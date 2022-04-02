@@ -6,3 +6,9 @@
   - this is a command we registered with flask
 - 32:20: the root of the directory is our backend
 - 33:55: Heroku deployment starts
+- 36:10: just for general knowledege, to push to another repo: git remote set-url origin <<link>>
+*** - 52:09: He starts writing Dockerfile
+
+
+(probably won't need this again but just in case):
+heroku token: 411cc278-b91b-408e-9573-fca8fbdae954
