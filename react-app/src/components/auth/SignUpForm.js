@@ -29,7 +29,7 @@ const SignUpForm = () => {
 
   }, [first_name, last_name, username, email, password, repeatPassword])
 
-   const onSignUp = async (e) => {
+  const onSignUp = async (e) => {
     e.preventDefault();
 
     if (password === repeatPassword) {
