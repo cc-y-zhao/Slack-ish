@@ -4,20 +4,20 @@ from app.models import Channel, db
 
 channel_routes = Blueprint('channels', __name__)
 
-@channel_routes('/channels/<int:user_id>')
-def get_channels(user_id):
-    channels = Channel.query.filter(Channel.owner_id == user_id).all()
-    return {'channels': [channel.to_dict() for channel in channels]}
+# @channel_routes('/channels/<int:user_id>')
+# def get_channels(user_id):
+#     channels = Channel.query.filter(Channel.owner_id == user_id).all()
+#     return {'channels': [channel.to_dict() for channel in channels]}
 
 # @channel_routes('/channels/<int:user_id>/<int:channel_id>')
 
 # POST Route
-@channel_routes.route('/', methods=["POST"])
+@channel_routes.route('/', methods=["GET","POST"])
 @login_required
 def add_channel():
 
     new_channel = Channel(
-      owner_id = request.json['user_id'],
+      owner_id = request.json['owner_id'],
       title = request.json['title'],
       is_dm = request.json['is_dm'],
       description = request.json['description'],

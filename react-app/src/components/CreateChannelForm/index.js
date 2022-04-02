@@ -119,4 +119,4 @@ const CreateChannelForm = () => {
   );
 };
 
-export default CreateReviewForm;
+export default CreateChannelForm;
