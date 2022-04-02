@@ -23,7 +23,10 @@ SECRET_KEY=type_gibberish_this_is_our_secret_key
 DATABASE_URL=postgresql://slackish_user:password@localhost/slackish_db
 
 pipenv shell
+flask db init
+flask db migrate
 flask db upgrade
+flask db downgrade
 flask seed all
 flask run
 
@@ -36,3 +39,10 @@ heroku run -a slack-ish-project flask seed all
     ›
     ›   Error ID: cannot_run_above_limit
     ›   See https://devcenter.heroku.com/articles/dyno-types#default-scaling-limits for more information.
+
+
+
+*********** git commands *************
+to access another branch that someone else pushed upstream:
+git fetch
+git checkout <<branch name>>
