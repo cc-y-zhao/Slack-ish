@@ -1,14 +1,13 @@
-** install dependencies
+************ install dependencies ************
 pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
 
 pipenv install psycopg2-binary
 
-***** ALSO GO TO react-app DIRECTORY AND DO THIS:
+************ ALSO GO TO react-app DIRECTORY AND DO THIS: ************
 1) npm install
 2) add .env based on the .env.example
 
-
-**psql
+************ psql ************
 
 CREATE USER slackish_user with password 'password' CREATEDB;
 CREATE DATABASE slackish_db WITH OWNER slackish_user;
@@ -16,13 +15,24 @@ CREATE DATABASE slackish_db WITH OWNER slackish_user;
 DROP DATABASE slackish_db;
 DROP USER slackish_user;
 
-** .env file
+************ .env file ************
 
 FLASK_APP=app
 FLASK_ENV=development
 SECRET_KEY=type_gibberish_this_is_our_secret_key
 DATABASE_URL=postgresql://slackish_user:password@localhost/slackish_db
 
+pipenv shell
+flask db upgrade
+flask seed all
+flask run
 
+************ seeding data directly to heroku (without having to push to main) ************
+- make sure you're in pipenv shell, then run:
+heroku run -a slack-ish-project flask seed all
 
-pipenv run flask db init
+(for cecilia only (error I got when running above command.. something about my account already using up free size dynos)):
+    Error: Cannot run more than 1 Free size dynos.
+    ›
+    ›   Error ID: cannot_run_above_limit
+    ›   See https://devcenter.heroku.com/articles/dyno-types#default-scaling-limits for more information.
