@@ -1,0 +1,28 @@
+** install dependencies
+pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
+
+pipenv install psycopg2-binary
+
+***** ALSO GO TO react-app DIRECTORY AND DO THIS:
+1) npm install
+2) add .env based on the .env.example
+
+
+**psql
+
+CREATE USER slackish_user with password 'password' CREATEDB;
+CREATE DATABASE slackish_db WITH OWNER slackish_user;
+
+DROP DATABASE slackish_db;
+DROP USER slackish_user;
+
+** .env file
+
+FLASK_APP=app
+FLASK_ENV=development
+SECRET_KEY=type_gibberish_this_is_our_secret_key
+DATABASE_URL=postgresql://slackish_user:password@localhost/slackish_db
+
+
+
+pipenv run flask db init

@@ -1,0 +1,8 @@
+- 6:20: we can use local pipenv and also devcontainer.. "we can use it or not.. theyre both there"
+- 8:20: .github / main.yml: this builds our React App in the virtual enviornment.. and then the Dockerfile fetches that build
+- 8:50: when we push on our main branch, it will push to heroku
+- 9:43: explains what happens when we "open in container" (actually installs everything for us and even creates database that's currently in .env)
+- 15:30: explains flask seed all
+  - this is a command we registered with flask
+- 32:20: the root of the directory is our backend
+- 33:55: Heroku deployment starts
