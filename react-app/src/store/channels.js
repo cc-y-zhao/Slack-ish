@@ -103,9 +103,9 @@ const channelsReducer = (state = initialState, action) => {
       return { [action.newChannel.id]: action.newChannel, ...state };
     }
 
-    case EDIT_ONE_CHANNEL: {
-      return { [action.editedChannel.id]: action.editedChannel, ...state };
-    }
+    // case EDIT_ONE_CHANNEL: {
+    //   return { [action.editedChannel.id]: action.editedChannel, ...state };
+    // }
 
     case DELETE_ONE_CHANNEL: {
       newState = { ...state };

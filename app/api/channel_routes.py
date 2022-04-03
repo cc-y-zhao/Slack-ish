@@ -23,43 +23,43 @@ def get_channels():
 # POST Route
 
 
-@channel_routes.route('/', methods=["POST"])
-@login_required
-def add_channel():
-
-    new_channel = Channel(
-        owner_id=request.json['owner_id'],
-        title=request.json['title'],
-        is_dm=request.json['is_dm'],
-        description=request.json['description'],
-    )
-    if new_channel:
-        db.session.add(new_channel)
-        db.session.commit()
-        return new_channel.to_dict()
-    return {"errors": "Server error. Unable to make channel"}
-
 # @channel_routes.route('/', methods=["POST"])
 # @login_required
 # def add_channel():
-#     form = ChannelForm
-#     form['csrf_token'].data = request.cookies['csrf_token']
 
-#     if form.validate_on_submit():
-#         new_channel = Channel(
-#             owner_id=request.json['owner_id'],
-#             title=request.json['title'],
-#             is_dm=request.json['is_dm'],
-#             description=request.json['description'],
-#             # created_at=datetime.now(),
-#             # updated_at=datetime.now()
-#         )
+#     new_channel = Channel(
+#         owner_id=request.json['owner_id'],
+#         title=request.json['title'],
+#         is_dm=request.json['is_dm'],
+#         description=request.json['description'],
+#     )
+#     if new_channel:
 #         db.session.add(new_channel)
 #         db.session.commit()
 #         return new_channel.to_dict()
-#         # return {**new_channel.to_dict()}
+#     return {"errors": "Server error. Unable to make channel"}
 
-#     return {"errors": validation_errors_to_error_messages(form.errors)}
+@channel_routes.route('/', methods=["POST"])
+@login_required
+def add_channel():
+    form = ChannelForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        new_channel = Channel(
+            owner_id=request.json['owner_id'],
+            title=request.json['title'],
+            is_dm=request.json['is_dm'],
+            description=request.json['description'],
+            # created_at=datetime.now(),
+            # updated_at=datetime.now()
+        )
+        db.session.add(new_channel)
+        db.session.commit()
+        return new_channel.to_dict()
+        # return {**new_channel.to_dict()}
+
+    return {"errors": validation_errors_to_error_messages(form.errors)}
 
 # PUT Route
 
