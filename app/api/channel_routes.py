@@ -4,10 +4,14 @@ from app.models import Channel, db
 
 channel_routes = Blueprint('channels', __name__)
 
-# @channel_routes('/channels/<int:user_id>')
-# def get_channels(user_id):
-#     channels = Channel.query.filter(Channel.owner_id == user_id).all()
-#     return {'channels': [channel.to_dict() for channel in channels]}
+# GET Route
+@channel_routes.route('/<int:user_id>')
+def get_channels(user_id):
+    channels = Channel.query.filter(Channel.owner_id == user_id).all()
+
+    # return_value = {'channels': [channel.to_dict() for channel in channels]}
+    # print('return_value in channel_routes-------', return_value)
+    return {'channels': [channel.to_dict() for channel in channels]}
 
 # @channel_routes('/channels/<int:user_id>/<int:channel_id>')
 

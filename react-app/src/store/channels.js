@@ -4,12 +4,26 @@ const CREATE_ONE_CHANNEL = 'channels/CREATE_CHANNEL'
 const EDIT_ONE_CHANNEL = 'channels/EDIT_ONE_CHANNEL'
 const DELETE_ONE_CHANNEL = 'channels/EDIT_ONE_CHANNEL'
 
-const loadChannels = (channels) => ({ type: GET_ALL_CHANNELS, channels })
-const loadChannel = (channel) => ({ type: GET_ONE_CHANNEL, channel })
+const loadAllChannels = (channels) => ({ type: GET_ALL_CHANNELS, channels })
+const loadOneChannel = (channel) => ({ type: GET_ONE_CHANNEL, channel })
 const createOneChannel = (channel) => ({ type: CREATE_ONE_CHANNEL, newChannel: channel })
 const editChannels = (channel) => ({ type: EDIT_ONE_CHANNEL, editedChannel: channel })
 const deleteChannels = (channel) => ({ type: DELETE_ONE_CHANNEL, deletedChannel: channel })
 
+
+export const loadChannels = (owner_id) => async (dispatch) => {
+  console.log("owner_id in loadChannels---------", owner_id)
+  const response = await fetch(`/api/channels/${owner_id}`);
+  if (response.ok) {
+    const channels = await response.json();
+    console.log("channels in loadChannels---------", channels)
+    dispatch(loadAllChannels(channels.channels));
+    return channels;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+};
 
 export const createChannel = (channel) => async (dispatch) => {
   const response = await fetch('/api/channels/', {
@@ -38,9 +52,12 @@ const channelsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_CHANNELS: {
       newState = { ...state };
+      console.log('actions.channels in channelsReducer-------', action.channels)
+      console.log('typeof actions.channels in channelsReducer-------', typeof action.channels === Array)
       action.channels.forEach((channel) => {
         newState[channel.id] = channel;
       });
+      console.log('newState in channelsReducer-------', newState)
       return newState;
     }
 
