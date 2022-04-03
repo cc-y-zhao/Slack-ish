@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 import CreateChannelForm from '../CreateChannelForm';
 
-import { loadChannels } from '../../store/channels';
+import { loadChannels, deleteChannel } from '../../store/channels';
 
 const Channels = () => {
     const channels = useSelector(state => Object.values(state.channels))
@@ -26,12 +26,15 @@ const Channels = () => {
         <div>
             <h2>Channels</h2>
             <div><CreateChannelForm /></div>
-            <div>Channels list will go here</div>
+            <div>Channels list: </div>
             <div>
                 {channels.map((channel) => {
                     return (
                         <div key={channel.id}>
                             <div>{channel.title}</div>
+                            <button onClick={async () => {
+                                await dispatch(deleteChannel(channel.id));
+                            }}>Delete</button>
                         </div>
                     );
                 }

@@ -31,3 +31,16 @@ def add_channel():
       db.session.commit()
       return new_channel.to_dict()
     return {"errors": "Server error. Unable to make channel"}
+
+
+# DELETE Route
+@channel_routes.route('/<int:channel_id>', methods=["DELETE"])
+@login_required
+def delete_channel(channel_id):
+  channel = Channel.query.get(channel_id)
+  deleted_channel = channel.to_dict()
+
+  db.session.delete(channel)
+  db.session.commit()
+
+  return deleted_channel
