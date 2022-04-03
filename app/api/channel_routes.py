@@ -1,6 +1,8 @@
+from app.api.auth_routes import validation_errors_to_error_messages
 from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
 from app.models import Channel, db, channel_users
+from app.forms import ChannelForm
 
 channel_routes = Blueprint('channels', __name__)
 
@@ -43,10 +45,18 @@ def add_channel():
 @channel_routes.route('/<int:channel_id>', methods=["PUT"])
 @login_required
 def edit_channel(channel_id):
-    channel = Channel.query.get(channel_id)
-    edited_channel = Channel(
+    form = ChannelForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-    )
+    if form.validate_on_submit():
+        channel = Channel.query.get(channel_id)
+        channel.title = form.data['title']
+        channel.description = form.data['description']
+        channel.updated_at = datetime.now()
+        db.session.commit()
+        return {**channel.to_dict()}
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}
 
 # DELETE Route
 
