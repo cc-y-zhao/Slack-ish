@@ -18,7 +18,13 @@ def get_channels():
     # print('return_value in channel_routes-------', return_value)
     return {'channels': [channel.to_dict() for channel in channels]}
 
-# @channel_routes('/channels/<int:user_id>/<int:channel_id>')
+@channel_routes.route('/<int:channel_id>')
+def get_one_channel(channel_id):
+    print('IM IN CHANNEL_ROUTES')
+    channel = Channel.query.get(channel_id)
+    print('single channel in channel_routes-------', channel)
+    return channel.to_dict()
+
 
 # POST Route
 
@@ -61,9 +67,9 @@ def add_channel():
 
     return {"errors": validation_errors_to_error_messages(form.errors)}
 
+
+
 # PUT Route
-
-
 @channel_routes.route('/<int:channel_id>', methods=["PUT"])
 # @login_required
 def edit_channel(channel_id):

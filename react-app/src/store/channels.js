@@ -34,7 +34,17 @@ export const loadChannels = () => async (dispatch) => {
 };
 
 export const loadChannel = (channel_id) => async (dispatch) => {
-  // const response = await fetch(`/api/channels/${channel_id}`)
+  const response = await fetch(`/api/channels/${channel_id}`)
+
+  if (response.ok) {
+    const channel = await response.json();
+    console.log("single channel in loadChannel---------", channel)
+    dispatch(loadOneChannel(channel))
+    return channel;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
 };
 
 export const createChannel = (channel) => async (dispatch) => {
@@ -96,6 +106,14 @@ const channelsReducer = (state = initialState, action) => {
         newState[channel.id] = channel;
       });
       // console.log('newState in channelsReducer-------', newState)
+      return newState;
+    }
+
+    case GET_ONE_CHANNEL: {
+      newState = { ...state };
+      newState[action.channel.id] = action.channel;
+      console.log('newState in channelsReducer-------', newState)
+
       return newState;
     }
 
