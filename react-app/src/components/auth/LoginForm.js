@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
 
+import logo from "../../images/slack-ish.png";
 import "./LoginForm.css";
 
 const LoginForm = () => {
@@ -34,40 +35,49 @@ const LoginForm = () => {
 
   return (
     <div className="LoginFormContainer">
-      <h1>Sign in to Slack-ish</h1>
-      <p>
-        We suggest using the <strong>email address you use at work.</strong>
-      </p>
-      <form onSubmit={onLogin}>
-        <div>
-          {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))}
+      <div className="LoginFormHeader">
+        <div className="LoginFormHeader-center">
+          <img src={logo} alt="Slack-ish logo"></img>
         </div>
-        <div>
-          {/* <label htmlFor="email">Email</label> */}
-          <input
-            name="email"
-            type="text"
-            placeholder="name@work-email.com"
-            value={email}
-            onChange={updateEmail}
-          />
+        <div className="LoginFormHeader-right">
+          <p>New to Slack-ish? </p>
+          <a href="/sign-up">Create an account</a>
         </div>
-        <div>
-          {/* <label htmlFor="password">Password</label> */}
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={updatePassword}
-          />
-        </div>
-        <button type="submit">Sign in</button>
-        <p>New to Slack-ish? </p>
-        <a href="/sign-up">Create an account</a>
-      </form>
+      </div>
+      <div className="LoginFormArea">
+        <h1>Sign in to Slack-ish</h1>
+        <p>
+          We suggest using the <strong>email address you use at work.</strong>
+        </p>
+        <form onSubmit={onLogin}>
+          <div>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
+          <div>
+            {/* <label htmlFor="email">Email</label> */}
+            <input
+              name="email"
+              type="text"
+              placeholder="name@work-email.com"
+              value={email}
+              onChange={updateEmail}
+            />
+          </div>
+          <div>
+            {/* <label htmlFor="password">Password</label> */}
+            <input
+              name="password"
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={updatePassword}
+            />
+          </div>
+          <button type="submit">Sign in</button>
+        </form>
+      </div>
     </div>
   );
 };
