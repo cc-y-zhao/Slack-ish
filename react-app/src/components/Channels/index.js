@@ -1,47 +1,56 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams, Redirect } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-import CreateChannelForm from '../CreateChannelForm';
+import CreateChannelForm from "../CreateChannelForm";
 
-import { loadChannels, deleteChannel } from '../../store/channels';
+import { loadChannels, deleteChannel } from "../../store/channels";
 
 const Channels = () => {
-    const channels = useSelector(state => Object.values(state.channels))
-    const owner_id = useSelector(state => (state.session.user.id))
+  const channels = useSelector((state) => Object.values(state.channels));
+  const user_id = useSelector((state) => state.session.user.id);
 
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-    console.log("channels in channels/index.js-------", channels)
+  console.log("channels in channels/index.js-------", channels);
 
-    useEffect(() => {
-        dispatch(loadChannels(owner_id));
-    }, [channels.toString()]);
+  useEffect(() => {
+    dispatch(loadChannels(owner_id));
+  }, [channels.toString()]);
 
-    // TO DO: add individual routes for each channel with below syntax:
-    // <NavLink key={channel.id} to={'/channels/' + channel.id}>
+  // TO DO: add individual routes for each channel with below syntax:
+  // <NavLink key={channel.id} to={'/channels/' + channel.id}>
 
-    return (
-        <div>
-            <h2>Channels</h2>
-            <div><CreateChannelForm /></div>
-            <div>Channels list: </div>
-            <div>
-                {channels.map((channel) => {
-                    return (
-                        <div key={channel.id}>
-                            <div>{channel.title}</div>
-                            <button onClick={async () => {
-                                await dispatch(deleteChannel(channel.id));
-                            }}>Delete</button>
-                        </div>
-                    );
-                }
+  return (
+    <div>
+      <h2>Channels</h2>
+      <div>
+        <CreateChannelForm />
+      </div>
+      <div>Channels list: </div>
+      <div>
+        {channels.map((channel) => {
+          return (
+            channel.user_id === user_id && (
+              <div key={channel.id}>
+                <div>{channel.title}</div>
+                {channel.owner_id === user_id && (
+                  <button
+                    onClick={async () => {
+                      await dispatch(deleteChannel(channel.id));
+                    }}
+                  >
+                    Delete
+                  </button>
                 )}
-            </div>
-        </div>
-    )
-}
+              </div>
+            )
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
-export default Channels
+export default Channels;

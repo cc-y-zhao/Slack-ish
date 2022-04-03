@@ -1,6 +1,7 @@
 from .db import db
 from .channel_user import channel_users
 
+
 class Channel(db.Model):
     __tablename__ = 'channels'
 
