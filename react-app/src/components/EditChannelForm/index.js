@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { loadChannel, editChannel, deleteChannel } from "../../store/channels";
+import { editChannel, deleteChannel } from "../../store/channels";
 //add deletechannel to edit form
 //need to do loadOneChannel and create single channel page and pass in as prop
 const EditChannelForm = ({ channel }) => {
   const channelToEdit = useSelector(() => channel);
+  const user = useSelector((state) => state.session.user);
 
   const dispatch = useDispatch();
   const params = useParams();
 
   const [title, setTitle] = useState(channelToEdit.title);
-  const [description, setDescription] = useSTate(channelToEdit.description);
+  const [description, setDescription] = useState(channelToEdit.description);
   const [errors, setErrors] = useState([]);
 
   const updatedTitle = (e) => setTitle(e.target.value);
   const updatedDescription = (e) => setDescription(e.target.value);
 
   useEffect(() => {
-    dispatch(loadChannel(channel));
+    const validationErrors = [];
+
+    if (title.length > 50)
+      validationErrors.push("Title must be 50 characters or less");
+    if (description.length > 1000)
+      validationErrors.push("Description must be 1000 characters or less");
   }, [dispatch]);
 
   const handleSubmit = async (e) => {
