@@ -10,7 +10,7 @@ const createOneChannel = (channel) => ({
   type: CREATE_ONE_CHANNEL,
   newChannel: channel,
 });
-const editChannels = (channel) => ({
+const editOneChannel = (channel) => ({
   type: EDIT_ONE_CHANNEL,
   editedChannel: channel,
 });
@@ -33,6 +33,10 @@ export const loadChannels = () => async (dispatch) => {
   }
 };
 
+export const loadChannel = (channel_id) => async (dispatch) => {
+  // const response = await fetch(`/api/channels/${channel_id}`)
+};
+
 export const createChannel = (channel) => async (dispatch) => {
   const response = await fetch("/api/channels/", {
     method: "POST",
@@ -47,6 +51,22 @@ export const createChannel = (channel) => async (dispatch) => {
     const errors = await response.json();
     return errors;
   }
+};
+
+export const editChannel = (channel_id, data) => async (dispatch) => {
+  const response = await fetch(`api/channels/${channel_id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    return response.errors;
+  }
+  const editedChannel = await response.json();
+
+  dispatch(editOneChannel(editedChannel));
+  return editedChannel;
 };
 
 export const deleteChannel = (channel_id) => async (dispatch) => {
@@ -83,9 +103,9 @@ const channelsReducer = (state = initialState, action) => {
       return { [action.newChannel.id]: action.newChannel, ...state };
     }
 
-    // case EDIT_ONE_CHANNEL: {
-    //   return { [action.editedChannel.id]: action.editedChannel, ...state };
-    // }
+    case EDIT_ONE_CHANNEL: {
+      return { [action.editedChannel.id]: action.editedChannel, ...state };
+    }
 
     case DELETE_ONE_CHANNEL: {
       newState = { ...state };
