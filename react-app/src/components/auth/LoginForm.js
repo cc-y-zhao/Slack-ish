@@ -65,10 +65,8 @@ const LoginForm = () => {
           />
         </div>
         <button type="submit">Sign in</button>
-        <p>
-          Not a member yet?
-          <a href="/sign-up">Sign Up.</a>
-        </p>
+        <p>New to Slack-ish? </p>
+        <a href="/sign-up">Create an account</a>
       </form>
     </div>
   );
