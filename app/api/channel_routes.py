@@ -10,7 +10,7 @@ channel_routes = Blueprint('channels', __name__)
 @channel_routes.route('/')
 def get_channels():
     channels = Channel.query.all()
-    channel_users = channel_users.query.all()
+    # channel_users = channel_users.query.all()
 
     # return_value = {'channels': [channel.to_dict() for channel in channels]}
     # print('return_value in channel_routes-------', return_value)
@@ -21,7 +21,7 @@ def get_channels():
 # POST Route
 
 
-@channel_routes.route('/', methods=["GET", "POST"])
+@channel_routes.route('/', methods=["POST"])
 @login_required
 def add_channel():
 
@@ -37,8 +37,20 @@ def add_channel():
         return new_channel.to_dict()
     return {"errors": "Server error. Unable to make channel"}
 
+# PUT Route
+
+
+@channel_routes.route('/<int:channel_id>', methods=["PUT"])
+@login_required
+def edit_channel(channel_id):
+    channel = Channel.query.get(channel_id)
+    edited_channel = Channel(
+
+    )
 
 # DELETE Route
+
+
 @channel_routes.route('/<int:channel_id>', methods=["DELETE"])
 @login_required
 def delete_channel(channel_id):

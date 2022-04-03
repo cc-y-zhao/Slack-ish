@@ -16,7 +16,7 @@ const Channels = () => {
   console.log("channels in channels/index.js-------", channels);
 
   useEffect(() => {
-    dispatch(loadChannels(owner_id));
+    dispatch(loadChannels());
   }, [channels.toString()]);
 
   // TO DO: add individual routes for each channel with below syntax:
@@ -32,7 +32,7 @@ const Channels = () => {
       <div>
         {channels.map((channel) => {
           return (
-            channel.user_id === user_id && (
+            channel.owner_id === user_id && (
               <div key={channel.id}>
                 <div>{channel.title}</div>
                 {channel.owner_id === user_id && (
