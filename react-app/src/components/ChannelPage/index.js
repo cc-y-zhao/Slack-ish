@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
-
+import EditChannelForm from "../EditChannelForm";
 import { loadChannel } from "../../store/channels";
 
 const ChannelPage = () => {
@@ -14,15 +14,15 @@ const ChannelPage = () => {
   const user_id = useSelector((state) => state.session.user.id);
 
 
-  console.log("channel in ChannelPage/index.js-------", channel);
+  // console.log("channel in ChannelPage/index.js-------", channel);
 
   let title = channel ? channel.title : ''
+  let channelToEdit = channel ? channel : ''
 
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));
-  }, [dispatch, channel_id]);
-
+  }, [dispatch]);
 
 
   // TO DO: add individual routes for each channel with below syntax:
@@ -31,6 +31,7 @@ const ChannelPage = () => {
   return (
     <div>
       <h2>{title}</h2>
+      <div><EditChannelForm channelToEdit={channelToEdit} /></div>
     </div>
   );
 };
