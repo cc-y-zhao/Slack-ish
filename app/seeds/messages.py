@@ -1,35 +1,47 @@
 from app.models import db, Message
 
 
-def seed_channels():
-    channel1 = Channel(
-        owner_id='1', title='Python Project Group', is_dm=False, description='We are cloning Slack!')
-    channel2 = Channel(
-        owner_id='1', title='App Academy', is_dm=False, description='This is BootCAMP!')
-    channel3 = Channel(
-        owner_id='1', title='Just For Funsies', is_dm=False, description='Slackin\' around!')
-    channel4 = Channel(
-        owner_id='2', title='Riot Hire Me Pls', is_dm=False, description='Sharon wants to work for Riot')
-    channel5 = Channel(
-        owner_id='3', title='Interview Prep', is_dm=False, description='Gabe\'s Interview Preppers')
-    channel6 = Channel(
-        owner_id='4', title='Cecilia\'s Corner', is_dm=False, description='Welcome to Cecilia\'s Corner!')
+def seed_messages():
+    message1 = Message(
+        user_id='1', channel_id='1', content='Hey guys!')
+    message2 = Message(
+        user_id='2', channel_id='1', content='What is UP!')
+    message3 = Message(
+        user_id='3', channel_id='1', content='Hello...')
+    message4 = Message(
+        user_id='4', channel_id='1', content='Hey!')
+    message5 = Message(
+        user_id='1', channel_id='2', content='App Academy is cool')
+    message6 = Message(
+        user_id='3', channel_id='5', content='Interview prep is hard!')
+    message7 = Message(
+        user_id='2', channel_id='2', content='I totally agree! This is awesome possum!')
+    message8 = Message(
+        user_id='4', channel_id='5', content='We got this!')
+    message9 = Message(
+        user_id='2', channel_id='4', content='I love Riot Games')
+    message10 = Message(
+        user_id='4', channel_id='6', content='Welcome to my corner!')
 
-    db.session.add(channel1)
-    db.session.add(channel2)
-    db.session.add(channel3)
-    db.session.add(channel4)
-    db.session.add(channel5)
-    db.session.add(channel6)
+    db.session.add(message1)
+    db.session.add(message2)
+    db.session.add(message3)
+    db.session.add(message4)
+    db.session.add(message5)
+    db.session.add(message6)
+    db.session.add(message7)
+    db.session.add(message8)
+    db.session.add(message9)
+    db.session.add(message10)
 
     db.session.commit()
 
 
-# Uses a raw SQL query to TRUNCATE the channels table.
+# Uses a raw SQL query to TRUNCATE the messages table.
 # SQLAlchemy doesn't have a built in function to do this
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
-def undo_channels():
-    db.session.execute('TRUNCATE channels RESTART IDENTITY CASCADE;')
+def undo_messages():
+    db.session.execute('TRUNCATE messages RESTART IDENTITY CASCADE;')
     db.session.commit()
