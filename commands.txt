@@ -50,3 +50,19 @@ git checkout <<branch name>>
 
 *********** heroku commands *************
 heroku run -a <app_name> flask seed all
+
+
+** start from scratch (db) **
+
+psql:
+DROP DATABASE slackish_db;
+CREATE DATABASE slackish_db WITH OWNER slackish_user;
+
+<<DELETE MIGRATIONS DIRECTORY>>
+
+pipenv shell
+flask db init
+flask db migrate
+flask db upgrade
+flask seed all
+flask run
