@@ -1,7 +1,7 @@
 from app.api.auth_routes import validation_errors_to_error_messages
 from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
-from app.models import Channel, db, channel_users
+from app.models import Channel, User, Message, db, channel_users
 from app.forms import ChannelForm
 
 channel_routes = Blueprint('channels', __name__)
@@ -10,6 +10,7 @@ channel_routes = Blueprint('channels', __name__)
 
 
 @channel_routes.route('/')
+# @login_required
 def get_channels():
     channels = Channel.query.all()
     # channel_users = channel_users.query.all()
@@ -19,10 +20,15 @@ def get_channels():
     return {'channels': [channel.to_dict() for channel in channels]}
 
 @channel_routes.route('/<int:channel_id>')
+# @login_required
 def get_one_channel(channel_id):
-    print('IM IN CHANNEL_ROUTES')
-    channel = Channel.query.get(channel_id)
-    print('single channel in channel_routes-------', channel)
+    # print('IM IN CHANNEL_ROUTES')
+    # channel = Channel.query.get(channel_id)
+
+    # channel = Channel.query.filter(Channel.id == channel_id)
+    # .filter(Message.channel_id == channel_id).all()
+    channel = db.session.query(Channel, Message).filter(Channel.id == channel_id).filter(Message.channel_id == channel_id).all()
+    # print('single channel in channel_routes-------', channel)
     return channel.to_dict()
 
 
