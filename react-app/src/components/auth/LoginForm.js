@@ -41,7 +41,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="LoginFormContainer">
+    <div className="SignupFormContainer">
       <div className="LoginFormHeader">
         <div className="LoginFormHeader-center">
           <img src={logo} alt="Slack-ish logo"></img>
@@ -54,10 +54,10 @@ const LoginForm = () => {
       <div className="LoginFormArea">
         <h1>Sign in to Slack-ish</h1>
         <p>
-          We suggest using the <strong>email address you use at work.</strong>
+          We suggest using an <strong>email address that doesn't work.</strong>
         </p>
         <form onSubmit={onLogin}>
-          <div>
+          <div className="SignFormErrors">
             {errors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
@@ -67,7 +67,7 @@ const LoginForm = () => {
             <input
               name="email"
               type="text"
-              placeholder="name@work-email.com"
+              placeholder="name@throwaway-email.com"
               value={email}
               onChange={updateEmail}
             />
@@ -95,7 +95,16 @@ const LoginForm = () => {
       {/* <button onClick={demo}>demo</button> */}
       <div className="LoginFormFooter">
         <a href="https://github.com/cc-y-zhao/Slack-ish">Slack-ish Github</a>
-        <a>Contact Us</a>
+        <div className="contact-dropup">
+          <a>Contact Us</a>
+          <div className="contact-dropup-content">
+            <a href="https://www.linkedin.com/in/ceciliazh/">Cecilia Zhao</a>
+            <a href="https://www.linkedin.com/in/gabriel-sitorus/">
+              Gabriel Sitorus
+            </a>
+            <a href="https://www.linkedin.com/in/sharonfang8/">Sharon Fang</a>
+          </div>
+        </div>
         <a>
           <i class="fa-solid fa-globe"></i> Languages used{" "}
           <i class="fa-solid fa-angle-down"></i>
