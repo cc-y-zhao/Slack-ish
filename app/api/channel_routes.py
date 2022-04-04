@@ -30,11 +30,17 @@ def get_one_channel(channel_id):
     # channel = Channel.query.filter(Channel.id == channel_id)
     # .filter(Message.channel_id == channel_id).all()
     # channel = db.session.query(Channel, Message).filter(Channel.id == channel_id).filter(Message.channel_id == channel_id).all()
-    channel = db.session.query(Channel, Message).filter(
-        Channel.id == channel_id).filter(Message.channel_id == channel_id).all()
-    # join(Message).filter(Message.channel_id == channel_id)
-    print('single channel in channel_routes-------', channel)
-    return channel.to_dict()
+    channel = db.session.query(Channel).get(channel_id)
+    all_messages = db.session.query(Message).filter(
+        Message.channel_id == channel_id).all()
+    messages = [message.to_dict() for message in all_messages]
+    print('single channel in channel_routes-------CHANNEL:', channel)
+    print('single channel in channel_routes-------MESSAGE:', messages)
+    single_channel = channel.to_dict()
+    single_channel["messages"] = messages
+    print('single channel in channel_routes-------SINGLE_CHANNEL:', single_channel)
+    return single_channel
+    # return channel.to_dict()
 
 # POST Route
 
