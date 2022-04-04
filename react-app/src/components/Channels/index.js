@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-
+import './Channels.css'
 import CreateChannelForm from "../CreateChannelForm";
 
 import { loadChannels, deleteChannel } from "../../store/channels";
@@ -24,18 +24,17 @@ const Channels = () => {
 
   return (
     <div>
-      <h2>Channels</h2>
       <div>
-        <CreateChannelForm />
+        {/* <CreateChannelForm /> */}
       </div>
-      <div>Channels list: </div>
+      {/* <div>Channels list: </div> */}
       <div>
         {channels?.map((channel) => {
           return (
             channel.owner_id === user_id && (
-              <div key={channel.id}>
-                <div>{channel.title}</div>
-                {channel.owner_id === user_id && (
+              <div className='channel__list' key={channel.id}>
+                <li>{channel.title}</li>
+                {/* {channel.owner_id === user_id && (
                   <button
                     onClick={async () => {
                       await dispatch(deleteChannel(channel.id));
@@ -43,7 +42,7 @@ const Channels = () => {
                   >
                     Delete
                   </button>
-                )}
+                )} */}
               </div>
             )
           );
