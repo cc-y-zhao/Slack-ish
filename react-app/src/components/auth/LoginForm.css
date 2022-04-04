@@ -8,7 +8,6 @@
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    z-index: 3;
 }
 
 .LoginFormHeader {
@@ -64,11 +63,13 @@
 
 .LoginFormArea h1 {
     font-size: 44px;
+    color: #1d1c1d;
     margin: 0px 0px 10px;
 }
 
 .LoginFormArea > p {
     margin: 0px 0px 32px;
+    color: #454245;
 }
 
 .LoginFormArea input[type=text], input[type=password] {

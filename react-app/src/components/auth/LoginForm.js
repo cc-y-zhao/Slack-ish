@@ -41,7 +41,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="LoginFormContainer">
+    <div className="SignupFormContainer">
       <div className="LoginFormHeader">
         <div className="LoginFormHeader-center">
           <img src={logo} alt="Slack-ish logo"></img>
@@ -54,10 +54,10 @@ const LoginForm = () => {
       <div className="LoginFormArea">
         <h1>Sign in to Slack-ish</h1>
         <p>
-          We suggest using the <strong>email address you use at work.</strong>
+          We suggest using an <strong>email address that doesn't work.</strong>
         </p>
         <form onSubmit={onLogin}>
-          <div>
+          <div className="SignFormErrors">
             {errors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
@@ -67,7 +67,7 @@ const LoginForm = () => {
             <input
               name="email"
               type="text"
-              placeholder="name@work-email.com"
+              placeholder="name@throwaway-email.com"
               value={email}
               onChange={updateEmail}
             />
