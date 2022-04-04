@@ -11,8 +11,8 @@ const EditChannelForm = ({ channelToEdit }) => {
   const id = channelToEdit?.id;
   const is_dm = false;
 
-  console.log('channelToEdit----------', channelToEdit)
-  console.log('channelToEdit title----------', channelToEdit.title)
+  // console.log('channelToEdit----------', channelToEdit)
+  // console.log('channelToEdit title----------', channelToEdit.title)
 
   const dispatch = useDispatch();
   const params = useParams();
@@ -36,7 +36,7 @@ const EditChannelForm = ({ channelToEdit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('IN HANDLESUBMIT------')
+    // console.log('IN HANDLESUBMIT------')
 
     const editedChannel = {
       id,
@@ -45,7 +45,7 @@ const EditChannelForm = ({ channelToEdit }) => {
       description,
     };
 
-    console.log("edited channel in hjandle submit", editedChannel);
+    // console.log("edited channel in hjandle submit", editedChannel);
 
     let editedChannelSuccess;
     try {
