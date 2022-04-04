@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { editChannel, deleteChannel } from "../../store/channels";
 //add deletechannel to edit form
 //need to do loadOneChannel and create single channel page and pass in as prop
 const EditChannelForm = ({ channelToEdit }) => {
-  // const channelToEdit = useSelector(() => channel);
-  // const channelToEdit = useSelector((state) => state.channels[channel_id]);
+  const history = useHistory();
 
-  // console.log("channelToEdit in EditChannelForm--------", channelToEdit);
   const user = useSelector((state) => state.session.user);
+  const id = channelToEdit?.id;
+  const is_dm = false;
+
+  console.log('channelToEdit----------', channelToEdit)
+  console.log('channelToEdit title----------', channelToEdit.title)
 
   const dispatch = useDispatch();
   const params = useParams();
@@ -18,31 +21,53 @@ const EditChannelForm = ({ channelToEdit }) => {
   const [description, setDescription] = useState(channelToEdit?.description);
   const [errors, setErrors] = useState([]);
 
-  const updatedTitle = (e) => setTitle(e.target.value);
-  const updatedDescription = (e) => setDescription(e.target.value);
+  const updateTitle = (e) => setTitle(e.target.value);
+  const updateDescription = (e) => setDescription(e.target.value);
 
-  // useEffect(() => {
-  //   const validationErrors = [];
+  useEffect(() => {
+    const validationErrors = [];
 
-  //   if (title.length > 50)
-  //     validationErrors.push("Title must be 50 characters or less");
-  //   if (description.length > 1000)
-  //     validationErrors.push("Description must be 1000 characters or less");
-  // }, [title, description]);
+    if (title?.length > 50)
+      validationErrors.push("Title must be 50 characters or less");
+    if (description?.length > 1000)
+      validationErrors.push("Description must be 1000 characters or less");
+  }, [title, description]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let editedChannel = {
-      id: channelToEdit.id,
+    console.log('IN HANDLESUBMIT------')
+
+    const editedChannel = {
+      id,
       title,
+      is_dm,
       description,
     };
 
-    dispatch(editChannel(channelToEdit.id, editedChannel)).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
-    });
+    console.log("edited channel in hjandle submit", editedChannel);
+
+    let editedChannelSuccess;
+    try {
+      console.log('attempting put with func', editChannel)
+      editedChannelSuccess = await dispatch(editChannel(editedChannel));
+    } catch (error) {
+      // if (error instanceof ValidationError) setErrors(error.errors);
+      // // If error is not a ValidationError, add slice at the end to remove extra
+      // // "Error: "
+      // else setErrors({ overall: error.toString().slice(7) })
+    }
+    if (editedChannelSuccess) {
+      setErrors([]);
+      // dispatch(getReviewsByCar(carId));
+      // setShowModal(false);
+      return history.push(`/channels/${id}`);
+    }
+
+    // dispatch(editChannel(editedChannel)).catch(async (res) => {
+    //   const data = await res.json();
+    //   if (data && data.errors) setErrors(data.errors);
+    // });
 
     // dispatch(editChannel(params.id, editedChannel)).catch(async (res) => {
     //   const data = await res.json();
@@ -54,16 +79,18 @@ const EditChannelForm = ({ channelToEdit }) => {
     <>
       <form onSubmit={handleSubmit}>
         <ul>{errors}</ul>
+        <input type="hidden" value={id} />
+        <input type="hidden" value={is_dm} />
         <label>
           Title
-          <input type="title" required value={title} onChange={updatedTitle} />
+          <input type="title" required value={title} onChange={updateTitle} />
         </label>
         <label>
           Add a description (optional)
           <textarea
             type="description"
             value={description}
-            onChange={updatedDescription}
+            onChange={updateDescription}
           />
         </label>
         <button type="submit" disabled={errors.length > 0}>

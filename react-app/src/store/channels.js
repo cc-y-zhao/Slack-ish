@@ -63,21 +63,59 @@ export const createChannel = (channel) => async (dispatch) => {
   }
 };
 
-export const editChannel = (channel_id, data) => async (dispatch) => {
-  const response = await fetch(`api/channels/${channel_id}`, {
+export const editChannel = (editedChannel) => async (dispatch) => {
+  console.log("editing channel", editedChannel);
+  console.log("editing channel id------", editedChannel.id);
+
+  const response = await fetch(`/api/channels/${editedChannel.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: JSON.stringify(editedChannel),
   });
 
   if (!response.ok) {
     return response.errors;
   }
-  const editedChannel = await response.json();
+  const updatedChannel = await response.json();
 
-  dispatch(editOneChannel(editedChannel));
-  return editedChannel;
-};
+  dispatch(editOneChannel(updatedChannel));
+  return updatedChannel;
+
+
+  // const response = await fetch(`api/channels/${editedChannel.id}`, {
+  //   method: "PUT",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify(editedChannel),
+  // });
+
+  // if (!response.ok) {
+  //   return response.errors;
+  // }
+  // const editedChannel = await response.json();
+
+  // dispatch(editOneChannel(editedChannel));
+  // return editedChannel;
+
+}
+
+// export const editChannel = (editedChannel) => async (dispatch) => {
+
+//   console.log("editedChannel in channels store--------", editedChannel)
+//   const channel_id = editedChannel.id
+//   const response = await fetch(`api/channels/${channel_id}`, {
+//     method: "PUT",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(editedChannel),
+//   });
+
+//   if (!response.ok) {
+//     return response.errors;
+//   }
+//   const editedChannel = await response.json();
+
+//   dispatch(editOneChannel(editedChannel));
+//   return editedChannel;
+// };
 
 export const deleteChannel = (channel_id) => async (dispatch) => {
   const response = await fetch(`/api/channels/${channel_id}`, {
@@ -122,14 +160,18 @@ const channelsReducer = (state = initialState, action) => {
     }
 
     // case EDIT_ONE_CHANNEL: {
-    //   return { [action.editedChannel.id]: action.editedChannel, ...state };
+    //   newState = { ...state };
+    //   newState[action.channel.id] = action.channel;
+    //   console.log('newState in channelsReducer-------', newState)
+
+    //   return newState;
     // }
 
-    case DELETE_ONE_CHANNEL: {
-      newState = { ...state };
-      delete newState[action.deletedChannel.id];
-      return newState;
-    }
+    // case DELETE_ONE_CHANNEL: {
+    //   newState = { ...state };
+    //   delete newState[action.deletedChannel.id];
+    //   return newState;
+    // }
     default:
       return state;
   }

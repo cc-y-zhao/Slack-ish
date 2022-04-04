@@ -14,7 +14,7 @@ const ChannelPage = () => {
   const user_id = useSelector((state) => state.session.user.id);
 
 
-  // console.log("channel in ChannelPage/index.js-------", channel);
+  console.log("channel in ChannelPage/index.js-------", [channel]);
 
   let title = channel ? channel.title : ''
   let channelToEdit = channel ? channel : ''
@@ -22,7 +22,7 @@ const ChannelPage = () => {
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));
-  }, [dispatch]);
+  }, [dispatch, [channel].toString()]);
 
 
   // TO DO: add individual routes for each channel with below syntax:

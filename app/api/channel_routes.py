@@ -73,16 +73,25 @@ def add_channel():
 @channel_routes.route('/<int:channel_id>', methods=["PUT"])
 # @login_required
 def edit_channel(channel_id):
+    print(f'\n\n im in edit channel\n\n')
     form = ChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+    data = form.data
+
     if form.validate_on_submit():
         channel = Channel.query.get(channel_id)
-        channel.title = form.data['title']
-        channel.description = form.data['description']
-        channel.updated_at = datetime.now()
+        print('channel to edit in channel routes--------', channel)
+        channel.title = data['title']
+        channel.description = data['description']
+        # channel.is_dm=form.data['is_dm']
+
+        # channel.updated_at = datetime.now()
         db.session.commit()
-        return {**channel.to_dict()}
+        # print('channel.to_dict()-------', {channel.to_dict()})
+
+        return channel.to_dict()
+        # return {**channel.to_dict()}
 
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
