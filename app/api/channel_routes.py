@@ -1,3 +1,4 @@
+from pyexpat.errors import messages
 from app.api.auth_routes import validation_errors_to_error_messages
 from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
@@ -34,13 +35,21 @@ def get_one_channel(channel_id):
     # .filter(Message.channel_id == channel_id).all()
     # channel = db.session.query(Channel, Message).filter(Channel.id == channel_id).filter(Message.channel_id == channel_id).all()
     channel = db.session.query(Channel).get(channel_id)
-    all_messages = db.session.query(Message).filter(
+    all_messages_query = db.session.query(Message).filter(
         Message.channel_id == channel_id).all()
-    messages = [message.to_dict() for message in all_messages]
+    all_messages = [message.to_dict() for message in all_messages_query]
+
+    messages = {}
+
+    for message in all_messages:
+        messages[message['id']] = message
+
+    # print('MESSAGES IN HCANNEL_ROUTES-----', messages)
+
     # messages['first_name] =
 
     user_list = []
-    for message in messages:
+    for message in all_messages:
         # print("MESSAGE:", message)
         user_before_to_dict = db.session.query(
             User).filter(User.id == message['user_id']).one()
@@ -57,7 +66,8 @@ def get_one_channel(channel_id):
     # print('single channel in channel_routes-------CHANNEL:', channel)
     # print('single channel in channel_routes-------MESSAGE:', messages)
     single_channel = channel.to_dict()
-    single_channel["messages"] = messages
+    single_channel['messages'] = messages
+    single_channel["all_messages"] = all_messages
     single_channel["users"] = user_list
     # print('single channel in channel_routes-------SINGLE_CHANNEL:', single_channel)
     return single_channel
