@@ -2,7 +2,7 @@ const GET_ALL_CHANNELS = "channels/GET_ALL_CHANNELS";
 const GET_ONE_CHANNEL = "channels/GET_ONE_CHANNEL";
 const CREATE_ONE_CHANNEL = "channels/CREATE_CHANNEL";
 const EDIT_ONE_CHANNEL = "channels/EDIT_ONE_CHANNEL";
-const DELETE_ONE_CHANNEL = "channels/EDIT_ONE_CHANNEL";
+const DELETE_ONE_CHANNEL = "channels/DELETE_ONE_CHANNEL";
 
 const loadAllChannels = (channels) => ({ type: GET_ALL_CHANNELS, channels });
 const loadOneChannel = (channel) => ({ type: GET_ONE_CHANNEL, channel });
@@ -150,7 +150,7 @@ const channelsReducer = (state = initialState, action) => {
     case GET_ONE_CHANNEL: {
       newState = { ...state };
       newState[action.channel.id] = action.channel;
-      console.log('newState in channelsReducer-------', newState)
+      // console.log('newState in channelsReducer-------', newState)
 
       return newState;
     }
@@ -159,19 +159,19 @@ const channelsReducer = (state = initialState, action) => {
       return { [action.newChannel.id]: action.newChannel, ...state };
     }
 
-    // case EDIT_ONE_CHANNEL: {
-    //   newState = { ...state };
-    //   newState[action.channel.id] = action.channel;
-    //   console.log('newState in channelsReducer-------', newState)
+    case EDIT_ONE_CHANNEL: {
+      newState = { ...state };
+      newState[action.editedChannel.id] = action.editedChannel;
 
-    //   return newState;
-    // }
+      return newState;
+    }
 
-    // case DELETE_ONE_CHANNEL: {
-    //   newState = { ...state };
-    //   delete newState[action.deletedChannel.id];
-    //   return newState;
-    // }
+    case DELETE_ONE_CHANNEL: {
+      newState = { ...state };
+      delete newState[action.deletedChannel.id];
+      return newState;
+    }
+
     default:
       return state;
   }

@@ -30,7 +30,7 @@ const Channels = () => {
       </div>
       <div>Channels list: </div>
       <div>
-        {channels.map((channel) => {
+        {channels?.map((channel) => {
           return (
             channel.owner_id === user_id && (
               <div key={channel.id}>
