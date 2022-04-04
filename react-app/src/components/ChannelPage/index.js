@@ -7,6 +7,7 @@ import EditChannelForm from "../EditChannelForm";
 import { loadChannel } from "../../store/channels";
 
 const ChannelPage = () => {
+  //TO DO: ONLY CHANNEL OWNER SHOULD BE ABLE TO SEE THE EDITCHANNELFORM
   const dispatch = useDispatch();
   const { channel_id } = useParams();
 
