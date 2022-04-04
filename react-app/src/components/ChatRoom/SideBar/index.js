@@ -1,4 +1,5 @@
 import React from 'react'
+import Channels from '../../Channels'
 import './SideBar.css'
 const SideBar = () => {
     return (
@@ -18,9 +19,9 @@ const SideBar = () => {
                 </div>
 
                 <div className="sidebar__channelsList">
-                    {/* Channels */}
+                    <Channels />
                 </div>
-                
+
                 <div className="sidebar__messages">
                     <div className="sidebar__messagesHeader">
                         <div className="sidebar__header">

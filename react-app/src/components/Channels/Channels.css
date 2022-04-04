@@ -1,0 +1,6 @@
+.channel__list {
+    display: flex;
+    margin-left: 2em;
+    position: relative;
+    bottom: 3em;
+}
