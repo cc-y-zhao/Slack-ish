@@ -11,7 +11,7 @@ channel_routes = Blueprint('channels', __name__)
 
 
 @channel_routes.route('/')
-# @login_required
+@login_required
 def get_channels():
     channels = Channel.query.all()
     # channel_users = channel_users.query.all()
@@ -22,7 +22,7 @@ def get_channels():
 
 
 @channel_routes.route('/<int:channel_id>')
-# @login_required
+@login_required
 def get_one_channel(channel_id):
     # print('IM IN CHANNEL_ROUTES')
     # channel = Channel.query.get(channel_id)
@@ -34,7 +34,7 @@ def get_one_channel(channel_id):
     all_messages = db.session.query(Message).filter(
         Message.channel_id == channel_id).all()
     messages = [message.to_dict() for message in all_messages]
-    #messages['first_name] =
+    # messages['first_name] =
 
     user_list = []
     for message in messages:
@@ -105,7 +105,7 @@ def add_channel():
 
 # PUT Route
 @channel_routes.route('/<int:channel_id>', methods=["PUT"])
-# @login_required
+@login_required
 def edit_channel(channel_id):
     print(f'\n\n im in edit channel\n\n')
     form = ChannelForm()
