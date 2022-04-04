@@ -1,0 +1,32 @@
+.LoginFormContainer {
+    background-color: white;
+    color: black;
+}
+
+.LoginFormContainer {
+    max-width: 800px;
+    width: 100% !important;
+    overflow: hidden;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px;
+}
+
+.LoginFormContainer h1 {
+    font-size: 44px;
+}
+
+.LoginFormContainer input[type=text], input[type=password] {
+    height: 44px;
+    font-size: 16px;
+    /* width: 100%; */
+    width: 400px;
+    margin: 0 0 20px;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    padding: 11px 12px 13px;
+    box-sizing: border-box;
+}

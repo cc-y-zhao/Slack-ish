@@ -1,1 +1,11 @@
 /* TODO Add site wide styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+html {
+    font-family: 'Lato', sans-serif;
+}
+/* html {
+    background-color: rgb(26, 29, 33);
+    color: rgb(209, 210, 211);
+} */
