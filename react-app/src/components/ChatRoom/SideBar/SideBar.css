@@ -17,7 +17,7 @@
 }
 
 .sidebar__channels, .sidebar__messages {
-    flex: 1;
+    flex: 1;;
 }
 
 
@@ -26,10 +26,15 @@
     justify-self: space-between;
     align-items: center;
     padding: 10px;
+    column-gap: 1em;
     background-color: #2f3135;
     color: grey;
 }
 
 .sidebar__channelsList {
     color: grey
+}
+
+.sidebar__channelsList {
+    display: flex;
 }

@@ -33,7 +33,7 @@ const Channels = () => {
           return (
             channel.owner_id === user_id && (
               <div className='channel__list' key={channel.id}>
-                <h4>{channel.title}</h4>
+                <li>{channel.title}</li>
                 {/* {channel.owner_id === user_id && (
                   <button
                     onClick={async () => {
