@@ -141,7 +141,6 @@ const createOneMessage = (channel_id, message) => ({
 // const editOneMessage = (message) => ({ type: EDIT_ONE_MESSAGE, editedMessage: message });
 
 export const createMessage = (channel_id, message) => async (dispatch) => {
-  console.log("REDUCER CHANNEL ID~~~:", channel_id);
   const response = await fetch(`/api/messages/${channel_id}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -187,7 +186,10 @@ const channelsReducer = (state = initialState, action) => {
 
     case CREATE_ONE_MESSAGE: {
       newState = { ...state };
-      console.log("REDUCERACTAULY CHANNEL ID~~~:", action.channel_id);
+      console.log(
+        "REDUCERACTAULY CHANNEL ID~~~:",
+        newState.channels[action.channel_id]
+      );
       newState.channels[action.channel_id].messages = action.newMessage;
 
       return newState;
