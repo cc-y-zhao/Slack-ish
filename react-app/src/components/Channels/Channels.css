@@ -1,0 +1,15 @@
+.channel__list {
+    position: absolute;
+    display: flex;
+    text-align: center;
+    font-size: small;
+    justify-content: flex-start;
+    margin-left: 5em;
+    position: relative;
+    bottom: 1.6em;
+    list-style: none;
+}
+
+.channel__list > li {
+    padding: 7px;
+}
