@@ -37,9 +37,9 @@ def get_one_channel(channel_id):
 
     user_list = []
     for message in messages:
-        # print("MESSAGE:", message)
-        user_before_to_dict = (db.session.query(
-            User).filter(User.id == message['user_id']))
+        print("MESSAGE:", message)
+        user_before_to_dict = db.session.query(
+            User).filter(User.id == message['user_id']).one()
         print("USER_BEFORETODICT:-------------------", user_before_to_dict)
         user = user_before_to_dict.to_dict()
         print("USER_TODICT:-------------------", user)
