@@ -7,7 +7,7 @@ const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
-  const [username, setUsername] = useState("");
+  // const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -21,10 +21,10 @@ const SignUpForm = () => {
       validationErrors.push("Please provide your first name");
     if (last_name.length === 0)
       validationErrors.push("Please provide your last name");
-    if (username.length < 4)
-      validationErrors.push("Usernames must be at least 4 characters");
-    if (username.length > 25)
-      validationErrors.push("Usernames must be less than 25 characters");
+    // if (username.length < 4)
+    //   validationErrors.push("Usernames must be at least 4 characters");
+    // if (username.length > 25)
+    //   validationErrors.push("Usernames must be less than 25 characters");
     if (!email.includes(".") || !email.includes("@") || email.length < 4)
       validationErrors.push("Please provide a valid email address");
     if (password.length < 5)
@@ -33,20 +33,20 @@ const SignUpForm = () => {
       validationErrors.push("Password and Confirm Password fields must match");
 
     setErrors(validationErrors);
-  }, [first_name, last_name, username, email, password, repeatPassword]);
+  }, [first_name, last_name, email, password, repeatPassword]);
 
   const onSignUp = async (e) => {
     e.preventDefault();
 
     if (password === repeatPassword) {
       const data = await dispatch(
-        signUp(username, first_name, last_name, email, password)
+        signUp(first_name, last_name, email, password)
       );
 
       setErrors([]);
       setFirstName("");
       setLastName("");
-      setUsername("");
+      // setUsername("");
       setEmail("");
       setPassword("");
       setRepeatPassword("");
@@ -68,9 +68,9 @@ const SignUpForm = () => {
   //   }
   // };
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
-  };
+  // const updateUsername = (e) => {
+  //   setUsername(e.target.value);
+  // };
 
   const updateFirstName = (e) => {
     setFirstName(e.target.value);
@@ -123,7 +123,7 @@ const SignUpForm = () => {
           required={true}
         ></input>
       </div>
-      <div>
+      {/* <div>
         <label>User Name</label>
         <input
           type="text"
@@ -132,7 +132,7 @@ const SignUpForm = () => {
           value={username}
           required={true}
         ></input>
-      </div>
+      </div> */}
       <div>
         <label>Email</label>
         <input
