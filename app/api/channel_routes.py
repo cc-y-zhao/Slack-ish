@@ -3,6 +3,7 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
 from app.models import Channel, User, Message, db, channel_users
 from app.forms import ChannelForm
+from sqlalchemy import join
 
 channel_routes = Blueprint('channels', __name__)
 
@@ -19,6 +20,7 @@ def get_channels():
     # print('return_value in channel_routes-------', return_value)
     return {'channels': [channel.to_dict() for channel in channels]}
 
+
 @channel_routes.route('/<int:channel_id>')
 # @login_required
 def get_one_channel(channel_id):
@@ -27,10 +29,12 @@ def get_one_channel(channel_id):
 
     # channel = Channel.query.filter(Channel.id == channel_id)
     # .filter(Message.channel_id == channel_id).all()
-    channel = db.session.query(Channel, Message).filter(Channel.id == channel_id).filter(Message.channel_id == channel_id).all()
-    # print('single channel in channel_routes-------', channel)
+    # channel = db.session.query(Channel, Message).filter(Channel.id == channel_id).filter(Message.channel_id == channel_id).all()
+    channel = db.session.query(Channel, Message).filter(
+        Channel.id == channel_id).filter(Message.channel_id == channel_id).all()
+    # join(Message).filter(Message.channel_id == channel_id)
+    print('single channel in channel_routes-------', channel)
     return channel.to_dict()
-
 
 # POST Route
 
@@ -72,7 +76,6 @@ def add_channel():
         # return {**new_channel.to_dict()}
 
     return {"errors": validation_errors_to_error_messages(form.errors)}
-
 
 
 # PUT Route
