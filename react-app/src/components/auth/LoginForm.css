@@ -83,10 +83,81 @@
     /* padding: 11px 12px 13px; */
     padding: 3px 12px 5px;
     box-sizing: border-box;
-    /* transition: border 80ms ease-out,box-shadow 80ms ease-out; */
+    transition: border 80ms ease-out,box-shadow 80ms ease-out;
 }
 
-.LoginFormArea input[type=text]:focus {
-    box-shadow: 0px 0px 5px rgb(186, 225, 241);
-    border: 1px solid rgb(69, 133, 183)
+.LoginFormArea input[type=text]:focus, input[type=password]:focus {
+    box-shadow: 0px 0px 0px 4px rgb(186, 225, 241);
+    border: 1px solid rgb(69, 133, 183);
+    outline: none;
+}
+
+
+.LoginFormArea button {
+    color: #fff;
+    background-color: #4a154b;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 44px;
+    font-size: 18px;
+    font-weight: 700;
+    min-width: 96px;
+    padding: 0 16px;
+    transition: ease-in-out;
+}
+
+.LoginFormArea button:hover {
+    cursor: pointer;
+    opacity: .9;
+}
+
+.demo-login {
+    max-width: 400px;
+    max-height: 68px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    color: rgba(97, 96, 97, 1);
+    background-color: rgba(29, 28, 29, .05);
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.demo-login > p {
+    padding: 0px 0px 0px 15px;
+}
+
+.demo-login > i {
+    padding-left: 10px;
+}
+
+.demo-login p > a {
+    color: #1264A3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.demo-login p > a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.LoginFormFooter {
+    padding: 32px 0;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+}
+
+.LoginFormFooter > a {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #696969;
+    letter-spacing: -.2px;
+    margin: 0px 16px 4px 0px;
 }

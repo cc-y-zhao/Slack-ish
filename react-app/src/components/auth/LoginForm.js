@@ -33,6 +33,13 @@ const LoginForm = () => {
     return <Redirect to="/" />;
   }
 
+  const demo = (e) => {
+    e.preventDefault();
+    const email = "demo@aa.io";
+    const password = "password";
+    return dispatch(login({ email, password }));
+  };
+
   return (
     <div className="LoginFormContainer">
       <div className="LoginFormHeader">
@@ -75,8 +82,24 @@ const LoginForm = () => {
               onChange={updatePassword}
             />
           </div>
-          <button type="submit">Sign in</button>
+          <button type="submit">Sign In with Email</button>
         </form>
+        <div className="demo-login">
+          <i class="fa-regular fa-heart"></i>
+          <p className="Box">
+            We won't email you a magic code for a password-free sign in. Or you
+            can <a href="/login">sign in as a demo user instead</a>.
+          </p>
+        </div>
+      </div>
+      {/* <button onClick={demo}>demo</button> */}
+      <div className="LoginFormFooter">
+        <a href="https://github.com/cc-y-zhao/Slack-ish">Slack-ish Github</a>
+        <a>Contact Us</a>
+        <a>
+          <i class="fa-solid fa-globe"></i> Languages used{" "}
+          <i class="fa-solid fa-angle-down"></i>
+        </a>
       </div>
     </div>
   );
