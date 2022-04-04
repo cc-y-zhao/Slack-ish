@@ -32,7 +32,15 @@ const ChannelPage = () => {
     <div>
       <h2>{title}</h2>
       <div><EditChannelForm channelToEdit={channelToEdit} /></div>
-      {/* <div>{channel?.messages}</div> */}
+      <div>Messages: </div>
+      <div>
+        {channel?.messages.map((message) => (
+          <div>
+            <div>{message.name}: </div>
+            <div>{message.content}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
