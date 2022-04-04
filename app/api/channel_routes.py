@@ -34,11 +34,24 @@ def get_one_channel(channel_id):
     all_messages = db.session.query(Message).filter(
         Message.channel_id == channel_id).all()
     messages = [message.to_dict() for message in all_messages]
-    print('single channel in channel_routes-------CHANNEL:', channel)
-    print('single channel in channel_routes-------MESSAGE:', messages)
+
+    user_list = []
+    for message in messages:
+        # print("MESSAGE:", message)
+        user_before_to_dict = (db.session.query(
+            User).filter(User.id == message['user_id']))
+        print("USER_BEFORETODICT:-------------------", user_before_to_dict)
+        user = user_before_to_dict.to_dict()
+        print("USER_TODICT:-------------------", user)
+        user_list.append(user)
+
+    # print('single channel in channel_routes-------CHANNEL:', user_list)
+    # print('single channel in channel_routes-------CHANNEL:', channel)
+    # print('single channel in channel_routes-------MESSAGE:', messages)
     single_channel = channel.to_dict()
     single_channel["messages"] = messages
-    print('single channel in channel_routes-------SINGLE_CHANNEL:', single_channel)
+    single_channel["users"] = user_list
+    # print('single channel in channel_routes-------SINGLE_CHANNEL:', single_channel)
     return single_channel
     # return channel.to_dict()
 
