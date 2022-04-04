@@ -10,6 +10,7 @@ import { loadChannel } from "../../store/channels";
 const ChannelPage = () => {
   const dispatch = useDispatch();
   const { channel_id } = useParams();
+  const channelId = parseInt(channel_id);
 
   const channel = useSelector((state) => state.channels[channel_id]);
   const user_id = useSelector((state) => state.session.user.id);
@@ -18,18 +19,15 @@ const ChannelPage = () => {
 
   // console.log("messages in ChannelPage/index.js-------", messages)
 
-
   // console.log("channel in ChannelPage/index.js-------", channel);
   // console.log("messages in ChannelPage/index.js-------", channel.channel_id.messages);
 
-  let title = channel ? channel.title : ''
-  let channelToEdit = channel ? channel : ''
-
+  let title = channel ? channel.title : "";
+  let channelToEdit = channel ? channel : "";
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));
-  }, [dispatch, [channel].toString(), [channel.messages].toString()]);
-
+  }, [dispatch, [channel].toString()]);
 
   // TO DO: add individual routes for each channel with below syntax:
   // <NavLink key={channel.id} to={'/channels/' + channel.id}>
@@ -37,7 +35,9 @@ const ChannelPage = () => {
   return (
     <div>
       <h2>{title}</h2>
-      <div><EditChannelForm channelToEdit={channelToEdit} /></div>
+      <div>
+        <EditChannelForm channelToEdit={channelToEdit} />
+      </div>
       <div>Messages: </div>
       <div>
         {channel?.messages.map((message) => (
@@ -47,7 +47,9 @@ const ChannelPage = () => {
           </div>
         ))}
       </div>
-      <div><CreateMessageForm channelId={channel_id}/></div>
+      <div>
+        <CreateMessageForm channelId={channelId} />
+      </div>
     </div>
   );
 };
