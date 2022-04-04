@@ -19,7 +19,8 @@ const ChannelPage = () => {
 
   // console.log("messages in ChannelPage/index.js-------", messages)
 
-  // console.log("channel in ChannelPage/index.js-------", channel);
+  // console.log("channel in ChannelPage/index.js-------", channel?.messages);
+  const messages = channel?.messages;
   // console.log("messages in ChannelPage/index.js-------", channel.channel_id.messages);
 
   let title = channel ? channel.title : "";
@@ -27,7 +28,8 @@ const ChannelPage = () => {
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));
-  }, [dispatch, [channel].toString()]);
+    // }, [dispatch, [channel].toString()]);
+  }, [channel_id]);
 
   // TO DO: add individual routes for each channel with below syntax:
   // <NavLink key={channel.id} to={'/channels/' + channel.id}>
