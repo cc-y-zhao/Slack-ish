@@ -3,6 +3,9 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
 from app.models import Message, db
 from app.forms import MessageForm
+import datetime
+from sqlalchemy import DateTime
+from sqlalchemy.sql import func
 
 message_routes = Blueprint('messages', __name__)
 
@@ -18,7 +21,8 @@ def post_message(channel_id):
             user_id=request.json['user_id'],
             channel_id=channel_id,
             content=request.json['content'],
-            time_created=datetime.now(),
+            time_created=datetime.datetime.utcnow(),
+
             # time_updated=datetime.now()
         )
         db.session.add(new_message)

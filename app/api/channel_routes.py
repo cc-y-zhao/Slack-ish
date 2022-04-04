@@ -4,6 +4,9 @@ from flask_login import login_required
 from app.models import Channel, User, Message, db, channel_users
 from app.forms import ChannelForm
 from sqlalchemy import join
+import datetime
+from sqlalchemy import DateTime
+from sqlalchemy.sql import func
 
 channel_routes = Blueprint('channels', __name__)
 
@@ -92,7 +95,12 @@ def add_channel():
             title=request.json['title'],
             is_dm=request.json['is_dm'],
             description=request.json['description'],
-            time_created=datetime.now(),
+            time_created=datetime.datetime.utcnow(),
+
+            # time_created=DateTime(timezone=True), server_default=func.now(),
+
+
+            # time_created=datetime.time(),
             # time_updated=datetime.now()
         )
         db.session.add(new_channel)

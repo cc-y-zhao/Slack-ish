@@ -4,6 +4,7 @@ import { useHistory, useParams, Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 import EditChannelForm from "../EditChannelForm";
+import CreateMessageForm from "../CreateMessageForm";
 import { loadChannel } from "../../store/channels";
 
 const ChannelPage = () => {
@@ -13,8 +14,13 @@ const ChannelPage = () => {
   const channel = useSelector((state) => state.channels[channel_id]);
   const user_id = useSelector((state) => state.session.user.id);
 
+  // const messages = channel.messages;
 
-  console.log("channel in ChannelPage/index.js-------", [channel]);
+  // console.log("messages in ChannelPage/index.js-------", messages)
+
+
+  // console.log("channel in ChannelPage/index.js-------", channel);
+  // console.log("messages in ChannelPage/index.js-------", channel.channel_id.messages);
 
   let title = channel ? channel.title : ''
   let channelToEdit = channel ? channel : ''
@@ -22,7 +28,7 @@ const ChannelPage = () => {
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));
-  }, [dispatch, [channel].toString()]);
+  }, [dispatch, [channel].toString(), [channel.messages].toString()]);
 
 
   // TO DO: add individual routes for each channel with below syntax:
@@ -41,6 +47,7 @@ const ChannelPage = () => {
           </div>
         ))}
       </div>
+      <div><CreateMessageForm channelId={channel_id}/></div>
     </div>
   );
 };
