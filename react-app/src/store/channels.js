@@ -131,6 +131,29 @@ export const deleteChannel = (channel_id) => async (dispatch) => {
   }
 };
 
+// **********************************MESSAGES**********************************************
+const CREATE_ONE_MESSAGE = "messages/CREATE_ONE_MESSAGE";
+// const EDIT_ONE_MESSAGE = "messages/EDIT_ONE_MESSAGE";
+
+const createOneMessage = (channel_id, message) => ({ type: CREATE_ONE_MESSAGE, newMessage: message, channel_id });
+// const editOneMessage = (message) => ({ type: EDIT_ONE_MESSAGE, editedMessage: message });
+
+export const createMessage = (channel_id, message) => async (dispatch) => {
+  const response = await fetch(`/api/messages/${channel_id}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(message),
+  });
+  if (response.ok) {
+    const newMessage = await response.json();
+    dispatch(createOneMessage(channel_id, newMessage));
+    return newMessage;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+};
+
 let initialState = {};
 
 const channelsReducer = (state = initialState, action) => {
@@ -159,10 +182,16 @@ const channelsReducer = (state = initialState, action) => {
       return { [action.newChannel.id]: action.newChannel, ...state };
     }
 
+    case CREATE_ONE_MESSAGE: {
+      newState = { ...state };
+      newState.channels[action.channel_id].messages = action.newMessage;
+      
+      return newState;
+    }
+
     case EDIT_ONE_CHANNEL: {
       newState = { ...state };
       newState[action.editedChannel.id] = action.editedChannel;
-
       return newState;
     }
 
@@ -171,7 +200,6 @@ const channelsReducer = (state = initialState, action) => {
       delete newState[action.deletedChannel.id];
       return newState;
     }
-
     default:
       return state;
   }

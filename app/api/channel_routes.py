@@ -92,8 +92,8 @@ def add_channel():
             title=request.json['title'],
             is_dm=request.json['is_dm'],
             description=request.json['description'],
-            # created_at=datetime.now(),
-            # updated_at=datetime.now()
+            time_created=datetime.now(),
+            # time_updated=datetime.now()
         )
         db.session.add(new_channel)
         db.session.commit()
