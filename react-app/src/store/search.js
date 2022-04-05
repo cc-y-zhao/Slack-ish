@@ -12,8 +12,10 @@ export const loadUsers = () => async (dispatch) => {
   console.log('this is our response in our thunk of search ', response)
   if (response.ok) {
     const users = await response.json();
-    console.log('this is our user from our if statement in our thunk of search ', users)
+    console.log('IM IN LOADUSERS DISAPTCH-=-----------')
+    // console.log("users in loadusers---------", users)
     dispatch(loadAllUsers(users));
+    console.log('users in loadUsers--------', users);
     return users;
   } else {
     const errors = await response.json();
@@ -40,15 +42,19 @@ const searchReducer = (state = initialState, action) => {
     }
 
 
+      let users_dict = {}
 
+      action.users.users.forEach((user) => {
+        users_dict[user.id] = user;
+      });
 
+      newState['users'] = users_dict
+      return newState;
+    }
 
     default:
       return state;
   }
-
-
-
 
 };
 

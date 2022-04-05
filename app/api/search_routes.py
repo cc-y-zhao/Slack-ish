@@ -11,13 +11,12 @@ from sqlalchemy.sql import func
 
 search_routes = Blueprint('search', __name__)
 
-######################################USERS######################################
+#################################USERS######################################
 #GET Route (all users)
 @search_routes.route('/')
 @login_required
 def get_users():
-    users = User.query.all()
 
-    # print('users in serach_routes--------', {'users': {user.to_dict() for user in users}})
+    users = User.query.all()
 
     return {'users': [user.to_dict() for user in users]}
