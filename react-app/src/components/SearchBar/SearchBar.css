@@ -5,6 +5,8 @@
     width: 100vw;
     height: 3em;
     display: flex;
+    position: absolute;
+    z-index: 1;
 }
 
 

@@ -37,9 +37,9 @@ const ChannelPage = () => {
   // <NavLink key={channel.id} to={'/channels/' + channel.id}>
 
   return (
-    <div>
+    <div className="chat">
       <h2>{title}</h2>
-      <div>
+      <div className="chat__messages">
         <EditChannelForm channelToEdit={channelToEdit} />
       </div>
       <div>Messages: </div>

@@ -5,6 +5,8 @@
     height: 100vh;
     background-color: rgb(25,23,29);
     max-width: 300px;
+    position: relative;
+    top: 48px;
 }
 
 .sidebar hr {

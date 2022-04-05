@@ -12,6 +12,7 @@ import Channels from "./components/Channels";
 import ChannelPage from "./components/ChannelPage";
 import ChatRoom from "./components/ChatRoom";
 import SearchBar from "./components/SearchBar";
+import { NoPage } from "./components/404Page/404Page";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,7 +32,7 @@ function App() {
   return (
     <BrowserRouter>
       {/* <NavBar /> */}
-      <SearchBar />
+      {/* <SearchBar /> */}
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm />
@@ -48,13 +49,14 @@ function App() {
         <ProtectedRoute path="/">
           <ChatRoom />
         </ProtectedRoute>
-        {/* <Route path='/chatroom' exact={true}> */}
-        {/* </Route> */}
         <Route path="/channels" exact={true}>
           <Channels />
         </Route>
         <Route path="/channels/:channel_id">
           <ChannelPage />
+        </Route>
+        <Route path="*">
+          <NoPage />
         </Route>
       </Switch>
     </BrowserRouter>

@@ -1,14 +1,17 @@
-import React from 'react'
-import Chat from './Chat'
-import SideBar from './SideBar'
-import './ChatRoom.css'
+import React from "react";
+import Home from "./Home";
+import SearchBar from "../SearchBar";
+import SideBar from "./SideBar";
+import "./ChatRoom.css";
+
 const ChatRoom = () => {
   return (
-    <div className='chatroom'>
-        <SideBar />
-        <Chat />
+    <div className="chatroom">
+      <SearchBar />
+      <SideBar />
+      <Home />
     </div>
-  )
-}
+  );
+};
 
-export default ChatRoom
+export default ChatRoom;
