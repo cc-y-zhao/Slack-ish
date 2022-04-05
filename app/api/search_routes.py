@@ -18,6 +18,6 @@ search_routes = Blueprint('search', __name__)
 def get_users():
     users = User.query.all()
 
-    print('users in serach_routes--------', {'users': {user.to_dict() for user in users}})
+    # print('users in serach_routes--------', {'users': {user.to_dict() for user in users}})
 
-    return {'users': {user.to_dict() for user in users}}
+    return {'users': [user.to_dict() for user in users]}
