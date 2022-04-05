@@ -4,7 +4,6 @@ from flask_login import UserMixin
 from .channel_user import channel_users
 
 
-
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -15,7 +14,12 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    messages = db.relationship('Message', back_populates='user')
+    #I think we need to take out the cascade='all-delete' here
+    # messages = db.relationship(
+    #     'Message', back_populates='user', cascade="all, delete")
+
+    messages = db.relationship(
+        'Message', back_populates='user')
 
     channels = db.relationship(
         "Channel",

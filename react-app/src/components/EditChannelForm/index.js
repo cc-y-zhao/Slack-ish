@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { editChannel, deleteChannel } from "../../store/channels";
+import { editChannel, deleteChannel, loadChannel } from "../../store/channels";
 //add deletechannel to edit form
 //need to do loadOneChannel and create single channel page and pass in as prop
 const EditChannelForm = ({ channelToEdit }) => {
@@ -11,8 +11,8 @@ const EditChannelForm = ({ channelToEdit }) => {
   const id = channelToEdit?.id;
   const is_dm = false;
 
-  console.log('channelToEdit----------', channelToEdit)
-  console.log('channelToEdit title----------', channelToEdit.title)
+  // console.log('channelToEdit----------', channelToEdit)
+  // console.log('channelToEdit title----------', channelToEdit.title)
 
   const dispatch = useDispatch();
   const params = useParams();
@@ -36,7 +36,7 @@ const EditChannelForm = ({ channelToEdit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('IN HANDLESUBMIT------')
+    // console.log('IN HANDLESUBMIT------')
 
     const editedChannel = {
       id,
@@ -45,12 +45,12 @@ const EditChannelForm = ({ channelToEdit }) => {
       description,
     };
 
-    console.log("edited channel in hjandle submit", editedChannel);
+    // console.log("edited channel in hjandle submit", editedChannel);
 
     let editedChannelSuccess;
     try {
       console.log('attempting put with func', editChannel)
-      editedChannelSuccess = await dispatch(editChannel(editedChannel));
+      editedChannelSuccess = await dispatch(editChannel(editedChannel)).then(() => dispatch(loadChannel(editedChannel.id)));
     } catch (error) {
       // if (error instanceof ValidationError) setErrors(error.errors);
       // // If error is not a ValidationError, add slice at the end to remove extra
