@@ -12,6 +12,7 @@ import { authenticate } from "./store/session";
 import Channels from "./components/Channels";
 import ChannelPage from "./components/ChannelPage";
 import CreateChannelForm from "./components/CreateChannelForm";
+import Search from "./components/Search";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -47,6 +48,7 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true}>
           <h1>testing</h1>
+          <Search />
         </ProtectedRoute>
         <Route path="/chatroom" exact={true}>
           {/* <ChatRoom /> */}
