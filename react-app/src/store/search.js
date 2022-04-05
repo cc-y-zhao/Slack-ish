@@ -12,8 +12,10 @@ export const loadUsers = () => async (dispatch) => {
   const response = await fetch(`/api/search/`);
   if (response.ok) {
     const users = await response.json();
+    console.log('IM IN LOADUSERS DISAPTCH-=-----------')
     // console.log("users in loadusers---------", users)
     dispatch(loadAllUsers(users));
+    console.log('users in loadUsers--------', users);
     return users;
   } else {
     const errors = await response.json();
@@ -29,18 +31,16 @@ const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_USERS: {
       newState = { ...state };
-      // console.log('actions.channels in channelsReducer-------', action.channels)
-      // console.log('typeof actions.channels in channelsReducer-------', typeof action.channels === Array)
-      action.users.forEach((user) => {
-        newState[user.id] = user;
+
+      let users_dict = {}
+
+      action.users.users.forEach((user) => {
+        users_dict[user.id] = user;
       });
-      // console.log('newState in channelsReducer-------', newState)
+
+      newState['users'] = users_dict
       return newState;
     }
-
-
-
-
 
     default:
       return state;

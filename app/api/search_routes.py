@@ -16,8 +16,7 @@ search_routes = Blueprint('search', __name__)
 @search_routes.route('/')
 @login_required
 def get_users():
+
     users = User.query.all()
 
-    print('users in serach_routes--------', {'users': {user.to_dict() for user in users}})
-
-    return {'users': {user.to_dict() for user in users}}
+    return {'users': [user.to_dict() for user in users]}

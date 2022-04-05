@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -9,8 +9,12 @@ function Search() {
   const { searchInput } = useParams();
   const dispatch = useDispatch();
 
-  const users = useSelector((state) => Object.values(state.search.users));
+  console.log('IM IN THE SEARCH COMPONENT---------')
 
+  const users = useSelector((state) => state?.search.users);
+  // const users = useSelector((state) => Object.values(state?.search.users));
+
+  console.log('USERS IN SEARCH COMPONENT--------', users)
   useEffect(() => {
     dispatch(loadUsers());
     }, [dispatch]);
