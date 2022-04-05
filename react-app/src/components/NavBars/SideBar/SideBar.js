@@ -14,6 +14,9 @@ const Sidebar = () => {
       <>
         <div className="SidebarNav">
           <div className="SidebarLabels">
+            <div className="SidebarLogo">
+              <h1>Slack-ish</h1>
+            </div>
             <div className="SidebarLabel">
               <h1>Channels</h1>
             </div>

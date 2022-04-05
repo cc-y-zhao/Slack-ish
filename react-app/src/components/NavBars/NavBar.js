@@ -13,9 +13,9 @@ const NavBar = () => {
       <>
         <div className="Nav">
           <h1>Top Nav Bar</h1>
+          {/* Add search bar here */}
+          <LogoutButton />
         </div>
-        {/* Add search bar here */}
-        <LogoutButton />
       </>
     );
   } else {

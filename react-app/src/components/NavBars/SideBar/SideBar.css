@@ -1,5 +1,5 @@
 .SidebarNav {
-    background: #15171c;
+    background: rgb(25,23,29);
     width: 257px;
     height: calc(100vh - 50px);
     display: flex;
@@ -7,10 +7,20 @@
     position: fixed;
     top: 50px;
     left: 0;
+    border-right:1px solid rgb(53,53,58);
 }
 
-.SidebarNav h1 {
-    color: rgb(108, 108, 111);
+.SidebarLogo {
+    border-bottom:1px solid rgb(53,53,58);
+}
+
+.SidebarLogo > h1 {
+    color: rgb(196, 202, 208);
+    margin: 12px 0 9px 10px;
+}
+
+.SidebarLabel > h1 {
+    color: rgb(134, 134, 136);
     font-size: 15px;
     margin: 10px 0 10px 0;
 }

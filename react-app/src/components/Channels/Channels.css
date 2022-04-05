@@ -14,12 +14,12 @@
     position: relative;
     list-style: none;
     text-decoration: none;
-    color: rgb(108, 108, 111);
+    color: rgb(134, 134, 136);
 }
 
 .channel__list > a {
     text-decoration: none;
-    color: rgb(108, 108, 111);
+    color: rgb(134, 134, 136);
 }
 
 .channel__list i {
@@ -30,3 +30,9 @@
 .channel__list:hover {
     background-color: rgb(39, 36, 44);
 }
+
+/* If active: set to blue */
+/* .channel__list:active {
+    color: rgb(243, 246, 249);
+    background-color: rgb(32, 110, 159);
+} */

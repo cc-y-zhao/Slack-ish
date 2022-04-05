@@ -1,8 +1,8 @@
 .Nav {
-    background: #15171c;
+    background: rgb(18,16,22);
     height: 50px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     color: white;
     position: fixed;
@@ -10,12 +10,13 @@
     top: 0;
     left: 0;
     z-index: 1;
+    border-bottom:1px solid rgb(53,53,58);
 }
 
 .Nav h1 {
     margin-left: 2rem;
     font-size: 2rem;
-    height: 80px;
+    /* height: 80px; */
     display: flex;
     justify-content: flex-start;
     align-items: center;

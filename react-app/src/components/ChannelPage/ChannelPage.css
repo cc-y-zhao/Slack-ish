@@ -1,0 +1,62 @@
+.ChannelPageBody {
+    position: absolute;
+    top: 50px;
+    left: 258px;
+    /* width: calc(100vw - 257px); */
+    width: calc(100vw - 257px);
+    height: calc(100vh - 50px);
+    color: white;
+    background-color: rgb(27,30,34);
+    padding-left: 25px;
+}
+
+.ChannelPageTitle {
+    display: flex;
+    width: 100%;
+    height: 48px;
+    color: rgb(196,197,198);
+    background-color: rgb(27,30,34);
+    border-bottom:1px solid rgb(53,53,58);
+    margin-left: -25px;
+    z-index: 1;
+    padding-left: 25px;
+}
+
+.ChannelPageTitle > i {
+    padding-top: 15px;
+}
+
+.ChannelPageTitle > h2 {
+    margin: 0;
+    padding-top: 15px;
+}
+
+.MessagesBody {
+    display: flex;
+    flex-direction: column-reverse;
+    width: calc(100% - 55px);
+    max-height: 77%;
+    overflow-y: scroll;
+    /* background-color: aliceblue; */
+    position: absolute;
+    bottom: 200px;
+}
+
+.SingleMessageBody {
+    display: flex;
+    padding: 5px;
+}
+
+.MessageProfile {
+    color: rgb(245, 235, 92);
+    font-size: 40px;
+}
+
+.MessagesMain {
+    color: white;
+}
+
+.CreateMessageFormDiv {
+    position: absolute;
+    bottom: 5px;
+}
