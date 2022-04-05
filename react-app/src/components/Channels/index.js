@@ -9,6 +9,8 @@ import { loadChannels, deleteChannel } from "../../store/channels";
 
 const Channels = () => {
   const channels = useSelector((state) => Object.values(state.channels));
+  const channels_obj = useSelector((state) => state.channels);
+
   const user_id = useSelector((state) => state.session.user.id);
 
   const dispatch = useDispatch();
@@ -30,9 +32,17 @@ const Channels = () => {
         {channels?.map((channel) => {
           return (
             channel.owner_id === user_id && (
-              <div className='channel__list' key={channel.id}>
+              <div className="channel__list" key={channel.id}>
                 <i className="fa-solid fa-hashtag"></i>
-                <li>{channel.title}</li>
+                {/* <li>{channel.title}</li> */}
+                <li>
+                  <NavLink
+                    to={`/channels/${channel.id}`}
+                    className="channellistnavlink"
+                  >
+                    {channel.title}
+                  </NavLink>{" "}
+                </li>
                 {/* {channel.owner_id === user_id && (
                   <button
                     onClick={async () => {

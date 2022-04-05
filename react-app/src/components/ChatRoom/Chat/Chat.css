@@ -10,15 +10,15 @@
 
 .chat__input {
     color: lightgray;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: space-between; */
     padding-top: 15px;
     padding-bottom: 15px;
     align-items: center;
     text-align: center;
-    width: 71vw;
-    max-width: 100%;
+    width: 80%;
+    max-width: 85vw;
     position: absolute;
     bottom: 25px;
     margin-left: 15px;
@@ -29,14 +29,50 @@
     border: 2px solid rgb(82, 84, 82);
 }
 
-.chat__input > form > input {
-    padding: 15px;
+.create_message_form button {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    /* height: 20px; */
+    /* width: 200px; */
+    font-size: 1em;
+    position: absolute;
+    right: 20px;
+    color: lightgray;
+}
+
+.chat__input textarea {
     background: transparent;
     border: none;
     outline-width: 0;
+    width: 98%;
     color: white;
-    font-size: large;;
-    width: 100%;
+    font-size: large;
+    box-sizing: border-box;
+    resize: none;
+    overflow: auto;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    /* background-color: #d6dee1; */
+    background-color: #a8bbbf77;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
 }
 
 .chat__input > form {
@@ -47,9 +83,10 @@
     display: none;
 }
 
-.chat__messages {
+/* .chat__messages {
     flex: 1;
-}
+    max-width: 100%;
+} */
 
 .chat_iconsTop {
     display: flex;
@@ -65,7 +102,7 @@
     text-align: center;
     column-gap: .5em;
     position: relative;
-    bottom: -1em;
+    /* bottom: -1em; */
     left:1em;
     color: rgb(76, 78, 81)
 }

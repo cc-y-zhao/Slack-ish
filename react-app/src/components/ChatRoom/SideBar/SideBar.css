@@ -57,9 +57,11 @@
 }
 
 .sidebar__channelsList {
-    color: grey
+    color: grey;
+    display: flex;
 }
 
-.sidebar__channelsList {
-    display: flex;
+.channellistnavlink {
+    text-decoration: none;
+    color: gray;
 }

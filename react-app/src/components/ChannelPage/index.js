@@ -21,14 +21,14 @@ const ChannelPage = () => {
 
   // console.log("channel in ChannelPage/index.js-------", channel?.messages);
   const messages = channel?.messages;
-  console.log("MESSAGES in ChannelPage/index.js-------", messages);
+  // console.log("MESSAGES in ChannelPage/index.js-------", messages);
 
   let title = channel ? channel.title : "";
   let channelToEdit = channel ? channel : "";
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));
-    }, [dispatch, [channel].toString()]);
+  }, [dispatch, [channel].toString()]);
   // }, [channel_id, channel.all_messages.toString()]);
 
   // TO DO: add individual routes for each channel with below syntax:
