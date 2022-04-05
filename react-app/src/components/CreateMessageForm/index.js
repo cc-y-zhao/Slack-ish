@@ -4,7 +4,7 @@ import { useHistory, useParams, Redirect } from "react-router-dom";
 
 // import { ValidationError } from '../../utils/ValidationError';
 // import ErrorMessage from '../ErrorMessage/ErrorMessage';
-
+import { loadChannel } from "../../store/channels";
 import { createMessage } from "../../store/channels";
 
 // import './CreateReviewForm.css';
@@ -39,7 +39,7 @@ const CreateMessageForm = ({ channelId }) => {
     };
 
     if (newMessage) {
-      dispatch(createMessage(channel_id, newMessage));
+      dispatch(createMessage(channel_id, newMessage)).then(dispatch(loadChannel(channel_id)));
       setErrors([]);
     }
 

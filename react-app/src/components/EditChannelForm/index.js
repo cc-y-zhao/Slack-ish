@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { editChannel, deleteChannel } from "../../store/channels";
+import { editChannel, deleteChannel, loadChannel } from "../../store/channels";
 //add deletechannel to edit form
 //need to do loadOneChannel and create single channel page and pass in as prop
 const EditChannelForm = ({ channelToEdit }) => {
@@ -50,7 +50,7 @@ const EditChannelForm = ({ channelToEdit }) => {
     let editedChannelSuccess;
     try {
       console.log('attempting put with func', editChannel)
-      editedChannelSuccess = await dispatch(editChannel(editedChannel));
+      editedChannelSuccess = await dispatch(editChannel(editedChannel)).then(() => dispatch(loadChannel(editedChannel.id)));
     } catch (error) {
       // if (error instanceof ValidationError) setErrors(error.errors);
       // // If error is not a ValidationError, add slice at the end to remove extra
