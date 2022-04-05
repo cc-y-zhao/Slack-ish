@@ -33,6 +33,7 @@ const Channels = () => {
           return (
             channel.owner_id === user_id && (
               <div className='channel__list' key={channel.id}>
+                <i class="fa-solid fa-hashtag"></i>
                 <li>{channel.title}</li>
                 {/* {channel.owner_id === user_id && (
                   <button

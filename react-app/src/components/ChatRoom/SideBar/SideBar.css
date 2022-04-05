@@ -20,6 +20,20 @@
     flex: 1;;
 }
 
+.sidebar__channelButton {
+    display: flex;
+    position: relative;
+    left: 8em;
+    column-gap: 1em;
+
+}
+
+.sidebar__messageButton {
+    display: flex;
+    position: relative;
+    left: 4.6em;
+    column-gap: 1em;
+}
 
 .sidebar__header {
     display: flex;
@@ -27,8 +41,10 @@
     align-items: center;
     padding: 10px;
     column-gap: 1em;
+    height: 2em;
     background-color: #2f3135;
     color: grey;
+
 }
 
 .sidebar__channelsList {

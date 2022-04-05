@@ -9,3 +9,8 @@ html {
     background-color: rgb(26, 29, 33);
     color: rgb(209, 210, 211);
 } */
+
+* {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
