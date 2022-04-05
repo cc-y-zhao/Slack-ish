@@ -11,6 +11,7 @@ import { authenticate } from "./store/session";
 import Channels from "./components/Channels";
 import ChannelPage from "./components/ChannelPage";
 import ChatRoom from "./components/ChatRoom";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -29,7 +30,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {/* <NavBar /> */}
+      <SearchBar />
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm />
@@ -43,12 +45,11 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true}>
-          <h1>My Home Page</h1>
-        </ProtectedRoute>
-        <Route path='/chatroom' exact={true}>
+        <ProtectedRoute path="/" >
           <ChatRoom />
-        </Route>
+        </ProtectedRoute>
+        {/* <Route path='/chatroom' exact={true}> */}
+        {/* </Route> */}
         <Route path="/channels" exact={true}>
           <Channels />
         </Route>

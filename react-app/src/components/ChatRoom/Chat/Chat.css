@@ -12,9 +12,14 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px;
-    margin: 20px;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 3.2em;
+    margin-left: 20px;
+    margin-right: 20px;
     border-top: 1px solid grey;
     background-color: #474b53;
+    border: solid lightgrey;
 }
 
 .chat__input > form > input {
@@ -23,7 +28,7 @@
     border: none;
     outline-width: 0;
     color: white;
-    font-size: large;
+    font-size: large;;
     width: 100%;
 }
 
@@ -37,4 +42,28 @@
 
 .chat__messages {
     flex: 1;
+}
+
+.chat_iconsTop {
+    display: flex;
+    text-align: center;
+    column-gap: 1em;
+    position: relative;
+    left:1em;
+}
+
+.chat_iconsBottom {
+    display: flex;
+    text-align: center;
+    column-gap: .5em;
+    position: relative;
+    bottom: -1em;
+    left:1em;
+}
+.chat__sendMessage {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    right: 10px;
+    /* bottom: -5px; */
 }

@@ -1,0 +1,44 @@
+.searchbar__top {
+    background-color: #2f3135;
+    /* background-color: blue; */
+    border-bottom: solid lightgrey;
+    width: 100vw;
+    height: 3em;
+    display: flex;
+}
+
+
+.searchbar__blank {
+    flex: .5;
+}
+
+.searchbar__searchbar {
+    flex: 1
+}
+
+.searchbar__avatar {
+    flex: .5;
+}
+
+.searchbar__searchbar>input {
+    width: 100%;
+    position: relative;
+    top: 25%;
+    margin: auto;
+    background-color: #5f6268;
+    /* filter: opacity(.25); */
+}
+
+.searchbar__searchbar>input:focus {
+    outline: none;
+    filter: none;
+    background-color: white;
+}
+
+.searchbar__searchbar>input::placeholder {
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+

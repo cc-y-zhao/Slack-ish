@@ -30,7 +30,8 @@ const Channels = () => {
         {channels?.map((channel) => {
           return (
             channel.owner_id === user_id && (
-              <div className="channel__list" key={channel.id}>
+              <div className='channel__list' key={channel.id}>
+                <i className="fa-solid fa-hashtag"></i>
                 <li>{channel.title}</li>
                 {/* {channel.owner_id === user_id && (
                   <button
