@@ -3,14 +3,14 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBars/NavBar";
+import SideBar from "./components/NavBars/SideBar/SideBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
 import Channels from "./components/Channels";
 import ChannelPage from "./components/ChannelPage";
-import ChatRoom from "./components/ChatRoom";
 import CreateChannelForm from "./components/CreateChannelForm";
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
+      <SideBar />
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm />
@@ -45,9 +46,9 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true}>
-          <h1>My Home Page</h1>
+          <h1>testing</h1>
         </ProtectedRoute>
-        <Route path='/chatroom' exact={true}>
+        <Route path="/chatroom" exact={true}>
           {/* <ChatRoom /> */}
           <CreateChannelForm />
         </Route>
