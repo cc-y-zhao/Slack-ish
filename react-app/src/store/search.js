@@ -27,7 +27,7 @@ const searchReducer = (state = initialState, action) => {
   let newState;
 
   switch (action.type) {
-    case GET_ALL_CHANNELS: {
+    case GET_ALL_USERS: {
       newState = { ...state };
       // console.log('actions.channels in channelsReducer-------', action.channels)
       // console.log('typeof actions.channels in channelsReducer-------', typeof action.channels === Array)
@@ -37,7 +37,16 @@ const searchReducer = (state = initialState, action) => {
       // console.log('newState in channelsReducer-------', newState)
       return newState;
     }
+
+
+
+
+
+    default:
+      return state;
   }
+
+
 
 
 };

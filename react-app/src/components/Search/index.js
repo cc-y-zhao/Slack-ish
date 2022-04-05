@@ -2,9 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-
-//TO DO:
-// set up Search state
+import { loadUsers} from "../../store/search";
 
 function Search() {
 
@@ -13,6 +11,16 @@ function Search() {
 
   const users = useSelector((state) => Object.values(state.search.users));
 
+  useEffect(() => {
+    dispatch(loadUsers());
+    }, [dispatch]);
+
+  return (
+    <div>
+      <h2>Results</h2>
+
+    </div>
+  )
 
 
 
