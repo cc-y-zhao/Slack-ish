@@ -10,7 +10,6 @@ from sqlalchemy.sql import func
 message_routes = Blueprint('messages', __name__)
 
 # POST Route
-
 @message_routes.route('/<int:channel_id>', methods=['POST'])
 @login_required
 def post_message(channel_id):
@@ -32,6 +31,34 @@ def post_message(channel_id):
         # return {**new_channel.to_dict()}
 
     return {"errors": validation_errors_to_error_messages(form.errors)}
+
+
+# PUT Route
+@message_routes.route('/<int:message_id>', methods=["PUT"])
+@login_required
+def edit_message(message_id):
+    print(f'\n\n im in edit message\n\n')
+    form = MessageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    data = form.data
+
+    if form.validate_on_submit():
+        message = Message.query.get(message_id)
+        print('message to edit in message routes--------', message)
+        message.content = data['content']
+        message.time_updated=datetime.datetime.utcnow(),
+
+        # message.is_dm=form.data['is_dm']
+
+        # message.updated_at = datetime.now()
+        db.session.commit()
+        # print('message.to_dict()-------', {message.to_dict()})
+
+        return message.to_dict()
+        # return {**channel.to_dict()}
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 # DELETE Route

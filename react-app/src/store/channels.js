@@ -130,14 +130,23 @@ export const deleteChannel = (channel_id) => async (dispatch) => {
 };
 
 // **********************************MESSAGES**********************************************
+// **********************************MESSAGES**********************************************
+// **********************************MESSAGES**********************************************
+// **********************************MESSAGES**********************************************
+
 const CREATE_ONE_MESSAGE = "messages/CREATE_ONE_MESSAGE";
-// const EDIT_ONE_MESSAGE = "messages/EDIT_ONE_MESSAGE";
+const EDIT_ONE_MESSAGE = "messages/EDIT_ONE_MESSAGE";
 const DELETE_ONE_MESSAGE = "messages/DELETE_ONE_MESSAGE";
 
 const createOneMessage = (channel_id, message) => ({
   type: CREATE_ONE_MESSAGE,
   newMessage: message,
   channel_id,
+});
+
+const editOneMessage = (message) => ({
+  type: EDIT_ONE_MESSAGE,
+  editedMessage: message,
 });
 
 const deleteOneMessage = (channel_id, message) => ({
@@ -163,6 +172,25 @@ export const createMessage = (channel_id, message) => async (dispatch) => {
     const errors = await response.json();
     return errors;
   }
+};
+
+export const editMessage = (editedMessage) => async (dispatch) => {
+  console.log("editing Message", editedMessage);
+  console.log("editing Message id------", editedMessage.id);
+
+  const response = await fetch(`/api/messages/${editedMessage.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(editedMessage),
+  });
+
+  if (!response.ok) {
+    return response.errors;
+  }
+  const updatedMessage = await response.json();
+
+  dispatch(editOneMessage(updatedMessage));
+  return updatedMessage;
 };
 
 export const deleteMessage = (channel_id, message_id) => async (dispatch) => {
@@ -216,6 +244,14 @@ const channelsReducer = (state = initialState, action) => {
       // console.log("REDUCERACTAULY newMessage~~~:", action.newMessage.id);
       newState[action.channel_id].messages[action.newMessage.id] =
         action.newMessage;
+
+      return newState;
+    }
+
+    case EDIT_ONE_MESSAGE: {
+      newState = { ...state };
+      console.log('action in EDIT ONE MESSAGE-----', action)
+      newState[action.editedMessage.channel_id].messages[action.editedMessage.id] = action.editedMessage;
 
       return newState;
     }

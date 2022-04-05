@@ -12,8 +12,6 @@ from sqlalchemy.sql import func
 channel_routes = Blueprint('channels', __name__)
 
 # GET Route
-
-
 @channel_routes.route('/')
 @login_required
 def get_channels():
@@ -24,7 +22,7 @@ def get_channels():
     # print('return_value in channel_routes-------', return_value)
     return {'channels': [channel.to_dict() for channel in channels]}
 
-
+# GET Route
 @channel_routes.route('/<int:channel_id>')
 @login_required
 def get_one_channel(channel_id):
