@@ -1,5 +1,7 @@
 from .db import db
 from .channel_user import channel_users
+from sqlalchemy import DateTime
+from sqlalchemy.sql import func
 
 
 class Channel(db.Model):
@@ -10,6 +12,8 @@ class Channel(db.Model):
     title = db.Column(db.String(50), nullable=False)
     is_dm = db.Column(db.Boolean, nullable=False)
     description = db.Column(db.String(1000))
+    time_created = db.Column(DateTime(timezone=True), server_default=func.now())
+    time_updated = db.Column(DateTime(timezone=True), onupdate=func.now())
 
     users = db.relationship(
         "User",
@@ -28,4 +32,6 @@ class Channel(db.Model):
             'title': self.title,
             'is_dm': self.is_dm,
             'description': self.description,
+            'time_created': self.time_created,
+            'time_updated': self.time_updated,
         }
