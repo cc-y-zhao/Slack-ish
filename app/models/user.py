@@ -15,8 +15,11 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     #I think we need to take out the cascade='all-delete' here
+    # messages = db.relationship(
+    #     'Message', back_populates='user', cascade="all, delete")
+
     messages = db.relationship(
-        'Message', back_populates='user', cascade="all, delete")
+        'Message', back_populates='user')
 
     channels = db.relationship(
         "Channel",

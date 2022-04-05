@@ -15,12 +15,18 @@ class Channel(db.Model):
     time_created = db.Column(DateTime(timezone=True), server_default=func.now())
     time_updated = db.Column(DateTime(timezone=True), onupdate=func.now())
 
+
     users = db.relationship(
         "User",
         secondary=channel_users,
         back_populates="channels",
-        cascade="all, delete"
     )
+    # users = db.relationship(
+    #     "User",
+    #     secondary=channel_users,
+    #     back_populates="channels",
+    #     cascade="all, delete"
+    # )
     messages = db.relationship(
         "Message", back_populates="channel", cascade="all, delete"
     )
