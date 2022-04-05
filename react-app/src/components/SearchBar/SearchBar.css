@@ -1,5 +1,5 @@
 .searchbar__top {
-    background-color: #2f3135;
+    background-color: rgb(18,16,22);
     /* background-color: blue; */
     border-bottom: solid lightgrey;
     width: 100vw;
@@ -21,24 +21,26 @@
 }
 
 .searchbar__searchbar>input {
-    width: 100%;
-    position: relative;
-    top: 25%;
-    margin: auto;
-    background-color: #5f6268;
+    width: 50%;
+    position: absolute;
+    top: 12px;
+    /* margin: auto; */
+    background-color: rgb(52,53,57);
+    border-top: 1px solid gray;
+    border-radius: 5px;
+    border: 2px solid rgb(82, 84, 82);
     /* filter: opacity(.25); */
 }
 
 .searchbar__searchbar>input:focus {
     outline: none;
     filter: none;
-    background-color: white;
+    background-color: rgb(52,53,57);
 }
 
 .searchbar__searchbar>input::placeholder {
-    color: white;
+    color: gray;
     display: flex;
     justify-content: center;
     text-align: center;
 }
-

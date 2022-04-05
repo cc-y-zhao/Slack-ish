@@ -3,18 +3,26 @@
     flex-direction: column;
     flex: .25;
     height: 100vh;
-    background-color: #2f3135;
+    background-color: rgb(25,23,29);
+    max-width: 300px;
+}
+
+.sidebar hr {
+    width: 100%;
+    color: gray;
 }
 
 .sidebar__top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background-color: #2f3135;
+    background-color: rgb(28,26,32);
     color: white;
-    border-bottom: 3px solid #26282c;
+    border-bottom: 3px solid rgb(25,23,29);
+    height: 60px;
+    padding-left: 20px;
 }
+
 
 .sidebar__channels, .sidebar__messages {
     flex: 1;;
@@ -39,10 +47,11 @@
     display: flex;
     justify-self: space-between;
     align-items: center;
-    padding: 10px;
+    /* padding: 10px; */
+    padding-left: 15px;
     column-gap: 1em;
     height: 2em;
-    background-color: #2f3135;
+    /* background-color: #2f3135; */
     color: grey;
 
 }
