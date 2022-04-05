@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
+import "./NavBar.css";
 
 const NavBar = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -10,6 +11,10 @@ const NavBar = () => {
   if (sessionUser) {
     sessionElements = (
       <>
+        <div className="Nav">
+          <h1>Top Nav Bar</h1>
+        </div>
+        {/* Add search bar here */}
         <LogoutButton />
       </>
     );

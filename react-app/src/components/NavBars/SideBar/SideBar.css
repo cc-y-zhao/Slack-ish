@@ -1,0 +1,34 @@
+.SidebarNav {
+    background: #15171c;
+    width: 257px;
+    height: calc(100vh - 50px);
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 50px;
+    left: 0;
+}
+
+.SidebarNav h1 {
+    color: white;
+}
+
+.SidebarLabels {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: space-between;
+    list-style: none;
+    height: 20px;
+    text-decoration: none;
+    font-size: 15px;
+    width: 100%;
+}
+
+.SidebarLabel {
+    padding-left: 10px;
+}
+
+.SidebarLabel:hover {
+    background-color: gray;
+}

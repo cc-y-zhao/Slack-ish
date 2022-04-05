@@ -32,15 +32,6 @@ const Channels = () => {
             channel.owner_id === user_id && (
               <div className="channel__list" key={channel.id}>
                 <li>{channel.title}</li>
-                {channel.owner_id === user_id && (
-                  <button
-                    onClick={async () => {
-                      await dispatch(deleteChannel(channel.id));
-                    }}
-                  >
-                    Delete
-                  </button>
-                )}
               </div>
             )
           );
@@ -51,3 +42,18 @@ const Channels = () => {
 };
 
 export default Channels;
+
+{
+  /* <div className="channel__list" key={channel.id}>
+<li>{channel.title}</li>
+{channel.owner_id === user_id && (
+  <button
+    onClick={async () => {
+      await dispatch(deleteChannel(channel.id));
+    }}
+  >
+    Delete
+  </button>
+)}
+</div> */
+}
