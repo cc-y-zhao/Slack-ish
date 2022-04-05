@@ -1,0 +1,23 @@
+.Nav {
+    background: rgb(18,16,22);
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border-bottom:1px solid rgb(53,53,58);
+}
+
+.Nav h1 {
+    margin-left: 2rem;
+    font-size: 2rem;
+    /* height: 80px; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}

@@ -1,0 +1,41 @@
+.SidebarNav {
+    background: rgb(25,23,29);
+    width: 257px;
+    height: calc(100vh - 50px);
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    border-right:1px solid rgb(53,53,58);
+}
+
+.SidebarLogo {
+    border-bottom:1px solid rgb(53,53,58);
+}
+
+.SidebarLogo > h1 {
+    color: rgb(196, 202, 208);
+    margin: 12px 0 9px 10px;
+}
+
+.SidebarLabel > h1 {
+    color: rgb(134, 134, 136);
+    font-size: 15px;
+    margin: 10px 0 10px 0;
+}
+
+.SidebarLabels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style: none;
+    height: 20px;
+    text-decoration: none;
+    font-size: 15px;
+    width: 100%;
+}
+
+.SidebarLabel {
+    padding-left: 10px;
+}

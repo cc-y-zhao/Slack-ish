@@ -57,7 +57,7 @@ function App() {
         <Route path="/channels" exact={true}>
           <Channels />
         </Route>
-        <Route path="/channels/:channel_id">
+        <Route path="/channels/:channel_id" exact={true}>
           <ChannelPage />
         </Route>
       </Switch>

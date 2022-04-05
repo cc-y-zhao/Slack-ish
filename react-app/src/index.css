@@ -4,6 +4,7 @@
 
 html {
     font-family: 'Lato', sans-serif;
+    overflow: hidden;
 }
 /* html {
     background-color: rgb(26, 29, 33);

@@ -19,12 +19,12 @@ const deleteOneChannel = (channel) => ({
   deletedChannel: channel,
 });
 
-export const loadChannels = () => async (dispatch) => {
+export const loadChannels = (user_id) => async (dispatch) => {
   // console.log("owner_id in loadChannels---------", owner_id)
-  const response = await fetch(`/api/channels/`);
+  const response = await fetch(`/api/channels/user/${user_id}`);
   if (response.ok) {
     const channels = await response.json();
-    // console.log("channels in loadChannels---------", channels)
+    console.log("channels in loadChannels---------", channels);
     dispatch(loadAllChannels(channels.channels));
     return channels;
   } else {
@@ -152,7 +152,7 @@ const editOneMessage = (message) => ({
 const deleteOneMessage = (channel_id, message) => ({
   type: DELETE_ONE_MESSAGE,
   deletedMessage: message,
-  channel_id
+  channel_id,
 });
 // const editOneMessage = (message) => ({ type: EDIT_ONE_MESSAGE, editedMessage: message });
 
@@ -250,8 +250,10 @@ const channelsReducer = (state = initialState, action) => {
 
     case EDIT_ONE_MESSAGE: {
       newState = { ...state };
-      console.log('action in EDIT ONE MESSAGE-----', action)
-      newState[action.editedMessage.channel_id].messages[action.editedMessage.id] = action.editedMessage;
+      console.log("action in EDIT ONE MESSAGE-----", action);
+      newState[action.editedMessage.channel_id].messages[
+        action.editedMessage.id
+      ] = action.editedMessage;
 
       return newState;
     }
@@ -260,9 +262,7 @@ const channelsReducer = (state = initialState, action) => {
       newState = { ...state };
       // console.log('newState[action.channel_id]-------',
       //   newState[action.channel_id]);
-      console.log('CHANNEL_ID IN DELETE_ONE_MESSAGE-------',
-        action.channel_id
-      )
+      console.log("CHANNEL_ID IN DELETE_ONE_MESSAGE-------", action.channel_id);
       delete newState[action.channel_id].messages[action.deletedMessage.id];
 
       return newState;
