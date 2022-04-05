@@ -39,7 +39,7 @@ const CreateMessageForm = ({ channelId }) => {
     };
 
     if (newMessage) {
-      dispatch(createMessage(channel_id, newMessage)).then(dispatch(loadChannel(channel_id)));
+      await dispatch(createMessage(channel_id, newMessage)).then(() => dispatch(loadChannel(channel_id)));
       setErrors([]);
     }
 
