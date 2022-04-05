@@ -10,13 +10,14 @@
 }
 
 .SidebarNav h1 {
-    color: white;
+    color: rgb(108, 108, 111);
+    font-size: 15px;
+    margin: 10px 0 10px 0;
 }
 
 .SidebarLabels {
     display: flex;
     flex-direction: column;
-    color: white;
     justify-content: space-between;
     list-style: none;
     height: 20px;
@@ -27,8 +28,4 @@
 
 .SidebarLabel {
     padding-left: 10px;
-}
-
-.SidebarLabel:hover {
-    background-color: gray;
 }

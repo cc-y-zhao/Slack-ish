@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Channels from "../../Channels";
+import DirectMessages from "../../DirectMessages/DirectMessages";
 import "./SideBar.css";
 
 const Sidebar = () => {
@@ -22,7 +23,9 @@ const Sidebar = () => {
             <div className="SidebarLabel">
               <h1>Direct Messages</h1>
             </div>
-            <div className="SidebarLinks"></div>
+            <div className="SidebarLinks">
+              <DirectMessages />
+            </div>
           </div>
         </div>
       </>
