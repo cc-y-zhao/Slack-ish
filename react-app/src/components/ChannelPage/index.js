@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 import EditChannelForm from "../EditChannelForm";
 import CreateMessageForm from "../CreateMessageForm";
-import { loadChannel } from "../../store/channels";
+import { loadChannel, deleteMessage } from "../../store/channels";
 
 const ChannelPage = () => {
   const dispatch = useDispatch();
@@ -46,6 +46,12 @@ const ChannelPage = () => {
           <div>
             <div>{message.name}: </div>
             <div>{message.content}</div>
+            <button
+              onClick={async () => {
+                await dispatch(deleteMessage(channel.id, message.id)).then(() => dispatch(loadChannel(channel_id)));
+              }}>
+              Delete
+            </button>
           </div>
         ))}
       </div>

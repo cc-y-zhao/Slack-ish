@@ -132,11 +132,18 @@ export const deleteChannel = (channel_id) => async (dispatch) => {
 // **********************************MESSAGES**********************************************
 const CREATE_ONE_MESSAGE = "messages/CREATE_ONE_MESSAGE";
 // const EDIT_ONE_MESSAGE = "messages/EDIT_ONE_MESSAGE";
+const DELETE_ONE_MESSAGE = "messages/DELETE_ONE_MESSAGE";
 
 const createOneMessage = (channel_id, message) => ({
   type: CREATE_ONE_MESSAGE,
   newMessage: message,
   channel_id,
+});
+
+const deleteOneMessage = (channel_id, message) => ({
+  type: DELETE_ONE_MESSAGE,
+  deletedMessage: message,
+  channel_id
 });
 // const editOneMessage = (message) => ({ type: EDIT_ONE_MESSAGE, editedMessage: message });
 
@@ -152,6 +159,20 @@ export const createMessage = (channel_id, message) => async (dispatch) => {
     const newMessage = await response.json();
     dispatch(createOneMessage(channel_id, newMessage));
     return newMessage;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+};
+
+export const deleteMessage = (channel_id, message_id) => async (dispatch) => {
+  const response = await fetch(`/api/messages/${message_id}`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    const deletedMessage = await response.json();
+    dispatch(deleteOneMessage(channel_id, deletedMessage));
+    return deletedMessage;
   } else {
     const errors = await response.json();
     return errors;
@@ -195,6 +216,18 @@ const channelsReducer = (state = initialState, action) => {
       // console.log("REDUCERACTAULY newMessage~~~:", action.newMessage.id);
       newState[action.channel_id].messages[action.newMessage.id] =
         action.newMessage;
+
+      return newState;
+    }
+
+    case DELETE_ONE_MESSAGE: {
+      newState = { ...state };
+      // console.log('newState[action.channel_id]-------',
+      //   newState[action.channel_id]);
+      console.log('CHANNEL_ID IN DELETE_ONE_MESSAGE-------',
+        action.channel_id
+      )
+      delete newState[action.channel_id].messages[action.deletedMessage.id];
 
       return newState;
     }

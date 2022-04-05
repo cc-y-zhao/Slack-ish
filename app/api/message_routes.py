@@ -9,6 +9,7 @@ from sqlalchemy.sql import func
 
 message_routes = Blueprint('messages', __name__)
 
+# POST Route
 
 @message_routes.route('/<int:channel_id>', methods=['POST'])
 @login_required
@@ -31,3 +32,17 @@ def post_message(channel_id):
         # return {**new_channel.to_dict()}
 
     return {"errors": validation_errors_to_error_messages(form.errors)}
+
+
+# DELETE Route
+
+@message_routes.route('/<int:message_id>', methods=["DELETE"])
+@login_required
+def delete_message(message_id):
+    message = Message.query.get(message_id)
+    deleted_message = message.to_dict()
+
+    db.session.delete(message)
+    db.session.commit()
+
+    return deleted_message

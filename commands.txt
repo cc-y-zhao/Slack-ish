@@ -47,6 +47,8 @@ to access another branch that someone else pushed upstream:
 git fetch
 git checkout <<branch name>>
 
+git branch -D (DELETE BRANCH PERMANENTLY - BE CAREFUL!)
+
 
 *********** heroku commands *************
 heroku run -a <app_name> flask seed all

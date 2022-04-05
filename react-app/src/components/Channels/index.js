@@ -32,7 +32,7 @@ const Channels = () => {
             channel.owner_id === user_id && (
               <div className="channel__list" key={channel.id}>
                 <li>{channel.title}</li>
-                {/* {channel.owner_id === user_id && (
+                {channel.owner_id === user_id && (
                   <button
                     onClick={async () => {
                       await dispatch(deleteChannel(channel.id));
@@ -40,7 +40,7 @@ const Channels = () => {
                   >
                     Delete
                   </button>
-                )} */}
+                )}
               </div>
             )
           );
