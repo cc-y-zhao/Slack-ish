@@ -37,7 +37,6 @@
     width: calc(100% - 55px);
     max-height: 77%;
     overflow-y: scroll;
-    /* background-color: aliceblue; */
     position: absolute;
     bottom: 200px;
 }
