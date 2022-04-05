@@ -39,6 +39,7 @@
     position: absolute;
     right: 20px;
     color: lightgray;
+    z-index: 3;
 }
 
 .chat__input textarea {
@@ -77,10 +78,6 @@
 
 .chat__input > form {
     flex: 1;
-}
-
-.chat__submitButton {
-    display: none;
 }
 
 /* .chat__messages {

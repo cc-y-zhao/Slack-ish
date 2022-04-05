@@ -12,6 +12,8 @@ const ChannelPage = () => {
   const { channel_id } = useParams();
   const channelId = parseInt(channel_id);
 
+  console.log("hey", channel_id);
+
   const channel = useSelector((state) => state.channels[channel_id]);
   const user_id = useSelector((state) => state.session.user.id);
 

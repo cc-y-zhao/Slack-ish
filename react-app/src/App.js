@@ -45,7 +45,7 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path="/" >
+        <ProtectedRoute path="/">
           <ChatRoom />
         </ProtectedRoute>
         {/* <Route path='/chatroom' exact={true}> */}

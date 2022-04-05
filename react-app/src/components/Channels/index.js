@@ -41,7 +41,7 @@ const Channels = () => {
                     className="channellistnavlink"
                   >
                     {channel.title}
-                  </NavLink>{" "}
+                  </NavLink>
                 </li>
                 {/* {channel.owner_id === user_id && (
                   <button

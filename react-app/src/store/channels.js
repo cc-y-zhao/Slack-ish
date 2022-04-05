@@ -141,7 +141,7 @@ const createOneMessage = (channel_id, message) => ({
 // const editOneMessage = (message) => ({ type: EDIT_ONE_MESSAGE, editedMessage: message });
 
 export const createMessage = (channel_id, message) => async (dispatch) => {
-  // console.log("REDUCER CHANNEL ID~~~:", typeof channel_id);
+  // console.log("REDUCER CHANNEL ID~~~:", channel_id);
 
   const response = await fetch(`/api/messages/${channel_id}`, {
     method: "POST",
