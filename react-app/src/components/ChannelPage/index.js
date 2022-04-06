@@ -17,6 +17,8 @@ const ChannelPage = () => {
 
   const channel = useSelector((state) => state.channels[channel_id]);
   const user_id = useSelector((state) => state.session.user.id);
+
+  const [showEditMessage, setShowEditMessage] = useState(false);
   // const messages = channel.messages;
 
   // console.log("messages in ChannelPage/index.js-------", messages)
@@ -76,12 +78,18 @@ const ChannelPage = () => {
                   <div className="MessageTime">
                     {formatDate(message.time_created)}
                   </div>
-                  <div className="EditMessageButton">
-                    {" "}
-                    {user_id === message.user_id && (
-                      <>
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                        {/* <div>
+                </div>
+                <div className="MessageContent">{message.content}</div>
+              </div>
+              <div
+                className="EditMessageButton"
+                onMouseEnter={() => setShowEditMessage(true)}
+                onMouseLeave={() => setShowEditMessage(false)}
+              >
+                {showEditMessage && user_id === message.user_id && (
+                  <>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                    {/* <div>
                       <EditMessageForm
                         channelId={channelId}
                         messageToEdit={message}
@@ -96,11 +104,8 @@ const ChannelPage = () => {
                         Delete
                       </button>
                     </div> */}
-                      </>
-                    )}
-                  </div>
-                </div>
-                <div className="MessageContent">{message.content}</div>
+                  </>
+                )}
               </div>
             </div>
           ))}

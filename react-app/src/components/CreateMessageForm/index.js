@@ -43,6 +43,7 @@ const CreateMessageForm = ({ channelId }) => {
         dispatch(loadChannel(channel_id))
       );
       setErrors([]);
+      setContent("");
     }
 
     // const payload = {

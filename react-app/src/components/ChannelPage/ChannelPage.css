@@ -83,8 +83,20 @@
 }
 
 .EditMessageButton {
-    color: rgb(172,172,174);
-    justify-content: flex-end;
+    color: rgb(196, 202, 208);
+    position: absolute;
+    right: 50px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.EditMessageButton:hover {
+    background-color: rgb(42,41,47);
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 ::-webkit-scrollbar {
