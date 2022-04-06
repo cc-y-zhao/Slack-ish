@@ -23,7 +23,7 @@ const ChannelPage = () => {
 
   // console.log("channel in ChannelPage/index.js-------", channel?.messages);
   let messages;
-  if (channel.messages) {
+  if (channel?.messages) {
     messages = Object.values(channel?.messages);
   }
   console.log("MESSAGES in ChannelPage/index.js-------", messages);
@@ -52,10 +52,9 @@ const ChannelPage = () => {
         <i class="fa-solid fa-hashtag"></i>
         <h2>{title}</h2>
       </div>
-      {/* <div>
+      <div>
         <EditChannelForm channelToEdit={channelToEdit} />
-      </div> */}
-      {/* <div>Messages: </div> */}
+      </div>
       <div className="MessagesBody">
         {messages
           ?.slice(0)
@@ -77,18 +76,21 @@ const ChannelPage = () => {
                 </div>
                 <div className="MessageContent">{message.content}</div>
               </div>
-              {/* <div>
-              <EditMessageForm channelId={channelId} messageToEdit={message} />
-            </div> */}
-              {/* <button
-              onClick={async () => {
-                await dispatch(deleteMessage(channel.id, message.id)).then(() =>
-                  dispatch(loadChannel(channel_id))
-                );
-              }}
-            >
-              Delete
-            </button> */}
+              <div>
+                <EditMessageForm
+                  channelId={channelId}
+                  messageToEdit={message}
+                />
+              </div>
+              <button
+                onClick={async () => {
+                  await dispatch(deleteMessage(channel.id, message.id)).then(
+                    () => dispatch(loadChannel(channel_id))
+                  );
+                }}
+              >
+                Delete
+              </button>
             </div>
           ))}
       </div>
