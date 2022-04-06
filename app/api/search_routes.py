@@ -42,15 +42,28 @@ def get_users_results():
     # request_json = request.get_json()
     # searchInput is the key of the request body
     # query = request_json.get('searchInput')
+    users = User.query.all()
     query = request.args.get('searchInput')
 
-    print(f'\n\nquery:\n{query}\n\n')
+    found_users = []
 
-    search_pattern = f'%{query}%'
+    print(f'query is {query}')
 
-    first_name_pattern = User.first_name.ilike(search_pattern)
-    last_name_pattern = User.last_name.ilike(search_pattern)
-    users = User.query.filter(or_(first_name_pattern, last_name_pattern))
+    for user in users:
+        fullname = f'{user.first_name} {user.last_name}'.lower()
+        if fullname.find(query.lower()) >= 0:
+            found_users.append(user.to_dict())
+
+    return {'users_results': found_users}
+
+    # Below does not return results for full name:
+    # print(f'\n\nquery:\n{query}\n\n')
+
+    # search_pattern = f'%{query}%'
+
+    # first_name_pattern = User.first_name.ilike(search_pattern)
+    # last_name_pattern = User.last_name.ilike(search_pattern)
+    # users = User.query.filter(or_(first_name_pattern, last_name_pattern))
 
 
-    return {'users_results': [user.to_dict() for user in users]}
+    # return {'users_results': [user.to_dict() for user in users]}
