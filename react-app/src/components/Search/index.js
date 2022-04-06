@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { loadUsersResults } from "../../store/search";
 
@@ -9,7 +9,7 @@ import { showModal, setCurrentModal } from "../../store/modal";
 import { createDm } from "../../store/channels";
 
 function Search() {
-  // const { searchInput } = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const results = useSelector((state) => state?.search.users_results);
@@ -26,11 +26,31 @@ function Search() {
   const [searchInput, setSearchResult] = useState(prevSearchInput);
 
   const showCreateChannelForm = () => {
-    console.log('IM IN SHOWCREATECHANNEL FUNCTION IN SEARCH')
     dispatch(setCurrentModal(CreateChannelForm));
-    console.log('IM IN SHOWCREATECHANNEL FUNCTION IN SIDEBAR----AFTER DISPATCH')
     dispatch(showModal());
   }
+
+  const handleClick = async (sessionUserId, resultId, e) => {
+    e.preventDefault();
+
+    let newDirectMessage;
+
+    try {
+      newDirectMessage = await dispatch(createDm(sessionUserId, resultId));
+    } catch (error) {
+      // if (error instanceof ValidationError) setErrors(error.errors);
+      // // If error is not a ValidationError, add slice at the end to remove extra
+      // // "Error: "
+      // else setErrors({ overall: error.toString().slice(7) })
+    }
+    if (newDirectMessage) {
+
+      history.push(`/channels/${newDirectMessage.id}`)
+      // dispatch(getReviewsByCar(carId));
+      // setShowModal(false);
+      // return history.push(`/cars/${carId}`);
+    }
+  };
 
 
   // useEffect(() => {
@@ -73,7 +93,7 @@ function Search() {
         <h2>Search Results</h2>
           <div className="search__result">
           {results?.map(result => (
-            <div key={result.id} onClick={() => dispatch(createDm(sessionUserId, result.id))}>
+            <div key={result.id} onClick={(e) => handleClick(sessionUserId, result.id, e)}>
               {result.first_name} {result.last_name}
             </div>
           ))}
