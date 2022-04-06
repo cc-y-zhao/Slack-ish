@@ -22,7 +22,10 @@ const ChannelPage = () => {
   // console.log("messages in ChannelPage/index.js-------", messages)
 
   // console.log("channel in ChannelPage/index.js-------", channel?.messages);
-  const messages = Object.values(channel?.messages);
+  let messages;
+  if (channel.messages) {
+    messages = Object.values(channel?.messages);
+  }
   console.log("MESSAGES in ChannelPage/index.js-------", messages);
 
   let title = channel ? channel.title : "";
@@ -32,9 +35,6 @@ const ChannelPage = () => {
     dispatch(loadChannel(channel_id));
   }, [dispatch, [channel].toString()]);
   // }, [channel_id, channel.all_messages.toString()]);
-
-  // TO DO: add individual routes for each channel with below syntax:
-  // <NavLink key={channel.id} to={'/channels/' + channel.id}>
 
   function formatTime(string) {
     const options = { hour: "2-digit", minute: "2-digit" };
