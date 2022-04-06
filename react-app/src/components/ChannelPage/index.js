@@ -33,7 +33,7 @@ const ChannelPage = () => {
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));
-  }, [dispatch, [channel].toString()]);
+  }, [dispatch, channel_id]);
   // }, [channel_id, channel.all_messages.toString()]);
 
   function formatTime(string) {
