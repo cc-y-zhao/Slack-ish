@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Redirect } from "react-router-dom";
 
+import { hideModal, setCurrentModal } from "../../store/modal";
+
 // import { ValidationError } from '../../utils/ValidationError';
 // import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
@@ -55,6 +57,7 @@ const CreateChannelForm = () => {
     }
     if (newChannel) {
       setErrors([]);
+      dispatch(hideModal())
       // dispatch(getReviewsByCar(carId));
       // setShowModal(false);
       // return history.push(`/cars/${carId}`);

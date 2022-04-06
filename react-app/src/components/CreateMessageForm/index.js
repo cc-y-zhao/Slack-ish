@@ -7,6 +7,8 @@ import { useHistory, useParams, Redirect } from "react-router-dom";
 import { loadChannel } from "../../store/channels";
 import { createMessage } from "../../store/channels";
 
+import { hideModal, setCurrentModal } from "../../store/modal";
+
 import "./CreateMessageForm.css";
 
 const CreateMessageForm = ({ channelId }) => {
