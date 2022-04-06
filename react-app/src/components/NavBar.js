@@ -1,9 +1,27 @@
 
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import LogoutButton from './auth/LogoutButton';
+import { showModal, setCurrentModal } from '../store/modal';
+
+import LoginForm from '../components/auth/LoginForm';
+import SignUpForm from '../components/auth/SignUpForm';
 import LogoutButton from './auth/LogoutButton';
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+
+  const showLoginForm = () => {
+    dispatch(setCurrentModal(LoginForm));
+    dispatch(showModal());
+  }
+
+  const showSignUpForm = () => {
+    dispatch(setCurrentModal(SignUpForm));
+    dispatch(showModal())
+  }
+
   return (
     <nav>
       <ul>

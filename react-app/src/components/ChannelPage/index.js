@@ -16,10 +16,10 @@ const ChannelPage = () => {
   const channelId = parseInt(channel_id);
 
   const channel = useSelector((state) => state.channels[channel_id]);
-  const user_id = useSelector((state) => state.session.user.id);
+  const user_id = useSelector((state) => state.session.user?.id);
   // const messages = channel.messages;
 
-  // console.log("messages in ChannelPage/index.js-------", messages) 
+  // console.log("messages in ChannelPage/index.js-------", messages)
 
   // console.log("channel in ChannelPage/index.js-------", channel?.messages);
   let messages;

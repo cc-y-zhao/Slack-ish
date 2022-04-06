@@ -15,6 +15,8 @@ import CreateChannelForm from "./components/CreateChannelForm";
 import Search from "./components/Search";
 import CreateDMForm from "./components/CreateDMForm";
 
+import Modal from './components/Modal/Modal';
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -34,6 +36,7 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <SideBar />
+      <Modal />
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm />
