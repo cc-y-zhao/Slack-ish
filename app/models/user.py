@@ -21,6 +21,7 @@ class User(db.Model, UserMixin):
     messages = db.relationship(
         'Message', back_populates='user')
 
+    #think of 'channels' more as 'join_channel_users'
     channels = db.relationship(
         "Channel",
         secondary=channel_users,

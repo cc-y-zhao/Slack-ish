@@ -43,30 +43,6 @@ def get_session_user_channels(user_id):
 #     # print('return_value in channel_routes-------', return_value)
 #     return {'channels': [channel.to_dict() for channel in channel_users_query]}
 
-# POST adding an instance of channel_users
-
-@channel_routes.route('/', methods=["POST"])
-@login_required
-def add_channel_user():
-    form = ChannelForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-
-    if form.validate_on_submit():
-        new_channel = Channel(
-            owner_id=request.json['owner_id'],
-            title=request.json['title'],
-            is_dm=request.json['is_dm'],
-            description=request.json['description'],
-            time_created=datetime.datetime.utcnow(),
-            # time_created=DateTime(timezone=True), server_default=func.now(),
-            # time_created=datetime.time(),
-            # time_updated=datetime.now()
-        )
-        db.session.add(new_channel)
-        db.session.commit()
-        return new_channel.to_dict()
-
-    return {"errors": validation_errors_to_error_messages(form.errors)}
 
 
 # GET Route
@@ -133,10 +109,45 @@ def add_channel():
             # time_updated=datetime.now()
         )
         db.session.add(new_channel)
+
+        owner = User.query.get(request.json['owner_id'])
+        owner.channels.append(new_channel)
+
         db.session.commit()
         return new_channel.to_dict()
 
     return {"errors": validation_errors_to_error_messages(form.errors)}
+
+
+# POST Route (to create a DM)
+
+@channel_routes.route('/<int:session_user_id>/<int:search_user_id>', methods=["POST"])
+# @login_required
+def add_direct_message(session_user_id, search_user_id):
+
+    session_user = User.query.get(session_user_id)
+    search_user = User.query.get(search_user_id)
+
+    session_user_full_name = f'{session_user.first_name.capitalize()} {session_user.last_name.capitalize()}'
+    search_user_full_name = f'{search_user.first_name.capitalize()} {search_user.last_name.capitalize()}'
+
+    new_channel = Channel(
+        title= f'{session_user_full_name}, {search_user_full_name}',
+        is_dm= True,
+        time_created=datetime.datetime.utcnow(),
+        # time_created=DateTime(timezone=True), server_default=func.now(),
+        # time_created=datetime.time(),
+        # time_updated=datetime.now()
+    )
+
+    db.session.add(new_channel)
+
+    session_user.channels.append(new_channel)
+    search_user.channels.append(new_channel)
+
+    db.session.commit()
+    return new_channel.to_dict()
+
 
 
 # PUT Route
@@ -151,17 +162,14 @@ def edit_channel(channel_id):
 
     if form.validate_on_submit():
         channel = Channel.query.get(channel_id)
-        print('channel to edit in channel routes--------', channel)
         channel.title = data['title']
         channel.description = data['description']
-        # channel.is_dm=form.data['is_dm']
 
-        # channel.updated_at = datetime.now()
         db.session.commit()
-        # print('channel.to_dict()-------', {channel.to_dict()})
+
 
         return channel.to_dict()
-        # return {**channel.to_dict()}
+
 
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
