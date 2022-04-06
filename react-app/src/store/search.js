@@ -6,7 +6,7 @@ const GET_ALL_USERS_RESULTS = "search/GET_ALL_RESULTS";
 // const DELETE_ONE_USER = "search/DELETE_ONE_USER";
 
 const loadAllUsers = (users) => ({ type: GET_ALL_USERS, users });
-const loadAllUsersResults = (results) => ({ type: GET_ALL_USERS_RESULTS, results });
+const loadAllUsersResults = (results, searchInput) => ({ type: GET_ALL_USERS_RESULTS, results, searchInput });
 
 
 export const loadUsers = () => async (dispatch) => {
@@ -27,7 +27,7 @@ export const loadUsersResults = (searchInput) => async (dispatch) => {
   const response = await fetch("/api/search/users?searchInput="+searchInput);
   if (response.ok) {
     const results = await response.json();
-    dispatch(loadAllUsersResults(results));
+    dispatch(loadAllUsersResults(results, searchInput));
     return results;
   } else {
     const errors = await response.json();
@@ -61,6 +61,7 @@ const searchReducer = (state = initialState, action) => {
       let users_results = action.results.users_results;
 
       newState['users_results'] = users_results;
+      newState['search_input'] = action.searchInput
 
       return newState;
     }

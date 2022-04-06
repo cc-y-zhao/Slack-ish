@@ -9,18 +9,19 @@ function Search() {
   // const { searchInput } = useParams();
   const dispatch = useDispatch();
 
-  const users = useSelector((state) => state?.search.users_list);
-  const results = useSelector((state) => state?.search.users_results)
-
-  console.log('users -----------', users);
-
-  const [showModal, setShowModal] = useState(false)
-  const [searchInput, setSearchResult] = useState('')
+  const results = useSelector((state) => state?.search.users_results);
+  const prevSearchInput = useSelector((state) => state?.search.search_input);
 
 
-  useEffect(() => {
-    dispatch(loadUsersResults());
-  }, [dispatch]);
+  const [showModal, setShowModal] = useState(false);
+  const [searchInput, setSearchResult] = useState(prevSearchInput);
+
+  console.log('previous search input', prevSearchInput);
+
+
+  // useEffect(() => {
+  //   dispatch(loadUsersResults());
+  // }, [dispatch]);
 
   // From Dan:
   // useEffect allows you to run code between renders.. doesnt actually cause renders
@@ -36,13 +37,14 @@ function Search() {
   // if message room doesn't exist, create new channel with hardcoded values (is_dm),
   // and then redirect / history.push them to that new channel
 
+
   return (
     <div>
       <div className="search">
         <h2>Results</h2>
         <input placeholder='Search'
           value={searchInput}
-          onClick={() => setShowModal(true)}
+          // onClick={() => setShowModal(true)}
           onChange={(e) => dispatch(loadUsersResults(e.target.value))}
           // onChange -> dispatch for the results and then setSearchResult to those results
         />
@@ -62,14 +64,14 @@ function Search() {
             </div>
           ))}
         </div>
-        <h2>All Users: (for testing)</h2>
+        {/* <h2>All Users: (for testing)</h2>
         <div className="search__result">
           {users?.map(user => (
             <div key={user.id}>
               {user.first_name} {user.last_name}
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   )
