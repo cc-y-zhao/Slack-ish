@@ -24,11 +24,7 @@ export const loadUsers = () => async (dispatch) => {
 };
 
 export const loadUsersResults = (searchInput) => async (dispatch) => {
-  const response = await fetch("/api/search/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(searchInput),
-  });
+  const response = await fetch("/api/search/users?searchInput="+searchInput);
   if (response.ok) {
     const results = await response.json();
     dispatch(loadAllUsersResults(results));

@@ -10,6 +10,7 @@ function Search() {
   const dispatch = useDispatch();
 
   const users = useSelector((state) => state?.search.users_list);
+  const results = useSelector((state) => state?.search.users_results)
 
   console.log('users -----------', users);
 
@@ -45,14 +46,22 @@ function Search() {
           onChange={(e) => dispatch(loadUsersResults(e.target.value))}
           // onChange -> dispatch for the results and then setSearchResult to those results
         />
-        <button onClick={() => setShowModal(true)} />
+        {/* <button onClick={() => setShowModal(true)} />
         {showModal && (
           <>
             <Modal onClose={() => setShowModal(false)} />
             <div>{searchInput}</div>
             <Modal />
           </>
-        )}
+        )} */}
+        <h2>Search Results</h2>
+          <div className="search__result">
+          {results?.map(result => (
+            <div key={result.id}>
+              {result.first_name} {result.last_name}
+            </div>
+          ))}
+        </div>
         <h2>All Users: (for testing)</h2>
         <div className="search__result">
           {users?.map(user => (

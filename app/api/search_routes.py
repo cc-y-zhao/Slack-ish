@@ -39,9 +39,10 @@ def get_users_results():
 
     # from a/A:    .filter(or_(Pony.name == "Bob", Pony.name == "Blob"))
 
-    request_json = request.get_json()
+    # request_json = request.get_json()
     # searchInput is the key of the request body
-    query = request_json.get('searchInput')
+    # query = request_json.get('searchInput')
+    query = request.args.get('searchInput')
 
     print(f'\n\nquery:\n{query}\n\n')
 
