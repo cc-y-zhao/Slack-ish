@@ -82,6 +82,11 @@
     color: rgb(196,198,199);
 }
 
+.EditMessageButton {
+    color: rgb(172,172,174);
+    justify-content: flex-end;
+}
+
 ::-webkit-scrollbar {
     width: 22px;
 }
