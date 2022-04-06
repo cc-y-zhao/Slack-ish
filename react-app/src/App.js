@@ -55,9 +55,9 @@ function App() {
           {/* <ChatRoom /> */}
           <CreateChannelForm />
         </Route>
-        <Route path="/channels" exact={true}>
+        {/* <Route path="/channels" exact={true}>
           <Channels />
-        </Route>
+        </Route> */}
         <Route path='/createDM' exact={true}>
           <CreateDMForm />
         </Route>

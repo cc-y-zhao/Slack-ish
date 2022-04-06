@@ -1,0 +1,31 @@
+.CreateMessageFormDiv {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+}
+
+.CreateMessageErrors {
+    color: white;
+}
+
+.MessageTextBoxArea {
+    padding: 0 21px 0 21px;
+}
+
+.MessageTextBoxArea > textarea {
+    min-height: 170px;
+    width: 100%;
+    background-color: rgb(37,40,43);
+    border: 1px solid rgb(81,83,82);
+    border-radius: 7px;
+    color: rgb(196,198,199);
+    font-family: Lato;
+    font-size: 15px;
+    resize: none;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.MessageTextBoxArea > textarea:active {
+    border-color: rgb(136,138,140);
+}

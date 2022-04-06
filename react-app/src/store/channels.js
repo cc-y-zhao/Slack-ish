@@ -226,6 +226,7 @@ const channelsReducer = (state = initialState, action) => {
     case GET_ONE_CHANNEL: {
       newState = { ...state };
       newState[action.channel.id] = action.channel;
+      // newState.current = action.channel.id; extra stuff for later on (highlighted channel sidebar)
       // console.log('newState in channelsReducer-------', newState)
 
       return newState;

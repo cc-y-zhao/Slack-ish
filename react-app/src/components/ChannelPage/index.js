@@ -17,13 +17,15 @@ const ChannelPage = () => {
 
   const channel = useSelector((state) => state.channels[channel_id]);
   const user_id = useSelector((state) => state.session.user.id);
-
   // const messages = channel.messages;
 
   // console.log("messages in ChannelPage/index.js-------", messages) 
 
   // console.log("channel in ChannelPage/index.js-------", channel?.messages);
-  const messages = channel?.messages;
+  let messages;
+  if (channel?.messages) {
+    messages = Object.values(channel?.messages);
+  }
   console.log("MESSAGES in ChannelPage/index.js-------", messages);
 
   let title = channel ? channel.title : "";
@@ -31,11 +33,8 @@ const ChannelPage = () => {
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));
-  }, [dispatch, [channel].toString()]);
+  }, [dispatch, channel_id]);
   // }, [channel_id, channel.all_messages.toString()]);
-
-  // TO DO: add individual routes for each channel with below syntax:
-  // <NavLink key={channel.id} to={'/channels/' + channel.id}>
 
   function formatTime(string) {
     const options = { hour: "2-digit", minute: "2-digit" };
@@ -53,12 +52,11 @@ const ChannelPage = () => {
         <i class="fa-solid fa-hashtag"></i>
         <h2>{title}</h2>
       </div>
-      {/* <div>
+      <div>
         <EditChannelForm channelToEdit={channelToEdit} />
-      </div> */}
-      {/* <div>Messages: </div> */}
+      </div>
       <div className="MessagesBody">
-        {channel?.all_messages
+        {messages
           ?.slice(0)
           .reverse()
           .map((message) => (
@@ -67,33 +65,36 @@ const ChannelPage = () => {
                 <i class="fa-solid fa-square-person-confined"></i>
               </div>
               <div className="MessageMain">
-                <div className="MessageName">{message.name}</div>
-                <div className="MessageTime">
-                  {formatTime(message.time_created)}
-                </div>
-                <div className="MessageDate">
-                  {formatDate(message.time_created)}
+                <div className="MessageInfo">
+                  <div className="MessageName">{message.name}</div>
+                  <div className="MessageTime">
+                    {formatTime(message.time_created)}{" "}
+                  </div>
+                  <div className="MessageTime">
+                    {formatDate(message.time_created)}
+                  </div>
                 </div>
                 <div className="MessageContent">{message.content}</div>
               </div>
-              {/* <div>
-              <EditMessageForm channelId={channelId} messageToEdit={message} />
-            </div> */}
-              {/* <button
-              onClick={async () => {
-                await dispatch(deleteMessage(channel.id, message.id)).then(() =>
-                  dispatch(loadChannel(channel_id))
-                );
-              }}
-            >
-              Delete
-            </button> */}
+              <div>
+                <EditMessageForm
+                  channelId={channelId}
+                  messageToEdit={message}
+                />
+              </div>
+              <button
+                onClick={async () => {
+                  await dispatch(deleteMessage(channel.id, message.id)).then(
+                    () => dispatch(loadChannel(channel_id))
+                  );
+                }}
+              >
+                Delete
+              </button>
             </div>
           ))}
       </div>
-      <div className="CreateMessageFormDiv">
-        <CreateMessageForm channelId={channelId} />
-      </div>
+      <CreateMessageForm channelId={channelId} />
     </div>
   );
 };

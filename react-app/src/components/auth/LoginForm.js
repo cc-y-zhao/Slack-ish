@@ -33,11 +33,8 @@ const LoginForm = () => {
     return <Redirect to="/" />;
   }
 
-  const demo = (e) => {
-    e.preventDefault();
-    const email = "demo@aa.io";
-    const password = "password";
-    return dispatch(login({ email, password }));
+  const demoLogin = async () => {
+    await dispatch(login("demo@aa.io", "password"));
   };
 
   return (
@@ -88,7 +85,7 @@ const LoginForm = () => {
           <i class="fa-regular fa-heart"></i>
           <p className="Box">
             We won't email you a magic code for a password-free sign in. Or you
-            can <a href="/login">sign in as a demo user instead</a>.
+            can <a onClick={demoLogin}>sign in as a demo user instead</a>.
           </p>
         </div>
       </div>
