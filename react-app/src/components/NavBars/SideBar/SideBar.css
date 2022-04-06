@@ -37,15 +37,37 @@
 .addchannelbutton {
     font-size: 18px;
     margin: 7px 0 0 115px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* color: rgb(25,23,29); */
     color: rgb(196, 202, 208);
 }
 
 .adddmbutton {
     font-size: 18px;
-    margin: 7px 0 0 70px;
+    margin: 7px 1px 0 70px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* color: rgb(25,23,29); */
     color: rgb(196, 202, 208);
+}
+
+.addchannelbutton:hover {
+    background-color: rgb(42,41,47);
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.adddmbutton:hover {
+    background-color: rgb(42,41,47);
+    border-radius: 2px;
+    cursor: pointer;
 }
 
 .SidebarLabels {

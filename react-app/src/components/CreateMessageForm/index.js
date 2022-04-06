@@ -73,13 +73,10 @@ const CreateMessageForm = ({ channelId }) => {
     <>
       <div className="CreateMessageFormDiv">
         <form onSubmit={handleSubmit}>
-          <div>
-            <div>{errors}</div>
-          </div>
+          <div className="CreateMessageErrors">{errors}</div>
           <input type="hidden" value={user_id} />
           <input type="hidden" value={channel_id} />
-          <div>
-            <label>Message</label>
+          <div className="MessageTextBoxArea">
             <textarea
               type="text"
               required
@@ -87,12 +84,9 @@ const CreateMessageForm = ({ channelId }) => {
               value={content}
               onChange={updateContent}
             />
-          </div>
-          <div>
             <button type="submit" disabled={errors.length > 0}>
               Send
             </button>
-            {/* <button className='btn-in-form' type="button" onClick={handleCancelClick}>Cancel</button> */}
           </div>
         </form>
       </div>

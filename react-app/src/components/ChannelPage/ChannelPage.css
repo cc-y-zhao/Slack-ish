@@ -16,12 +16,13 @@
     color: rgb(196,197,198);
     background-color: rgb(27,30,34);
     border-bottom:1px solid rgb(53,53,58);
-    z-index: 1;
     padding-left: 25px;
+    z-index: 2;
 }
 
 .ChannelPageTitle > i {
     padding-top: 19px;
+    z-index: 2;
 }
 
 .ChannelPageTitle > h2 {
@@ -29,23 +30,23 @@
     padding-top: 11px;
     padding-left: 6px;
     font-size: 22px;
+    z-index: 2;
 }
 
 .MessagesBody {
     display: flex;
     flex-direction: column-reverse;
     width: calc(100%);
-    max-height: 78%;
-    overflow-y: scroll;
-    position: absolute;
-    bottom: 200px;
+    max-height: calc(100% - 250px);
+    overflow: overlay;
+    position: relative;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
 }
 
 .SingleMessageBody {
     display: flex;
-    padding: 5px;
-    padding-left: 25px;
-
+    padding: 5px 50px 10px 25px;
 }
 
 .SingleMessageBody:hover {
@@ -79,4 +80,24 @@
 
 .MessagesContent {
     color: rgb(196,198,199);
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    /* background-color: #d6dee1; */
+    background-color: rgb(118,121,123);
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(118,121,123);
 }

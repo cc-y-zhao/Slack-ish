@@ -17,13 +17,12 @@ const ChannelPage = () => {
 
   const channel = useSelector((state) => state.channels[channel_id]);
   const user_id = useSelector((state) => state.session.user.id);
-
   // const messages = channel.messages;
 
   // console.log("messages in ChannelPage/index.js-------", messages)
 
   // console.log("channel in ChannelPage/index.js-------", channel?.messages);
-  const messages = channel?.messages;
+  const messages = Object.values(channel?.messages);
   console.log("MESSAGES in ChannelPage/index.js-------", messages);
 
   let title = channel ? channel.title : "";
@@ -58,7 +57,7 @@ const ChannelPage = () => {
       </div> */}
       {/* <div>Messages: </div> */}
       <div className="MessagesBody">
-        {channel?.all_messages
+        {messages
           ?.slice(0)
           .reverse()
           .map((message) => (
