@@ -20,7 +20,7 @@ const ChannelPage = () => {
 
   // const messages = channel.messages;
 
-  // console.log("messages in ChannelPage/index.js-------", messages)
+  // console.log("messages in ChannelPage/index.js-------", messages) 
 
   // console.log("channel in ChannelPage/index.js-------", channel?.messages);
   const messages = channel?.messages;

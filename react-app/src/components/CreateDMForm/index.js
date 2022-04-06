@@ -10,8 +10,9 @@ const CreateDMForm = () => {
   const channels = useSelector((state) => Object.values(state.channels));
   const [errors, setErrors] = useState([]);
   const [title, setTitle] = useState("");
+  const [showModal, setShowModal] = useState(false)
   const owner_id = useSelector((state) => state.session.user).id;
-  const is_dm = false;
+  const is_dm = true;
 
   useEffect(() => {
     dispatch(loadChannels(owner_id));
