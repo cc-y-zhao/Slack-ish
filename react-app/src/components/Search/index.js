@@ -21,6 +21,9 @@ function Search() {
   //   dispatch(loadUsers());
   // }, [dispatch]);
 
+  // useEffect allows you to run code between renders.. doesnt actually cause renders
+  // console log inside useEffects
+
   // useEffect(() => {
   //   if (searchUsers.includes(searchInput)) {
 

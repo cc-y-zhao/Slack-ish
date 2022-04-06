@@ -37,6 +37,7 @@ const searchReducer = (state = initialState, action) => {
       });
 
       newState['users'] = users_dict;
+      newState['users_list'] = action.users.users
       return newState;
     }
 
