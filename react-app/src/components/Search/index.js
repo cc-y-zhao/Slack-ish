@@ -3,24 +3,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Modal } from '../../context/Modal';
 
-import { loadUsers } from "../../store/search";
+import { loadUsersResults } from "../../store/search";
 
 function Search() {
   // const { searchInput } = useParams();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const searchState = useSelector((state) => Object.values(state?.search));
+  const users = useSelector((state) => state?.search.users_list);
 
-  // console.log('NEW SEARCH STATE-----------', searchState);
+  console.log('users -----------', users);
 
-  // const [showModal, setShowModal] = useState(false)
-  // const [searchInput, setSearchResult] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const [searchInput, setSearchResult] = useState('')
 
 
-  // useEffect(() => {
-  //   dispatch(loadUsers());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(loadUsersResults());
+  }, [dispatch]);
 
+  // From Dan:
   // useEffect allows you to run code between renders.. doesnt actually cause renders
   // console log inside useEffects
 
@@ -29,19 +30,20 @@ function Search() {
 
   //   }
   // }, [searchInput])
+
   // once a name is selected, need to search join table to see if a channel_users intance exists
-  //if message room doesn't exist, create new channel with hardcoded values (is_dm),
+  // if message room doesn't exist, create new channel with hardcoded values (is_dm),
   // and then redirect / history.push them to that new channel
 
   return (
     <div>
-
-      {/* <div className="search">
+      <div className="search">
         <h2>Results</h2>
         <input placeholder='Search'
           value={searchInput}
           onClick={() => setShowModal(true)}
-          onChange={(e) => setSearchResult(e.target.value)}
+          onChange={(e) => dispatch(loadUsersResults(e.target.value))}
+          // onChange -> dispatch for the results and then setSearchResult to those results
         />
         <button onClick={() => setShowModal(true)} />
         {showModal && (
@@ -51,15 +53,15 @@ function Search() {
             <Modal />
           </>
         )}
+        <h2>All Users: (for testing)</h2>
         <div className="search__result">
-          {searchUsers.map(search => (
-            <div key={search.id}>
-              {search.first_name} {search.last_name}
+          {users?.map(user => (
+            <div key={user.id}>
+              {user.first_name} {user.last_name}
             </div>
           ))}
         </div>
-      </div> */}
-
+      </div>
     </div>
   )
 

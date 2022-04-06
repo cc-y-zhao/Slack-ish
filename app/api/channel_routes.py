@@ -32,8 +32,8 @@ def get_session_user_channels(user_id):
 # GET Route
 
 
-@ channel_routes.route('/<int:channel_id>')
-@ login_required
+@channel_routes.route('/<int:channel_id>')
+@login_required
 def get_one_channel(channel_id):
     # print('IM IN CHANNEL_ROUTES')
     # channel = Channel.query.get(channel_id)
@@ -99,8 +99,8 @@ def get_one_channel(channel_id):
 #         return new_channel.to_dict()
 #     return {"errors": "Server error. Unable to make channel"}
 
-@ channel_routes.route('/', methods=["POST"])
-@ login_required
+@channel_routes.route('/', methods=["POST"])
+@login_required
 def add_channel():
     form = ChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -128,8 +128,8 @@ def add_channel():
 
 
 # PUT Route
-@ channel_routes.route('/<int:channel_id>', methods=["PUT"])
-@ login_required
+@channel_routes.route('/<int:channel_id>', methods=["PUT"])
+@login_required
 def edit_channel(channel_id):
     # print(f'\n\n im in edit channel\n\n')
     form = ChannelForm()
@@ -156,8 +156,8 @@ def edit_channel(channel_id):
 # DELETE Route
 
 
-@ channel_routes.route('/<int:channel_id>', methods=["DELETE"])
-@ login_required
+@channel_routes.route('/<int:channel_id>', methods=["DELETE"])
+@login_required
 def delete_channel(channel_id):
     channel = Channel.query.get(channel_id)
     deleted_channel = channel.to_dict()
