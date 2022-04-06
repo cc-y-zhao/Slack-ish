@@ -1,0 +1,103 @@
+.ChannelPageBody {
+    position: absolute;
+    top: 50px;
+    left: 258px;
+    /* width: calc(100vw - 257px); */
+    width: calc(100vw - 257px);
+    height: calc(100vh - 50px);
+    color: white;
+    background-color: rgb(27,30,34);
+}
+
+.ChannelPageTitle {
+    display: flex;
+    width: 100%;
+    height: 48px;
+    color: rgb(196,197,198);
+    background-color: rgb(27,30,34);
+    border-bottom:1px solid rgb(53,53,58);
+    padding-left: 25px;
+    z-index: 2;
+}
+
+.ChannelPageTitle > i {
+    padding-top: 19px;
+    z-index: 2;
+}
+
+.ChannelPageTitle > h2 {
+    margin: 0;
+    padding-top: 11px;
+    padding-left: 6px;
+    font-size: 22px;
+    z-index: 2;
+}
+
+.MessagesBody {
+    display: flex;
+    flex-direction: column-reverse;
+    width: calc(100%);
+    max-height: calc(100% - 250px);
+    overflow: overlay;
+    position: relative;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+}
+
+.SingleMessageBody {
+    display: flex;
+    padding: 5px 50px 10px 25px;
+}
+
+.SingleMessageBody:hover {
+    background-color: rgb(46,49,52);
+}
+
+.MessageProfile {
+    color: rgb(245, 235, 92);
+    font-size: 45px;
+    padding-right: 10px;
+}
+
+.MessageInfo {
+    display: flex;
+    align-items: center;
+    padding-bottom: 4px;
+}
+
+.MessageName {
+    color: rgb(208,209,210);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.MessageTime {
+    color: rgb(172,172,174);
+    font-size: 13px;
+    padding-top: 5px;
+    padding-left: 12px;
+}
+
+.MessagesContent {
+    color: rgb(196,198,199);
+}
+
+::-webkit-scrollbar {
+    width: 22px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    /* background-color: #d6dee1; */
+    background-color: rgb(118,121,123);
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(118,121,123);
+}

@@ -12,17 +12,26 @@ from sqlalchemy.sql import func
 channel_routes = Blueprint('channels', __name__)
 
 # GET Route
-@channel_routes.route('/')
+
+
+@channel_routes.route('/user/<int:user_id>')
 @login_required
-def get_channels():
-    channels = Channel.query.all()
-    # channel_users = channel_users.query.all()
+def get_session_user_channels(user_id):
+    # channels = Channel.query.all()
+    # user_id = 1
+    # print('channels backend', type(channels))
+    channel_users_query = Channel.query.join(channel_users).join(
+        User).filter((channel_users.c.user_id == user_id)).all()
+    # print('channels backend@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',
+    #       channel_users_query)
 
     # return_value = {'channels': [channel.to_dict() for channel in channels]}
     # print('return_value in channel_routes-------', return_value)
-    return {'channels': [channel.to_dict() for channel in channels]}
+    return {'channels': [channel.to_dict() for channel in channel_users_query]}
 
 # GET Route
+
+
 @channel_routes.route('/<int:channel_id>')
 @login_required
 def get_one_channel(channel_id):
@@ -122,7 +131,7 @@ def add_channel():
 @channel_routes.route('/<int:channel_id>', methods=["PUT"])
 @login_required
 def edit_channel(channel_id):
-    print(f'\n\n im in edit channel\n\n')
+    # print(f'\n\n im in edit channel\n\n')
     form = ChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 

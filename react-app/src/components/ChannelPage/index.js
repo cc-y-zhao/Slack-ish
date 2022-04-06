@@ -8,6 +8,8 @@ import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
 import { loadChannel, deleteMessage } from "../../store/channels";
 
+import "./ChannelPage.css";
+
 const ChannelPage = () => {
   const dispatch = useDispatch();
   const { channel_id } = useParams();
@@ -15,13 +17,15 @@ const ChannelPage = () => {
 
   const channel = useSelector((state) => state.channels[channel_id]);
   const user_id = useSelector((state) => state.session.user.id);
-
   // const messages = channel.messages;
 
-  // console.log("messages in ChannelPage/index.js-------", messages)
+  // console.log("messages in ChannelPage/index.js-------", messages) 
 
   // console.log("channel in ChannelPage/index.js-------", channel?.messages);
-  const messages = channel?.messages;
+  let messages;
+  if (channel?.messages) {
+    messages = Object.values(channel?.messages);
+  }
   console.log("MESSAGES in ChannelPage/index.js-------", messages);
 
   let title = channel ? channel.title : "";
@@ -29,37 +33,68 @@ const ChannelPage = () => {
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));
-    }, [dispatch, [channel].toString()]);
+  }, [dispatch, channel_id]);
   // }, [channel_id, channel.all_messages.toString()]);
 
-  // TO DO: add individual routes for each channel with below syntax:
-  // <NavLink key={channel.id} to={'/channels/' + channel.id}>
+  function formatTime(string) {
+    const options = { hour: "2-digit", minute: "2-digit" };
+    return new Date(string).toLocaleTimeString([], options);
+  }
+
+  function formatDate(string) {
+    const options = { year: "2-digit", month: "2-digit", day: "2-digit" };
+    return new Date(string).toLocaleDateString([], options);
+  }
 
   return (
-    <div>
-      <h2>{title}</h2>
+    <div className="ChannelPageBody">
+      <div className="ChannelPageTitle">
+        <i class="fa-solid fa-hashtag"></i>
+        <h2>{title}</h2>
+      </div>
       <div>
         <EditChannelForm channelToEdit={channelToEdit} />
       </div>
-      <div>Messages: </div>
-      <div>
-        {channel?.all_messages?.map((message) => (
-          <div>
-            <div>{message.name}: </div>
-            <div>{message.content}</div>
-            <div><EditMessageForm channelId={channelId} messageToEdit={message}/></div>
-            <button
-              onClick={async () => {
-                await dispatch(deleteMessage(channel.id, message.id)).then(() => dispatch(loadChannel(channel_id)));
-              }}>
-              Delete
-            </button>
-          </div>
-        ))}
+      <div className="MessagesBody">
+        {messages
+          ?.slice(0)
+          .reverse()
+          .map((message) => (
+            <div className="SingleMessageBody">
+              <div className="MessageProfile">
+                <i class="fa-solid fa-square-person-confined"></i>
+              </div>
+              <div className="MessageMain">
+                <div className="MessageInfo">
+                  <div className="MessageName">{message.name}</div>
+                  <div className="MessageTime">
+                    {formatTime(message.time_created)}{" "}
+                  </div>
+                  <div className="MessageTime">
+                    {formatDate(message.time_created)}
+                  </div>
+                </div>
+                <div className="MessageContent">{message.content}</div>
+              </div>
+              <div>
+                <EditMessageForm
+                  channelId={channelId}
+                  messageToEdit={message}
+                />
+              </div>
+              <button
+                onClick={async () => {
+                  await dispatch(deleteMessage(channel.id, message.id)).then(
+                    () => dispatch(loadChannel(channel_id))
+                  );
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
       </div>
-      <div>
-        <CreateMessageForm channelId={channelId} />
-      </div>
+      <CreateMessageForm channelId={channelId} />
     </div>
   );
 };

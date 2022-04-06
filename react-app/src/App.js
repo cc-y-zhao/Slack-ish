@@ -12,6 +12,8 @@ import { authenticate } from "./store/session";
 import Channels from "./components/Channels";
 import ChannelPage from "./components/ChannelPage";
 import CreateChannelForm from "./components/CreateChannelForm";
+import Search from "./components/Search";
+import CreateDMForm from "./components/CreateDMForm";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -45,17 +47,21 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true}>
-          <h1>testing</h1>
+        <ProtectedRoute path="/search" exact={true}>
+          {/* <h1>testing</h1> */}
+          <Search />
         </ProtectedRoute>
         <Route path="/chatroom" exact={true}>
           {/* <ChatRoom /> */}
           <CreateChannelForm />
         </Route>
-        <Route path="/channels" exact={true}>
+        {/* <Route path="/channels" exact={true}>
           <Channels />
+        </Route> */}
+        <Route path='/createDM' exact={true}>
+          <CreateDMForm />
         </Route>
-        <Route path="/channels/:channel_id">
+        <Route path="/channels/:channel_id" exact={true}>
           <ChannelPage />
         </Route>
       </Switch>

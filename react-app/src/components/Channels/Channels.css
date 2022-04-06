@@ -1,15 +1,42 @@
-.channel__list {
-    position: absolute;
+.channels {
     display: flex;
-    text-align: center;
-    font-size: small;
-    justify-content: flex-start;
-    margin-left: 5em;
-    position: relative;
-    bottom: 1.6em;
-    list-style: none;
+    flex-direction: column;
 }
 
-.channel__list > li {
-    padding: 7px;
+.channel__list {
+    display: flex;
+    font-size: 15px;
+    justify-content: flex-start;
+    height: 25px;
+    padding-top: 5px;
+    position: relative;
+    list-style: none;
+    text-decoration: none;
+    color: rgb(134, 134, 136);
 }
+
+.channel__list > a {
+    text-decoration: none;
+    color: rgb(134, 134, 136);
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+}
+
+.channel__list i {
+    padding-right: 10px;
+    font-size: 14px;
+    padding-left: 25px;
+}
+
+.channel__list:hover {
+    background-color: rgb(39, 36, 44);
+}
+
+/* If active: set to blue */
+/* .channel__list:active {
+    color: rgb(243, 246, 249);
+    background-color: rgb(32, 110, 159);
+} */
