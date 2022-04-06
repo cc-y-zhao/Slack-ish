@@ -14,6 +14,14 @@ def seed_all():
     cecilia = User(
         first_name='Cecilia', last_name='Zhao', email='cecilia@aa.io', password='password')
 
+    first_names = ['Charlie', 'Dan', 'Caleb', 'Drew', 'Albus', 'Keebie', 'Eevie', 'Sherry', 'John']
+    last_names = ['Hope', 'Purcell', 'Braaten', 'Thurman', 'Dumbledore', 'Chen', 'Zhao', 'Yu', 'Lee']
+
+    for first_name, last_name in zip(first_names, last_names):
+        new_email = f'{first_name}{last_name}@aa.io'
+        new_user = User(first_name=first_name, last_name=last_name, email=new_email, password='password')
+        db.session.add(new_user)
+
     db.session.add(demo)
     db.session.add(sharon)
     db.session.add(gabriel)

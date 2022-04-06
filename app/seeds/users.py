@@ -11,11 +11,23 @@ def seed_users():
         first_name='Gabriel', last_name='Sitorus', email='gabriel@aa.io', password='password')
     cecilia = User(
         first_name='Cecilia', last_name='Zhao', email='cecilia@aa.io', password='password')
+    ceclia = User(
+        first_name='Ceclia', last_name='Chen', email='ceclia@aa.io', password='password')
+
+    first_names = ['Adam', 'Aaron', 'Angela', 'Bob', 'Brian', 'Beth', 'Charlie', 'Dan', 'Caleb', 'Drew']
+    last_names = ['Johnson', 'Smith', 'Lee', 'Washington', 'Lincoln', 'Smart', 'Hope', 'Purcell', 'Braaten', 'Thurman']
+
+    for first_name in first_names:
+        for last_name in last_names:
+            new_email = f'{first_name}{last_name}@aaAA.io'
+            new_user = User(first_name=first_name, last_name=last_name, email=new_email, password='password')
+            db.session.add(new_user)
 
     db.session.add(demo)
     db.session.add(sharon)
     db.session.add(gabriel)
     db.session.add(cecilia)
+    db.session.add(ceclia)
 
     db.session.commit()
 
