@@ -54,24 +54,24 @@ def seed_all():
 
     # seed_dms():
     dms1 = Channel(
-        title='Cecilia Zhao', is_dm=True)
+        title='App Academy, Cecilia Zhao', is_dm=True)
     dms2 = Channel(
-        title='App Academy', is_dm=True)
+        title='App Academy, Gabriel Sitorus', is_dm=True)
     dms3 = Channel(
-        title='Sharon Fang', is_dm=True)
-    dms4 = Channel(
-        title='App Academy', is_dm=True)
-    dms5 = Channel(
-        title='Gabriel Sitorus', is_dm=True)
-    dms6 = Channel(
-        title='App Academy', is_dm=True)
+        title='App Academy, Sharon Fang', is_dm=True)
+    # dms4 = Channel(
+    #     title='App Academy', is_dm=True)
+    # dms5 = Channel(
+    #     title='Gabriel Sitorus', is_dm=True)
+    # dms6 = Channel(
+    #     title='App Academy', is_dm=True)
 
     db.session.add(dms1)
     db.session.add(dms2)
     db.session.add(dms3)
-    db.session.add(dms4)
-    db.session.add(dms5)
-    db.session.add(dms6)
+    # db.session.add(dms4)
+    # db.session.add(dms5)
+    # db.session.add(dms6)
 
     db.session.commit()
 
@@ -137,11 +137,11 @@ def seed_all():
     cecilia.channels.append(channel6)
 
     demo.channels.append(dms1)
-    cecilia.channels.append(dms2)
+    cecilia.channels.append(dms1)
+    demo.channels.append(dms2)
     demo.channels.append(dms3)
-    sharon.channels.append(dms4)
-    demo.channels.append(dms5)
-    gabriel.channels.append(dms6)
+    sharon.channels.append(dms3)
+    gabriel.channels.append(dms2)
 
     db.session.commit()
 

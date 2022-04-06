@@ -11,9 +11,7 @@ from sqlalchemy.sql import func
 
 channel_routes = Blueprint('channels', __name__)
 
-# GET Route
-
-
+# GET logged in user's channels
 @channel_routes.route('/user/<int:user_id>')
 @login_required
 def get_session_user_channels(user_id):
@@ -29,9 +27,49 @@ def get_session_user_channels(user_id):
     # print('return_value in channel_routes-------', return_value)
     return {'channels': [channel.to_dict() for channel in channel_users_query]}
 
+# GET logged in user's DM (search)
+# @channel_routes.route('/user/<int:user_id>/<int:search_user_id>')
+# @login_required
+# def get_session_user_DM(user_id):
+#     # channels = Channel.query.all()
+#     # user_id = 1
+#     # print('channels backend', type(channels))
+#     channel_users_query = Channel.query.join(channel_users).join(
+#         User).filter((channel_users.c.user_id == user_id)).all()
+#     # print('channels backend@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',
+#     #       channel_users_query)
+
+#     # return_value = {'channels': [channel.to_dict() for channel in channels]}
+#     # print('return_value in channel_routes-------', return_value)
+#     return {'channels': [channel.to_dict() for channel in channel_users_query]}
+
+# POST adding an instance of channel_users
+
+@channel_routes.route('/', methods=["POST"])
+@login_required
+def add_channel_user():
+    form = ChannelForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        new_channel = Channel(
+            owner_id=request.json['owner_id'],
+            title=request.json['title'],
+            is_dm=request.json['is_dm'],
+            description=request.json['description'],
+            time_created=datetime.datetime.utcnow(),
+            # time_created=DateTime(timezone=True), server_default=func.now(),
+            # time_created=datetime.time(),
+            # time_updated=datetime.now()
+        )
+        db.session.add(new_channel)
+        db.session.commit()
+        return new_channel.to_dict()
+
+    return {"errors": validation_errors_to_error_messages(form.errors)}
+
+
 # GET Route
-
-
 @channel_routes.route('/<int:channel_id>')
 @login_required
 def get_one_channel(channel_id):
@@ -69,35 +107,13 @@ def get_one_channel(channel_id):
 
         user_list.append(user)
 
-    # print('single channel in channel_routes-------CHANNEL:', user_list)
-    # print('single channel in channel_routes-------CHANNEL:', channel)
-    # print('single channel in channel_routes-------MESSAGE:', messages)
     single_channel = channel.to_dict()
     single_channel['messages'] = messages
     single_channel["all_messages"] = all_messages
     single_channel["users"] = user_list
-    # print('single channel in channel_routes-------SINGLE_CHANNEL:', single_channel)
     return single_channel
-    # return channel.to_dict()
 
 # POST Route
-
-
-# @channel_routes.route('/', methods=["POST"])
-# @login_required
-# def add_channel():
-
-#     new_channel = Channel(
-#         owner_id=request.json['owner_id'],
-#         title=request.json['title'],
-#         is_dm=request.json['is_dm'],
-#         description=request.json['description'],
-#     )
-#     if new_channel:
-#         db.session.add(new_channel)
-#         db.session.commit()
-#         return new_channel.to_dict()
-#     return {"errors": "Server error. Unable to make channel"}
 
 @channel_routes.route('/', methods=["POST"])
 @login_required
@@ -112,17 +128,13 @@ def add_channel():
             is_dm=request.json['is_dm'],
             description=request.json['description'],
             time_created=datetime.datetime.utcnow(),
-
             # time_created=DateTime(timezone=True), server_default=func.now(),
-
-
             # time_created=datetime.time(),
             # time_updated=datetime.now()
         )
         db.session.add(new_channel)
         db.session.commit()
         return new_channel.to_dict()
-        # return {**new_channel.to_dict()}
 
     return {"errors": validation_errors_to_error_messages(form.errors)}
 
