@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Modal } from '../../context/Modal';
 
 import { loadUsersResults } from "../../store/search";
+
+import CreateChannelForm from "../CreateChannelForm";
+import { showModal, setCurrentModal } from "../../store/modal";
 
 function Search() {
   // const { searchInput } = useParams();
@@ -13,10 +15,15 @@ function Search() {
   const prevSearchInput = useSelector((state) => state?.search.search_input);
 
 
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const [searchInput, setSearchResult] = useState(prevSearchInput);
 
-  console.log('previous search input', prevSearchInput);
+  const showCreateChannelForm = () => {
+    console.log('IM IN SHOWCREATECHANNEL FUNCTION IN SEARCH')
+    dispatch(setCurrentModal(CreateChannelForm));
+    console.log('IM IN SHOWCREATECHANNEL FUNCTION IN SIDEBAR----AFTER DISPATCH')
+    dispatch(showModal());
+  }
 
 
   // useEffect(() => {
@@ -73,6 +80,9 @@ function Search() {
           ))}
         </div> */}
       </div>
+      <button onClick={showCreateChannelForm}>
+        Create Channel
+      </button>
     </div>
   )
 
