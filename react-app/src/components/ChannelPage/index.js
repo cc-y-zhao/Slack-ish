@@ -16,7 +16,11 @@ const ChannelPage = () => {
   const channelId = parseInt(channel_id);
 
   const channel = useSelector((state) => state.channels[channel_id]);
+
   const user_id = useSelector((state) => state.session.user?.id);
+
+  const [showEditMessage, setShowEditMessage] = useState(false);
+
   // const messages = channel.messages;
 
   // console.log("messages in ChannelPage/index.js-------", messages)
@@ -51,9 +55,12 @@ const ChannelPage = () => {
       <div className="ChannelPageTitle">
         <i class="fa-solid fa-hashtag"></i>
         <h2>{title}</h2>
-      </div>
-      <div>
-        <EditChannelForm channelToEdit={channelToEdit} />
+        <div>
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+          {/* <div>
+            <EditChannelForm channelToEdit={channelToEdit} />
+          </div> */}
+        </div>
       </div>
       <div className="MessagesBody">
         {messages
@@ -76,21 +83,32 @@ const ChannelPage = () => {
                 </div>
                 <div className="MessageContent">{message.content}</div>
               </div>
-              <div>
-                <EditMessageForm
-                  channelId={channelId}
-                  messageToEdit={message}
-                />
-              </div>
-              <button
-                onClick={async () => {
-                  await dispatch(deleteMessage(channel.id, message.id)).then(
-                    () => dispatch(loadChannel(channel_id))
-                  );
-                }}
+              <div
+                className="EditMessageButton"
+                onMouseEnter={() => setShowEditMessage(true)}
+                onMouseLeave={() => setShowEditMessage(false)}
               >
-                Delete
-              </button>
+                {showEditMessage && user_id === message.user_id && (
+                  <>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                    {/* <div>
+                      <EditMessageForm
+                        channelId={channelId}
+                        messageToEdit={message}
+                      />
+                      <button
+                        onClick={async () => {
+                          await dispatch(
+                            deleteMessage(channel.id, message.id)
+                          ).then(() => dispatch(loadChannel(channel_id)));
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div> */}
+                  </>
+                )}
+              </div>
             </div>
           ))}
       </div>
