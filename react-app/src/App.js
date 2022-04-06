@@ -13,6 +13,7 @@ import Channels from "./components/Channels";
 import ChannelPage from "./components/ChannelPage";
 import CreateChannelForm from "./components/CreateChannelForm";
 import Search from "./components/Search";
+import CreateDMForm from "./components/CreateDMForm";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -57,6 +58,9 @@ function App() {
         {/* <Route path="/channels" exact={true}>
           <Channels />
         </Route> */}
+        <Route path='/createDM' exact={true}>
+          <CreateDMForm />
+        </Route>
         <Route path="/channels/:channel_id" exact={true}>
           <ChannelPage />
         </Route>
