@@ -6,6 +6,7 @@ import { loadUsersResults } from "../../store/search";
 
 import CreateChannelForm from "../CreateChannelForm";
 import { showModal, setCurrentModal } from "../../store/modal";
+import { createDm } from "../../store/channels";
 
 function Search() {
   // const { searchInput } = useParams();
@@ -13,7 +14,13 @@ function Search() {
 
   const results = useSelector((state) => state?.search.users_results);
   const prevSearchInput = useSelector((state) => state?.search.search_input);
+  const sessionUser = useSelector((state) => state.session.user)
 
+  let sessionUserId;
+
+  if (sessionUser) {
+    sessionUserId = sessionUser.id
+  }
 
   // const [showModal, setShowModal] = useState(false);
   const [searchInput, setSearchResult] = useState(prevSearchInput);
@@ -66,7 +73,7 @@ function Search() {
         <h2>Search Results</h2>
           <div className="search__result">
           {results?.map(result => (
-            <div key={result.id}>
+            <div key={result.id} onClick={() => dispatch(createDm(sessionUserId, result.id))}>
               {result.first_name} {result.last_name}
             </div>
           ))}
