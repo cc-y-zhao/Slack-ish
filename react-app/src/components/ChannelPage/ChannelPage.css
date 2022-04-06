@@ -7,7 +7,6 @@
     height: calc(100vh - 50px);
     color: white;
     background-color: rgb(27,30,34);
-    padding-left: 25px;
 }
 
 .ChannelPageTitle {
@@ -17,25 +16,26 @@
     color: rgb(196,197,198);
     background-color: rgb(27,30,34);
     border-bottom:1px solid rgb(53,53,58);
-    margin-left: -25px;
     z-index: 1;
     padding-left: 25px;
 }
 
 .ChannelPageTitle > i {
-    padding-top: 15px;
+    padding-top: 19px;
 }
 
 .ChannelPageTitle > h2 {
     margin: 0;
-    padding-top: 15px;
+    padding-top: 11px;
+    padding-left: 6px;
+    font-size: 22px;
 }
 
 .MessagesBody {
     display: flex;
     flex-direction: column-reverse;
-    width: calc(100% - 55px);
-    max-height: 77%;
+    width: calc(100%);
+    max-height: 78%;
     overflow-y: scroll;
     position: absolute;
     bottom: 200px;
@@ -44,18 +44,39 @@
 .SingleMessageBody {
     display: flex;
     padding: 5px;
+    padding-left: 25px;
+
+}
+
+.SingleMessageBody:hover {
+    background-color: rgb(46,49,52);
 }
 
 .MessageProfile {
     color: rgb(245, 235, 92);
-    font-size: 40px;
+    font-size: 45px;
+    padding-right: 10px;
 }
 
-.MessagesMain {
-    color: white;
+.MessageInfo {
+    display: flex;
+    align-items: center;
+    padding-bottom: 4px;
 }
 
-.CreateMessageFormDiv {
-    position: absolute;
-    bottom: 5px;
+.MessageName {
+    color: rgb(208,209,210);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.MessageTime {
+    color: rgb(172,172,174);
+    font-size: 13px;
+    padding-top: 5px;
+    padding-left: 12px;
+}
+
+.MessagesContent {
+    color: rgb(196,198,199);
 }

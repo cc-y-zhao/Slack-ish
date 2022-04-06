@@ -31,8 +31,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <NavBar />
-      <SideBar /> */}
+      <NavBar />
+      <SideBar />
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm />
@@ -54,9 +54,9 @@ function App() {
           {/* <ChatRoom /> */}
           <CreateChannelForm />
         </Route>
-        <Route path="/channels" exact={true}>
+        {/* <Route path="/channels" exact={true}>
           <Channels />
-        </Route>
+        </Route> */}
         <Route path="/channels/:channel_id" exact={true}>
           <ChannelPage />
         </Route>

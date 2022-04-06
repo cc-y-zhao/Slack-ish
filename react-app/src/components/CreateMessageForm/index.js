@@ -7,7 +7,7 @@ import { useHistory, useParams, Redirect } from "react-router-dom";
 import { loadChannel } from "../../store/channels";
 import { createMessage } from "../../store/channels";
 
-// import './CreateReviewForm.css';
+import "./CreateMessageForm.css";
 
 const CreateMessageForm = ({ channelId }) => {
   const dispatch = useDispatch();
@@ -39,7 +39,9 @@ const CreateMessageForm = ({ channelId }) => {
     };
 
     if (newMessage) {
-      await dispatch(createMessage(channel_id, newMessage)).then(() => dispatch(loadChannel(channel_id)));
+      await dispatch(createMessage(channel_id, newMessage)).then(() =>
+        dispatch(loadChannel(channel_id))
+      );
       setErrors([]);
     }
 
@@ -67,15 +69,9 @@ const CreateMessageForm = ({ channelId }) => {
     // }
   };
 
-  // const handleCancelClick = (e) => {
-  //   e.preventDefault();
-  //   setErrors([]);
-  //   setShowModal(false);
-  // };
-
   return (
     <>
-      <section>
+      <div className="CreateMessageFormDiv">
         <form onSubmit={handleSubmit}>
           <div>
             <div>{errors}</div>
@@ -99,7 +95,7 @@ const CreateMessageForm = ({ channelId }) => {
             {/* <button className='btn-in-form' type="button" onClick={handleCancelClick}>Cancel</button> */}
           </div>
         </form>
-      </section>
+      </div>
     </>
   );
 };

@@ -67,12 +67,14 @@ const ChannelPage = () => {
                 <i class="fa-solid fa-square-person-confined"></i>
               </div>
               <div className="MessageMain">
-                <div className="MessageName">{message.name}</div>
-                <div className="MessageTime">
-                  {formatTime(message.time_created)}
-                </div>
-                <div className="MessageDate">
-                  {formatDate(message.time_created)}
+                <div className="MessageInfo">
+                  <div className="MessageName">{message.name}</div>
+                  <div className="MessageTime">
+                    {formatTime(message.time_created)}{" "}
+                  </div>
+                  <div className="MessageTime">
+                    {formatDate(message.time_created)}
+                  </div>
                 </div>
                 <div className="MessageContent">{message.content}</div>
               </div>
@@ -91,9 +93,7 @@ const ChannelPage = () => {
             </div>
           ))}
       </div>
-      <div className="CreateMessageFormDiv">
-        <CreateMessageForm channelId={channelId} />
-      </div>
+      <CreateMessageForm channelId={channelId} />
     </div>
   );
 };
