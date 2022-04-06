@@ -2,16 +2,21 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Redirect } from "react-router-dom";
 
-import { createChannel } from "../../store/channels";
+import { createChannel, loadChannels } from "../../store/channels";
 
 const CreateDMForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const channels = useSelector((state) => Object.values(state.channels));
   const [errors, setErrors] = useState([]);
   const [title, setTitle] = useState("");
   const owner_id = useSelector((state) => state.session.user).id;
   const is_dm = false;
+
+  useEffect(() => {
+    dispatch(loadChannels(owner_id));
+  }, [dispatch]);
+
 
   const updateTitle = (e) => setTitle(e.target.value);
 
@@ -60,7 +65,7 @@ const CreateDMForm = () => {
             <textarea
               type="text"
               required
-              placeholder="Channel name"
+              placeholder="Send a message"
               value={title}
               onChange={updateTitle}
             />
@@ -69,7 +74,6 @@ const CreateDMForm = () => {
             <button type="submit" disabled={errors.length > 0}>
               Create Channel
             </button>
-            {/* <button className='btn-in-form' type="button" onClick={handleCancelClick}>Cancel</button> */}
           </div>
         </form>
       </section>
