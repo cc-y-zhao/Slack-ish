@@ -58,7 +58,6 @@ function App() {
         {/* <Route path="/channels" exact={true}>
           <Channels />
         </Route> */}
-        {/* This route will be delted  */}
         <Route path='/createDM' exact={true}>
           <CreateDMForm />
         </Route>
