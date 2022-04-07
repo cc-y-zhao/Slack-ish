@@ -6,7 +6,7 @@ import EditChannelForm from "../EditChannelForm";
 import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
 import { loadChannel } from "../../store/channels";
-import { showModal, setCurrentModal } from "../../store/modal";
+import { showModal, setCurrentEditModal } from "../../store/modal";
 import "./ChannelPage.css";
 
 const ChannelPage = () => {
@@ -19,7 +19,7 @@ const ChannelPage = () => {
   const user_id = useSelector((state) => state.session.user?.id);
 
   const showEditChannelForm = () => {
-    dispatch(setCurrentModal(EditChannelForm));
+    dispatch(setCurrentEditModal(EditChannelForm, channel?.id));
     dispatch(showModal());
   };
   // const [showEditMessage, setShowEditMessage] = useState(false);
@@ -33,10 +33,10 @@ const ChannelPage = () => {
   if (channel?.messages) {
     messages = Object.values(channel?.messages);
   }
-  console.log("MESSAGES in ChannelPage/index.js-------", messages);
 
   let title = channel ? channel.title : "";
   let channelToEdit = channel ? channel : "";
+  // let channelToEdit = channel;
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));

@@ -6,10 +6,13 @@ import { hideModal } from "../../store/modal";
 
 //add deletechannel to edit form
 //need to do loadOneChannel and create single channel page and pass in as prop
-const EditChannelForm = ({ channelToEdit }) => {
+const EditChannelForm = () => {
   const history = useHistory();
 
   const user = useSelector((state) => state.session.user);
+  const editId = useSelector((state) => state.modals.id);
+  const channelToEdit = useSelector((state) => state.channels[editId]);
+  // const user = useSelector((state) => state.session.user);
   const id = channelToEdit?.id;
   const is_dm = false;
 
@@ -78,6 +81,13 @@ const EditChannelForm = ({ channelToEdit }) => {
         </label>
         <button type="submit" disabled={errors.length > 0}>
           Update Channel
+        </button>
+        <button
+          onClick={async () => {
+            await dispatch(deleteChannel(channelToEdit?.id));
+          }}
+        >
+          Delete
         </button>
       </form>
     </>
