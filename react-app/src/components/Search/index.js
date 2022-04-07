@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { loadUsersResults } from "../../store/search";
-import { hideModal } from "../../store/modal";
+import { hideSearchModal } from "../../store/modal";
 import { createDm } from "../../store/channels";
 
 function Search() {
@@ -30,7 +30,7 @@ function Search() {
     newDirectMessage = await dispatch(createDm(sessionUserId, resultId));
 
     if (newDirectMessage) {
-      dispatch(hideModal());
+      dispatch(hideSearchModal());
       history.push(`/channels/${newDirectMessage.id}`);
     }
   };
@@ -56,9 +56,9 @@ function Search() {
   return (
     <div>
       <div className="search">
-        <h2>Results</h2>
+        {/* <h2>Results</h2> */}
         <input
-          placeholder="Search"
+          placeholder="Type to search users"
           value={searchInput}
           // onClick={() => setShowModal(true)}
           onChange={(e) => dispatch(loadUsersResults(e.target.value))}
@@ -72,12 +72,13 @@ function Search() {
             <Modal />
           </>
         )} */}
-        <h2>Search Results</h2>
+        {/* <h2>Search Results</h2> */}
         <div className="search__result">
           {results?.map((result) => (
             <div
               key={result.id}
               onClick={(e) => handleClick(sessionUserId, result.id, e)}
+              className="SearchResultDiv"
             >
               {result.first_name} {result.last_name}
             </div>

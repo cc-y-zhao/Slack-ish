@@ -27,7 +27,7 @@ const Root = () => {
     <>
       <App />
       <div ref={modalMountRef} className="modal"></div>
-      <div ref={searchModalMountRef} className="modal"></div>
+      <div ref={searchModalMountRef} className="searchModal"></div>
     </>
   );
 };

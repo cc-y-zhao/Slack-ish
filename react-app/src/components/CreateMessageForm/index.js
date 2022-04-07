@@ -7,13 +7,10 @@ import { useHistory, useParams, Redirect } from "react-router-dom";
 import { loadChannel } from "../../store/channels";
 import { createMessage } from "../../store/channels";
 
-import { hideModal, setCurrentModal } from "../../store/modal";
-
 import "./CreateMessageForm.css";
 
 const CreateMessageForm = ({ channelId }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [errors, setErrors] = useState([]);
   const [content, setContent] = useState("");
@@ -47,29 +44,6 @@ const CreateMessageForm = ({ channelId }) => {
       setErrors([]);
       setContent("");
     }
-
-    // const payload = {
-    //   user_id,
-    //   channel_id,
-    //   content,
-    // };
-
-    // let newMessage;
-
-    // try {
-    //   newMessage = await dispatch(createMessage(channel_id, payload));
-    // } catch (error) {
-    //   // if (error instanceof ValidationError) setErrors(error.errors);
-    //   // // If error is not a ValidationError, add slice at the end to remove extra
-    //   // // "Error: "
-    //   // else setErrors({ overall: error.toString().slice(7) })
-    // }
-    // if (newMessage) {
-    //   setErrors([]);
-    //   // dispatch(getReviewsByCar(carId));
-    //   // setShowModal(false);
-    //   // return history.push(`/cars/${carId}`);
-    // }
   };
 
   return (

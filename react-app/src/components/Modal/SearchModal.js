@@ -21,11 +21,8 @@ export const SearchModal = () => {
     display &&
     mount &&
     ReactDOM.createPortal(
-      <div className="search-modal-background" onClick={closeModal}>
-        <div
-          className="search-modal-content"
-          onClick={(e) => e.stopPropagation()}
-        >
+      <div className="modal-background" onClick={closeModal}>
+        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
           <Current />
         </div>
       </div>,
