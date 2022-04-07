@@ -13,11 +13,11 @@ function AddMembersSearchBar() {
 
   // these results only show people who are not already in the channel
   const allResults = useSelector((state) => state?.search.users_results);
+  const channelId = useSelector((state) => state?.modals?.channelId);
   const channelsState = useSelector((state) => state?.channels?.channelId);
-  // const channelId = useSelector((state) => state?.modals?.channelId);
 
-  // console.log('channel id --------------', channelId);
-  console.log('channelsState------------------', channelsState);
+  console.log('channel id --------------', channelId);
+  // console.log('channelsState------------------', channelsState);
   // console.log('channelsState.channelId------------------', channelsState.channelId);
 
   // console.log('channel id --------------', channelId);

@@ -8,6 +8,8 @@ import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
 import { loadChannel, deleteMessage } from "../../store/channels";
 
+import { showModal, showSearchModal } from "../../store/modal";
+import AddMembersSearchBar from "../AddMembersSearchBar";
 import { setAddMembersChannelSearchModal } from "../../store/modal";
 
 import "./ChannelPage.css";
@@ -51,12 +53,29 @@ const ChannelPage = () => {
     const options = { year: "2-digit", month: "2-digit", day: "2-digit" };
     return new Date(string).toLocaleDateString([], options);
   }
+  ////////////// ADD MEMBERS TO CHANNEL SECTION //////////////////
+  let addChannelMembersButton = false;
+  if (channel?.is_dm == false) {
+    addChannelMembersButton = true;
+  }
+
+  const showAddMembersSearchBar = () => {
+    dispatch(setAddMembersChannelSearchModal(AddMembersSearchBar, channelId));
+    dispatch(showSearchModal());
+  }
 
   return (
     <div className="ChannelPageBody">
       <div className="ChannelPageTitle">
         <i class="fa-solid fa-hashtag"></i>
         <h2>{title}</h2>
+        <div>
+          {addChannelMembersButton &&
+            <button onClick={showAddMembersSearchBar}>
+              Add Members
+            </button>
+          }
+        </div>
         <div>
           <i class="fa-solid fa-ellipsis-vertical"></i>
           {/* <div>
