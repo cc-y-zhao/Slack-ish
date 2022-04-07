@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./Channels.css";
-// import CreateChannelForm from "../CreateChannelForm";
 
-import { loadChannels, deleteChannel } from "../../store/channels";
+import { loadChannels } from "../../store/channels";
 
 const Channels = () => {
   const channels = useSelector((state) => Object.values(state.channels));
@@ -21,7 +20,6 @@ const Channels = () => {
 
   return (
     <>
-      <div>{/* <CreateChannelForm /> */}</div>
       <div className="channels">
         {channels?.map((channel) => {
           return (
@@ -42,18 +40,3 @@ const Channels = () => {
 };
 
 export default Channels;
-
-{
-  /* <div className="channel__list" key={channel.id}>
-<li>{channel.title}</li>
-{channel.owner_id === user_id && (
-  <button
-    onClick={async () => {
-      await dispatch(deleteChannel(channel.id));
-    }}
-  >
-    Delete
-  </button>
-)}
-</div> */
-}

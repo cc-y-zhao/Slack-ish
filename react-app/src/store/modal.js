@@ -16,10 +16,11 @@ export const setCurrentModal = (jsxComponent) => ({
   payload: jsxComponent,
 });
 
-export const setCurrentEditModal = (jsxComponent, id) => ({
+export const setCurrentEditModal = (jsxComponent, id, messageId) => ({
   type: SET_CURRENT_MODAL,
   payload: jsxComponent,
   id,
+  messageId,
 });
 
 export const setModalMount = (mount) => ({
@@ -79,6 +80,7 @@ export default function modals(state = initialState, action) {
         ...state,
         currentModal: action.payload,
         id: action.id,
+        messageId: action.messageId,
       };
 
     case SET_MODAL_MOUNT:
