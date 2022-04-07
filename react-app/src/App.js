@@ -38,6 +38,9 @@ function App() {
       <SideBar />
       <Modal />
       <Switch>
+        <Route path="/" exact={true}>
+          <LoginForm />
+        </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
@@ -54,18 +57,22 @@ function App() {
           {/* <h1>testing</h1> */}
           <Search />
         </ProtectedRoute>
-        <Route path="/chatroom" exact={true}>
+        <ProtectedRoute path="/chatroom" exact={true}>
           {/* <ChatRoom /> */}
           <CreateChannelForm />
-        </Route>
-        {/* <Route path="/channels" exact={true}>
+        </ProtectedRoute>
+        {/* <ProtectedRoute path="/channels" exact={true}>
           <Channels />
-        </Route> */}
-        <Route path="/createDM" exact={true}>
+        </ProtectedRoute> */}
+        <ProtectedRoute path="/createDM" exact={true}>
           <CreateDMForm />
-        </Route>
-        <Route path="/channels/:channel_id" exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path="/channels/:channel_id" exact={true}>
           <ChannelPage />
+        </ProtectedRoute>
+        <Route path="*">
+          <h1>YOU DONT BELONG HERE!!</h1>
+          {/* Render a component that's just centered */}
         </Route>
       </Switch>
     </BrowserRouter>

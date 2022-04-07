@@ -5,33 +5,37 @@ from app.models import db, Message
 
 def seed_all():
     # seed_users():
+    channel1 = Channel(
+        title='Welcome', is_dm=False, description='We are cloning Slack!')
+
     demo = User(
-        first_name='App', last_name='Academy', email='demo@aa.io', password='password')
+        first_name='App', last_name='Academy', email='demo@aa.io', password='password', channels=[channel1])
     sharon = User(
-        first_name='Sharon', last_name='Fang', email='sharon@aa.io', password='password')
+        first_name='Sharon', last_name='Fang', email='sharon@aa.io', password='password', channels=[channel1])
     gabriel = User(
-        first_name='Gabriel', last_name='Sitorus', email='gabriel@aa.io', password='password')
+        first_name='Gabriel', last_name='Sitorus', email='gabriel@aa.io', password='password', channels=[channel1])
     cecilia = User(
-        first_name='Cecilia', last_name='Zhao', email='cecilia@aa.io', password='password')
-
-    first_names = ['Charlie', 'Dan', 'Caleb', 'Drew', 'Albus', 'Keebie', 'Eevie', 'Sherry', 'John']
-    last_names = ['Hope', 'Purcell', 'Braaten', 'Thurman', 'Dumbledore', 'Chen', 'Zhao', 'Yu', 'Lee']
-
-    for first_name, last_name in zip(first_names, last_names):
-        new_email = f'{first_name}{last_name}@aa.io'
-        new_user = User(first_name=first_name, last_name=last_name, email=new_email, password='password')
-        db.session.add(new_user)
+        first_name='Cecilia', last_name='Zhao', email='cecilia@aa.io', password='password', channels=[channel1])
 
     db.session.add(demo)
     db.session.add(sharon)
     db.session.add(gabriel)
     db.session.add(cecilia)
 
-    db.session.commit()
+    first_names = ['Charlie', 'Dan', 'Caleb', 'Drew',
+                   'Albus', 'Keebie', 'Eevie', 'Sherry', 'John']
+    last_names = ['Hope', 'Purcell', 'Braaten', 'Thurman',
+                  'Dumbledore', 'Chen', 'Zhao', 'Yu', 'Lee']
+
+    for first_name, last_name in zip(first_names, last_names):
+        new_email = f'{first_name}{last_name}@aa.io'
+        new_user = User(first_name=first_name, last_name=last_name,
+                        email=new_email, password='password', channels=[channel1])
+        db.session.add(new_user)
+
+    db.session.flush()
 
     # seed_channels():
-    channel1 = Channel(
-        owner_id='1', title='Python Project Group', is_dm=False, description='We are cloning Slack!')
     channel2 = Channel(
         owner_id='1', title='App Academy', is_dm=False, description='This is BootCAMP!')
     channel3 = Channel(
@@ -50,8 +54,6 @@ def seed_all():
     db.session.add(channel5)
     db.session.add(channel6)
 
-    db.session.commit()
-
     # seed_dms():
     dms1 = Channel(
         title='App Academy, Cecilia Zhao', is_dm=True)
@@ -59,21 +61,10 @@ def seed_all():
         title='App Academy, Gabriel Sitorus', is_dm=True)
     dms3 = Channel(
         title='App Academy, Sharon Fang', is_dm=True)
-    # dms4 = Channel(
-    #     title='App Academy', is_dm=True)
-    # dms5 = Channel(
-    #     title='Gabriel Sitorus', is_dm=True)
-    # dms6 = Channel(
-    #     title='App Academy', is_dm=True)
 
     db.session.add(dms1)
     db.session.add(dms2)
     db.session.add(dms3)
-    # db.session.add(dms4)
-    # db.session.add(dms5)
-    # db.session.add(dms6)
-
-    db.session.commit()
 
     # seed_messages():
     message1 = Message(
@@ -108,33 +99,12 @@ def seed_all():
     db.session.add(message9)
     db.session.add(message10)
 
-    db.session.commit()
-
     # seed_channel_users():
-    demo.channels.append(channel1)
-    demo.channels.append(channel2)
-    demo.channels.append(channel3)
-    demo.channels.append(channel4)
-    demo.channels.append(channel5)
-    demo.channels.append(channel6)
-    sharon.channels.append(channel1)
-    sharon.channels.append(channel2)
-    sharon.channels.append(channel3)
-    sharon.channels.append(channel4)
-    sharon.channels.append(channel5)
-    sharon.channels.append(channel6)
-    gabriel.channels.append(channel1)
-    gabriel.channels.append(channel2)
-    gabriel.channels.append(channel3)
-    gabriel.channels.append(channel4)
-    gabriel.channels.append(channel5)
-    gabriel.channels.append(channel6)
-    cecilia.channels.append(channel1)
-    cecilia.channels.append(channel2)
-    cecilia.channels.append(channel3)
-    cecilia.channels.append(channel4)
-    cecilia.channels.append(channel5)
-    cecilia.channels.append(channel6)
+    seed_channel_list = [channel2, channel3, channel4, channel5, channel6]
+    demo.channels.extend(seed_channel_list)
+    sharon.channels.extend(seed_channel_list)
+    gabriel.channels.extend(seed_channel_list)
+    cecilia.channels.extend(seed_channel_list)
 
     demo.channels.append(dms1)
     cecilia.channels.append(dms1)

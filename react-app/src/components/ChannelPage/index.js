@@ -19,7 +19,7 @@ const ChannelPage = () => {
 
   const user_id = useSelector((state) => state.session.user?.id);
 
-  const [showEditMessage, setShowEditMessage] = useState(false);
+  // const [showEditMessage, setShowEditMessage] = useState(false);
 
   // const messages = channel.messages;
 
@@ -69,8 +69,8 @@ const ChannelPage = () => {
           .map((message) => (
             <div
               className="SingleMessageBody"
-              onMouseEnter={() => setShowEditMessage(true)}
-              onMouseLeave={() => setShowEditMessage(false)}
+              // onMouseEnter={() => setShowEditMessage(true)}
+              // onMouseLeave={() => setShowEditMessage(false)}
             >
               <div className="MessageProfile">
                 <i class="fa-solid fa-square-person-confined"></i>
@@ -87,8 +87,11 @@ const ChannelPage = () => {
                 </div>
                 <div className="MessageContent">{message.content}</div>
               </div>
-              <div className="EditMessageButton">
-                {showEditMessage && user_id === message.user_id && (
+              <div
+                className="EditMessageButton"
+                id={"MessageEdit" + message.id}
+              >
+                {user_id === message.user_id && (
                   <>
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                     {/* <div>

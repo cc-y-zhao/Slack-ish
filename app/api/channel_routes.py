@@ -1,7 +1,8 @@
 from pyexpat.errors import messages
 from app.api.auth_routes import validation_errors_to_error_messages
 from flask import Blueprint, jsonify, session, request
-from flask_login import login_required
+from flask_login import login_required, current_user
+# current_user is a built in that comes from UserMixin that shows whoever is logged in (an instance of the user model, if someone is logged in)
 from app.models import Channel, User, Message, db, channel_users
 from app.forms import ChannelForm
 from sqlalchemy import join
@@ -12,6 +13,8 @@ from sqlalchemy.sql import func
 channel_routes = Blueprint('channels', __name__)
 
 # GET logged in user's channels
+
+
 @channel_routes.route('/user/<int:user_id>')
 # @login_required
 def get_session_user_channels(user_id):
@@ -21,7 +24,7 @@ def get_session_user_channels(user_id):
     channel_users_query = Channel.query.join(channel_users).join(
         User).filter((channel_users.c.user_id == user_id)).all()
 
-    #Dan's demo:
+    # Dan's demo:
     # return_value = {'channels': [channel.to_dict() for channel in channels]}
     # print('return_value in channel_routes-------', return_value)
     # channels = Channel.query.all()
@@ -44,7 +47,6 @@ def get_session_user_channels(user_id):
 #     # return_value = {'channels': [channel.to_dict() for channel in channels]}
 #     # print('return_value in channel_routes-------', return_value)
 #     return {'channels': [channel.to_dict() for channel in channel_users_query]}
-
 
 
 # GET Route
@@ -93,6 +95,7 @@ def get_one_channel(channel_id):
 
 # POST Route
 
+
 @channel_routes.route('/', methods=["POST"])
 @login_required
 def add_channel():
@@ -102,6 +105,7 @@ def add_channel():
     if form.validate_on_submit():
         new_channel = Channel(
             owner_id=request.json['owner_id'],
+            # owner_id=current_user.id,
             title=request.json['title'],
             is_dm=request.json['is_dm'],
             description=request.json['description'],
@@ -112,8 +116,8 @@ def add_channel():
         )
         db.session.add(new_channel)
 
-        owner = User.query.get(request.json['owner_id'])
-        owner.channels.append(new_channel)
+        # owner = User.query.get(request.json['owner_id'])
+        current_user.channels.append(new_channel)
 
         db.session.commit()
         return new_channel.to_dict()
@@ -137,7 +141,7 @@ def add_direct_message(session_user_id, search_user_id):
     param_ids = [session_user.id, search_user.id]
 
     for channel in channel_arr:
-        users = channel.users #this is an array: [<User 10>, <User 13>]
+        users = channel.users  # this is an array: [<User 10>, <User 13>]
 
         user_ids = []
 
@@ -155,8 +159,8 @@ def add_direct_message(session_user_id, search_user_id):
     search_user_full_name = f'{search_user.first_name.capitalize()} {search_user.last_name.capitalize()}'
 
     new_channel = Channel(
-        title= f'{session_user_full_name}, {search_user_full_name}',
-        is_dm= True,
+        title=f'{session_user_full_name}, {search_user_full_name}',
+        is_dm=True,
         time_created=datetime.datetime.utcnow(),
         # time_created=DateTime(timezone=True), server_default=func.now(),
         # time_created=datetime.time(),
@@ -170,7 +174,6 @@ def add_direct_message(session_user_id, search_user_id):
 
     db.session.commit()
     return new_channel.to_dict()
-
 
 
 # PUT Route
@@ -190,9 +193,7 @@ def edit_channel(channel_id):
 
         db.session.commit()
 
-
         return channel.to_dict()
-
 
     return {'errors': validation_errors_to_error_messages(form.errors)}
 

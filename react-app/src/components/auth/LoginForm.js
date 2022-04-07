@@ -14,14 +14,17 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  if (user) history.push("/channels/1");
+
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
+      return;
     }
 
-    history.push('/')
+    history.push("/channels/1");
   };
 
   const updateEmail = (e) => {
@@ -38,6 +41,7 @@ const LoginForm = () => {
 
   const demoLogin = async () => {
     await dispatch(login("demo@aa.io", "password"));
+    history.push("/channels/1");
   };
 
   return (

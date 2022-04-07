@@ -71,3 +71,8 @@ flask db migrate
 flask db upgrade
 flask seed all
 flask run
+
+
+to reseed:
+flask seed undo
+flask seed all
