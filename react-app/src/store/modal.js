@@ -45,6 +45,15 @@ export const setSearchModalMount = (mount) => ({
   payload: mount,
 });
 
+// **ADD MEMBERS TO CHANNEL SEARCH MODAL**
+
+export const setAddMembersChannelSearchModal = (jsxComponent, channelId) => ({
+  type: SET_CURRENT_SEARCH_MODAL,
+  payload: jsxComponent,
+  channelId
+});
+
+
 const initialState = {
   currentModal: null,
   currentSearchModal: null,

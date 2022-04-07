@@ -8,6 +8,8 @@ import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
 import { loadChannel, deleteMessage } from "../../store/channels";
 
+import { setAddMembersChannelSearchModal } from "../../store/modal";
+
 import "./ChannelPage.css";
 
 const ChannelPage = () => {
