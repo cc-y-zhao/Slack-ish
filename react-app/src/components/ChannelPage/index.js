@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
+import CreateMessageForm
 import EditChannelForm from "../EditChannelForm";
-import CreateMessageForm from "../CreateMessageForm";
+import addMembersSearchBar from "../AddMembersSearchBar";
+import { showModal, setCurrentModal } from "../../store/modal";
 import EditMessageForm from "../EditMessageForm";
+
 import { loadChannel, deleteMessage } from "../../store/channels";
 
 import "./ChannelPage.css";
@@ -19,13 +22,6 @@ const ChannelPage = () => {
 
   const user_id = useSelector((state) => state.session.user?.id);
 
-  // const [showEditMessage, setShowEditMessage] = useState(false);
-
-  // const messages = channel.messages;
-
-  // console.log("messages in ChannelPage/index.js-------", messages)
-
-  // console.log("channel in ChannelPage/index.js-------", channel?.messages);
   let messages;
   if (channel?.messages) {
     messages = Object.values(channel?.messages);
@@ -50,11 +46,29 @@ const ChannelPage = () => {
     return new Date(string).toLocaleDateString([], options);
   }
 
+  ////////////// ADD MEMBERS TO CHANNEL SECTION //////////////////
+  let addChannelMembersButton = false;
+  if (channel?.is_dm == false) {
+    addChannelMembersButton = true;
+  }
+
+  const showAddMembersSearchBar = () => {
+    dispatch(setCurrentModal(addMembersSearchBar));
+    dispatch(showModal());
+  }
+
   return (
     <div className="ChannelPageBody">
       <div className="ChannelPageTitle">
         <i class="fa-solid fa-hashtag"></i>
         <h2>{title}</h2>
+        <div>
+          {addChannelMembersButton &&
+            <button onClick={showAddMembersSearchBar}>
+              Add Members
+            </button>
+          }
+        </div>
         <div>
           <i class="fa-solid fa-ellipsis-vertical"></i>
           {/* <div>

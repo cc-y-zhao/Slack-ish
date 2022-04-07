@@ -64,9 +64,9 @@ function App() {
         {/* <ProtectedRoute path="/channels" exact={true}>
           <Channels />
         </ProtectedRoute> */}
-        <ProtectedRoute path="/createDM" exact={true}>
+        {/* <ProtectedRoute path="/createDM" exact={true}>
           <CreateDMForm />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path="/channels/:channel_id" exact={true}>
           <ChannelPage />
         </ProtectedRoute>
