@@ -9,6 +9,8 @@ import EditMessageForm from "../EditMessageForm";
 import { loadChannel, deleteMessage } from "../../store/channels";
 
 import "./ChannelPage.css";
+import ShowDBUser from "../ShowDBUser";
+import { setCurrentModal, showModal } from "../../store/modal";
 
 const ChannelPage = () => {
   const dispatch = useDispatch();
@@ -16,24 +18,24 @@ const ChannelPage = () => {
   const channelId = parseInt(channel_id);
 
   const channel = useSelector((state) => state.channels[channel_id]);
-
+  const members = useSelector(state => Object.values(state.channels));
+  const choiceMember = members.find(person => person?.id === +channel_id)
   const user_id = useSelector((state) => state.session.user?.id);
+  const memberCount = choiceMember?.users
 
-  // const [showEditMessage, setShowEditMessage] = useState(false);
-
-  // const messages = channel.messages;
-
-  // console.log("messages in ChannelPage/index.js-------", messages)
-
-  // console.log("channel in ChannelPage/index.js-------", channel?.messages);
   let messages;
   if (channel?.messages) {
     messages = Object.values(channel?.messages);
   }
-  console.log("MESSAGES in ChannelPage/index.js-------", messages);
 
   let title = channel ? channel.title : "";
   let channelToEdit = channel ? channel : "";
+
+
+  const ShowListOfUsers = () => {
+    dispatch(setCurrentModal(ShowDBUser));
+    dispatch(showModal())
+  }
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));
@@ -56,7 +58,9 @@ const ChannelPage = () => {
         <i class="fa-solid fa-hashtag"></i>
         <h2>{title}</h2>
         <div>
-          <i class="fa-solid fa-ellipsis-vertical"></i>
+
+          <button onClick={ShowListOfUsers}>{memberCount?.length}</button>
+          {/* <i class="fa-solid fa-ellipsis-vertical"></i> */}
           {/* <div>
             <EditChannelForm channelToEdit={channelToEdit} />
           </div> */}
@@ -69,8 +73,8 @@ const ChannelPage = () => {
           .map((message) => (
             <div
               className="SingleMessageBody"
-              // onMouseEnter={() => setShowEditMessage(true)}
-              // onMouseLeave={() => setShowEditMessage(false)}
+            // onMouseEnter={() => setShowEditMessage(true)}
+            // onMouseLeave={() => setShowEditMessage(false)}
             >
               <div className="MessageProfile">
                 <i class="fa-solid fa-square-person-confined"></i>
@@ -114,8 +118,10 @@ const ChannelPage = () => {
               </div>
             </div>
           ))}
+
       </div>
       <CreateMessageForm channelId={channelId} />
+      <ShowDBUser channelId={channelId} />
     </div>
   );
 };

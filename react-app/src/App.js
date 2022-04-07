@@ -16,6 +16,7 @@ import Search from "./components/Search";
 import CreateDMForm from "./components/CreateDMForm";
 
 import Modal from "./components/Modal/Modal";
+import ShowDBUser from "./components/ShowDBUser";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -70,6 +71,9 @@ function App() {
         <ProtectedRoute path="/channels/:channel_id" exact={true}>
           <ChannelPage />
         </ProtectedRoute>
+        <Route path="/channels/:channel_id" exact={true}>
+          <ShowDBUser />
+        </Route>
         <Route path="*">
           <h1>YOU DONT BELONG HERE!!</h1>
           {/* Render a component that's just centered */}

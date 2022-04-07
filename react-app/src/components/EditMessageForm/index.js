@@ -12,8 +12,8 @@ const EditMessageForm = ({ channelId, messageToEdit }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  console.log('channelId in EDitMessageForm-------', channelId)
-  console.log('messageToEdit in EDitMessageForm-------', messageToEdit)
+  // console.log('channelId in EDitMessageForm-------', channelId)
+  // console.log('messageToEdit in EDitMessageForm-------', messageToEdit)
 
   const [errors, setErrors] = useState([]);
   const [content, setContent] = useState(messageToEdit.content);
@@ -35,7 +35,7 @@ const EditMessageForm = ({ channelId, messageToEdit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('IM IN THE HANDLE SUBMIT------------')
+    // console.log('IM IN THE HANDLE SUBMIT------------')
 
     let editedMessage = {
       id,
@@ -44,7 +44,7 @@ const EditMessageForm = ({ channelId, messageToEdit }) => {
       content,
     };
 
-    console.log('editedMessage in EditMessageForm---------', editedMessage)
+    // console.log('editedMessage in EditMessageForm---------', editedMessage)
 
     if (editedMessage) {
       await dispatch(editMessage(editedMessage)).then(() => dispatch(loadChannel(channel_id)));

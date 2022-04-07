@@ -26,7 +26,7 @@ export const loadChannels = (user_id) => async (dispatch) => {
   const response = await fetch(`/api/channels/user/${user_id}`);
   if (response.ok) {
     const channels = await response.json();
-    console.log("channels in loadChannels---------", channels);
+    // console.log("channels in loadChannels---------", channels);
     dispatch(loadAllChannels(channels.channels));
     return channels;
   } else {
