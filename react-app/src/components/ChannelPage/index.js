@@ -67,7 +67,11 @@ const ChannelPage = () => {
           ?.slice(0)
           .reverse()
           .map((message) => (
-            <div className="SingleMessageBody">
+            <div
+              className="SingleMessageBody"
+              onMouseEnter={() => setShowEditMessage(true)}
+              onMouseLeave={() => setShowEditMessage(false)}
+            >
               <div className="MessageProfile">
                 <i class="fa-solid fa-square-person-confined"></i>
               </div>
@@ -83,11 +87,7 @@ const ChannelPage = () => {
                 </div>
                 <div className="MessageContent">{message.content}</div>
               </div>
-              <div
-                className="EditMessageButton"
-                onMouseEnter={() => setShowEditMessage(true)}
-                onMouseLeave={() => setShowEditMessage(false)}
-              >
+              <div className="EditMessageButton">
                 {showEditMessage && user_id === message.user_id && (
                   <>
                     <i class="fa-solid fa-ellipsis-vertical"></i>

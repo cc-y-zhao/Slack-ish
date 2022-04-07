@@ -18,7 +18,7 @@ const CreateMessageForm = ({ channelId }) => {
   const [errors, setErrors] = useState([]);
   const [content, setContent] = useState("");
   const channel_id = channelId;
-  const user_id = useSelector((state) => state.session.user).id;
+  const user_id = useSelector((state) => state.session?.user).id;
 
   const updateContent = (e) => setContent(e.target.value);
 

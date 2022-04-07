@@ -15,7 +15,7 @@ import CreateChannelForm from "./components/CreateChannelForm";
 import Search from "./components/Search";
 import CreateDMForm from "./components/CreateDMForm";
 
-import Modal from './components/Modal/Modal';
+import Modal from "./components/Modal/Modal";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -34,8 +34,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <NavBar />
-      <SideBar /> */}
+      <NavBar />
+      <SideBar />
       <Modal />
       <Switch>
         <Route path="/login" exact={true}>
@@ -61,7 +61,7 @@ function App() {
         {/* <Route path="/channels" exact={true}>
           <Channels />
         </Route> */}
-        <Route path='/createDM' exact={true}>
+        <Route path="/createDM" exact={true}>
           <CreateDMForm />
         </Route>
         <Route path="/channels/:channel_id" exact={true}>
