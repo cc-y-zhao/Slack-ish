@@ -70,9 +70,6 @@ function App() {
         <ProtectedRoute path="/channels/:channel_id" exact={true}>
           <ChannelPage />
         </ProtectedRoute>
-        <Route path="/channels/:channel_id" exact={true}>
-          <ShowDBUser />
-        </Route>
         <Route path="*">
           <h1>YOU DONT BELONG HERE!!</h1>
           {/* Render a component that's just centered */}

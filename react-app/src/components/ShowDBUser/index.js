@@ -9,33 +9,36 @@ import { createChannel } from "../../store/channels";
 
 import "./ShowDBUser.css";
 import { loadUsersResults } from "../../store/search";
+import Search from "../Search";
 
 const ShowDBUser = ({ channelId }) => {
+// const ShowDBUser = ({ channelId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-
-  console.log(channelId,'///////////////////////////')
-  const channel = useSelector((state) => state.channels[channelId]);
+  // const channel = useSelector((state) => state.channels[channelId]);
   const members = useSelector(state => Object.values(state.channels));
-  const choiceMember = members.find(person => person?.id === +channelId)
+  const choiceMember = members.find(person => person?.id === channelId)
   const prevSearchInput = useSelector((state) => state?.search.search_input);
   const memberCount = choiceMember?.users
   const [searchInput, setSearchResult] = useState(prevSearchInput);
+  // useEffect(() => {
+  //   dispatch()
+  // })
 
   return (
     <div className="ShowListOfUsers">
       <div className="search">
-        <h2>{channel?.title}</h2>
+        <h3>{choiceMember?.title}</h3>
         <input placeholder='Find members'
           value={prevSearchInput}
           onChange={(e) => dispatch(loadUsersResults(e.target.value))}
         />
         <h2>Search Results</h2>
+        <h3>Add people button </h3>
         <div className="userlist__searchResult">
-          <h3>Add people button </h3>
           {memberCount?.map(result => (
-            <div key={result.id}>
-              {result.first_name} {result.last_name}
+            <div key={result?.id}>
+              <li>{result?.first_name} {result?.last_name}</li>
             </div>
           ))}
         </div>

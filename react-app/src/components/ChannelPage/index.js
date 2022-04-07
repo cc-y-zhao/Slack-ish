@@ -10,13 +10,12 @@ import { loadChannel, deleteMessage } from "../../store/channels";
 
 import "./ChannelPage.css";
 import ShowDBUser from "../ShowDBUser";
-import { setCurrentModal, showModal } from "../../store/modal";
+import { setCurrentModal, setCurrentModal2, showModal } from "../../store/modal";
 
 const ChannelPage = () => {
   const dispatch = useDispatch();
   const { channel_id } = useParams();
   const channelId = parseInt(channel_id);
-
   const channel = useSelector((state) => state.channels[channel_id]);
   const members = useSelector(state => Object.values(state.channels));
   const choiceMember = members.find(person => person?.id === +channel_id)
@@ -32,8 +31,13 @@ const ChannelPage = () => {
   let channelToEdit = channel ? channel : "";
 
 
+  // const ShowListOfUsers = () => {
+  //   dispatch(setCurrentModal2(ShowDBUser));
+  //   dispatch(showModal())
+  // }
+
   const ShowListOfUsers = () => {
-    dispatch(setCurrentModal(ShowDBUser));
+    dispatch(setCurrentModal2(ShowDBUser, channelId));
     dispatch(showModal())
   }
 
@@ -59,7 +63,9 @@ const ChannelPage = () => {
         <h2>{title}</h2>
         <div>
 
-          <button onClick={ShowListOfUsers}>{memberCount?.length}</button>
+          <button onClick={ShowListOfUsers}>{memberCount?.length}
+            {/* <ShowDBUser channelId={channelId}/> */}
+          </button>
           {/* <i class="fa-solid fa-ellipsis-vertical"></i> */}
           {/* <div>
             <EditChannelForm channelToEdit={channelToEdit} />
@@ -73,8 +79,6 @@ const ChannelPage = () => {
           .map((message) => (
             <div
               className="SingleMessageBody"
-            // onMouseEnter={() => setShowEditMessage(true)}
-            // onMouseLeave={() => setShowEditMessage(false)}
             >
               <div className="MessageProfile">
                 <i class="fa-solid fa-square-person-confined"></i>
@@ -120,8 +124,8 @@ const ChannelPage = () => {
           ))}
 
       </div>
+      {/* <ShowDBUser channelId={channelId} /> */}
       <CreateMessageForm channelId={channelId} />
-      <ShowDBUser channelId={channelId} />
     </div>
   );
 };
