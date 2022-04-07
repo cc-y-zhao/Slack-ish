@@ -13,7 +13,7 @@ channel_routes = Blueprint('channels', __name__)
 
 # GET logged in user's channels
 @channel_routes.route('/user/<int:user_id>')
-@login_required
+# @login_required
 def get_session_user_channels(user_id):
     # channels = Channel.query.all()
     # user_id = 1
@@ -21,8 +21,12 @@ def get_session_user_channels(user_id):
     channel_users_query = Channel.query.join(channel_users).join(
         User).filter((channel_users.c.user_id == user_id)).all()
 
+    #Dan's demo:
     # return_value = {'channels': [channel.to_dict() for channel in channels]}
     # print('return_value in channel_routes-------', return_value)
+    # channels = Channel.query.all()
+    # return {'channels': [channel.to_dict() for channel in channels]}
+
     return {'channels': [channel.to_dict() for channel in channel_users_query]}
 
 # GET logged in user's DM (search)
