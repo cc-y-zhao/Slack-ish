@@ -82,17 +82,17 @@ const EditChannelForm = () => {
         <button type="submit" disabled={errors.length > 0}>
           Update Channel
         </button>
-        <button
-          onClick={async () => {
-            await dispatch(deleteChannel(channelToEdit?.id))
-              .then(() => dispatch(loadChannel(1)))
-              .then(() => dispatch(hideModal()))
-              .then(() => history.push(`/channels/1`));
-          }}
-        >
-          Delete
-        </button>
       </form>
+      <button
+        onClick={async () => {
+          await dispatch(deleteChannel(channelToEdit?.id))
+            .then(() => dispatch(loadChannel(1)))
+            .then(() => dispatch(hideModal()))
+            .then(() => history.push(`/channels/1`));
+        }}
+      >
+        Delete
+      </button>
     </>
   );
 };
