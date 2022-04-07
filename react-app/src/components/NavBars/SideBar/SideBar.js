@@ -5,9 +5,10 @@ import Channels from "../../Channels";
 import DirectMessages from "../../DirectMessages/DirectMessages";
 import "./SideBar.css";
 
-//ADDED FOR TESTING:
+import Search from "../../Search";
 import CreateChannelForm from "../../CreateChannelForm";
 import { showModal, setCurrentModal } from "../../../store/modal";
+import { showSearchModal, setCurrentSearchModal } from "../../../store/modal";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,11 @@ const Sidebar = () => {
   const showCreateChannelForm = () => {
     dispatch(setCurrentModal(CreateChannelForm));
     dispatch(showModal());
+  };
+
+  const showCreateDMSearch = () => {
+    dispatch(setCurrentSearchModal(Search));
+    dispatch(showSearchModal());
   };
 
   let sessionElements;
@@ -57,7 +63,12 @@ const Sidebar = () => {
               <i className="fa-solid fa-caret-down"></i>
               <h1>Direct Messages</h1>
               <div className="adddmbutton">
-                {showAddDm && <i className="fa-solid fa-plus"></i>}
+                {showAddDm && (
+                  <i
+                    className="fa-solid fa-plus"
+                    onClick={showCreateDMSearch}
+                  ></i>
+                )}
               </div>
             </div>
             <div className="SidebarLinks">

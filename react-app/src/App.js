@@ -16,6 +16,7 @@ import Search from "./components/Search";
 import CreateDMForm from "./components/CreateDMForm";
 
 import Modal from "./components/Modal/Modal";
+import SearchModal from "./components/Modal/SearchModal";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -37,6 +38,7 @@ function App() {
       <NavBar />
       <SideBar />
       <Modal />
+      <SearchModal />
       <Switch>
         <Route path="/" exact={true}>
           <LoginForm />
@@ -57,16 +59,9 @@ function App() {
           {/* <h1>testing</h1> */}
           <Search />
         </ProtectedRoute>
-        <ProtectedRoute path="/chatroom" exact={true}>
-          {/* <ChatRoom /> */}
-          <CreateChannelForm />
-        </ProtectedRoute>
-        {/* <ProtectedRoute path="/channels" exact={true}>
-          <Channels />
-        </ProtectedRoute> */}
-        <ProtectedRoute path="/createDM" exact={true}>
+        {/* <ProtectedRoute path="/createDM" exact={true}>
           <CreateDMForm />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path="/channels/:channel_id" exact={true}>
           <ChannelPage />
         </ProtectedRoute>
