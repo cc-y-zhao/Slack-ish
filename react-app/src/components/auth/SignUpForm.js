@@ -14,6 +14,7 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [image_url, setImageUrl] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
@@ -95,6 +96,10 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
+  const updateImageUrl = (e) => {
+    setImageUrl(e.target.value)
+  }
+
   if (user) {
     return <Redirect to="/" />;
   }
@@ -140,46 +145,46 @@ const SignUpForm = () => {
               value={last_name}
               required={true}
             ></input>
-          </div>
-          {/* <div>
-        <label>User Name</label>
-        <input
-          type="text"
-          name="username"
-          onChange={updateUsername}
-          value={username}
-          required={true}
-        ></input>
-      </div> */}
-          <div>
+
+            <div>
+              <input
+                type="text"
+                name="email"
+                placeholder="name@throwaway-email.com"
+                onChange={updateEmail}
+                value={email}
+                required={true}
+              ></input>
+            </div>
+            <div>
+              <input
+                type="password"
+                name="password"
+                placeholder="password"
+                onChange={updatePassword}
+                value={password}
+                required={true}
+              ></input>
+            </div>
+            <div>
+              <input
+                type="password"
+                name="repeat_password"
+                placeholder="confirm password"
+                onChange={updateRepeatPassword}
+                value={repeatPassword}
+                required={true}
+              ></input>
+            </div>
             <input
-              type="text"
-              name="email"
-              placeholder="name@throwaway-email.com"
-              onChange={updateEmail}
-              value={email}
-              required={true}
-            ></input>
-          </div>
-          <div>
-            <input
-              type="password"
-              name="password"
-              placeholder="password"
-              onChange={updatePassword}
-              value={password}
-              required={true}
-            ></input>
-          </div>
-          <div>
-            <input
-              type="password"
-              name="repeat_password"
-              placeholder="confirm password"
-              onChange={updateRepeatPassword}
-              value={repeatPassword}
-              required={true}
-            ></input>
+                type="url"
+                name="image_url"
+                placeholder="Enter a profile picture"
+                onChange={updateImageUrl}
+                value={image_url}
+              ></input>
+            <div>
+            </div>
           </div>
           <button type="submit" disabled={errors.length > 0}>
             Sign Up
