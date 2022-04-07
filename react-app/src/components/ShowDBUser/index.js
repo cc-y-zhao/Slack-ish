@@ -14,6 +14,7 @@ const ShowDBUser = ({ channelId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  console.log(channelId,'///////////////////////////')
   const channel = useSelector((state) => state.channels[channelId]);
   const members = useSelector(state => Object.values(state.channels));
   const choiceMember = members.find(person => person?.id === +channelId)
