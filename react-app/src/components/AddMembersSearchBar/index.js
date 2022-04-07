@@ -1,18 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { loadUsersResults } from "../../store/search";
 
 import CreateChannelForm from "../CreateChannelForm";
 import { showModal, setCurrentModal } from "../../store/modal";
 
-function AddMembersSearchBar({channelId}) {
+function AddMembersSearchBar() {
   const history = useHistory();
   const dispatch = useDispatch();
 
+
   // these results only show people who are not already in the channel
   const allResults = useSelector((state) => state?.search.users_results);
+  const channelsState = useSelector((state) => state?.channels?.channelId);
+  const channelId = useSelector((state) => state?.modals?.channelId);
+
+  console.log('channel id --------------', channelId);
+  console.log('channelsState------------------', channelsState);
+  // console.log('channelsState.channelId------------------', channelsState.channelId);
+
+  // console.log('channel id --------------', channelId);
+  // let currentChannel;
+  // if (channelsState) {
+  //   currentChannel = channelsState[channelId];
+  // }
+
+  // console.log('currentChannel----------------', currentChannel)
 
   const prevSearchInput = useSelector((state) => state?.search.search_input);
   const sessionUser = useSelector((state) => state.session.user)
@@ -24,11 +39,6 @@ function AddMembersSearchBar({channelId}) {
   }
 
   const [searchInput, setSearchResult] = useState(prevSearchInput);
-
-  const showCreateChannelForm = () => {
-    dispatch(setCurrentModal(CreateChannelForm));
-    dispatch(showModal());
-  }
 
   const handleClick = async (sessionUserId, resultId, e) => {
     e.preventDefault();

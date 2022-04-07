@@ -11,9 +11,10 @@ export const hideModal = () => ({
   type: HIDE_MODAL,
 });
 
-export const setCurrentModal = (jsxComponent) => ({
+export const setCurrentModal = (jsxComponent, channelId) => ({
   type: SET_CURRENT_MODAL,
-  payload: jsxComponent
+  payload: jsxComponent,
+  channelId
 })
 
 export const setModalMount = (mount) => ({
@@ -45,7 +46,8 @@ export default function modals(state = initialState, action) {
     case SET_CURRENT_MODAL:
       return {
         ...state,
-        currentModal: action.payload
+        currentModal: action.payload,
+        'channelId': action.channelId,
       }
 
     case SET_MODAL_MOUNT:

@@ -54,7 +54,7 @@ const ChannelPage = () => {
   }
 
   const showAddMembersSearchBar = () => {
-    dispatch(setCurrentModal(addMembersSearchBar));
+    dispatch(setCurrentModal(AddMembersSearchBar, channelId));
     dispatch(showModal());
   }
 
@@ -63,6 +63,10 @@ const ChannelPage = () => {
       <div className="ChannelPageTitle">
         <i class="fa-solid fa-hashtag"></i>
         <h2>{title}</h2>
+        <div hidden>
+          <AddMembersSearchBar channelId={channelId} />
+          {/* {console.log('channelId in hidden div---------', channelId)} */}
+        </div>
         <div>
           {addChannelMembersButton &&
             <button onClick={showAddMembersSearchBar}>
@@ -131,9 +135,6 @@ const ChannelPage = () => {
           ))}
       </div>
       <CreateMessageForm channelId={channelId} />
-      <div hidden>
-        <AddMembersSearchBar channelId={channelId} />
-      </div>
     </div>
   );
 };
