@@ -35,6 +35,9 @@ function Search() {
 
     let newDirectMessage;
 
+    // i want to message dan
+    // dm id = 10
+
     try {
       newDirectMessage = await dispatch(createDm(sessionUserId, resultId));
     } catch (error) {

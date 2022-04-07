@@ -20,8 +20,6 @@ def get_session_user_channels(user_id):
     # print('channels backend', type(channels))
     channel_users_query = Channel.query.join(channel_users).join(
         User).filter((channel_users.c.user_id == user_id)).all()
-    # print('channels backend@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',
-    #       channel_users_query)
 
     # return_value = {'channels': [channel.to_dict() for channel in channels]}
     # print('return_value in channel_routes-------', return_value)
@@ -127,6 +125,32 @@ def add_direct_message(session_user_id, search_user_id):
 
     session_user = User.query.get(session_user_id)
     search_user = User.query.get(search_user_id)
+
+    # channel_users_query = Channel.query.join(channel_users).join(
+    #     User).filter((channel_users.c.user_id == search_user_id) and (channel_users.c.user_id == session_user_id)).all()
+
+    # dm_channels = Channel.query.join(channel_users).join(
+    # User).filter((Channel.is_dm == True) and (channel_users.c.user_id == search_user_id)).all()
+
+    dm_channels = Channel.query.filter(Channel.is_dm == True).all()
+
+    channel_arr = [c for c in dm_channels]
+
+    param_ids = [session_user.id, search_user.id]
+
+    for channel in channel_arr:
+        users = channel.users #this is an array: [<User 10>, <User 13>]
+        user_ids = []
+
+        for user in users:
+            user_ids.append(user.id)
+
+        if param_ids == user_ids:
+            return channel.to_dict()
+
+    # print(f'\n\n', channel_arr, '\n\n')
+    # print('\n\n', channel_arr[0].users, '\n\n')
+    # return {'results': channel_users_query}
 
     session_user_full_name = f'{session_user.first_name.capitalize()} {session_user.last_name.capitalize()}'
     search_user_full_name = f'{search_user.first_name.capitalize()} {search_user.last_name.capitalize()}'
