@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
-import CreateMessageForm
 import EditChannelForm from "../EditChannelForm";
+import CreateMessageForm from "../CreateMessageForm";
 import addMembersSearchBar from "../AddMembersSearchBar";
 import { showModal, setCurrentModal } from "../../store/modal";
 import EditMessageForm from "../EditMessageForm";
@@ -12,6 +12,7 @@ import EditMessageForm from "../EditMessageForm";
 import { loadChannel, deleteMessage } from "../../store/channels";
 
 import "./ChannelPage.css";
+import AddMembersSearchBar from "../AddMembersSearchBar";
 
 const ChannelPage = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const ChannelPage = () => {
   if (channel?.messages) {
     messages = Object.values(channel?.messages);
   }
-  console.log("MESSAGES in ChannelPage/index.js-------", messages);
+  // console.log("MESSAGES in ChannelPage/index.js-------", messages);
 
   let title = channel ? channel.title : "";
   let channelToEdit = channel ? channel : "";
@@ -130,6 +131,9 @@ const ChannelPage = () => {
           ))}
       </div>
       <CreateMessageForm channelId={channelId} />
+      <div hidden>
+        <AddMembersSearchBar channelId={channelId} />
+      </div>
     </div>
   );
 };
