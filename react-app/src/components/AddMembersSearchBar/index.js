@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { loadUsersResults } from "../../store/search";
+import { loadUsersResults, loadUsers } from "../../store/search";
 
 import CreateChannelForm from "../CreateChannelForm";
 import { showModal } from "../../store/modal";
@@ -13,23 +13,37 @@ function AddMembersSearchBar() {
 
   // these results only show people who are not already in the channel
   const allResults = useSelector((state) => state?.search.users_results);
+  const allUsers = useSelector((state) => state?.search.users);
   const channelId = useSelector((state) => state?.modals?.channelId);
-  const channelsState = useSelector((state) => state?.channels?.channelId);
+  const currentChannelMembers = useSelector((state) => state?.channels[channelId].users);
 
-  console.log('channel id --------------', channelId);
-  // console.log('channelsState------------------', channelsState);
-  // console.log('channelsState.channelId------------------', channelsState.channelId);
-
-  // console.log('channel id --------------', channelId);
-  // let currentChannel;
-  // if (channelsState) {
-  //   currentChannel = channelsState[channelId];
-  // }
-
-  // console.log('currentChannel----------------', currentChannel)
-
+  console.log('all users in database---------', allUsers);
+  // console.log('all users in database----------', allResults)
+  console.log('current channel users-----------', currentChannelMembers)
   const prevSearchInput = useSelector((state) => state?.search.search_input);
   const sessionUser = useSelector((state) => state.session.user)
+
+  let allUsersArray = [];
+  if (allUsers) {
+    allUsersArray = Object.values(allUsers);
+  }
+
+  let currentChannelEmails = [];
+  currentChannelMembers.forEach((user) => {
+    currentChannelEmails.push(user.email);
+  })
+
+  let usersNotInChannel = [];
+
+  allUsersArray.forEach((user) => {
+    // console.log('user in for each--------', user)
+    if (!currentChannelEmails.includes(user.email)) {
+      usersNotInChannel.push(user)
+    }
+  })
+
+  console.log('users not in channel---------', usersNotInChannel);
+
 
   let sessionUserId;
 
@@ -38,6 +52,10 @@ function AddMembersSearchBar() {
   }
 
   const [searchInput, setSearchResult] = useState(prevSearchInput);
+
+  useEffect(() => {
+    dispatch(loadUsers());
+  }, [dispatch]);
 
   const handleClick = async (sessionUserId, resultId, e) => {
     e.preventDefault();
