@@ -12,15 +12,22 @@ const store = configureStore();
 const Root = () => {
   const dispatch = useDispatch();
   const modalMountRef = useRef(null);
+  const modalMountAddMembersToChannelRef = useRef(null);
 
   useEffect(() => {
     dispatch(setModalMount(modalMountRef.current))
   }, [dispatch])
 
+   useEffect(() => {
+    dispatch(setModalMount(modalMountAddMembersToChannelRef.current))
+  }, [dispatch])
+
+
   return (
     <>
       <App />
       <div ref={modalMountRef} className='modal'></div>
+      <div ref={modalMountAddMembersToChannelRef} className='modal'></div>
     </>
   )
 }

@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { loadUsersResults } from "../../store/search";
 
 import CreateChannelForm from "../CreateChannelForm";
-import { showModal, setCurrentModal } from "../../store/modal";
+import { showModal } from "../../store/modal";
 
 function AddMembersSearchBar() {
   const history = useHistory();

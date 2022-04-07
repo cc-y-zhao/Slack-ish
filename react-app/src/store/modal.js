@@ -1,6 +1,7 @@
 const SHOW_MODAL = 'SHOW_MODAL';
 const HIDE_MODAL = 'HIDE_MODAL';
 const SET_CURRENT_MODAL = 'SET_CURRENT_MODAL';
+const SET_CURRENT_ADD_MEMBERS_TO_CHANNEL_MODAL = 'SET_CURRENT_ADD_MEMBERS_TO_CHANNEL_MODAL';
 const SET_MODAL_MOUNT = 'SET_MODAL_MOUNT';
 
 export const showModal = () => ({
@@ -11,7 +12,12 @@ export const hideModal = () => ({
   type: HIDE_MODAL,
 });
 
-export const setCurrentModal = (jsxComponent, channelId) => ({
+export const setCurrentModal = (jsxComponent) => ({
+  type: SET_CURRENT_MODAL,
+  payload: jsxComponent
+})
+
+export const setAddMembersToChannelModal = (jsxComponent, channelId) => ({
   type: SET_CURRENT_MODAL,
   payload: jsxComponent,
   channelId
@@ -24,6 +30,7 @@ export const setModalMount = (mount) => ({
 
 const initialState = {
   currentModal: null,
+  currentAddMembersToChannelModal: null,
   modalMount: null,
   display: false
 }
@@ -47,13 +54,19 @@ export default function modals(state = initialState, action) {
       return {
         ...state,
         currentModal: action.payload,
-        'channelId': action.channelId,
+      }
+
+    case SET_CURRENT_ADD_MEMBERS_TO_CHANNEL_MODAL:
+      return {
+        ...state,
+        currentModal: action.payload,
       }
 
     case SET_MODAL_MOUNT:
     return {
       ...state,
-      modalMount: action.payload
+      currentAddMembersToChannelModal: action.payload,
+      channelId: action.channelId,
     }
 
     default:
