@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-import { hideModal, setCurrentModal } from "../../store/modal";
+import { hideModal } from "../../store/modal";
 
 import { createChannel } from "../../store/channels";
 

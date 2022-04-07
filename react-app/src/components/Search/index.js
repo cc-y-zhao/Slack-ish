@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
-
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { loadUsersResults } from "../../store/search";
-
-import CreateChannelForm from "../CreateChannelForm";
-import { showModal, setCurrentModal } from "../../store/modal";
+import { hideSearchModal } from "../../store/modal";
 import { createDm } from "../../store/channels";
 
 function Search() {
@@ -14,47 +11,29 @@ function Search() {
 
   const results = useSelector((state) => state?.search.users_results);
   const prevSearchInput = useSelector((state) => state?.search.search_input);
-  const sessionUser = useSelector((state) => state.session.user)
+  const sessionUser = useSelector((state) => state.session.user);
 
   let sessionUserId;
 
   if (sessionUser) {
-    sessionUserId = sessionUser.id
+    sessionUserId = sessionUser.id;
   }
 
   // const [showModal, setShowModal] = useState(false);
   const [searchInput, setSearchResult] = useState(prevSearchInput);
-
-  const showCreateChannelForm = () => {
-    dispatch(setCurrentModal(CreateChannelForm));
-    dispatch(showModal());
-  }
 
   const handleClick = async (sessionUserId, resultId, e) => {
     e.preventDefault();
 
     let newDirectMessage;
 
-    // i want to message dan
-    // dm id = 10
+    newDirectMessage = await dispatch(createDm(sessionUserId, resultId));
 
-    try {
-      newDirectMessage = await dispatch(createDm(sessionUserId, resultId));
-    } catch (error) {
-      // if (error instanceof ValidationError) setErrors(error.errors);
-      // // If error is not a ValidationError, add slice at the end to remove extra
-      // // "Error: "
-      // else setErrors({ overall: error.toString().slice(7) })
-    }
     if (newDirectMessage) {
-
-      history.push(`/channels/${newDirectMessage.id}`)
-      // dispatch(getReviewsByCar(carId));
-      // setShowModal(false);
-      // return history.push(`/cars/${carId}`);
+      dispatch(hideSearchModal());
+      history.push(`/channels/${newDirectMessage.id}`);
     }
   };
-
 
   // useEffect(() => {
   //   dispatch(loadUsersResults());
@@ -74,12 +53,12 @@ function Search() {
   // if message room doesn't exist, create new channel with hardcoded values (is_dm),
   // and then redirect / history.push them to that new channel
 
-
   return (
     <div>
       <div className="search">
-        <h2>Results</h2>
-        <input placeholder='Search'
+        {/* <h2>Results</h2> */}
+        <input
+          placeholder="Type to search users"
           value={searchInput}
           // onClick={() => setShowModal(true)}
           onChange={(e) => dispatch(loadUsersResults(e.target.value))}
@@ -93,10 +72,14 @@ function Search() {
             <Modal />
           </>
         )} */}
-        <h2>Search Results</h2>
-          <div className="search__result">
-          {results?.map(result => (
-            <div key={result.id} onClick={(e) => handleClick(sessionUserId, result.id, e)}>
+        {/* <h2>Search Results</h2> */}
+        <div className="search__result">
+          {results?.map((result) => (
+            <div
+              key={result.id}
+              onClick={(e) => handleClick(sessionUserId, result.id, e)}
+              className="SearchResultDiv"
+            >
               {result.first_name} {result.last_name}
             </div>
           ))}
@@ -110,16 +93,11 @@ function Search() {
           ))}
         </div> */}
       </div>
-      <button onClick={showCreateChannelForm}>
+      {/* <button onClick={showCreateChannelForm}>
         Create Channel
-      </button>
+      </button> */}
     </div>
-  )
-
-
-
-
+  );
 }
-
 
 export default Search;

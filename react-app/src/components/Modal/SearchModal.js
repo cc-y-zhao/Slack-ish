@@ -2,19 +2,19 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactDOM from "react-dom";
 
-import { hideModal } from "../../store/modal";
+import { hideSearchModal } from "../../store/modal";
 
 import "./Modal.css";
 
-export const Modal = () => {
+export const SearchModal = () => {
   const dispatch = useDispatch();
 
-  const mount = useSelector((state) => state.modals.modalMount);
-  const display = useSelector((state) => state.modals.modalDisplay);
-  const Current = useSelector((state) => state.modals.currentModal);
+  const mount = useSelector((state) => state.modals.searchModalMount);
+  const display = useSelector((state) => state.modals.searchDisplay);
+  const Current = useSelector((state) => state.modals.currentSearchModal);
 
   const closeModal = () => {
-    dispatch(hideModal());
+    dispatch(hideSearchModal());
   };
 
   return (
@@ -31,4 +31,4 @@ export const Modal = () => {
   );
 };
 
-export default Modal;
+export default SearchModal;

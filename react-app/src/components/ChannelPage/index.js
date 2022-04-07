@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams, Redirect } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 import EditChannelForm from "../EditChannelForm";
 import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
-import { loadChannel, deleteMessage } from "../../store/channels";
-
+import { loadChannel } from "../../store/channels";
+import { showModal, setCurrentEditModal } from "../../store/modal";
 import "./ChannelPage.css";
 
 const ChannelPage = () => {
@@ -19,26 +17,26 @@ const ChannelPage = () => {
 
   const user_id = useSelector((state) => state.session.user?.id);
 
-  // const [showEditMessage, setShowEditMessage] = useState(false);
+  const showEditChannelForm = () => {
+    dispatch(setCurrentEditModal(EditChannelForm, channel?.id));
+    dispatch(showModal());
+  };
 
-  // const messages = channel.messages;
+  const showEditMessageForm = () => {
+    dispatch(setCurrentEditModal(EditMessageForm, channel?.id));
+    dispatch(showModal());
+  };
 
-  // console.log("messages in ChannelPage/index.js-------", messages)
-
-  // console.log("channel in ChannelPage/index.js-------", channel?.messages);
   let messages;
   if (channel?.messages) {
     messages = Object.values(channel?.messages);
   }
-  console.log("MESSAGES in ChannelPage/index.js-------", messages);
 
   let title = channel ? channel.title : "";
-  let channelToEdit = channel ? channel : "";
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));
   }, [dispatch, channel_id]);
-  // }, [channel_id, channel.all_messages.toString()]);
 
   function formatTime(string) {
     const options = { hour: "2-digit", minute: "2-digit" };
@@ -56,7 +54,10 @@ const ChannelPage = () => {
         <i class="fa-solid fa-hashtag"></i>
         <h2>{title}</h2>
         <div>
-          <i class="fa-solid fa-ellipsis-vertical"></i>
+          <i
+            class="fa-solid fa-ellipsis-vertical"
+            onClick={showEditChannelForm}
+          ></i>
           {/* <div>
             <EditChannelForm channelToEdit={channelToEdit} />
           </div> */}
@@ -69,6 +70,7 @@ const ChannelPage = () => {
           .map((message) => (
             <div
               className="SingleMessageBody"
+              key={message.id}
               // onMouseEnter={() => setShowEditMessage(true)}
               // onMouseLeave={() => setShowEditMessage(false)}
             >
@@ -93,7 +95,19 @@ const ChannelPage = () => {
               >
                 {user_id === message.user_id && (
                   <>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                    <i
+                      class="fa-solid fa-ellipsis-vertical"
+                      onClick={() => {
+                        dispatch(
+                          setCurrentEditModal(
+                            EditMessageForm,
+                            channel?.id,
+                            message?.id
+                          )
+                        );
+                        dispatch(showModal());
+                      }}
+                    ></i>
                     {/* <div>
                       <EditMessageForm
                         channelId={channelId}
