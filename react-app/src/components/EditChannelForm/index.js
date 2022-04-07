@@ -84,7 +84,10 @@ const EditChannelForm = () => {
         </button>
         <button
           onClick={async () => {
-            await dispatch(deleteChannel(channelToEdit?.id));
+            await dispatch(deleteChannel(channelToEdit?.id))
+              .then(() => dispatch(loadChannel(1)))
+              .then(() => dispatch(hideModal()))
+              .then(() => history.push(`/channels/1`));
           }}
         >
           Delete
