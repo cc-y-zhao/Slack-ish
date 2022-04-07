@@ -18,7 +18,7 @@ export const setCurrentModal = (jsxComponent) => ({
 })
 
 export const setAddMembersToChannelModal = (jsxComponent, channelId) => ({
-  type: SET_CURRENT_MODAL,
+  type: SET_CURRENT_ADD_MEMBERS_TO_CHANNEL_MODAL,
   payload: jsxComponent,
   channelId
 })
@@ -32,7 +32,7 @@ const initialState = {
   currentModal: null,
   currentAddMembersToChannelModal: null,
   modalMount: null,
-  display: false
+  modalDisplay: false
 }
 
 
@@ -41,13 +41,13 @@ export default function modals(state = initialState, action) {
     case SHOW_MODAL:
     return {
       ...state,
-      display: true
+      modalDisplay: true
     }
 
     case HIDE_MODAL:
       return {
-        ...state,
-        display: false
+      ...state,
+      modalDisplay: false
     }
 
     case SET_CURRENT_MODAL:
@@ -59,14 +59,14 @@ export default function modals(state = initialState, action) {
     case SET_CURRENT_ADD_MEMBERS_TO_CHANNEL_MODAL:
       return {
         ...state,
-        currentModal: action.payload,
+        currentAddMembersToChannelModal: action.payload,
+        channelId: action.channelId,
       }
 
     case SET_MODAL_MOUNT:
     return {
       ...state,
-      currentAddMembersToChannelModal: action.payload,
-      channelId: action.channelId,
+      modalMount: action.payload,
     }
 
     default:

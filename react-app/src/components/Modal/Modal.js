@@ -13,6 +13,7 @@ export const Modal = () => {
   const mount = useSelector(state => state.modals.modalMount);
   const display = useSelector(state => state.modals.display);
   const Current = useSelector(state => state.modals.currentModal);
+  const AddMembersToChannel = useSelector(state => state.modals.currentAddMembersToChannelModal);
 
   const closeModal = () => {
     dispatch(hideModal());
@@ -22,6 +23,7 @@ export const Modal = () => {
     <div className='modal-background' onClick={closeModal}>
       <div className='modal-content' onClick={(e) => e.stopPropagation()}>
         <Current />
+        <AddMembersToChannel />
       </div>
     </div>
     , mount)
