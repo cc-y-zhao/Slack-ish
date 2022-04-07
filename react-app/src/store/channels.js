@@ -3,7 +3,9 @@ const GET_ONE_CHANNEL = "channels/GET_ONE_CHANNEL";
 const CREATE_ONE_CHANNEL = "channels/CREATE_CHANNEL";
 const EDIT_ONE_CHANNEL = "channels/EDIT_ONE_CHANNEL";
 const DELETE_ONE_CHANNEL = "channels/DELETE_ONE_CHANNEL";
+const CREATE_ONE_DM = "channels/CREATE_ONE_DM";
 
+const createOneDm = (dm) => ({ type: CREATE_ONE_DM, dm });
 const loadAllChannels = (channels) => ({ type: GET_ALL_CHANNELS, channels });
 const loadOneChannel = (channel) => ({ type: GET_ONE_CHANNEL, channel });
 const createOneChannel = (channel) => ({
@@ -129,6 +131,19 @@ export const deleteChannel = (channel_id) => async (dispatch) => {
   }
 };
 
+export const createDm = (session_user_id, search_user_id) => async dispatch => {
+  const response = await fetch(`/api/channels/${session_user_id}/${search_user_id}`, {
+    method: 'POST',
+    headers: { 'Content-Type' : 'application/json' },
+  })
+  if (response.ok) {
+    const createDm = await response.json();
+    dispatch(createOneDm(createDm))
+    return createDm
+  } else {
+    return response.json('Could not handle request')
+  }
+}
 // **********************************MESSAGES**********************************************
 // **********************************MESSAGES**********************************************
 // **********************************MESSAGES**********************************************
@@ -280,6 +295,11 @@ const channelsReducer = (state = initialState, action) => {
       delete newState[action.deletedChannel.id];
       return newState;
     }
+
+    case CREATE_ONE_DM: {
+      return { [action.dm.id]: action.dm, ...state };
+    }
+
     default:
       return state;
   }

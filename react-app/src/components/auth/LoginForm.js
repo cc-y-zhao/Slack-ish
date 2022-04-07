@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { login } from "../../store/session";
 
 import logo from "../../images/slack-ish.png";
@@ -12,13 +12,19 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  if (user) history.push("/channels/1");
 
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
+      return;
     }
+
+    history.push("/channels/1");
   };
 
   const updateEmail = (e) => {
@@ -29,12 +35,13 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
-  if (user) {
-    return <Redirect to="/" />;
-  }
+  // if (user) {
+  //   return <Redirect to="/" />;
+  // }
 
   const demoLogin = async () => {
     await dispatch(login("demo@aa.io", "password"));
+    history.push("/channels/1");
   };
 
   return (

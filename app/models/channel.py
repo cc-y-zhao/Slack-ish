@@ -40,4 +40,6 @@ class Channel(db.Model):
             'description': self.description,
             'time_created': self.time_created,
             'time_updated': self.time_updated,
+            'users': [u.info() for u in self.users],
+            'messages': [m.to_dict() for m in self.messages]
         }

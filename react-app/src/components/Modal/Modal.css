@@ -1,0 +1,28 @@
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(1px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.modal-content {
+  height: 400px;
+  width: 400px;
+  /* background-color: rgb(27,30,34); */
+  background-color: rgb(27,30,34);
+  border:2px solid rgb(53,53,58);
+  color: rgb(196,198,199);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  z-index: 3;
+  border-radius: 8px;
+}

@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session'
 import channelsReducer from './channels'
 import searchReducer from './search';
+import modals from './modal';
 
 const rootReducer = combineReducers({
   session,
   channels: channelsReducer,
   search: searchReducer,
+  modals
 });
 
 

@@ -7,6 +7,8 @@ import { useHistory, useParams, Redirect } from "react-router-dom";
 import { loadChannel } from "../../store/channels";
 import { createMessage } from "../../store/channels";
 
+import { hideModal, setCurrentModal } from "../../store/modal";
+
 import "./CreateMessageForm.css";
 
 const CreateMessageForm = ({ channelId }) => {
@@ -16,7 +18,7 @@ const CreateMessageForm = ({ channelId }) => {
   const [errors, setErrors] = useState([]);
   const [content, setContent] = useState("");
   const channel_id = channelId;
-  const user_id = useSelector((state) => state.session.user).id;
+  const user_id = useSelector((state) => state.session?.user).id;
 
   const updateContent = (e) => setContent(e.target.value);
 
@@ -43,6 +45,7 @@ const CreateMessageForm = ({ channelId }) => {
         dispatch(loadChannel(channel_id))
       );
       setErrors([]);
+      setContent("");
     }
 
     // const payload = {

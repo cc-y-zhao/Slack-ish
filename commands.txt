@@ -51,7 +51,10 @@ git branch -D (DELETE BRANCH PERMANENTLY - BE CAREFUL!)
 
 
 *********** heroku commands *************
-heroku run -a <app_name> flask seed all
+DELETE HEROKU POSTGRES EXTENSION ON HEROKU (if db changes were made)
+
+heroku run -a  slack-ish flask db upgrade
+heroku run -a  slack-ish flask seed all
 
 
 ** start from scratch (db) **
@@ -68,3 +71,8 @@ flask db migrate
 flask db upgrade
 flask seed all
 flask run
+
+
+to reseed:
+flask seed undo
+flask seed all

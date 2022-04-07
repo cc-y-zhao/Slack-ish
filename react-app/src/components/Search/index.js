@@ -1,22 +1,59 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { Modal } from '../../context/Modal';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { loadUsersResults } from "../../store/search";
 
+import CreateChannelForm from "../CreateChannelForm";
+import { showModal, setCurrentModal } from "../../store/modal";
+import { createDm } from "../../store/channels";
+
 function Search() {
-  // const { searchInput } = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const results = useSelector((state) => state?.search.users_results);
   const prevSearchInput = useSelector((state) => state?.search.search_input);
+  const sessionUser = useSelector((state) => state.session.user)
 
+  let sessionUserId;
 
-  const [showModal, setShowModal] = useState(false);
+  if (sessionUser) {
+    sessionUserId = sessionUser.id
+  }
+
+  // const [showModal, setShowModal] = useState(false);
   const [searchInput, setSearchResult] = useState(prevSearchInput);
 
-  console.log('previous search input', prevSearchInput);
+  const showCreateChannelForm = () => {
+    dispatch(setCurrentModal(CreateChannelForm));
+    dispatch(showModal());
+  }
+
+  const handleClick = async (sessionUserId, resultId, e) => {
+    e.preventDefault();
+
+    let newDirectMessage;
+
+    // i want to message dan
+    // dm id = 10
+
+    try {
+      newDirectMessage = await dispatch(createDm(sessionUserId, resultId));
+    } catch (error) {
+      // if (error instanceof ValidationError) setErrors(error.errors);
+      // // If error is not a ValidationError, add slice at the end to remove extra
+      // // "Error: "
+      // else setErrors({ overall: error.toString().slice(7) })
+    }
+    if (newDirectMessage) {
+
+      history.push(`/channels/${newDirectMessage.id}`)
+      // dispatch(getReviewsByCar(carId));
+      // setShowModal(false);
+      // return history.push(`/cars/${carId}`);
+    }
+  };
 
 
   // useEffect(() => {
@@ -59,7 +96,7 @@ function Search() {
         <h2>Search Results</h2>
           <div className="search__result">
           {results?.map(result => (
-            <div key={result.id}>
+            <div key={result.id} onClick={(e) => handleClick(sessionUserId, result.id, e)}>
               {result.first_name} {result.last_name}
             </div>
           ))}
@@ -73,6 +110,9 @@ function Search() {
           ))}
         </div> */}
       </div>
+      <button onClick={showCreateChannelForm}>
+        Create Channel
+      </button>
     </div>
   )
 
