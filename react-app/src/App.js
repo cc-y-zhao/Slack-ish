@@ -35,7 +35,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <SideBar />
+      {/* <SideBar /> */}
       <Modal />
       <Switch>
         <Route path="/login" exact={true}>
