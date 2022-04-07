@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-
 import EditChannelForm from "../EditChannelForm";
 import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
-import { loadChannel, deleteMessage } from "../../store/channels";
-
+import { loadChannel } from "../../store/channels";
+import { showModal, setCurrentModal } from "../../store/modal";
 import "./ChannelPage.css";
 
 const ChannelPage = () => {
@@ -19,6 +18,10 @@ const ChannelPage = () => {
 
   const user_id = useSelector((state) => state.session.user?.id);
 
+  const showEditChannelForm = () => {
+    dispatch(setCurrentModal(EditChannelForm));
+    dispatch(showModal());
+  };
   // const [showEditMessage, setShowEditMessage] = useState(false);
 
   // const messages = channel.messages;
@@ -56,7 +59,10 @@ const ChannelPage = () => {
         <i class="fa-solid fa-hashtag"></i>
         <h2>{title}</h2>
         <div>
-          <i class="fa-solid fa-ellipsis-vertical"></i>
+          <i
+            class="fa-solid fa-ellipsis-vertical"
+            onClick={showEditChannelForm}
+          ></i>
           {/* <div>
             <EditChannelForm channelToEdit={channelToEdit} />
           </div> */}

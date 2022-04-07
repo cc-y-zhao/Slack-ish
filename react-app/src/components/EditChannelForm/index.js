@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { editChannel, deleteChannel, loadChannel } from "../../store/channels";
+import { hideModal } from "../../store/modal";
+
 //add deletechannel to edit form
 //need to do loadOneChannel and create single channel page and pass in as prop
 const EditChannelForm = ({ channelToEdit }) => {
@@ -36,8 +38,6 @@ const EditChannelForm = ({ channelToEdit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // console.log('IN HANDLESUBMIT------')
-
     const editedChannel = {
       id,
       title,
@@ -45,34 +45,17 @@ const EditChannelForm = ({ channelToEdit }) => {
       description,
     };
 
-    // console.log("edited channel in hjandle submit", editedChannel);
-
     let editedChannelSuccess;
-    try {
-      console.log('attempting put with func', editChannel)
-      editedChannelSuccess = await dispatch(editChannel(editedChannel)).then(() => dispatch(loadChannel(editedChannel.id)));
-    } catch (error) {
-      // if (error instanceof ValidationError) setErrors(error.errors);
-      // // If error is not a ValidationError, add slice at the end to remove extra
-      // // "Error: "
-      // else setErrors({ overall: error.toString().slice(7) })
-    }
+
+    editedChannelSuccess = await dispatch(editChannel(editedChannel)).then(() =>
+      dispatch(loadChannel(editedChannel.id))
+    );
+
     if (editedChannelSuccess) {
       setErrors([]);
-      // dispatch(getReviewsByCar(carId));
-      // setShowModal(false);
-      return history.push(`/channels/${id}`);
+      dispatch(hideModal());
+      history.push(`/channels/${editedChannel.id}`);
     }
-
-    // dispatch(editChannel(editedChannel)).catch(async (res) => {
-    //   const data = await res.json();
-    //   if (data && data.errors) setErrors(data.errors);
-    // });
-
-    // dispatch(editChannel(params.id, editedChannel)).catch(async (res) => {
-    //   const data = await res.json();
-    //   if (data && data.errors) setErrors(data.errors);
-    // });
   };
 
   return (
