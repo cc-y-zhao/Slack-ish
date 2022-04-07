@@ -30,7 +30,8 @@ const ShowDBUser = ({ channelId }) => {
           onChange={(e) => dispatch(loadUsersResults(e.target.value))}
         />
         <h2>Search Results</h2>
-        <div className="search__result">
+        <div className="userlist__searchResult">
+          <h3>Add people button </h3>
           {memberCount?.map(result => (
             <div key={result.id}>
               {result.first_name} {result.last_name}

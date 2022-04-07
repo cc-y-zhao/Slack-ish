@@ -55,7 +55,6 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/search" exact={true}>
-          {/* <h1>testing</h1> */}
           <Search />
         </ProtectedRoute>
         <ProtectedRoute path="/chatroom" exact={true}>

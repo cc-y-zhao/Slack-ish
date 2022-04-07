@@ -15,14 +15,13 @@ function Search() {
   const results = useSelector((state) => state?.search.users_results);
   const prevSearchInput = useSelector((state) => state?.search.search_input);
   const sessionUser = useSelector((state) => state.session.user)
+  const [showSearch, setShowSearch] = useState(false);
 
   let sessionUserId;
 
   if (sessionUser) {
     sessionUserId = sessionUser.id
   }
-
-  // const [showModal, setShowModal] = useState(false);
   const [searchInput, setSearchResult] = useState(prevSearchInput);
 
   const showCreateChannelForm = () => {
@@ -81,26 +80,22 @@ function Search() {
         <h2>Results</h2>
         <input placeholder='Search'
           value={searchInput}
-          // onClick={() => setShowModal(true)}
+          onClick={() => setShowSearch(true)}
           onChange={(e) => dispatch(loadUsersResults(e.target.value))}
-          // onChange -> dispatch for the results and then setSearchResult to those results
+        // onChange -> dispatch for the results and then setSearchResult to those results
         />
-        {/* <button onClick={() => setShowModal(true)} />
-        {showModal && (
-          <>
-            <Modal onClose={() => setShowModal(false)} />
-            <div>{searchInput}</div>
-            <Modal />
-          </>
-        )} */}
-        <h2>Search Results</h2>
+        {showSearch && (
+        <>
+          <h2>Search Results</h2>
           <div className="search__result">
-          {results?.map(result => (
-            <div key={result.id} onClick={(e) => handleClick(sessionUserId, result.id, e)}>
-              {result.first_name} {result.last_name}
-            </div>
-          ))}
-        </div>
+            {results?.map(result => (
+              <div key={result.id} onClick={(e) => handleClick(sessionUserId, result.id, e)}>
+                {result.first_name} {result.last_name}
+              </div>
+            ))}
+          </div>
+        </>
+        )}
         {/* <h2>All Users: (for testing)</h2>
         <div className="search__result">
           {users?.map(user => (

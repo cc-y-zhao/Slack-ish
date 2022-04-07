@@ -1,19 +1,29 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { setCurrentModal, showModal } from "../../store/modal";
 import LogoutButton from "../auth/LogoutButton";
+import Search from "../Search";
 import "./NavBar.css";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-
+  const showSearchForm = () => {
+    dispatch(setCurrentModal(Search));
+    dispatch(showModal());
+  }
   let sessionElements;
   if (sessionUser) {
     sessionElements = (
       <>
         <div className="Nav">
           <h1>Top Nav Bar</h1>
-          {/* Add search bar here */}
+          {/* <Search /> */}
+          <input className="searchbar__mainPage"
+          placeholder="Search Slack-ish users"
+          onClick={showSearchForm}
+          ></input>
           <LogoutButton />
         </div>
       </>
