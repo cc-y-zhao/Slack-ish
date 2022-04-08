@@ -76,6 +76,8 @@ const EditMessageForm = () => {
             <button type="submit" disabled={errors.length > 0}>
               Update
             </button>
+          </div>
+          <div>
             <button
               onClick={async () => {
                 await dispatch(deleteMessage(channel_id, id)).then(() =>
