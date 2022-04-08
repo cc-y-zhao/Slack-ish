@@ -77,6 +77,12 @@ const ChannelPage = () => {
           }
         </div>
         <div>
+          <button onClick={ShowListOfUsers}>
+
+
+          </button>
+        </div>
+        <div>
           <i class="fa-solid fa-ellipsis-vertical"></i>
           {/* <div>
             <EditChannelForm channelToEdit={channelToEdit} />
