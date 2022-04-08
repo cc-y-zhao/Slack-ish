@@ -83,8 +83,8 @@ def get_channel_users_results():
     # print('\n\n CHANNEL USERS \n\n', channel_users)
     results = User.query.filter(User.email.not_in([user.email for user in channel_users])).all()
 
-    # print('\n\n RESULTS \n\n', results)
-
+    print('\n\n RESULTS \n\n', results)
+    print('\n\n NUM OF RESULTS \n\n', len(results))
 
     # print('\n\n channel id \n\n', channel_id)
     # print('\n\n CHANNEL \n\n', channel)
@@ -99,4 +99,4 @@ def get_channel_users_results():
     #     if fullname.find(query.lower()) >= 0:
     #         found_users.append(user.to_dict())
 
-    return {'users_results': [user.to_dict() for user in results]}
+    return {'users': [user.to_dict() for user in results]}

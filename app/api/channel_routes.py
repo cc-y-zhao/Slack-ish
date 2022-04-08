@@ -91,6 +91,9 @@ def get_one_channel(channel_id):
     single_channel['messages'] = messages
     single_channel["all_messages"] = all_messages
     single_channel["users"] = user_list
+    ############IMPORTANT##########: SINGLE_CHANNEL['USERS] IS A LIST OF USER NAMES FOR PEOPLE WHO SENT MESSAGES
+    ############IMPORTANT##########: SINGLE_CHANNEL['USERS_IN_CHANNEL] IS LIST OF USERS IN THE CHANNEL!!!
+
     return single_channel
 
 # POST Route

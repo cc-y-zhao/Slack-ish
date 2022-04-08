@@ -1,5 +1,5 @@
 const GET_ALL_USERS = "search/GET_ALL_USERS";
-const GET_CHANNEL_USERS = "search/GET_CHANNEL_USERS";
+// const GET_CHANNEL_USERS = "search/GET_CHANNEL_USERS";
 const GET_ALL_USERS_RESULTS = "search/GET_ALL_RESULTS";
 // const GET_ONE_USER = "search/GET_ONE_USER";
 // const CREATE_ONE_USER = "search/CREATE_USER";
@@ -7,7 +7,7 @@ const GET_ALL_USERS_RESULTS = "search/GET_ALL_RESULTS";
 // const DELETE_ONE_USER = "search/DELETE_ONE_USER";
 
 const loadAllUsers = (users) => ({ type: GET_ALL_USERS, users });
-const loadChannelUsers = (users) => ({ type: GET_CHANNEL_USERS, users});
+const loadChannelUsers = (users) => ({ type: GET_ALL_USERS, users});
 const loadAllUsersResults = (results, searchInput) => ({ type: GET_ALL_USERS_RESULTS, results, searchInput });
 
 

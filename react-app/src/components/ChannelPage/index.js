@@ -21,11 +21,11 @@ const ChannelPage = () => {
   const channelId = parseInt(channel_id);
   const channel = useSelector((state) => state.channels[channel_id]);
   const user_id = useSelector((state) => state.session.user?.id);
-  const members = channel?.users;
+  const members = channel?.users_in_channel;
   const totalMembers = `(${members?.length})`;
 
   // console.log('members-------------------', members)
-  // console.log('members.length-------------------', members?.length)
+  console.log('members.length-------------------', members?.length)
 
   let messages;
   if (channel?.messages) {
