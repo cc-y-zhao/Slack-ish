@@ -21,11 +21,11 @@ const ChannelPage = () => {
   const channelId = parseInt(channel_id);
   const channel = useSelector((state) => state.channels[channel_id]);
   const user_id = useSelector((state) => state.session.user?.id);
-  const members = useSelector(state => Object.values(state.channels));
-  const choiceMember = members.find(person => person?.id === +channel_id)
-  const memberCount = choiceMember?.users;
-  const totalMembers = `(${memberCount?.length})`;
+  const members = channel?.users;
+  const totalMembers = `(${members?.length})`;
 
+  // console.log('members-------------------', members)
+  // console.log('members.length-------------------', members?.length)
 
   let messages;
   if (channel?.messages) {
@@ -36,8 +36,8 @@ const ChannelPage = () => {
   let channelToEdit = channel ? channel : "";
 
   useEffect(() => {
-    dispatch(loadChannel(channel_id));
-  }, [dispatch, channel_id]);
+    dispatch(loadChannel(channel_id))
+  }, [dispatch, totalMembers, channel_id]);
 
   function formatTime(string) {
     const options = { hour: "2-digit", minute: "2-digit" };

@@ -4,9 +4,10 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { addUserToChannel } from "../../store/channels";
 import { loadUsersResults, loadUsers } from "../../store/search";
+import { loadChannel } from "../../store/channels";
 
 import CreateChannelForm from "../CreateChannelForm";
-import { showModal } from "../../store/modal";
+import { showModal, hideSearchModal } from "../../store/modal";
 
 function AddMembersSearchBar() {
   const history = useHistory();
@@ -64,10 +65,13 @@ function AddMembersSearchBar() {
 
     }
     if (addUserToChannel) {
-      history.push(`/channels/${channelId}`)
+      dispatch(loadChannel(channelId));
+      return dispatch(hideSearchModal());
+      // dispatch(hideSearchModal()).then(() => dispatch(loadChannel(channelId)));
     }
   };
-
+  // loadChannel(channelId)
+  // hideSearchModal()
 
   return (
     <div>

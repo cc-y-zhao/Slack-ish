@@ -15,18 +15,18 @@ const ChannelMembers = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const channelId = useSelector((state) => state?.modals?.channelId);
-  // const channel = useSelector((state) => state.channels[channelId]);
-  const members = useSelector(state => Object.values(state.channels));
-  const choiceMember = members.find(person => person?.id === channelId)
-  const prevSearchInput = useSelector((state) => state?.search.search_input);
-  const memberCount = choiceMember?.users;
-  const totalMembers = memberCount?.length;
+  const channel = useSelector((state) => state.channels[channelId]);
+  const members = channel?.users
+  const totalMembers = members?.length
 
-  console.log('totalMembers in channelmemebrs', totalMembers);
-  const [searchInput, setSearchResult] = useState(prevSearchInput);
-  // useEffect(() => {
-  //   dispatch()
-  // })
+  console.log('channel-------------------', channel)
+  console.log('members-------------------', members)
+
+
+  // const prevSearchInput = useSelector((state) => state?.search.search_input);
+  // console.log('totalMembers in channelmemebrs', totalMembers);
+  // const [searchInput, setSearchResult] = useState(prevSearchInput);
+
 
   return (
     <div className="ShowListOfUsers">
@@ -37,7 +37,7 @@ const ChannelMembers = () => {
         /> */}
         <h2>Members</h2>
         <div className="userlist__searchResult">
-          {memberCount?.map(result => (
+          {members?.map(result => (
             <div key={result?.id}>
               <div>{result?.first_name} {result?.last_name}</div>
             </div>
