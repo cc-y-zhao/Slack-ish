@@ -13,7 +13,7 @@ function Search() {
   const prevSearchInput = useSelector((state) => state?.search.search_input);
   const sessionUser = useSelector((state) => state.session.user);
 
-  const [searchInput, setSearchInput] = useState(prevSearchInput);
+  const [searchInput, setSearchInput] = useState('');
 
   // set search field to empty if showModal is false
   // const modalState = useSelector((state) => state?.modals);
@@ -32,6 +32,15 @@ function Search() {
 
   // const [showModal, setShowModal] = useState(false);
 
+   const handleOnChange = async (inputValue, e) => {
+    e.preventDefault();
+
+    dispatch(loadUsersResults(inputValue));
+    setSearchInput(prevSearchInput);
+    return;
+  };
+
+
   const handleClick = async (sessionUserId, resultId, e) => {
     e.preventDefault();
 
@@ -42,12 +51,7 @@ function Search() {
 
     if (newDirectMessage) {
       dispatch(hideSearchModal())
-
-      // await dispatch(hideModal())
-      //   .then(() => setSearchInput(''))
-      //   .then(() => history.push(`/channels/${newDirectMessage.id}`))
-      // await setSearchInput('');
-      // history.push(`/channels/${newDirectMessage.id}`);
+      history.push(`/channels/${newDirectMessage.id}`);
     }
   };
 
@@ -77,7 +81,7 @@ function Search() {
           placeholder="Search"
           value={searchInput}
           // onClick={() => setShowModal(true)}
-          onChange={(e) => dispatch(loadUsersResults(e.target.value))}
+          onChange={(e) => handleOnChange(e.target.value, e)}
           // onChange -> dispatch for the results and then setSearchResult to those results
         />
         {/* <button onClick={() => setShowModal(true)} />
