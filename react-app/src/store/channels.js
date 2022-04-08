@@ -4,10 +4,13 @@ const CREATE_ONE_CHANNEL = "channels/CREATE_CHANNEL";
 const EDIT_ONE_CHANNEL = "channels/EDIT_ONE_CHANNEL";
 const DELETE_ONE_CHANNEL = "channels/DELETE_ONE_CHANNEL";
 const CREATE_ONE_DM = "channels/CREATE_ONE_DM";
+const ADD_ONE_USER_TO_CHANNEL = "channels/ADD_ONE_USER_TO_CHANNEL";
 
 const createOneDm = (dm) => ({ type: CREATE_ONE_DM, dm });
 const loadAllChannels = (channels) => ({ type: GET_ALL_CHANNELS, channels });
 const loadOneChannel = (channel) => ({ type: GET_ONE_CHANNEL, channel });
+const addOneUserToChannel = (channel) => ({ type: ADD_ONE_USER_TO_CHANNEL, channel });
+
 const createOneChannel = (channel) => ({
   type: CREATE_ONE_CHANNEL,
   newChannel: channel,
@@ -144,6 +147,25 @@ export const createDm = (session_user_id, search_user_id) => async dispatch => {
     return response.json('Could not handle request')
   }
 }
+
+export const addUserToChannel = (channelId, userId) => async dispatch => {
+
+  console.log('channel id in store-------', channelId);
+  console.log('user id in store-------', userId);
+
+  const response = await fetch(`/api/channels/add_user/${channelId}/${userId}`, {
+    method: 'POST',
+    headers: { 'Content-Type' : 'application/json' },
+  })
+
+  if (response.ok) {
+    const channelWithNewUser = await response.json();
+    dispatch(addOneUserToChannel(channelWithNewUser))
+    return channelWithNewUser
+  } else {
+    return response.json('Could not handle request')
+  }
+}
 // **********************************MESSAGES**********************************************
 // **********************************MESSAGES**********************************************
 // **********************************MESSAGES**********************************************
@@ -249,6 +271,10 @@ const channelsReducer = (state = initialState, action) => {
 
     case CREATE_ONE_CHANNEL: {
       return { [action.newChannel.id]: action.newChannel, ...state };
+    }
+
+    case ADD_ONE_USER_TO_CHANNEL: {
+      return { [action.channel.id]: action.channel, ...state };
     }
 
     case CREATE_ONE_MESSAGE: {

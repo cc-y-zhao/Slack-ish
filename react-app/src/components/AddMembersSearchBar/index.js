@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
+import { addUserToChannel } from "../../store/channels";
 import { loadUsersResults, loadUsers } from "../../store/search";
 
 import CreateChannelForm from "../CreateChannelForm";
@@ -39,6 +40,8 @@ function AddMembersSearchBar() {
     }
   })
 
+  console.log('users not in cahnnel', usersNotInChannel);
+
 
   let sessionUserId;
 
@@ -52,20 +55,17 @@ function AddMembersSearchBar() {
     dispatch(loadUsers());
   }, [dispatch]);
 
-  const handleClick = async (sessionUserId, resultId, e) => {
+  const handleClick = async (channelId, userId, e) => {
     e.preventDefault();
 
-    // let newDirectMessage;
+    try {
+      addUserToChannel = await dispatch(addUserToChannel(channelId, userId));
+    } catch (error) {
 
-    // try {
-    //   newDirectMessage = await dispatch(createDm(sessionUserId, resultId));
-    // } catch (error) {
-
-    // }
-    // if (newDirectMessage) {
-
-    //   history.push(`/channels/${newDirectMessage.id}`)
-    // }
+    }
+    if (addUserToChannel) {
+      history.push(`/channels/${channelId}`)
+    }
   };
 
 
@@ -78,9 +78,9 @@ function AddMembersSearchBar() {
           onChange={(e) => dispatch(loadUsersResults(e.target.value))}
         />
           <div className="search__result">
-          {allResults?.map(result => (
-            <div key={result.id} onClick={(e) => handleClick(sessionUserId, result.id, e)}>
-              {result.first_name} {result.last_name}
+          {usersNotInChannel?.map(user => (
+            <div key={user.id} onClick={(e) => handleClick(channelId, user.id, e)}>
+              {user.first_name} {user.last_name}
             </div>
           ))}
         </div>
