@@ -18,8 +18,12 @@ const EditChannelForm = () => {
   const id = channelToEdit?.id;
   const is_dm = false;
 
+  let descriptionCheck = channelToEdit.description
+    ? channelToEdit.description
+    : undefined;
+
   const [title, setTitle] = useState(channelToEdit?.title);
-  const [description, setDescription] = useState(channelToEdit?.description);
+  const [description, setDescription] = useState(descriptionCheck);
 
   const updateTitle = (e) => setTitle(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
@@ -29,7 +33,7 @@ const EditChannelForm = () => {
 
     if (title.length > 50)
       validationErrors.push("Title must be 50 characters or less");
-    if (description.length > 150)
+    if (description?.length > 150)
       validationErrors.push("Description must be 150 characters or less");
 
     setErrors(validationErrors);
