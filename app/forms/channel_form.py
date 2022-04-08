@@ -12,7 +12,7 @@ def title_max_length(form, field):
 
 def description_max_length(form, field):
     description = field.data
-    if len(description) > 1000:
+    if len(description) > 150:
         raise ValidationError('Description must be 1000 characters or less')
 
 

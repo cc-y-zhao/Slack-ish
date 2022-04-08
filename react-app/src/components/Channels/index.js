@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./Channels.css";
@@ -10,6 +10,8 @@ const Channels = () => {
   const user_id = useSelector((state) => state.session.user.id);
 
   const dispatch = useDispatch();
+
+  // const [selected, setSelected] = useState(true);
 
   useEffect(() => {
     dispatch(loadChannels(user_id));
@@ -24,14 +26,19 @@ const Channels = () => {
         {channels?.map((channel) => {
           return (
             channel.is_dm === false && (
-              <div className="channel__list" key={channel.id}>
-                <NavLink to={`/channels/${channel.id}`}>
-                  <li>
-                    <i class="fa-solid fa-hashtag"></i>
-                    {channel.title}
-                  </li>
-                </NavLink>
-              </div>
+              // <div className="channel__list" key={channel.id}>
+              <NavLink
+                to={`/channels/${channel.id}`}
+                key={channel.id}
+                className="channel__list"
+                activeClassName="selected"
+              >
+                <div className="ChannelListItem">
+                  <i class="fa-solid fa-hashtag"></i>
+                  {channel.title}
+                </div>
+              </NavLink>
+              // </div>
             )
           );
         })}
