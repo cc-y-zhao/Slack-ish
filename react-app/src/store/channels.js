@@ -4,10 +4,13 @@ const CREATE_ONE_CHANNEL = "channels/CREATE_CHANNEL";
 const EDIT_ONE_CHANNEL = "channels/EDIT_ONE_CHANNEL";
 const DELETE_ONE_CHANNEL = "channels/DELETE_ONE_CHANNEL";
 const CREATE_ONE_DM = "channels/CREATE_ONE_DM";
+const ADD_ONE_USER_TO_CHANNEL = "channels/ADD_ONE_USER_TO_CHANNEL";
 
 const createOneDm = (dm) => ({ type: CREATE_ONE_DM, dm });
 const loadAllChannels = (channels) => ({ type: GET_ALL_CHANNELS, channels });
 const loadOneChannel = (channel) => ({ type: GET_ONE_CHANNEL, channel });
+const addOneUserToChannel = (channel) => ({ type: ADD_ONE_USER_TO_CHANNEL, channel });
+
 const createOneChannel = (channel) => ({
   type: CREATE_ONE_CHANNEL,
   newChannel: channel,
@@ -22,11 +25,9 @@ const deleteOneChannel = (channel) => ({
 });
 
 export const loadChannels = (user_id) => async (dispatch) => {
-  // console.log("owner_id in loadChannels---------", owner_id)
   const response = await fetch(`/api/channels/user/${user_id}`);
   if (response.ok) {
     const channels = await response.json();
-    console.log("channels in loadChannels---------", channels);
     dispatch(loadAllChannels(channels.channels));
     return channels;
   } else {
@@ -40,7 +41,6 @@ export const loadChannel = (channel_id) => async (dispatch) => {
 
   if (response.ok) {
     const channel = await response.json();
-    // console.log("single channel in loadChannel---------", channel);
     dispatch(loadOneChannel(channel));
     return channel;
   } else {
@@ -66,8 +66,6 @@ export const createChannel = (channel) => async (dispatch) => {
 };
 
 export const editChannel = (editedChannel) => async (dispatch) => {
-  console.log("editing channel", editedChannel);
-  console.log("editing channel id------", editedChannel.id);
 
   const response = await fetch(`/api/channels/${editedChannel.id}`, {
     method: "PUT",
@@ -82,40 +80,7 @@ export const editChannel = (editedChannel) => async (dispatch) => {
 
   dispatch(editOneChannel(updatedChannel));
   return updatedChannel;
-
-  // const response = await fetch(`api/channels/${editedChannel.id}`, {
-  //   method: "PUT",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify(editedChannel),
-  // });
-
-  // if (!response.ok) {
-  //   return response.errors;
-  // }
-  // const editedChannel = await response.json();
-
-  // dispatch(editOneChannel(editedChannel));
-  // return editedChannel;
 };
-
-// export const editChannel = (editedChannel) => async (dispatch) => {
-
-//   console.log("editedChannel in channels store--------", editedChannel)
-//   const channel_id = editedChannel.id
-//   const response = await fetch(`api/channels/${channel_id}`, {
-//     method: "PUT",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(editedChannel),
-//   });
-
-//   if (!response.ok) {
-//     return response.errors;
-//   }
-//   const editedChannel = await response.json();
-
-//   dispatch(editOneChannel(editedChannel));
-//   return editedChannel;
-// };
 
 export const deleteChannel = (channel_id) => async (dispatch) => {
   const response = await fetch(`/api/channels/${channel_id}`, {
@@ -140,6 +105,22 @@ export const createDm = (session_user_id, search_user_id) => async dispatch => {
     const createDm = await response.json();
     dispatch(createOneDm(createDm))
     return createDm
+  } else {
+    return response.json('Could not handle request')
+  }
+}
+
+export const addUserToChannel = (channelId, userId) => async dispatch => {
+
+  const response = await fetch(`/api/channels/add_user/${channelId}/${userId}`, {
+    method: 'POST',
+    headers: { 'Content-Type' : 'application/json' },
+  })
+
+  if (response.ok) {
+    const channelWithNewUser = await response.json();
+    dispatch(addOneUserToChannel(channelWithNewUser))
+    return channelWithNewUser
   } else {
     return response.json('Could not handle request')
   }
@@ -229,20 +210,15 @@ const channelsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_CHANNELS: {
       newState = { ...state };
-      // console.log('actions.channels in channelsReducer-------', action.channels)
-      // console.log('typeof actions.channels in channelsReducer-------', typeof action.channels === Array)
       action.channels.forEach((channel) => {
         newState[channel.id] = channel;
       });
-      // console.log('newState in channelsReducer-------', newState)
       return newState;
     }
 
     case GET_ONE_CHANNEL: {
       newState = { ...state };
       newState[action.channel.id] = action.channel;
-      // newState.current = action.channel.id; extra stuff for later on (highlighted channel sidebar)
-      // console.log('newState in channelsReducer-------', newState)
 
       return newState;
     }
@@ -251,13 +227,12 @@ const channelsReducer = (state = initialState, action) => {
       return { [action.newChannel.id]: action.newChannel, ...state };
     }
 
+    case ADD_ONE_USER_TO_CHANNEL: {
+      return { [action.channel.id]: action.channel, ...state };
+    }
+
     case CREATE_ONE_MESSAGE: {
       newState = { ...state };
-      // console.log(
-      //   "REDUCERACTAULY CHANNEL ID~~~:",
-      //   newState[action.channel_id].messages
-      // );
-      // console.log("REDUCERACTAULY newMessage~~~:", action.newMessage.id);
       newState[action.channel_id].messages[action.newMessage.id] =
         action.newMessage;
 
@@ -266,7 +241,6 @@ const channelsReducer = (state = initialState, action) => {
 
     case EDIT_ONE_MESSAGE: {
       newState = { ...state };
-      console.log("action in EDIT ONE MESSAGE-----", action);
       newState[action.editedMessage.channel_id].messages[
         action.editedMessage.id
       ] = action.editedMessage;
@@ -276,9 +250,6 @@ const channelsReducer = (state = initialState, action) => {
 
     case DELETE_ONE_MESSAGE: {
       newState = { ...state };
-      // console.log('newState[action.channel_id]-------',
-      //   newState[action.channel_id]);
-      console.log("CHANNEL_ID IN DELETE_ONE_MESSAGE-------", action.channel_id);
       delete newState[action.channel_id].messages[action.deletedMessage.id];
 
       return newState;

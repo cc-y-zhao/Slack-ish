@@ -91,6 +91,9 @@ def get_one_channel(channel_id):
     single_channel['messages'] = messages
     single_channel["all_messages"] = all_messages
     single_channel["users"] = user_list
+    ############IMPORTANT##########: SINGLE_CHANNEL['USERS] IS A LIST OF USER NAMES FOR PEOPLE WHO SENT MESSAGES
+    ############IMPORTANT##########: SINGLE_CHANNEL['USERS_IN_CHANNEL] IS LIST OF USERS IN THE CHANNEL!!!
+
     return single_channel
 
 # POST Route
@@ -174,6 +177,26 @@ def add_direct_message(session_user_id, search_user_id):
 
     db.session.commit()
     return new_channel.to_dict()
+
+# POST Route to add a user to a channel
+#####################################################
+
+@channel_routes.route('add_user/<int:channel_id>/<int:user_id>', methods=["POST"])
+# @login_required
+def add_user_channel(channel_id, user_id):
+
+    channel = Channel.query.get(channel_id)
+    user = User.query.get(user_id)
+
+    print('\n\n channel in channel_routes \n\n', channel)
+    print('\n\n user in channel_routes \n\n', user)
+
+    user.channels.append(channel)
+
+    db.session.commit()
+    return channel.to_dict()
+
+
 
 
 # PUT Route

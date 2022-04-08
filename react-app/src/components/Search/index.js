@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { loadUsersResults } from "../../store/search";
+
+import { loadUsersResults, resetSearchInput } from "../../store/search";
+
 import { hideSearchModal } from "../../store/modal";
 import { createDm } from "../../store/channels";
 
@@ -16,6 +18,17 @@ function Search() {
   const prevSearchInput = useSelector((state) => state?.search.search_input);
   const sessionUser = useSelector((state) => state.session.user);
 
+  const [searchInput, setSearchInput] = useState('');
+
+  // set search field to empty if showModal is false
+  // const modalState = useSelector((state) => state?.modals);
+
+  // if (modalState) {
+  //   console.log('modal state search display----------', modalState['searchDisplay'])
+  //   if (!modalState['searchDisplay'])
+  //   setSearchInput('');
+  // }
+
   let sessionUserId;
 
   if (sessionUser) {
@@ -23,18 +36,26 @@ function Search() {
   }
 
   // const [showModal, setShowModal] = useState(false);
-  const [searchInput, setSearchInput] = useState(prevSearchInput);
+
+   const handleOnChange = async (inputValue, e) => {
+    e.preventDefault();
+
+    dispatch(loadUsersResults(inputValue));
+    setSearchInput(prevSearchInput);
+    return;
+  };
+
 
   const handleClick = async (sessionUserId, resultId, e) => {
     e.preventDefault();
 
     let newDirectMessage;
 
+    dispatch(resetSearchInput())
     newDirectMessage = await dispatch(createDm(sessionUserId, resultId));
 
     if (newDirectMessage) {
-      dispatch(hideSearchModal());
-      // setSearchInput(null);
+      dispatch(hideSearchModal())
       history.push(`/channels/${newDirectMessage.id}`);
     }
   };
@@ -60,6 +81,15 @@ function Search() {
   return (
     <div>
       <div className="search">
+// LOOK AT THIS
+//         <input
+//           placeholder="Search"
+//           value={searchInput}
+//           // onClick={() => setShowModal(true)}
+//           onChange={(e) => handleOnChange(e.target.value, e)}
+//           // onChange -> dispatch for the results and then setSearchResult to those results
+//         />
+
         <div className="SearchBarArea">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input
@@ -70,6 +100,7 @@ function Search() {
             // onChange -> dispatch for the results and then setSearchResult to those results
           />
         </div>
+
         <div className="search__result">
           {results && (
             <>
