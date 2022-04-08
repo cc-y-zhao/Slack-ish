@@ -14,6 +14,7 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [image_url, setImageUrl] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
@@ -43,7 +44,7 @@ const SignUpForm = () => {
 
     if (password === repeatPassword) {
       const data = await dispatch(
-        signUp(first_name, last_name, email.toLowerCase(), password)
+        signUp(first_name, last_name, email.toLowerCase(), password, image_url)
       );
 
       setErrors([]);
@@ -53,6 +54,7 @@ const SignUpForm = () => {
       setEmail("");
       setPassword("");
       setRepeatPassword("");
+      setImageUrl("");
 
       // if (data) {
       //   setErrors(data);
@@ -93,6 +95,10 @@ const SignUpForm = () => {
 
   const updateRepeatPassword = (e) => {
     setRepeatPassword(e.target.value);
+  };
+
+  const updateImageUrl = (e) => {
+    setImageUrl(e.target.value);
   };
 
   if (user) {
@@ -179,6 +185,15 @@ const SignUpForm = () => {
               onChange={updateRepeatPassword}
               value={repeatPassword}
               required={true}
+            ></input>
+          </div>
+          <div>
+            <input
+              type="url"
+              name="image_url"
+              placeholder="Enter a profile picture"
+              onChange={updateImageUrl}
+              value={image_url}
             ></input>
           </div>
           <button type="submit" disabled={errors.length > 0}>

@@ -84,6 +84,7 @@ def get_one_channel(channel_id):
 
         name = user['first_name'] + ' ' + user['last_name']
         message['name'] = name
+        message['image_url'] = user['image_url']
 
         user_list.append(user)
 
@@ -91,8 +92,8 @@ def get_one_channel(channel_id):
     single_channel['messages'] = messages
     single_channel["all_messages"] = all_messages
     single_channel["users"] = user_list
-    ############IMPORTANT##########: SINGLE_CHANNEL['USERS] IS A LIST OF USER NAMES FOR PEOPLE WHO SENT MESSAGES
-    ############IMPORTANT##########: SINGLE_CHANNEL['USERS_IN_CHANNEL] IS LIST OF USERS IN THE CHANNEL!!!
+    # IMPORTANT##########: SINGLE_CHANNEL['USERS] IS A LIST OF USER NAMES FOR PEOPLE WHO SENT MESSAGES
+    # IMPORTANT##########: SINGLE_CHANNEL['USERS_IN_CHANNEL] IS LIST OF USERS IN THE CHANNEL!!!
 
     return single_channel
 
@@ -181,6 +182,7 @@ def add_direct_message(session_user_id, search_user_id):
 # POST Route to add a user to a channel
 #####################################################
 
+
 @channel_routes.route('add_user/<int:channel_id>/<int:user_id>', methods=["POST"])
 # @login_required
 def add_user_channel(channel_id, user_id):
@@ -195,8 +197,6 @@ def add_user_channel(channel_id, user_id):
 
     db.session.commit()
     return channel.to_dict()
-
-
 
 
 # PUT Route

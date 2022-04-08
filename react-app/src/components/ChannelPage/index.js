@@ -111,9 +111,19 @@ const ChannelPage = () => {
               // onMouseEnter={() => setShowEditMessage(true)}
               // onMouseLeave={() => setShowEditMessage(false)}
             >
-              <div className="MessageProfile">
-                <i class="fa-solid fa-square-person-confined"></i>
-              </div>
+              {message.image_url ? (
+                <div className="MessageProfile">
+                  <img
+                    src={message.image_url}
+                    alt=""
+                    style={{ width: "45px", height: "43px", paddingTop: "7px" }}
+                  />
+                </div>
+              ) : (
+                <div className="MessageProfile">
+                  <i class="fa-solid fa-square-person-confined"></i>
+                </div>
+              )}
               <div className="MessageMain">
                 <div className="MessageInfo">
                   <div className="MessageName">{message.name}</div>
