@@ -24,8 +24,31 @@
     resize: none;
     box-sizing: border-box;
     padding: 10px;
+    margin-bottom: 10px;
 }
 
 .MessageTextBoxArea > textarea:active {
     border-color: rgb(136,138,140);
+}
+
+.MessageTextBoxArea > button {
+	background: none;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    font-size: 18px;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    right: 32px;
+    bottom: 27px;
+    color: rgb(134, 134, 136);
+}
+
+.MessageTextBoxArea > button:hover {
+    cursor: pointer;
+    color: inherit;
+    border-radius: 4px;
 }

@@ -27,7 +27,8 @@ const Channels = () => {
               <div className="channel__list" key={channel.id}>
                 <NavLink to={`/channels/${channel.id}`}>
                   <li>
-                    <i class="fa-solid fa-hashtag"></i> {channel.title}
+                    <i class="fa-solid fa-hashtag"></i>
+                    {channel.title}
                   </li>
                 </NavLink>
               </div>
