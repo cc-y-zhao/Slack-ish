@@ -11,7 +11,8 @@
 
 .ChannelPageTitle {
     display: flex;
-    width: 100%;
+    justify-content: space-between;
+    width: calc(100% - 20px);
     height: 48px;
     color: rgb(196,197,198);
     background-color: rgb(27,30,34);
@@ -20,17 +21,39 @@
     z-index: 2;
 }
 
-.ChannelPageTitle > i {
-    padding-top: 19px;
-    z-index: 2;
+.ChannelPageTitleLeft {
+    display: flex;
 }
 
-.ChannelPageTitle > h2 {
+.ChannelPageTitleLeft > h2 {
     margin: 0;
     padding-top: 11px;
     padding-left: 6px;
     font-size: 22px;
     z-index: 2;
+}
+
+.ChannelPageTitleLeft > i {
+    padding-top: 19px;
+    z-index: 2;
+}
+
+#EditChannelButton {
+    color: rgb(196, 202, 208);
+    position: absolute;
+    top: 12px;
+    right: 50px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#EditChannelButton:hover {
+    background-color: rgb(42,41,47);
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .MessagesBody {
@@ -82,7 +105,7 @@
     color: rgb(196,198,199);
 }
 
-.EditMessageButton {
+/* .EditMessageButton {
     color: rgb(196, 202, 208);
     position: absolute;
     right: 50px;
@@ -94,6 +117,23 @@
 }
 
 .EditMessageButton:hover {
+    background-color: rgb(42,41,47);
+    border-radius: 4px;
+    cursor: pointer;
+} */
+
+#EditMessageButton {
+    color: rgb(196, 202, 208);
+    position: absolute;
+    right: 50px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#EditMessageButton:hover {
     background-color: rgb(42,41,47);
     border-radius: 4px;
     cursor: pointer;

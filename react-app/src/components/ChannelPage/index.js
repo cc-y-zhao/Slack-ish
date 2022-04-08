@@ -22,11 +22,6 @@ const ChannelPage = () => {
     dispatch(showModal());
   };
 
-  // const showEditMessageForm = () => {
-  //   dispatch(setCurrentEditModal(EditMessageForm, channel?.id));
-  //   dispatch(showModal());
-  // };
-
   let messages;
   if (channel?.messages) {
     messages = Object.values(channel?.messages);
@@ -52,18 +47,18 @@ const ChannelPage = () => {
   return (
     <div className="ChannelPageBody">
       <div className="ChannelPageTitle">
-        <i class="fa-solid fa-hashtag"></i>
-        <h2>{title}</h2>
-        <p>{description}</p>
-        <div>
-          <i
-            class="fa-solid fa-ellipsis-vertical"
-            onClick={showEditChannelForm}
-          ></i>
-          {/* <div>
-            <EditChannelForm channelToEdit={channelToEdit} />
-          </div> */}
+        <div className="ChannelPageTitleLeft">
+          <i class="fa-solid fa-hashtag"></i>
+          <h2>{title}</h2>
+          <p>{description}</p>
         </div>
+        {/* <div className="ChannelPageTitleRight"> */}
+        <i
+          class="fa-solid fa-ellipsis-vertical"
+          id="EditChannelButton"
+          onClick={showEditChannelForm}
+        ></i>
+        {/* </div> */}
       </div>
       <div className="MessagesBody">
         {messages
@@ -91,14 +86,12 @@ const ChannelPage = () => {
                 </div>
                 <div className="MessageContent">{message.content}</div>
               </div>
-              <div
-                className="EditMessageButton"
-                id={"MessageEdit" + message.id}
-              >
+              <div id={"MessageEdit" + message.id}>
                 {user_id === message.user_id && (
                   <>
                     <i
                       class="fa-solid fa-ellipsis-vertical"
+                      id="EditMessageButton"
                       onClick={() => {
                         dispatch(
                           setCurrentEditModal(
@@ -110,21 +103,6 @@ const ChannelPage = () => {
                         dispatch(showModal());
                       }}
                     ></i>
-                    {/* <div>
-                      <EditMessageForm
-                        channelId={channelId}
-                        messageToEdit={message}
-                      />
-                      <button
-                        onClick={async () => {
-                          await dispatch(
-                            deleteMessage(channel.id, message.id)
-                          ).then(() => dispatch(loadChannel(channel_id)));
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </div> */}
                   </>
                 )}
               </div>
