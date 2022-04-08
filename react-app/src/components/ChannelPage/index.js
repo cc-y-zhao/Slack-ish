@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import EditChannelForm from "../EditChannelForm";
 import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
+import ChannelMembers from "./ChannelMembers"
 import { loadChannel, deleteMessage } from "../../store/channels";
 
 import { showModal, showSearchModal } from "../../store/modal";
@@ -18,23 +19,16 @@ const ChannelPage = () => {
   const dispatch = useDispatch();
   const { channel_id } = useParams();
   const channelId = parseInt(channel_id);
-
   const channel = useSelector((state) => state.channels[channel_id]);
-
   const user_id = useSelector((state) => state.session.user?.id);
+  const members = useSelector(state => Object.values(state.channels));
+  const choiceMember = members.find(person => person?.id === +channel_id)
+  const memberCount = choiceMember?.users
 
-  // const [showEditMessage, setShowEditMessage] = useState(false);
-
-  // const messages = channel.messages;
-
-  // console.log("messages in ChannelPage/index.js-------", messages)
-
-  // console.log("channel in ChannelPage/index.js-------", channel?.messages);
   let messages;
   if (channel?.messages) {
     messages = Object.values(channel?.messages);
   }
-  console.log("MESSAGES in ChannelPage/index.js-------", messages);
 
   let title = channel ? channel.title : "";
   let channelToEdit = channel ? channel : "";
@@ -42,7 +36,6 @@ const ChannelPage = () => {
   useEffect(() => {
     dispatch(loadChannel(channel_id));
   }, [dispatch, channel_id]);
-  // }, [channel_id, channel.all_messages.toString()]);
 
   function formatTime(string) {
     const options = { hour: "2-digit", minute: "2-digit" };
@@ -57,6 +50,11 @@ const ChannelPage = () => {
   let addChannelMembersButton = false;
   if (channel?.is_dm == false) {
     addChannelMembersButton = true;
+  }
+
+  const ShowChannelMembers = () => {
+    dispatch(setCurrentModal2(ShowDBUser, channelId));
+    dispatch(showSearchModal())
   }
 
   const showAddMembersSearchBar = () => {
@@ -77,9 +75,8 @@ const ChannelPage = () => {
           }
         </div>
         <div>
-          <button onClick={ShowListOfUsers}>
-
-
+          <button onClick={ShowChannelMembers}>{memberCount?.length}
+            <ChannelMembers channelId={channelId}/>
           </button>
         </div>
         <div>
