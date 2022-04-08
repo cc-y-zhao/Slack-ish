@@ -104,7 +104,6 @@ const ChannelPage = () => {
           ))}
 
       </div>
-      {/* <ShowDBUser channelId={channelId} /> */}
       <CreateMessageForm channelId={channelId} />
     </div >
   );
