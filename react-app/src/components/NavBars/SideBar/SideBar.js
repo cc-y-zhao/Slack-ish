@@ -54,6 +54,10 @@ const Sidebar = () => {
             </div>
             <div className="SidebarLinks">
               <Channels />
+              <div className="AddTeammates" onClick={showCreateChannelForm}>
+                <i className="fa-solid fa-plus"></i>
+                Add Channels
+              </div>
             </div>
             <div
               className="SidebarLabel"
@@ -74,6 +78,10 @@ const Sidebar = () => {
             </div>
             <div className="SidebarLinks">
               <DirectMessages />
+              <div className="AddTeammates" onClick={showCreateDMSearch}>
+                <i className="fa-solid fa-plus"></i>
+                Add Teammates
+              </div>
             </div>
           </div>
         </div>

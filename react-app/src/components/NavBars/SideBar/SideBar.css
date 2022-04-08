@@ -93,3 +93,31 @@
     border-radius: 2px;
     cursor: pointer;
 }
+
+.AddTeammates {
+    font-size: 15px;
+    /* margin: 10px 10px 10px 10px; */
+    height: 33px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    color: rgb(134, 134, 136);
+}
+
+.AddTeammates > i {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    background-color: rgb(42,41,47);
+    border-radius: 2px;
+    margin-right: 5px;
+}
+
+.AddTeammates:hover {
+    background-color: rgb(39, 36, 44);
+    cursor: pointer;
+}
