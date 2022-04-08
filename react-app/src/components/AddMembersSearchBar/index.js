@@ -14,10 +14,9 @@ function AddMembersSearchBar() {
   const dispatch = useDispatch();
 
   // these results only show people who are not already in the channel
-  const results = useSelector((state) => state?.search.users_results);
-  const allUsers = useSelector((state) => state?.search.users);
+  const results = useSelector((state) => state?.search.users_list);
   const channelId = useSelector((state) => state?.modals?.channelId);
-  const currentChannelMembers = useSelector((state) => state?.channels[channelId].users);
+  const currentChannelMembers = useSelector((state) => state?.channels[channelId].users_in_channel);
 
   const prevSearchInput = useSelector((state) => state?.search.search_input);
   const sessionUser = useSelector((state) => state.session.user)
