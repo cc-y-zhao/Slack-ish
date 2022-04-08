@@ -17,9 +17,6 @@ function AddMembersSearchBar() {
   const channelId = useSelector((state) => state?.modals?.channelId);
   const currentChannelMembers = useSelector((state) => state?.channels[channelId].users);
 
-  console.log('all users in database---------', allUsers);
-  // console.log('all users in database----------', allResults)
-  console.log('current channel users-----------', currentChannelMembers)
   const prevSearchInput = useSelector((state) => state?.search.search_input);
   const sessionUser = useSelector((state) => state.session.user)
 
@@ -41,8 +38,6 @@ function AddMembersSearchBar() {
       usersNotInChannel.push(user)
     }
   })
-
-  console.log('users not in channel---------', usersNotInChannel);
 
 
   let sessionUserId;
