@@ -43,6 +43,7 @@ class User(db.Model, UserMixin):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'email': self.email,
+            'image_url': self.image_url
         }
 
     def to_dict(self):
