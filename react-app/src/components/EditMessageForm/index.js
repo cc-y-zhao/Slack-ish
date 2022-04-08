@@ -4,6 +4,8 @@ import { hideModal } from "../../store/modal";
 
 import { loadChannel, editMessage, deleteMessage } from "../../store/channels";
 
+import "../CreateChannelForm/CreateChannelForm.css";
+
 const EditMessageForm = () => {
   const dispatch = useDispatch();
 
@@ -52,16 +54,16 @@ const EditMessageForm = () => {
   };
 
   return (
-    <>
-      <section>
+    <div className="CreateChannelFormWrapper">
+      <div className="CreateChannelFormHeader">
+        <h1>Edit Message</h1>
+      </div>
+      <div className="CreatChannelFormBody">
         <form onSubmit={handleSubmit}>
-          <div>
-            <div>{errors}</div>
-          </div>
+          <div className="CreateChannelFormErrors">{errors}</div>
           <input type="hidden" value={user_id} />
           <input type="hidden" value={channel_id} />
-          <div>
-            <label>Message</label>
+          <div className="CreateChannelDescription">
             <textarea
               type="text"
               required
@@ -85,8 +87,8 @@ const EditMessageForm = () => {
             </button>
           </div>
         </form>
-      </section>
-    </>
+      </div>
+    </div>
   );
 };
 

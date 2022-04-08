@@ -26,11 +26,11 @@ const CreateChannelForm = () => {
 
     if (title.length > 50)
       validationErrors.push("Title must be 50 characters or less");
-    if (description.length > 1000)
-      validationErrors.push("Description must be 1000 characters or less");
+    if (description.length > 150)
+      validationErrors.push("Description must be 150 characters or less");
 
     setErrors(validationErrors);
-  }, [title]);
+  }, [title, description]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,11 +44,8 @@ const CreateChannelForm = () => {
 
     let newChannel;
 
-    // try {
     newChannel = await dispatch(createChannel(payload));
-    // } catch (error) {
-    //   console.log(error)
-    // }
+
     if (newChannel) {
       setErrors([]);
       dispatch(hideModal());
