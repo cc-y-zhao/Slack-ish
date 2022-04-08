@@ -18,23 +18,25 @@ const ChannelPage = () => {
   const channelId = parseInt(channel_id);
   const channel = useSelector((state) => state.channels[channel_id]);
   const members = useSelector(state => Object.values(state.channels));
-  const choiceMember = members.find(person => person?.id === +channel_id)
   const user_id = useSelector((state) => state.session.user?.id);
+  const choiceMember = members.find(person => person?.id === +channel_id)
+  const users = channel?.users
   const memberCount = choiceMember?.users
 
   let messages;
   if (channel?.messages) {
     messages = Object.values(channel?.messages);
   }
+  console.log(channel, '//////////////////')
+  let images;
+  if (channel?.users) {
+    images = channel?.users
+  }
+
+  console.log(images, '||||||||||||||||||||');
 
   let title = channel ? channel.title : "";
   let channelToEdit = channel ? channel : "";
-
-
-  // const ShowListOfUsers = () => {
-  //   dispatch(setCurrentModal2(ShowDBUser));
-  //   dispatch(showModal())
-  // }
 
   const ShowListOfUsers = () => {
     dispatch(setCurrentModal2(ShowDBUser, channelId));
@@ -64,12 +66,7 @@ const ChannelPage = () => {
         <div>
 
           <button onClick={ShowListOfUsers}>{memberCount?.length}
-            {/* <ShowDBUser channelId={channelId}/> */}
           </button>
-          {/* <i class="fa-solid fa-ellipsis-vertical"></i> */}
-          {/* <div>
-            <EditChannelForm channelToEdit={channelToEdit} />
-          </div> */}
         </div>
       </div>
       <div className="MessagesBody">
@@ -80,6 +77,7 @@ const ChannelPage = () => {
             <div
               className="SingleMessageBody"
             >
+              {/* {users} */}
               <div className="MessageProfile">
                 <i class="fa-solid fa-square-person-confined"></i>
               </div>
@@ -102,21 +100,6 @@ const ChannelPage = () => {
                 {user_id === message.user_id && (
                   <>
                     <i class="fa-solid fa-ellipsis-vertical"></i>
-                    {/* <div>
-                      <EditMessageForm
-                        channelId={channelId}
-                        messageToEdit={message}
-                      />
-                      <button
-                        onClick={async () => {
-                          await dispatch(
-                            deleteMessage(channel.id, message.id)
-                          ).then(() => dispatch(loadChannel(channel_id)));
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </div> */}
                   </>
                 )}
               </div>
