@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { loadUsersResults } from "../../store/search";
-import { hideModal } from "../../store/modal";
+import { loadUsersResults, resetSearchInput } from "../../store/search";
+import { hideSearchModal } from "../../store/modal";
 import { createDm } from "../../store/channels";
 
 function Search() {
@@ -13,6 +13,17 @@ function Search() {
   const prevSearchInput = useSelector((state) => state?.search.search_input);
   const sessionUser = useSelector((state) => state.session.user);
 
+  const [searchInput, setSearchInput] = useState(prevSearchInput);
+
+  // set search field to empty if showModal is false
+  // const modalState = useSelector((state) => state?.modals);
+
+  // if (modalState) {
+  //   console.log('modal state search display----------', modalState['searchDisplay'])
+  //   if (!modalState['searchDisplay'])
+  //   setSearchInput('');
+  // }
+
   let sessionUserId;
 
   if (sessionUser) {
@@ -20,18 +31,23 @@ function Search() {
   }
 
   // const [showModal, setShowModal] = useState(false);
-  const [searchInput, setSearchResult] = useState(prevSearchInput);
 
   const handleClick = async (sessionUserId, resultId, e) => {
     e.preventDefault();
 
     let newDirectMessage;
 
+    dispatch(resetSearchInput())
     newDirectMessage = await dispatch(createDm(sessionUserId, resultId));
 
     if (newDirectMessage) {
-      dispatch(hideModal());
-      history.push(`/channels/${newDirectMessage.id}`);
+      dispatch(hideSearchModal())
+
+      // await dispatch(hideModal())
+      //   .then(() => setSearchInput(''))
+      //   .then(() => history.push(`/channels/${newDirectMessage.id}`))
+      // await setSearchInput('');
+      // history.push(`/channels/${newDirectMessage.id}`);
     }
   };
 

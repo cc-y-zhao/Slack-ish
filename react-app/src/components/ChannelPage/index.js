@@ -24,9 +24,6 @@ const ChannelPage = () => {
   const members = channel?.users_in_channel;
   const totalMembers = `(${members?.length})`;
 
-  // console.log('members-------------------', members)
-  console.log('members.length-------------------', members?.length)
-
   let messages;
   if (channel?.messages) {
     messages = Object.values(channel?.messages);

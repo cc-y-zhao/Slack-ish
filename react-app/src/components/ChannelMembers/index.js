@@ -16,8 +16,8 @@ const ChannelMembers = () => {
   const history = useHistory();
   const channelId = useSelector((state) => state?.modals?.channelId);
   const channel = useSelector((state) => state.channels[channelId]);
-  const members = channel?.users
-  const totalMembers = members?.length
+  const members = channel?.users_in_channel;
+  const totalMembers = members?.length;
 
   console.log('channel-------------------', channel)
   console.log('members-------------------', members)

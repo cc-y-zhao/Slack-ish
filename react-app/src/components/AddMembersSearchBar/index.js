@@ -40,8 +40,6 @@ function AddMembersSearchBar() {
   //   }
   // })
 
-  // console.log('users not in cahnnel', usersNotInChannel);
-
 
   let sessionUserId;
 
@@ -65,6 +63,7 @@ function AddMembersSearchBar() {
     }
     if (addUserToChannel) {
       dispatch(loadChannel(channelId));
+      setSearchResult('');
       return dispatch(hideSearchModal());
       // dispatch(hideSearchModal()).then(() => dispatch(loadChannel(channelId)));
     }
