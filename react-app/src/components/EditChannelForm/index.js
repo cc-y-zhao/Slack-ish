@@ -86,20 +86,26 @@ const EditChannelForm = () => {
               onChange={updateDescription}
             />
           </div>
-          <button type="submit" disabled={errors.length > 0}>
-            Update Channel
-          </button>
+          <div className="UpdateMessageButtonContainer">
+            <div className="DeleteMessageButton">
+              <button
+                onClick={async () => {
+                  await dispatch(deleteChannel(channelToEdit?.id))
+                    .then(() => dispatch(loadChannel(1)))
+                    .then(() => dispatch(hideModal()))
+                    .then(() => history.push(`/channels/1`));
+                }}
+              >
+                Delete
+              </button>
+            </div>
+            <div className="UpdateMessageButton">
+              <button type="submit" disabled={errors.length > 0}>
+                Update
+              </button>
+            </div>
+          </div>
         </form>
-        <button
-          onClick={async () => {
-            await dispatch(deleteChannel(channelToEdit?.id))
-              .then(() => dispatch(loadChannel(1)))
-              .then(() => dispatch(hideModal()))
-              .then(() => history.push(`/channels/1`));
-          }}
-        >
-          Delete
-        </button>
       </div>
     </div>
   );

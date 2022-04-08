@@ -35,6 +35,10 @@ const Sidebar = () => {
           <div className="SidebarLabels">
             <div className="SidebarLogo">
               <h1>Slack-ish</h1>
+              <i
+                class="fa-regular fa-pen-to-square"
+                onClick={showCreateDMSearch}
+              ></i>
             </div>
             <div
               className="SidebarLabel"

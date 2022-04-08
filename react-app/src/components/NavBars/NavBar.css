@@ -30,6 +30,7 @@
 .ProfileButton {
     position: relative;
     color: rgb(245, 235, 92);
+    cursor: pointer;
 }
 
 #ProfileField {

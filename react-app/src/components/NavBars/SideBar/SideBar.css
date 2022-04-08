@@ -20,11 +20,26 @@
 
 .SidebarLogo {
     border-bottom:1px solid rgb(53,53,58);
+    display: flex;
+    justify-content: space-between;
 }
 
 .SidebarLogo > h1 {
     color: rgb(196, 202, 208);
     margin: 12px 0 9px 15px;
+}
+
+.SidebarLogo > i {
+    background-color: rgb(196, 202, 208);
+    font-size: 20px;
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 15px 2px 0;
+    cursor: pointer;
 }
 
 .SidebarLabels {

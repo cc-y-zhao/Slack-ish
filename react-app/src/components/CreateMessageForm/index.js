@@ -22,6 +22,8 @@ const CreateMessageForm = ({ channelId }) => {
   useEffect(() => {
     const validationErrors = [];
 
+    if (content.length === 0) validationErrors.push("");
+
     if (content.length > 12000)
       validationErrors.push("Your message is too long.");
 
@@ -50,7 +52,11 @@ const CreateMessageForm = ({ channelId }) => {
     <>
       <div className="CreateMessageFormDiv">
         <form onSubmit={handleSubmit}>
-          <div className="CreateMessageErrors">{errors}</div>
+          <div className="CreateMessageErrors">
+            <ul>
+              {errors && errors.map((error) => <li key={error}>{error}</li>)}
+            </ul>
+          </div>
           <input type="hidden" value={user_id} />
           <input type="hidden" value={channel_id} />
           <div className="MessageTextBoxArea">

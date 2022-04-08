@@ -52,12 +52,13 @@ const ChannelPage = () => {
           <h2>{title}</h2>
           <p>{description}</p>
         </div>
-        {/* <div className="ChannelPageTitleRight"> */}
-        <i
-          class="fa-solid fa-ellipsis-vertical"
-          id="EditChannelButton"
-          onClick={showEditChannelForm}
-        ></i>
+        {user_id == channel?.owner_id && (
+          <i
+            class="fa-solid fa-ellipsis-vertical"
+            id="EditChannelButton"
+            onClick={showEditChannelForm}
+          ></i>
+        )}
         {/* </div> */}
       </div>
       <div className="MessagesBody">

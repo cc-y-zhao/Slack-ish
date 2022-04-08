@@ -26,6 +26,29 @@
   border-radius: 8px;
 }
 
+.modal-content button {
+  box-sizing: border-box;
+    display: inline-block;
+    padding: 0 20px;
+    height: 30px;
+    text-align: center;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(44, 44, 44);
+    border:2px solid rgb(139, 139, 139);
+    color: rgb(204, 204, 204);
+    transition: all .15s ease-in-out;
+    position: relative;
+}
+
+.modal-content button:disabled {
+  cursor:not-allowed;
+  color: rgb(134, 134, 136);
+  background-color: rgb(27,30,34);
+  border:2px solid rgb(53,53,58);
+}
+
 .search-modal-background {
   position: fixed;
   top: 0;

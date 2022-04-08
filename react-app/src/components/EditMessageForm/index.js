@@ -28,6 +28,7 @@ const EditMessageForm = () => {
   useEffect(() => {
     const validationErrors = [];
 
+    if (content?.length === 0) validationErrors.push("");
     if (content?.length > 12000)
       validationErrors.push("Your message is too long.");
 
@@ -63,30 +64,30 @@ const EditMessageForm = () => {
           <div className="CreateChannelFormErrors">{errors}</div>
           <input type="hidden" value={user_id} />
           <input type="hidden" value={channel_id} />
-          <div className="CreateChannelDescription">
-            <textarea
-              type="text"
-              required
-              placeholder="Message"
-              value={content}
-              onChange={updateContent}
-            />
-          </div>
-          <div>
-            <button type="submit" disabled={errors.length > 0}>
-              Update
-            </button>
-          </div>
-          <div>
-            <button
-              onClick={async () => {
-                await dispatch(deleteMessage(channel_id, id)).then(() =>
-                  dispatch(loadChannel(channel_id))
-                );
-              }}
-            >
-              Delete
-            </button>
+          <textarea
+            type="text"
+            required
+            placeholder="Message"
+            value={content}
+            onChange={updateContent}
+          />
+          <div className="UpdateMessageButtonContainer">
+            <div className="DeleteMessageButton">
+              <button
+                onClick={async () => {
+                  await dispatch(deleteMessage(channel_id, id)).then(() =>
+                    dispatch(loadChannel(channel_id))
+                  );
+                }}
+              >
+                Delete
+              </button>
+            </div>
+            <div className="UpdateMessageButton">
+              <button type="submit" disabled={errors.length > 0}>
+                Update
+              </button>
+            </div>
           </div>
         </form>
       </div>
