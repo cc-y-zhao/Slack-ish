@@ -33,7 +33,7 @@ const ChannelPage = () => {
     images = channel?.users
   }
 
-  console.log(images, '||||||||||||||||||||');
+  console.log(Object.values(images), '||||||||||||||||||||');
 
   let title = channel ? channel.title : "";
   let channelToEdit = channel ? channel : "";
@@ -77,10 +77,15 @@ const ChannelPage = () => {
             <div
               className="SingleMessageBody"
             >
-              {/* {users} */}
-              <div className="MessageProfile">
-                <i class="fa-solid fa-square-person-confined"></i>
-              </div>
+              {images.map(pics => (
+                pics.image_url ?
+                  <div className="MessageProfile">
+                    <img src={pics.image_url} alt='' />
+                  </div> :
+                  <div className="MessageProfile">
+                    <i class="fa-solid fa-square-person-confined"></i>
+                  </div>
+              ))}
               <div className="MessageMain">
                 <div className="MessageInfo">
                   <div className="MessageName">{message.name}</div>
