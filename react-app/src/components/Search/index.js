@@ -15,7 +15,7 @@ function Search() {
 
   const results = useSelector((state) => state?.search.users_results);
 
-  const prevSearchInput = useSelector((state) => state?.search.search_input);
+  // const prevSearchInput = useSelector((state) => state?.search.search_input);
   const sessionUser = useSelector((state) => state.session.user);
 
   const [searchInput, setSearchInput] = useState("");
@@ -39,10 +39,7 @@ function Search() {
 
   const handleOnChange = async (inputValue, e) => {
     e.preventDefault();
-
-    dispatch(loadUsersResults(inputValue));
-    setSearchInput(prevSearchInput);
-    return;
+    setSearchInput(inputValue)
   };
 
   const handleClick = async (sessionUserId, resultId, e) => {
@@ -60,8 +57,9 @@ function Search() {
   };
 
   useEffect(() => {
-    console.log('search input----------------', searchInput)
-    dispatch(loadUsersResults());
+    if (searchInput) {
+      dispatch(loadUsersResults(searchInput));
+    }
   }, [dispatch, searchInput]);
 
   // From Dan:
