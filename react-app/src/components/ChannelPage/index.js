@@ -6,12 +6,12 @@ import { NavLink } from "react-router-dom";
 import EditChannelForm from "../EditChannelForm";
 import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
-import ChannelMembers from "./ChannelMembers"
+import ChannelMembers from "../ChannelMembers"
 import { loadChannel, deleteMessage } from "../../store/channels";
 
 import { showModal, showSearchModal } from "../../store/modal";
 import AddMembersSearchBar from "../AddMembersSearchBar";
-import { setAddMembersChannelSearchModal } from "../../store/modal";
+import { setAddMembersChannelSearchModal, setChannelUsersSearchModal } from "../../store/modal";
 
 import "./ChannelPage.css";
 
@@ -23,7 +23,9 @@ const ChannelPage = () => {
   const user_id = useSelector((state) => state.session.user?.id);
   const members = useSelector(state => Object.values(state.channels));
   const choiceMember = members.find(person => person?.id === +channel_id)
-  const memberCount = choiceMember?.users
+  const memberCount = choiceMember?.users;
+  const totalMembers = `(${memberCount?.length})`;
+
 
   let messages;
   if (channel?.messages) {
@@ -53,7 +55,7 @@ const ChannelPage = () => {
   }
 
   const ShowChannelMembers = () => {
-    dispatch(setCurrentModal2(ShowDBUser, channelId));
+    dispatch(setChannelUsersSearchModal(ChannelMembers, channelId));
     dispatch(showSearchModal())
   }
 
@@ -75,8 +77,8 @@ const ChannelPage = () => {
           }
         </div>
         <div>
-          <button onClick={ShowChannelMembers}>{memberCount?.length}
-            <ChannelMembers channelId={channelId}/>
+          <button onClick={ShowChannelMembers}>
+            Channel Members {totalMembers}
           </button>
         </div>
         <div>
