@@ -56,7 +56,7 @@ const ChannelPage = () => {
     const options = { year: "2-digit", month: "2-digit", day: "2-digit" };
     return new Date(string).toLocaleDateString([], options);
   }
-  ////////////// ADD MEMBERS TO CHANNEL SECTION //////////////////
+  ////////////// ADD MEMBERS TO CHANNEL SECTION ///////////////////
   let addChannelMembersButton = false;
   if (channel?.is_dm == false) {
     addChannelMembersButton = true;
