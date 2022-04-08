@@ -84,6 +84,7 @@ def get_one_channel(channel_id):
 
         name = user['first_name'] + ' ' + user['last_name']
         message['name'] = name
+        message['image_url'] = user['image_url']
 
         user_list.append(user)
 

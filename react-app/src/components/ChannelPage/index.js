@@ -20,20 +20,13 @@ const ChannelPage = () => {
   const members = useSelector(state => Object.values(state.channels));
   const user_id = useSelector((state) => state.session.user?.id);
   const choiceMember = members.find(person => person?.id === +channel_id)
-  const users = channel?.users
   const memberCount = choiceMember?.users
 
   let messages;
   if (channel?.messages) {
     messages = Object.values(channel?.messages);
   }
-  console.log(channel, '//////////////////')
-  let images;
-  if (channel?.users) {
-    images = channel?.users
-  }
 
-  console.log(Object.values(images), '||||||||||||||||||||');
 
   let title = channel ? channel.title : "";
   let channelToEdit = channel ? channel : "";
@@ -46,7 +39,6 @@ const ChannelPage = () => {
   useEffect(() => {
     dispatch(loadChannel(channel_id));
   }, [dispatch, channel_id]);
-  // }, [channel_id, channel.all_messages.toString()]);
 
   function formatTime(string) {
     const options = { hour: "2-digit", minute: "2-digit" };
@@ -64,7 +56,6 @@ const ChannelPage = () => {
         <i class="fa-solid fa-hashtag"></i>
         <h2>{title}</h2>
         <div>
-
           <button onClick={ShowListOfUsers}>{memberCount?.length}
           </button>
         </div>
@@ -76,16 +67,17 @@ const ChannelPage = () => {
           .map((message) => (
             <div
               className="SingleMessageBody"
+              key={message.id}
             >
-              {images.map(pics => (
-                pics.image_url ?
-                  <div className="MessageProfile">
-                    <img src={pics.image_url} alt='' />
-                  </div> :
-                  <div className="MessageProfile">
-                    <i class="fa-solid fa-square-person-confined"></i>
-                  </div>
-              ))}
+              {message.image_url ?
+                <div className="MessageProfile" >
+                  {console.log(message.image_url, '/////////////////image_url/////////////////')}
+                  <img src={message.image_url} alt='' style={{ width: '45px', height: '43px', paddingTop:'7px'}} />
+                </div> :
+                <div className="MessageProfile">
+                  <i class="fa-solid fa-square-person-confined"></i>
+                </div>
+              }
               <div className="MessageMain">
                 <div className="MessageInfo">
                   <div className="MessageName">{message.name}</div>
@@ -114,7 +106,7 @@ const ChannelPage = () => {
       </div>
       {/* <ShowDBUser channelId={channelId} /> */}
       <CreateMessageForm channelId={channelId} />
-    </div>
+    </div >
   );
 };
 
