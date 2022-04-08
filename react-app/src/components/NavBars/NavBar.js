@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
+
+import Search from "../Search";
+import { showSearchModal, setCurrentSearchModal } from "../../store/modal";
+
 import "./NavBar.css";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
+  const [showAddDm, setShowAddDm] = useState(false);
+
+  const showCreateDMSearch = () => {
+    dispatch(setCurrentSearchModal(Search));
+    dispatch(showSearchModal());
+  };
 
   const openMenu = () => {
     if (showMenu) return;
@@ -31,7 +42,9 @@ const NavBar = () => {
       <div className="Nav">
         <div></div>
         {/* Add search bar here */}
-        <div>Search users in Slack-ish</div>
+        <div className="SearchButton" onClick={showCreateDMSearch}>
+          Search users in Slack-ish
+        </div>
         <div className="ProfileButton">
           <i
             class="fa-solid fa-square-person-confined"

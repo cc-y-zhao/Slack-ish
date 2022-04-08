@@ -13,13 +13,18 @@
     border-bottom:1px solid rgb(53,53,58);
 }
 
-.Nav h1 {
-    margin-left: 2rem;
-    font-size: 2rem;
-    /* height: 80px; */
+.SearchButton {
+    width: 587px;
+    height: 24px;
+    background-color: rgb(37,40,43);
+    border: 1px solid rgb(81,83,82);
+    color: rgb(196,198,199);
+    border-radius: 7px;
+    padding-left: 11px;
+    font-size: 15px;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
+    cursor: pointer;
 }
 
 .ProfileButton {
