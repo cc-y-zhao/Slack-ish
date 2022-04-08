@@ -1,4 +1,5 @@
 const GET_ALL_USERS = "search/GET_ALL_USERS";
+const GET_CHANNEL_USERS = "search/GET_CHANNEL_USERS";
 const GET_ALL_USERS_RESULTS = "search/GET_ALL_RESULTS";
 // const GET_ONE_USER = "search/GET_ONE_USER";
 // const CREATE_ONE_USER = "search/CREATE_USER";
@@ -6,6 +7,7 @@ const GET_ALL_USERS_RESULTS = "search/GET_ALL_RESULTS";
 // const DELETE_ONE_USER = "search/DELETE_ONE_USER";
 
 const loadAllUsers = (users) => ({ type: GET_ALL_USERS, users });
+const loadChannelUsers = (users) => ({ type: GET_CHANNEL_USERS, users});
 const loadAllUsersResults = (results, searchInput) => ({ type: GET_ALL_USERS_RESULTS, results, searchInput });
 
 
@@ -17,6 +19,18 @@ export const loadUsers = () => async (dispatch) => {
 
     dispatch(loadAllUsers(users));
     return users;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+};
+
+export const loadChannelUsersResults = (channelId) => async (dispatch) => {
+  const response = await fetch("/api/search/users-in-channel/?channelId="+channelId);
+  if (response.ok) {
+    const results = await response.json();
+    dispatch(loadChannelUsers(results));
+    return results;
   } else {
     const errors = await response.json();
     return errors;

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { addUserToChannel } from "../../store/channels";
-import { loadUsersResults, loadUsers } from "../../store/search";
+import { loadUsersResults, loadChannelUsersResults } from "../../store/search";
 import { loadChannel } from "../../store/channels";
 
 import CreateChannelForm from "../CreateChannelForm";
@@ -53,7 +53,7 @@ function AddMembersSearchBar() {
   const [searchInput, setSearchResult] = useState(prevSearchInput);
 
   useEffect(() => {
-    dispatch(loadUsers());
+    dispatch(loadChannelUsersResults(channelId));
   }, [dispatch]);
 
   const handleClick = async (channelId, userId, e) => {
