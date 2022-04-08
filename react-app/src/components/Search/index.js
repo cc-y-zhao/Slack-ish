@@ -18,7 +18,7 @@ function Search() {
   const prevSearchInput = useSelector((state) => state?.search.search_input);
   const sessionUser = useSelector((state) => state.session.user);
 
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
 
   // set search field to empty if showModal is false
   // const modalState = useSelector((state) => state?.modals);
@@ -37,7 +37,7 @@ function Search() {
 
   // const [showModal, setShowModal] = useState(false);
 
-   const handleOnChange = async (inputValue, e) => {
+  const handleOnChange = async (inputValue, e) => {
     e.preventDefault();
 
     dispatch(loadUsersResults(inputValue));
@@ -45,17 +45,16 @@ function Search() {
     return;
   };
 
-
   const handleClick = async (sessionUserId, resultId, e) => {
     e.preventDefault();
 
     let newDirectMessage;
 
-    dispatch(resetSearchInput())
+    dispatch(resetSearchInput());
     newDirectMessage = await dispatch(createDm(sessionUserId, resultId));
 
     if (newDirectMessage) {
-      dispatch(hideSearchModal())
+      dispatch(hideSearchModal());
       history.push(`/channels/${newDirectMessage.id}`);
     }
   };
@@ -81,14 +80,14 @@ function Search() {
   return (
     <div>
       <div className="search">
-// LOOK AT THIS
-//         <input
-//           placeholder="Search"
-//           value={searchInput}
-//           // onClick={() => setShowModal(true)}
-//           onChange={(e) => handleOnChange(e.target.value, e)}
-//           // onChange -> dispatch for the results and then setSearchResult to those results
-//         />
+        {/* // LOOK AT THIS */}
+        {/* <input
+          placeholder="Search"
+          value={searchInput}
+          // onClick={() => setShowModal(true)}
+          onChange={(e) => handleOnChange(e.target.value, e)}
+          // onChange -> dispatch for the results and then setSearchResult to those results
+        /> */}
 
         <div className="SearchBarArea">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -96,7 +95,9 @@ function Search() {
             placeholder="Type to search users"
             value={searchInput}
             // onClick={() => setShowModal(true)}
-            onChange={(e) => dispatch(loadUsersResults(e.target.value))}
+            // onChange={(e) => dispatch(loadUsersResults(e.target.value))}
+            onChange={(e) => handleOnChange(e.target.value, e)}
+
             // onChange -> dispatch for the results and then setSearchResult to those results
           />
         </div>

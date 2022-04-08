@@ -5,12 +5,19 @@ import EditChannelForm from "../EditChannelForm";
 import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
 
-import ChannelMembers from "../ChannelMembers"
+import ChannelMembers from "../ChannelMembers";
 import { loadChannel, deleteMessage } from "../../store/channels";
 
-import { showModal, showSearchModal, setCurrentEditModal } from "../../store/modal";
+import {
+  showModal,
+  showSearchModal,
+  setCurrentEditModal,
+} from "../../store/modal";
 import AddMembersSearchBar from "../AddMembersSearchBar";
-import { setAddMembersChannelSearchModal, setChannelUsersSearchModal } from "../../store/modal";
+import {
+  setAddMembersChannelSearchModal,
+  setChannelUsersSearchModal,
+} from "../../store/modal";
 
 import "./ChannelPage.css";
 
@@ -22,7 +29,6 @@ const ChannelPage = () => {
   const user_id = useSelector((state) => state.session.user?.id);
   const members = channel?.users_in_channel;
   const totalMembers = `(${members?.length})`;
-
 
   const showEditChannelForm = () => {
     dispatch(setCurrentEditModal(EditChannelForm, channel?.id));
@@ -38,9 +44,8 @@ const ChannelPage = () => {
   let description = channel ? channel.description : "";
 
   useEffect(() => {
-    dispatch(loadChannel(channel_id))
+    dispatch(loadChannel(channel_id));
   }, [dispatch, totalMembers, channel_id]);
-
 
   function formatTime(string) {
     const options = { hour: "2-digit", minute: "2-digit" };
@@ -59,51 +64,41 @@ const ChannelPage = () => {
 
   const ShowChannelMembers = () => {
     dispatch(setChannelUsersSearchModal(ChannelMembers, channelId));
-    dispatch(showSearchModal())
-  }
+    dispatch(showSearchModal());
+  };
 
   const showAddMembersSearchBar = () => {
     dispatch(setAddMembersChannelSearchModal(AddMembersSearchBar, channelId));
     dispatch(showSearchModal());
-  }
+  };
 
   return (
     <div className="ChannelPageBody">
       <div className="ChannelPageTitle">
-
-    //LOOK AT THIS!!!
-//         <i class="fa-solid fa-hashtag"></i>
-//         <h2>{title}</h2>
-//         <div>
-//           {addChannelMembersButton &&
-//             <button onClick={showAddMembersSearchBar}>
-//               Add Members
-//             </button>
-//           }
-//         </div>
-//         <div>
-//           <button onClick={ShowChannelMembers}>
-//             Channel Members {totalMembers}
-//           </button>
-//         </div>
-//         <div>
-//           <i class="fa-solid fa-ellipsis-vertical"></i>
-
-
         <div className="ChannelPageTitleLeft">
           <i class="fa-solid fa-hashtag"></i>
           <h2>{title}</h2>
           <p>{description}</p>
-
         </div>
-        {user_id == channel?.owner_id && (
-          <i
-            class="fa-solid fa-ellipsis-vertical"
-            id="EditChannelButton"
-            onClick={showEditChannelForm}
-          ></i>
-        )}
-        {/* </div> */}
+        <div className="ChannelPageTitleRight">
+          <div>
+            {addChannelMembersButton && (
+              <button onClick={showAddMembersSearchBar}>Add Members</button>
+            )}
+          </div>
+          <div>
+            <button onClick={ShowChannelMembers}>
+              Channel Members {totalMembers}
+            </button>
+          </div>
+          {user_id == channel?.owner_id && (
+            <i
+              class="fa-solid fa-ellipsis-vertical"
+              id="EditChannelButton"
+              onClick={showEditChannelForm}
+            ></i>
+          )}
+        </div>
       </div>
       <div className="MessagesBody">
         {messages

@@ -45,6 +45,10 @@
     color: rgb(134, 134, 136);
 }
 
+.ChannelPageTitleRight {
+    display: flex;
+}
+
 #EditChannelButton {
     color: rgb(196, 202, 208);
     position: absolute;
