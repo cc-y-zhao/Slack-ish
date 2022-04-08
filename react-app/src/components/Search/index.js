@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -59,9 +59,10 @@ function Search() {
     }
   };
 
-  // useEffect(() => {
-  //   dispatch(loadUsersResults());
-  // }, [dispatch]);
+  useEffect(() => {
+    console.log('search input----------------', searchInput)
+    dispatch(loadUsersResults());
+  }, [dispatch, searchInput]);
 
   // From Dan:
   // useEffect allows you to run code between renders.. doesnt actually cause renders
