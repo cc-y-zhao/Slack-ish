@@ -33,14 +33,12 @@
 .channel__list i {
     padding-right: 10px;
     font-size: 14px;
-    /* padding-left: 25px; */
     position: absolute;
     left: 25px;
     top: 5px;
 }
 
 .channel__list li {
-    /* padding-top: 5px; */
     padding-left: 45px;
 }
 
