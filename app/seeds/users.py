@@ -13,33 +13,64 @@ def seed_users():
         first_name='Cecilia', last_name='Zhao', email='cecilia@aa.io', password='password', image_url='https://ca.slack-edge.com/T03GU501J-U02D2PVAF5W-41109fd1a78b-72')
     ceclia = User(
         first_name='Ceclia', last_name='Chen', email='ceclia@aa.io', password='password', image_url='https://ca.slack-edge.com/T03GU501J-U02D2PVAF5W-41109fd1a78b-72')
+    adam = User(
+        first_name='Adam', last_name='Johnson', email='adam@aa.io', password='password', image_url='https://ca.slack-edge.com/T03GU501J-U01M9M9GU48-70cca787cf5e-72')
+    aaron = User(
+        first_name='Aaron', last_name='Smith', email='aaron@aa.io', password='password', image_url='https://ca.slack-edge.com/T03GU501J-U02SZE0GPFG-196de960a5a8-72')
+    angela = User(
+        first_name='Angela', last_name='Lee', email='angela@aa.io', password='password', image_url='https://ca.slack-edge.com/T03GU501J-U02SZE0GPFG-196de960a5a8-72')
+    bob = User(
+        first_name='Bob', last_name='Washington', email='bob@aa.io', password='password', image_url='https://ca.slack-edge.com/T03GU501J-U02H2R4AD7T-814eac0ac15a-512')
+    brian = User(
+        first_name='Brian', last_name='Lincoln', email='brian@aa.io', password='password', image_url='https://ca.slack-edge.com/T03GU501J-U02H2R4AD7T-814eac0ac15a-512')
+    beth = User(
+        first_name='Beth', last_name='Smart', email='brian@aa.io', password='password', image_url='https://ca.slack-edge.com/T03GU501J-U02H2R4AD7T-814eac0ac15a-512')
+    charlie = User(
+        first_name='Charlie', last_name='Hope', email='charlie@aa.io', password='password', image_url='https://ca.slack-edge.com/T03GU501J-U4XLEFDMF-ga0bb56f2c05-72')
+    dan = User(
+        first_name='Dan', last_name='Purcell', email='dan@aa.io', password='password', image_url='https://ca.slack-edge.com/T03GU501J-U0327LT9U5S-f1862c6cb1e0-512')
+    caleb = User(
+        first_name='Caleb', last_name='Braaten', email='caleb@aa.io', password='password', image_url='https://ca.slack-edge.com/T03GU501J-U01SH02QNCV-514081bd2fde-72')
+    drew = User(
+        first_name='Drew', last_name='Thurman', email='drew@aa.io', password='password', image_url='https://ca.slack-edge.com/T03GU501J-U01D8FV3L12-800f94980f0b-72')
 
-    first_names = ['Adam', 'Aaron', 'Angela', 'Bob', 'Brian', 'Beth', 'Charlie', 'Dan', 'Caleb', 'Drew']
-    last_names = ['Johnson', 'Smith', 'Lee', 'Washington', 'Lincoln', 'Smart', 'Hope', 'Purcell', 'Braaten', 'Thurman']
-    image_urls = [
-        'https://ca.slack-edge.com/T03GU501J-U01M9M9GU48-70cca787cf5e-72',
-        'https://ca.slack-edge.com/T03GU501J-U02SZE0GPFG-196de960a5a8-72',
-        'https://ca.slack-edge.com/T03GU501J-U02SZE0GPFG-196de960a5a8-72',
-        'https://ca.slack-edge.com/T03GU501J-U02H2R4AD7T-814eac0ac15a-512',
-        'https://ca.slack-edge.com/T03GU501J-U02H2R4AD7T-814eac0ac15a-512',
-        'https://ca.slack-edge.com/T03GU501J-U02H2R4AD7T-814eac0ac15a-512',
-        'https://ca.slack-edge.com/T03GU501J-U4XLEFDMF-ga0bb56f2c05-72',
-        'https://ca.slack-edge.com/T03GU501J-U0327LT9U5S-f1862c6cb1e0-512',
-        'https://ca.slack-edge.com/T03GU501J-U01SH02QNCV-514081bd2fde-72',
-        'https://ca.slack-edge.com/T03GU501J-U01D8FV3L12-800f94980f0b-72'
-    ]
-    for first_name in first_names:
-        for last_name in last_names:
-            for image_url in image_urls:
-                new_email = f'{first_name}{last_name}@aaAA.io'
-                new_user = User(first_name=first_name, last_name=last_name, email=new_email, password='password' image_url=image_url)
-                db.session.add(new_user)
+
+
+    # first_names = ['Adam', 'Aaron', 'Angela', 'Bob', 'Brian', 'Beth', 'Charlie', 'Dan', 'Caleb', 'Drew']
+    # last_names = ['Johnson', 'Smith', 'Lee', 'Washington', 'Lincoln', 'Smart', 'Hope', 'Purcell', 'Braaten', 'Thurman']
+    # image_urls = [
+    #     'https://ca.slack-edge.com/T03GU501J-U01M9M9GU48-70cca787cf5e-72',
+    #     'https://ca.slack-edge.com/T03GU501J-U02SZE0GPFG-196de960a5a8-72',
+    #     'https://ca.slack-edge.com/T03GU501J-U02SZE0GPFG-196de960a5a8-72',
+    #     'https://ca.slack-edge.com/T03GU501J-U02H2R4AD7T-814eac0ac15a-512',
+    #     'https://ca.slack-edge.com/T03GU501J-U02H2R4AD7T-814eac0ac15a-512',
+    #     'https://ca.slack-edge.com/T03GU501J-U02H2R4AD7T-814eac0ac15a-512',
+    #     'https://ca.slack-edge.com/T03GU501J-U4XLEFDMF-ga0bb56f2c05-72',
+    #     'https://ca.slack-edge.com/T03GU501J-U0327LT9U5S-f1862c6cb1e0-512',
+    #     'https://ca.slack-edge.com/T03GU501J-U01SH02QNCV-514081bd2fde-72',
+    #     'https://ca.slack-edge.com/T03GU501J-U01D8FV3L12-800f94980f0b-72'
+    # ]
+    # for first_name in first_names:
+    #     for last_name in last_names:
+    #         new_email = f'{first_name}{last_name}@aaAA.io'
+    #         new_user = User(first_name=first_name, last_name=last_name, email=new_email, password='password' image_url=image_url)
+    #         db.session.add(new_user)
 
     db.session.add(demo)
     db.session.add(sharon)
     db.session.add(gabriel)
     db.session.add(cecilia)
     db.session.add(ceclia)
+    db.session.add(adam)
+    db.session.add(aaron)
+    db.session.add(angela)
+    db.session.add(bob)
+    db.session.add(brian)
+    db.session.add(beth)
+    db.session.add(charlie)
+    db.session.add(dan)
+    db.session.add(caleb)
+    db.session.add(drew)
 
     db.session.commit()
 
