@@ -22,10 +22,10 @@ const ChannelPage = () => {
     dispatch(showModal());
   };
 
-  const showEditMessageForm = () => {
-    dispatch(setCurrentEditModal(EditMessageForm, channel?.id));
-    dispatch(showModal());
-  };
+  // const showEditMessageForm = () => {
+  //   dispatch(setCurrentEditModal(EditMessageForm, channel?.id));
+  //   dispatch(showModal());
+  // };
 
   let messages;
   if (channel?.messages) {
@@ -33,6 +33,7 @@ const ChannelPage = () => {
   }
 
   let title = channel ? channel.title : "";
+  let description = channel ? channel.description : "";
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));
@@ -53,6 +54,7 @@ const ChannelPage = () => {
       <div className="ChannelPageTitle">
         <i class="fa-solid fa-hashtag"></i>
         <h2>{title}</h2>
+        <p>{description}</p>
         <div>
           <i
             class="fa-solid fa-ellipsis-vertical"
