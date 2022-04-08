@@ -4,8 +4,10 @@
     width: 100%;
 }
 
-.CreateMessageErrors {
-    color: white;
+.CreateMessageErrors ul {
+    color: rgb(194, 92, 92);
+    text-decoration: none;
+    list-style: none;
 }
 
 .MessageTextBoxArea {
@@ -24,8 +26,56 @@
     resize: none;
     box-sizing: border-box;
     padding: 10px;
+    margin-bottom: 10px;
 }
 
 .MessageTextBoxArea > textarea:active {
     border-color: rgb(136,138,140);
+}
+
+.MessageTextBoxArea > button {
+	background: none;
+	border: none;
+	padding: 0;
+	font: inherit;
+	outline: inherit;
+    font-size: 18px;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    right: 32px;
+    bottom: 27px;
+    color: rgb(134, 134, 136);
+}
+
+.MessageTextBoxArea > button:disabled {
+    color: rgb(70, 70, 70);
+    cursor: not-allowed;
+}
+
+.MessageTextBoxArea > button:hover:enabled {
+    cursor: pointer;
+    color: inherit;
+    border-radius: 4px;
+}
+
+.UpdateMessageButtonContainer {
+    height: 75px;
+    width: 80%;
+    display: flex;
+    /* flex-direction: column-reverse; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.UpdateMessageButton > button:disabled {
+    cursor:not-allowed;
+    color: rgb(134, 134, 136);
+    background-color: rgb(27,30,34);
+    border:2px solid rgb(53,53,58);
+}
+
+.DeleteMessageButton > button:hover {
+    border:2px solid rgb(190, 92, 92) !important;
+    color: rgb(190, 92, 92) !important;
 }

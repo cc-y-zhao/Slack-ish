@@ -11,7 +11,8 @@
 
 .ChannelPageTitle {
     display: flex;
-    width: 100%;
+    justify-content: space-between;
+    width: calc(100% - 20px);
     height: 48px;
     color: rgb(196,197,198);
     background-color: rgb(27,30,34);
@@ -20,33 +21,66 @@
     z-index: 2;
 }
 
-.ChannelPageTitle > i {
-    padding-top: 19px;
+.ChannelPageTitleLeft {
+    display: flex;
+}
+
+.ChannelPageTitleLeft > i {
+    padding: 19px 6px 0 0;
     z-index: 2;
 }
 
-.ChannelPageTitle > h2 {
+.ChannelPageTitleLeft > h2 {
     margin: 0;
-    padding-top: 11px;
-    padding-left: 6px;
+    /* padding-top: 11px;
+    padding-left: 6px; */
+    padding: 11px 10px 0 0;
     font-size: 22px;
     z-index: 2;
+}
+
+.ChannelPageTitleLeft > p {
+    padding: 5px 10px 0 0;
+    font-size: 14px;
+    color: rgb(134, 134, 136);
+}
+
+#EditChannelButton {
+    color: rgb(196, 202, 208);
+    position: absolute;
+    top: 12px;
+    right: 50px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#EditChannelButton:hover {
+    background-color: rgb(42,41,47);
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .MessagesBody {
     display: flex;
     flex-direction: column-reverse;
     width: calc(100%);
-    max-height: calc(100% - 250px);
-    overflow: overlay;
+    max-height: calc(100% - 240px);
+    overflow-y: overlay;
     position: relative;
     scrollbar-gutter: stable;
     scrollbar-width: thin;
+    word-wrap: break-word;
+    white-space: initial;
 }
 
 .SingleMessageBody {
     display: flex;
     padding: 5px 50px 10px 25px;
+    white-space: initial;
+    word-wrap: break-word;
 }
 
 .SingleMessageBody:hover {
@@ -82,7 +116,7 @@
     color: rgb(196,198,199);
 }
 
-.EditMessageButton {
+/* .EditMessageButton {
     color: rgb(196, 202, 208);
     position: absolute;
     right: 50px;
@@ -97,10 +131,27 @@
     background-color: rgb(42,41,47);
     border-radius: 4px;
     cursor: pointer;
+} */
+
+#EditMessageButton {
+    color: rgb(196, 202, 208);
+    position: absolute;
+    right: 50px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#EditMessageButton:hover {
+    background-color: rgb(42,41,47);
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 ::-webkit-scrollbar {
-    width: 22px;
+    width: 20px;
 }
 
 ::-webkit-scrollbar-track {
@@ -109,12 +160,12 @@
 
 ::-webkit-scrollbar-thumb {
     /* background-color: #d6dee1; */
-    background-color: rgb(118,121,123);
+    background-color: rgba(118, 121, 123, 0.5);
     border-radius: 20px;
     border: 6px solid transparent;
     background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(118,121,123);
+    background-color: rgba(118, 121, 123, 0.8);
 }

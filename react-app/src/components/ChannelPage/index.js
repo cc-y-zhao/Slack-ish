@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams, Redirect } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 import EditChannelForm from "../EditChannelForm";
 import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
+
 import ChannelMembers from "../ChannelMembers"
 import { loadChannel, deleteMessage } from "../../store/channels";
 
-import { showModal, showSearchModal } from "../../store/modal";
+import { showModal, showSearchModal, setCurrentEditModal } from "../../store/modal";
 import AddMembersSearchBar from "../AddMembersSearchBar";
 import { setAddMembersChannelSearchModal, setChannelUsersSearchModal } from "../../store/modal";
 
@@ -24,17 +23,24 @@ const ChannelPage = () => {
   const members = channel?.users_in_channel;
   const totalMembers = `(${members?.length})`;
 
+
+  const showEditChannelForm = () => {
+    dispatch(setCurrentEditModal(EditChannelForm, channel?.id));
+    dispatch(showModal());
+  };
+
   let messages;
   if (channel?.messages) {
     messages = Object.values(channel?.messages);
   }
 
   let title = channel ? channel.title : "";
-  let channelToEdit = channel ? channel : "";
+  let description = channel ? channel.description : "";
 
   useEffect(() => {
     dispatch(loadChannel(channel_id))
   }, [dispatch, totalMembers, channel_id]);
+
 
   function formatTime(string) {
     const options = { hour: "2-digit", minute: "2-digit" };
@@ -64,26 +70,40 @@ const ChannelPage = () => {
   return (
     <div className="ChannelPageBody">
       <div className="ChannelPageTitle">
-        <i class="fa-solid fa-hashtag"></i>
-        <h2>{title}</h2>
-        <div>
-          {addChannelMembersButton &&
-            <button onClick={showAddMembersSearchBar}>
-              Add Members
-            </button>
-          }
+
+    //LOOK AT THIS!!!
+//         <i class="fa-solid fa-hashtag"></i>
+//         <h2>{title}</h2>
+//         <div>
+//           {addChannelMembersButton &&
+//             <button onClick={showAddMembersSearchBar}>
+//               Add Members
+//             </button>
+//           }
+//         </div>
+//         <div>
+//           <button onClick={ShowChannelMembers}>
+//             Channel Members {totalMembers}
+//           </button>
+//         </div>
+//         <div>
+//           <i class="fa-solid fa-ellipsis-vertical"></i>
+
+
+        <div className="ChannelPageTitleLeft">
+          <i class="fa-solid fa-hashtag"></i>
+          <h2>{title}</h2>
+          <p>{description}</p>
+
         </div>
-        <div>
-          <button onClick={ShowChannelMembers}>
-            Channel Members {totalMembers}
-          </button>
-        </div>
-        <div>
-          <i class="fa-solid fa-ellipsis-vertical"></i>
-          {/* <div>
-            <EditChannelForm channelToEdit={channelToEdit} />
-          </div> */}
-        </div>
+        {user_id == channel?.owner_id && (
+          <i
+            class="fa-solid fa-ellipsis-vertical"
+            id="EditChannelButton"
+            onClick={showEditChannelForm}
+          ></i>
+        )}
+        {/* </div> */}
       </div>
       <div className="MessagesBody">
         {messages
@@ -92,6 +112,7 @@ const ChannelPage = () => {
           .map((message) => (
             <div
               className="SingleMessageBody"
+              key={message.id}
               // onMouseEnter={() => setShowEditMessage(true)}
               // onMouseLeave={() => setShowEditMessage(false)}
             >
@@ -110,28 +131,23 @@ const ChannelPage = () => {
                 </div>
                 <div className="MessageContent">{message.content}</div>
               </div>
-              <div
-                className="EditMessageButton"
-                id={"MessageEdit" + message.id}
-              >
+              <div id={"MessageEdit" + message.id}>
                 {user_id === message.user_id && (
                   <>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                    {/* <div>
-                      <EditMessageForm
-                        channelId={channelId}
-                        messageToEdit={message}
-                      />
-                      <button
-                        onClick={async () => {
-                          await dispatch(
-                            deleteMessage(channel.id, message.id)
-                          ).then(() => dispatch(loadChannel(channel_id)));
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </div> */}
+                    <i
+                      class="fa-solid fa-ellipsis-vertical"
+                      id="EditMessageButton"
+                      onClick={() => {
+                        dispatch(
+                          setCurrentEditModal(
+                            EditMessageForm,
+                            channel?.id,
+                            message?.id
+                          )
+                        );
+                        dispatch(showModal());
+                      }}
+                    ></i>
                   </>
                 )}
               </div>
