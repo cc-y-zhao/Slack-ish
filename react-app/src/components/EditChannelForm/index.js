@@ -5,8 +5,6 @@ import { editChannel, deleteChannel, loadChannel } from "../../store/channels";
 import { hideModal } from "../../store/modal";
 import "../CreateChannelForm/CreateChannelForm.css";
 
-//add deletechannel to edit form
-//need to do loadOneChannel and create single channel page and pass in as prop
 const EditChannelForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
