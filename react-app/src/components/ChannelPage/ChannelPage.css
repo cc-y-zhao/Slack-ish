@@ -25,17 +25,24 @@
     display: flex;
 }
 
+.ChannelPageTitleLeft > i {
+    padding: 19px 6px 0 0;
+    z-index: 2;
+}
+
 .ChannelPageTitleLeft > h2 {
     margin: 0;
-    padding-top: 11px;
-    padding-left: 6px;
+    /* padding-top: 11px;
+    padding-left: 6px; */
+    padding: 11px 10px 0 0;
     font-size: 22px;
     z-index: 2;
 }
 
-.ChannelPageTitleLeft > i {
-    padding-top: 19px;
-    z-index: 2;
+.ChannelPageTitleLeft > p {
+    padding: 5px 10px 0 0;
+    font-size: 14px;
+    color: rgb(134, 134, 136);
 }
 
 #EditChannelButton {
