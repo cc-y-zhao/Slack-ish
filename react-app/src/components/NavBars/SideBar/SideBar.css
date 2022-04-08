@@ -8,6 +8,14 @@
     top: 50px;
     left: 0;
     border-right:1px solid rgb(53,53,58);
+    overflow-y: hidden;
+    scrollbar-width: thin;
+}
+
+.SidebarNav:hover {
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
+    overflow: overlay;
 }
 
 .SidebarLogo {
@@ -19,9 +27,25 @@
     margin: 12px 0 9px 15px;
 }
 
+.SidebarLabels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style: none;
+    height: 20px;
+    text-decoration: none;
+    font-size: 15px;
+    width: 100%;
+}
+
 .SidebarLabel {
     display: flex;
     color: rgb(134, 134, 136);
+    padding-left: 10px;
+}
+
+#SidebarLabelDms {
+    margin-top: 20px;
 }
 
 .SidebarLabel > i {
@@ -68,19 +92,4 @@
     background-color: rgb(42,41,47);
     border-radius: 2px;
     cursor: pointer;
-}
-
-.SidebarLabels {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    list-style: none;
-    height: 20px;
-    text-decoration: none;
-    font-size: 15px;
-    width: 100%;
-}
-
-.SidebarLabel {
-    padding-left: 10px;
 }

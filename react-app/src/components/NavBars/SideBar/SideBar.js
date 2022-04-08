@@ -57,6 +57,7 @@ const Sidebar = () => {
             </div>
             <div
               className="SidebarLabel"
+              id="SidebarLabelDms"
               onMouseEnter={() => setShowAddDm(true)}
               onMouseLeave={() => setShowAddDm(false)}
             >
