@@ -21,3 +21,74 @@
     justify-content: flex-start;
     align-items: center;
 }
+
+.ProfileButton {
+    position: relative;
+    color: rgb(245, 235, 92);
+}
+
+#ProfileField {
+    /* width: 300px; */
+    font-size: 35px;
+    position: absolute;
+    right: 15px;
+    top: -15px;
+}
+
+.ProfileList {
+    position: absolute;
+    background-color: rgb(37,40,43);
+    border: 1px solid rgb(81,83,82);
+    border-radius: 7px;
+    color: rgb(196,198,199);
+    right:10px;
+    top: -15px;
+    min-width: 260px;
+}
+
+.ProfileNameArea {
+    padding: 15px 15px 15px 15px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgb(81,83,82);
+}
+
+.ProfileNameArea > i {
+    color: rgb(245, 235, 92);
+    font-size: 40px;
+    padding-right: 8px;
+}
+
+.ProfileName {
+    font-weight: bold;
+}
+
+.ProfileStatus {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.ProfileStatus > i {
+    font-size: 11px;
+    padding-right: 4px;
+    color: rgb(43,172,118);
+}
+
+.ProfileStatus > p {
+    margin: 0;
+    font-size: 13px;
+}
+
+.ProfileLogout {
+    width: 260px;
+    padding: 15px 0px 15px 15px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.ProfileLogout:hover {
+    cursor: pointer;
+    color: rgb(243, 246, 249) !important;
+    background-color: rgb(32, 110, 159) !important;
+}

@@ -21,8 +21,6 @@ const DirectMessages = () => {
 
   // const [selected, setSelected] = useState(true);
 
-  console.log(window.location.pathname);
-
   const dispatch = useDispatch();
 
   useEffect(() => {

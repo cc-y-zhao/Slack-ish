@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
@@ -6,17 +6,59 @@ import "./NavBar.css";
 
 const NavBar = () => {
   const sessionUser = useSelector((state) => state.session.user);
+  const [showMenu, setShowMenu] = useState(false);
+
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
+
+  useEffect(() => {
+    if (!showMenu) return;
+
+    const closeMenu = () => {
+      setShowMenu(false);
+    };
+
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
 
   let sessionElements;
   if (sessionUser) {
     sessionElements = (
-      <>
-        <div className="Nav">
-          <h1>Top Nav Bar</h1>
-          {/* Add search bar here */}
-          <LogoutButton />
+      <div className="Nav">
+        <div></div>
+        {/* Add search bar here */}
+        <div>Search users in Slack-ish</div>
+        <div className="ProfileButton">
+          <i
+            class="fa-solid fa-square-person-confined"
+            id="ProfileField"
+            onClick={openMenu}
+          ></i>
+          {showMenu && (
+            <>
+              <div className="ProfileList">
+                <div className="ProfileNameArea">
+                  <i class="fa-solid fa-square-person-confined"></i>
+                  <div className="ProfileName_Status">
+                    <div className="ProfileName">
+                      {sessionUser.first_name} {sessionUser.last_name}
+                    </div>
+                    <div className="ProfileStatus">
+                      <i class="fa-solid fa-circle"></i>
+                      <p>Active</p>
+                    </div>
+                  </div>
+                </div>
+                <LogoutButton />
+              </div>
+            </>
+          )}
         </div>
-      </>
+      </div>
     );
   } else {
     sessionElements = <></>;
