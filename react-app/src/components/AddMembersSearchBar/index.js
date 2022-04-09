@@ -27,6 +27,7 @@ function AddMembersSearchBar() {
   }
 
   const handleOnChange = async (inputValue, e) => {
+    console.log(inputValue, e);
     e.preventDefault();
     setSearchInput(inputValue)
   };
@@ -51,6 +52,8 @@ function AddMembersSearchBar() {
   useEffect(() => {
     if (searchInput) {
       dispatch(loadChannelUsersResults(channelId, searchInput));
+    } else {
+      dispatch(resetSearchInput())
     }
   }, [dispatch, searchInput]);
 

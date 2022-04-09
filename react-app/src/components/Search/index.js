@@ -59,6 +59,8 @@ function Search() {
   useEffect(() => {
     if (searchInput) {
       dispatch(loadUsersResults(searchInput));
+    } else {
+      dispatch(resetSearchInput())
     }
   }, [dispatch, searchInput]);
 
