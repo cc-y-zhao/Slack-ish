@@ -34,7 +34,8 @@ const ChannelMembers = () => {
           value={prevSearchInput}
           onChange={(e) => dispatch(loadUsersResults(e.target.value))}
         /> */}
-        <h2>All Members of {channel.title}</h2>
+        <i class="fa-solid fa-hashtag"></i>
+        <h2>{channel.title} members</h2>
       </div>
       <div className="MembersBody">
         {members?.map((result) => (

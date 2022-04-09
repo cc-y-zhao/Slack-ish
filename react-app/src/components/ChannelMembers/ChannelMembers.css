@@ -9,6 +9,17 @@
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid rgb(81,83,82);
+    /* padding-left: 50px; */
+}
+
+.MembersTitle > h2 {
+    margin: 10px 0 10px 0;
+}
+
+.MembersTitle > i {
+    font-size: 20px;
+    padding-right: 7px;
+    padding-top: 4px;
 }
 
 .MembersBody {
