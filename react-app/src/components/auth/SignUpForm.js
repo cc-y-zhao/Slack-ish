@@ -191,7 +191,7 @@ const SignUpForm = () => {
             <input
               type="url"
               name="image_url"
-              placeholder="Enter a profile picture"
+              placeholder="profile image url (optional)"
               onChange={updateImageUrl}
               value={image_url}
             ></input>
