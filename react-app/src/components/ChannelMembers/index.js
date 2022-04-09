@@ -18,8 +18,8 @@ const ChannelMembers = () => {
   const members = channel?.users_in_channel;
   const totalMembers = members?.length;
 
-  // console.log("channel-------------------", channel);
-  // console.log("members-------------------", members);
+  console.log("channel-------------------", channel);
+  console.log("members-------------------", members);
 
   // const prevSearchInput = useSelector((state) => state?.search.search_input);
   // console.log('totalMembers in channelmemebrs', totalMembers);
