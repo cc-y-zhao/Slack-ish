@@ -73,7 +73,7 @@ def get_users_results():
 
 @search_routes.route('/users-in-channel/', methods=["GET"])
 # @login_required
-def get_channel_users_results():
+def get_channel_users():
 
     users = User.query.all()
     channel_id = request.args.get('channelId')
@@ -85,6 +85,15 @@ def get_channel_users_results():
 
     print('\n\n RESULTS \n\n', results)
     print('\n\n NUM OF RESULTS \n\n', len(results))
+
+    # found_users = []
+
+    # for user in results:
+    #     fullname = f'{user.first_name} {user.last_name}'.lower()
+    #     if fullname.find(query.lower()) >= 0:
+    #         found_users.append(user.to_dict())
+
+    # return {'users_results': found_users}
 
     # print('\n\n channel id \n\n', channel_id)
     # print('\n\n CHANNEL \n\n', channel)
