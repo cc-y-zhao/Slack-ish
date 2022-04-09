@@ -39,7 +39,7 @@ function Search() {
 
   const handleOnChange = async (inputValue, e) => {
     e.preventDefault();
-    setSearchInput(inputValue)
+    setSearchInput(inputValue);
   };
 
   const handleClick = async (sessionUserId, resultId, e) => {
@@ -60,7 +60,7 @@ function Search() {
     if (searchInput) {
       dispatch(loadUsersResults(searchInput));
     } else {
-      dispatch(resetSearchInput())
+      dispatch(resetSearchInput());
     }
   }, [dispatch, searchInput]);
 
@@ -114,6 +114,23 @@ function Search() {
                 >
                   <i class="fa-solid fa-magnifying-glass"></i>
                   <div className="SearchName">
+                    {result.image_url ? (
+                      <div className="SearchProfile">
+                        <img
+                          src={result.image_url}
+                          alt=""
+                          style={{
+                            width: "30px",
+                            height: "30px",
+                            borderRadius: "5px",
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      <div className="SearchProfile">
+                        <i class="fa-solid fa-square-person-confined"></i>
+                      </div>
+                    )}
                     {result.first_name} {result.last_name}
                   </div>
                 </div>

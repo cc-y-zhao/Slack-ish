@@ -116,7 +116,11 @@ const ChannelPage = () => {
                   <img
                     src={message.image_url}
                     alt=""
-                    style={{ width: "45px", height: "43px", paddingTop: "7px" }}
+                    style={{
+                      width: "45px",
+                      height: "45px",
+                      borderRadius: "5px",
+                    }}
                   />
                 </div>
               ) : (

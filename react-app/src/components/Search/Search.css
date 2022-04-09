@@ -63,4 +63,10 @@
 .SearchName {
     font-size: 19px;
     padding-left: 45px;
+    display: flex;
+    align-items: center;
+}
+
+.SearchProfile {
+    padding: 5px 10px 5px 8px;
 }
