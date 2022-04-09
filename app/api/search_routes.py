@@ -2,7 +2,7 @@ from pyexpat.errors import messages
 from this import d
 from app.api.auth_routes import validation_errors_to_error_messages
 from flask import Blueprint, jsonify, session, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import Channel, User, Message, db, channel_users
 # from app.forms import ChannelForm
 from sqlalchemy import join
@@ -52,7 +52,7 @@ def get_users_results():
 
     for user in users:
         fullname = f'{user.first_name} {user.last_name}'.lower()
-        if fullname.find(query.lower()) >= 0:
+        if user != current_user and fullname.find(query.lower()) >= 0:
             found_users.append(user.to_dict())
 
     return {'users_results': found_users}
@@ -93,7 +93,7 @@ def get_channel_users():
 
     for user in results:
         fullname = f'{user.first_name} {user.last_name}'.lower()
-        if fullname.find(search_input.lower()) >= 0:
+        if user != current_user and fullname.find(search_input.lower()) >= 0:
             found_users.append(user.to_dict())
 
     print('\n\n found users \n\n', found_users)
