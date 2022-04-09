@@ -8,7 +8,7 @@ const CLEAR_SEARCH_INPUT  = "search/CLEAR_SEARCH_INPUT";
 // const DELETE_ONE_USER = "search/DELETE_ONE_USER";
 
 const loadAllUsers = (users) => ({ type: GET_ALL_USERS, users });
-const loadChannelUsers = (users) => ({ type: GET_ALL_USERS, users});
+const loadChannelUsers = (results) => ({ type: GET_ALL_USERS_RESULTS, results});
 const loadAllUsersResults = (results, searchInput) => ({ type: GET_ALL_USERS_RESULTS, results, searchInput });
 const clearSearchInput = () => ({ type: CLEAR_SEARCH_INPUT });
 
@@ -26,11 +26,11 @@ export const loadUsers = () => async (dispatch) => {
     return errors;
   }
 };
-
-export const loadChannelUsersResults = (channelId) => async (dispatch) => {
-  const response = await fetch("/api/search/users-in-channel/?channelId="+channelId);
+export const loadChannelUsersResults = (channelId, searchInput) => async (dispatch) => {
+  const response = await fetch("/api/search/users-in-channel/?channelId="+channelId+"&searchInput="+searchInput);
   if (response.ok) {
     const results = await response.json();
+    console.log('fetch results', results);
     dispatch(loadChannelUsers(results));
     return results;
   } else {
@@ -38,6 +38,18 @@ export const loadChannelUsersResults = (channelId) => async (dispatch) => {
     return errors;
   }
 };
+
+// export const loadChannelUsersResults = (channelId) => async (dispatch) => {
+//   const response = await fetch("/api/search/users-in-channel/?channelId="+channelId);
+//   if (response.ok) {
+//     const results = await response.json();
+//     dispatch(loadChannelUsers(results));
+//     return results;
+//   } else {
+//     const errors = await response.json();
+//     return errors;
+//   }
+// };
 
 export const loadUsersResults = (searchInput) => async (dispatch) => {
   const response = await fetch("/api/search/users?searchInput="+searchInput);
@@ -50,6 +62,7 @@ export const loadUsersResults = (searchInput) => async (dispatch) => {
     return errors;
   }
 };
+
 
 export const resetSearchInput = () => async (dispatch) => {
   dispatch(clearSearchInput());
@@ -79,10 +92,12 @@ const searchReducer = (state = initialState, action) => {
     case GET_ALL_USERS_RESULTS: {
       newState = { ...state };
 
+      console.log('action in GET ALL USERS-----------', action)
+
       let users_results = action.results.users_results;
 
       newState['users_results'] = users_results;
-      newState['search_input'] = action.searchInput
+      // newState['search_input'] = action.searchInput
 
       return newState;
     }
