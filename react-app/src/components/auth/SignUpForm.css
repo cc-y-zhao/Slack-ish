@@ -27,7 +27,7 @@
     color: #454245;
 }
 
-.SignupFormArea input[type=text], input[type=password] {
+.SignupFormArea input[type=text], input[type=password], input[type=url] {
     height: 44px;
     font-size: 16px;
     width: 400px;
@@ -42,7 +42,7 @@
     transition: border 80ms ease-out,box-shadow 80ms ease-out;
 }
 
-.SignupFormArea input[type=text]:focus, input[type=password]:focus {
+.SignupFormArea input[type=text]:focus, input[type=password]:focus, input[type=url]:focus {
     box-shadow: 0px 0px 0px 4px rgb(186, 225, 241);
     border: 1px solid rgb(69, 133, 183);
     outline: none;

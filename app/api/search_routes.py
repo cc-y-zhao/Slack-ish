@@ -1,4 +1,5 @@
 from pyexpat.errors import messages
+from this import d
 from app.api.auth_routes import validation_errors_to_error_messages
 from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
@@ -67,3 +68,33 @@ def get_users_results():
 
 
     # return {'users_results': [user.to_dict() for user in users]}
+
+
+
+@search_routes.route('/users-in-channel/', methods=["GET"])
+# @login_required
+def get_channel_users():
+
+    search_input = request.args.get('searchInput')
+    channel_id = request.args.get('channelId')
+
+    channel = Channel.query.get(channel_id)
+    channel_users = channel.users
+
+    # print('\n\n CHANNEL USERS \n\n', channel_users)
+    results = User.query.filter(User.email.not_in([user.email for user in channel_users])).all()
+
+    print('\n\n RESULTS \n\n', results)
+    print('\n\n NUM OF RESULTS \n\n', len(results))
+
+    print(f'\n\n search input:\n{search_input}\n\n')
+
+    found_users = []
+
+    for user in results:
+        fullname = f'{user.first_name} {user.last_name}'.lower()
+        if fullname.find(search_input.lower()) >= 0:
+            found_users.append(user.to_dict())
+
+    print('\n\n found users \n\n', found_users)
+    return {'users_results': found_users}

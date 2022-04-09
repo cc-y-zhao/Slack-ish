@@ -1,17 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { loadUsersResults } from "../../store/search";
+
+import { loadUsersResults, resetSearchInput } from "../../store/search";
+
 import { hideSearchModal } from "../../store/modal";
 import { createDm } from "../../store/channels";
+
+import "./Search.css";
 
 function Search() {
   const history = useHistory();
   const dispatch = useDispatch();
 
   const results = useSelector((state) => state?.search.users_results);
-  const prevSearchInput = useSelector((state) => state?.search.search_input);
+
+  // const prevSearchInput = useSelector((state) => state?.search.search_input);
   const sessionUser = useSelector((state) => state.session.user);
+
+  const [searchInput, setSearchInput] = useState("");
+
+  // set search field to empty if showModal is false
+  // const modalState = useSelector((state) => state?.modals);
+
+  // if (modalState) {
+  //   console.log('modal state search display----------', modalState['searchDisplay'])
+  //   if (!modalState['searchDisplay'])
+  //   setSearchInput('');
+  // }
 
   let sessionUserId;
 
@@ -20,13 +36,18 @@ function Search() {
   }
 
   // const [showModal, setShowModal] = useState(false);
-  const [searchInput, setSearchResult] = useState(prevSearchInput);
+
+  const handleOnChange = async (inputValue, e) => {
+    e.preventDefault();
+    setSearchInput(inputValue)
+  };
 
   const handleClick = async (sessionUserId, resultId, e) => {
     e.preventDefault();
 
     let newDirectMessage;
 
+    dispatch(resetSearchInput());
     newDirectMessage = await dispatch(createDm(sessionUserId, resultId));
 
     if (newDirectMessage) {
@@ -35,9 +56,13 @@ function Search() {
     }
   };
 
-  // useEffect(() => {
-  //   dispatch(loadUsersResults());
-  // }, [dispatch]);
+  useEffect(() => {
+    if (searchInput) {
+      dispatch(loadUsersResults(searchInput));
+    } else {
+      dispatch(resetSearchInput())
+    }
+  }, [dispatch, searchInput]);
 
   // From Dan:
   // useEffect allows you to run code between renders.. doesnt actually cause renders
@@ -56,33 +81,59 @@ function Search() {
   return (
     <div>
       <div className="search">
-        {/* <h2>Results</h2> */}
-        <input
-          placeholder="Type to search users"
+        {/* // LOOK AT THIS */}
+        {/* <input
+          placeholder="Search"
           value={searchInput}
           // onClick={() => setShowModal(true)}
-          onChange={(e) => dispatch(loadUsersResults(e.target.value))}
+          onChange={(e) => handleOnChange(e.target.value, e)}
           // onChange -> dispatch for the results and then setSearchResult to those results
-        />
-        {/* <button onClick={() => setShowModal(true)} />
-        {showModal && (
-          <>
-            <Modal onClose={() => setShowModal(false)} />
-            <div>{searchInput}</div>
-            <Modal />
-          </>
-        )} */}
-        {/* <h2>Search Results</h2> */}
+        /> */}
+
+        <div className="SearchBarArea">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            placeholder="Type to search users"
+            value={searchInput}
+            // onClick={() => setShowModal(true)}
+            // onChange={(e) => dispatch(loadUsersResults(e.target.value))}
+            onChange={(e) => handleOnChange(e.target.value, e)}
+
+            // onChange -> dispatch for the results and then setSearchResult to those results
+          />
+        </div>
+
         <div className="search__result">
-          {results?.map((result) => (
-            <div
-              key={result.id}
-              onClick={(e) => handleClick(sessionUserId, result.id, e)}
-              className="SearchResultDiv"
-            >
-              {result.first_name} {result.last_name}
-            </div>
-          ))}
+          {results && (
+            <>
+              {results?.map((result) => (
+                <div
+                  key={result.id}
+                  onClick={(e) => handleClick(sessionUserId, result.id, e)}
+                  className="SearchResultDiv"
+                >
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <div className="SearchName">
+                    {result.first_name} {result.last_name}
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
+          {/* <>
+            {results?.map((result) => (
+              <div
+                key={result.id}
+                onClick={(e) => handleClick(sessionUserId, result.id, e)}
+                className="SearchResultDiv"
+              >
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <div className="SearchName">
+                  {result.first_name} {result.last_name}
+                </div>
+              </div>
+            ))}
+          </> */}
         </div>
         {/* <h2>All Users: (for testing)</h2>
         <div className="search__result">
@@ -93,9 +144,6 @@ function Search() {
           ))}
         </div> */}
       </div>
-      {/* <button onClick={showCreateChannelForm}>
-        Create Channel
-      </button> */}
     </div>
   );
 }

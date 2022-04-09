@@ -9,13 +9,13 @@ def seed_all():
         title='Welcome', is_dm=False, description='We are cloning Slack!')
 
     demo = User(
-        first_name='App', last_name='Academy', email='demo@aa.io', password='password', channels=[channel1])
+        first_name='App', last_name='Academy', email='demo@aa.io', password='password', channels=[channel1], image_url='https://assets-global.website-files.com/5dcc7f8c449e597ed83356b8/603820afd31232aab368ea6f_New%20Red-logo-emblem.png')
     sharon = User(
-        first_name='Sharon', last_name='Fang', email='sharon@aa.io', password='password', channels=[channel1])
+        first_name='Sharon', last_name='Fang', email='sharon@aa.io', password='password', channels=[channel1], image_url='https://pbs.twimg.com/media/EbSfCHFU8AEimfk.jpg')
     gabriel = User(
-        first_name='Gabriel', last_name='Sitorus', email='gabriel@aa.io', password='password', channels=[channel1])
+        first_name='Gabriel', last_name='Sitorus', email='gabriel@aa.io', password='password', channels=[channel1], image_url='https://media-exp1.licdn.com/dms/image/D5603AQHYi5RD9DFdKA/profile-displayphoto-shrink_200_200/0/1647206013202?e=1654732800&v=beta&t=kWWvntvsst9HwJikcrAKGe8fSr3-caSoOAVG2cW8MM8')
     cecilia = User(
-        first_name='Cecilia', last_name='Zhao', email='cecilia@aa.io', password='password', channels=[channel1])
+        first_name='Cecilia', last_name='Zhao', email='cecilia@aa.io', password='password', channels=[channel1], image_url='https://ca.slack-edge.com/T03GU501J-U02D2PVAF5W-41109fd1a78b-72')
 
     db.session.add(demo)
     db.session.add(sharon)
@@ -26,10 +26,21 @@ def seed_all():
                    'Albus', 'Keebie', 'Eevie', 'Sherry', 'John']
     last_names = ['Hope', 'Purcell', 'Braaten', 'Thurman',
                   'Dumbledore', 'Chen', 'Zhao', 'Yu', 'Lee']
-
-    for first_name, last_name in zip(first_names, last_names):
+    image_urls = [
+        'https://ca.slack-edge.com/T03GU501J-U01M9M9GU48-70cca787cf5e-72',
+        'https://ca.slack-edge.com/T03GU501J-U02SZE0GPFG-196de960a5a8-72',
+        'https://ca.slack-edge.com/T03GU501J-U02SZE0GPFG-196de960a5a8-72',
+        'https://ca.slack-edge.com/T03GU501J-U02H2R4AD7T-814eac0ac15a-512',
+        'https://ca.slack-edge.com/T03GU501J-U02H2R4AD7T-814eac0ac15a-512',
+        'https://ca.slack-edge.com/T03GU501J-U02H2R4AD7T-814eac0ac15a-512',
+        'https://ca.slack-edge.com/T03GU501J-U4XLEFDMF-ga0bb56f2c05-72',
+        'https://ca.slack-edge.com/T03GU501J-U0327LT9U5S-f1862c6cb1e0-512',
+        'https://ca.slack-edge.com/T03GU501J-U01SH02QNCV-514081bd2fde-72',
+        'https://ca.slack-edge.com/T03GU501J-U01D8FV3L12-800f94980f0b-72'
+    ]
+    for first_name, last_name, image_url in zip(first_names, last_names, image_urls):
         new_email = f'{first_name}{last_name}@aa.io'
-        new_user = User(first_name=first_name, last_name=last_name,
+        new_user = User(first_name=first_name, last_name=last_name, image_url=image_url,
                         email=new_email, password='password', channels=[channel1])
         db.session.add(new_user)
 

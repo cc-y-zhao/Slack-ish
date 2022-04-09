@@ -11,10 +11,10 @@ class Channel(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     title = db.Column(db.String(50), nullable=False)
     is_dm = db.Column(db.Boolean, nullable=False)
-    description = db.Column(db.String(1000))
-    time_created = db.Column(DateTime(timezone=True), server_default=func.now())
+    description = db.Column(db.String(150))
+    time_created = db.Column(DateTime(timezone=True),
+                             server_default=func.now())
     time_updated = db.Column(DateTime(timezone=True), onupdate=func.now())
-
 
     users = db.relationship(
         "User",
@@ -40,6 +40,6 @@ class Channel(db.Model):
             'description': self.description,
             'time_created': self.time_created,
             'time_updated': self.time_updated,
-            'users': [u.info() for u in self.users],
+            'users_in_channel': [u.info() for u in self.users],
             'messages': [m.to_dict() for m in self.messages]
         }

@@ -52,6 +52,22 @@ export const setSearchModalMount = (mount) => ({
   payload: mount,
 });
 
+// **ADD MEMBERS TO CHANNEL SEARCH MODAL**
+const SET_ADD_MEMBERS_TO_CHANNEL = 'SET_ADD_MEMBERS_TO_CHANNEL'
+
+export const setAddMembersChannelSearchModal = (jsxComponent, channelId) => ({
+  type: SET_CURRENT_SEARCH_MODAL,
+  payload: jsxComponent,
+  channelId
+});
+
+export const setChannelUsersSearchModal = (jsxComponent, channelId) => ({
+  type: SET_CURRENT_SEARCH_MODAL,
+  payload: jsxComponent,
+  channelId
+});
+
+
 const initialState = {
   currentModal: null,
   currentSearchModal: null,
@@ -106,6 +122,7 @@ export default function modals(state = initialState, action) {
       return {
         ...state,
         currentSearchModal: action.payload,
+        channelId: action.channelId
       };
 
     case SET_SEARCH_MODAL_MOUNT:

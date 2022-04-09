@@ -4,6 +4,8 @@ import { hideModal } from "../../store/modal";
 
 import { loadChannel, editMessage, deleteMessage } from "../../store/channels";
 
+import "../CreateChannelForm/CreateChannelForm.css";
+
 const EditMessageForm = () => {
   const dispatch = useDispatch();
 
@@ -26,6 +28,7 @@ const EditMessageForm = () => {
   useEffect(() => {
     const validationErrors = [];
 
+    if (content?.length === 0) validationErrors.push("");
     if (content?.length > 12000)
       validationErrors.push("Your message is too long.");
 
@@ -52,41 +55,43 @@ const EditMessageForm = () => {
   };
 
   return (
-    <>
-      <section>
+    <div className="CreateChannelFormWrapper">
+      <div className="CreateChannelFormHeader">
+        <h1>Edit Message</h1>
+      </div>
+      <div className="CreatChannelFormBody">
         <form onSubmit={handleSubmit}>
-          <div>
-            <div>{errors}</div>
-          </div>
+          <div className="CreateChannelFormErrors">{errors}</div>
           <input type="hidden" value={user_id} />
           <input type="hidden" value={channel_id} />
-          <div>
-            <label>Message</label>
-            <textarea
-              type="text"
-              required
-              placeholder="Message"
-              value={content}
-              onChange={updateContent}
-            />
-          </div>
-          <div>
-            <button type="submit" disabled={errors.length > 0}>
-              Update
-            </button>
-            <button
-              onClick={async () => {
-                await dispatch(deleteMessage(channel_id, id)).then(() =>
-                  dispatch(loadChannel(channel_id))
-                );
-              }}
-            >
-              Delete
-            </button>
+          <textarea
+            type="text"
+            required
+            placeholder="Message"
+            value={content}
+            onChange={updateContent}
+          />
+          <div className="UpdateMessageButtonContainer">
+            <div className="DeleteMessageButton">
+              <button
+                onClick={async () => {
+                  await dispatch(deleteMessage(channel_id, id)).then(() =>
+                    dispatch(loadChannel(channel_id))
+                  );
+                }}
+              >
+                Delete
+              </button>
+            </div>
+            <div className="UpdateMessageButton">
+              <button type="submit" disabled={errors.length > 0}>
+                Update
+              </button>
+            </div>
           </div>
         </form>
-      </section>
-    </>
+      </div>
+    </div>
   );
 };
 

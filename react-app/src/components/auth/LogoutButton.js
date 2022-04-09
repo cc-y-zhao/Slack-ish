@@ -14,7 +14,11 @@ const LogoutButton = () => {
     // }
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  return (
+    <div onClick={onLogout} className="ProfileLogout">
+      Sign out of Slack-ish
+    </div>
+  );
 };
 
 export default LogoutButton;

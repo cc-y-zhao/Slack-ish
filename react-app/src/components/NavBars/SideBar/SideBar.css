@@ -8,10 +8,20 @@
     top: 50px;
     left: 0;
     border-right:1px solid rgb(53,53,58);
+    overflow-y: hidden;
+    scrollbar-width: thin;
+}
+
+.SidebarNav:hover {
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
+    overflow: overlay;
 }
 
 .SidebarLogo {
     border-bottom:1px solid rgb(53,53,58);
+    display: flex;
+    justify-content: space-between;
 }
 
 .SidebarLogo > h1 {
@@ -19,9 +29,38 @@
     margin: 12px 0 9px 15px;
 }
 
+.SidebarLogo > i {
+    background-color: rgb(196, 202, 208);
+    font-size: 20px;
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 15px 2px 0;
+    cursor: pointer;
+}
+
+.SidebarLabels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style: none;
+    height: 20px;
+    text-decoration: none;
+    font-size: 15px;
+    width: 100%;
+}
+
 .SidebarLabel {
     display: flex;
     color: rgb(134, 134, 136);
+    padding-left: 10px;
+}
+
+#SidebarLabelDms {
+    margin-top: 20px;
 }
 
 .SidebarLabel > i {
@@ -70,17 +109,30 @@
     cursor: pointer;
 }
 
-.SidebarLabels {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    list-style: none;
-    height: 20px;
-    text-decoration: none;
+.AddTeammates {
     font-size: 15px;
-    width: 100%;
+    /* margin: 10px 10px 10px 10px; */
+    height: 33px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    color: rgb(134, 134, 136);
 }
 
-.SidebarLabel {
-    padding-left: 10px;
+.AddTeammates > i {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    background-color: rgb(42,41,47);
+    border-radius: 2px;
+    margin-right: 5px;
+}
+
+.AddTeammates:hover {
+    background-color: rgb(39, 36, 44);
+    cursor: pointer;
 }

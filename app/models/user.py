@@ -13,12 +13,12 @@ class User(db.Model, UserMixin):
     # username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-
+    image_url = db.Column(db.String(2000))
 
     messages = db.relationship(
         'Message', back_populates='user')
 
-    #think of 'channels' more as 'join_channel_users'
+    # think of 'channels' more as 'join_channel_users'
     channels = db.relationship(
         "Channel",
         secondary=channel_users,
@@ -42,6 +42,7 @@ class User(db.Model, UserMixin):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'email': self.email,
+            'image_url': self.image_url
         }
 
     def to_dict(self):
@@ -51,5 +52,6 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'email': self.email,
             'channels': [c.to_dict() for c in self.channels],
-            'messages': [m.to_dict() for m in self.messages]
+            'messages': [m.to_dict() for m in self.messages],
+            'image_url': self.image_url
         }

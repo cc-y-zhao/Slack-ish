@@ -23,14 +23,14 @@ const CreateChannelForm = () => {
 
   useEffect(() => {
     const validationErrors = [];
-
+    if (title.length === 0) validationErrors.push("");
     if (title.length > 50)
       validationErrors.push("Title must be 50 characters or less");
-    if (description.length > 1000)
-      validationErrors.push("Description must be 1000 characters or less");
+    if (description.length > 150)
+      validationErrors.push("Description must be 150 characters or less");
 
     setErrors(validationErrors);
-  }, [title]);
+  }, [title, description]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,11 +44,8 @@ const CreateChannelForm = () => {
 
     let newChannel;
 
-    // try {
     newChannel = await dispatch(createChannel(payload));
-    // } catch (error) {
-    //   console.log(error)
-    // }
+
     if (newChannel) {
       setErrors([]);
       dispatch(hideModal());
@@ -70,26 +67,24 @@ const CreateChannelForm = () => {
           </div>
           <input type="hidden" value={owner_id} />
           <input type="hidden" value={is_dm} />
-          <div className="CreateChannelTitle">
-            <input
-              type="text"
-              required
-              placeholder="Channel name"
-              value={title}
-              onChange={updateTitle}
-            />
+          <input
+            type="text"
+            required
+            placeholder="Channel name"
+            value={title}
+            onChange={updateTitle}
+          />
+          <textarea
+            type="text"
+            placeholder="Channel description (optional)"
+            value={description}
+            onChange={updateDescription}
+          />
+          <div className="CreateChannelButton">
+            <button type="submit" disabled={errors.length > 0}>
+              Create Channel
+            </button>
           </div>
-          <div className="CreateChannelDescription">
-            <textarea
-              type="text"
-              placeholder="Channel description (optional)"
-              value={description}
-              onChange={updateDescription}
-            />
-          </div>
-          <button type="submit" disabled={errors.length > 0}>
-            Create Channel
-          </button>
         </form>
       </div>
     </div>

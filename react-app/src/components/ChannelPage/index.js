@@ -4,26 +4,34 @@ import { useParams } from "react-router-dom";
 import EditChannelForm from "../EditChannelForm";
 import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
-import { loadChannel } from "../../store/channels";
-import { showModal, setCurrentEditModal } from "../../store/modal";
+
+import ChannelMembers from "../ChannelMembers";
+import { loadChannel, deleteMessage } from "../../store/channels";
+
+import {
+  showModal,
+  showSearchModal,
+  setCurrentEditModal,
+} from "../../store/modal";
+import AddMembersSearchBar from "../AddMembersSearchBar";
+import {
+  setAddMembersChannelSearchModal,
+  setChannelUsersSearchModal,
+} from "../../store/modal";
+
 import "./ChannelPage.css";
 
 const ChannelPage = () => {
   const dispatch = useDispatch();
   const { channel_id } = useParams();
   const channelId = parseInt(channel_id);
-
   const channel = useSelector((state) => state.channels[channel_id]);
-
   const user_id = useSelector((state) => state.session.user?.id);
+  const members = channel?.users_in_channel;
+  const totalMembers = `(${members?.length})`;
 
   const showEditChannelForm = () => {
     dispatch(setCurrentEditModal(EditChannelForm, channel?.id));
-    dispatch(showModal());
-  };
-
-  const showEditMessageForm = () => {
-    dispatch(setCurrentEditModal(EditMessageForm, channel?.id));
     dispatch(showModal());
   };
 
@@ -33,10 +41,11 @@ const ChannelPage = () => {
   }
 
   let title = channel ? channel.title : "";
+  let description = channel ? channel.description : "";
 
   useEffect(() => {
     dispatch(loadChannel(channel_id));
-  }, [dispatch, channel_id]);
+  }, [dispatch, totalMembers, channel_id]);
 
   function formatTime(string) {
     const options = { hour: "2-digit", minute: "2-digit" };
@@ -47,20 +56,48 @@ const ChannelPage = () => {
     const options = { year: "2-digit", month: "2-digit", day: "2-digit" };
     return new Date(string).toLocaleDateString([], options);
   }
+  ////////////// ADD MEMBERS TO CHANNEL SECTION ///////////////////
+  let addChannelMembersButton = false;
+  if (channel?.is_dm == false) {
+    addChannelMembersButton = true;
+  }
+
+  const ShowChannelMembers = () => {
+    dispatch(setChannelUsersSearchModal(ChannelMembers, channelId));
+    dispatch(showSearchModal());
+  };
+
+  const showAddMembersSearchBar = () => {
+    dispatch(setAddMembersChannelSearchModal(AddMembersSearchBar, channelId));
+    dispatch(showSearchModal());
+  };
 
   return (
     <div className="ChannelPageBody">
       <div className="ChannelPageTitle">
-        <i class="fa-solid fa-hashtag"></i>
-        <h2>{title}</h2>
-        <div>
-          <i
-            class="fa-solid fa-ellipsis-vertical"
-            onClick={showEditChannelForm}
-          ></i>
-          {/* <div>
-            <EditChannelForm channelToEdit={channelToEdit} />
-          </div> */}
+        <div className="ChannelPageTitleLeft">
+          <i class="fa-solid fa-hashtag"></i>
+          <h2>{title}</h2>
+          <p>{description}</p>
+        </div>
+        <div className="ChannelPageTitleRight">
+          <div>
+            {addChannelMembersButton && (
+              <button onClick={showAddMembersSearchBar}>Add Members</button>
+            )}
+          </div>
+          <div>
+            <button onClick={ShowChannelMembers}>
+              Channel Members {totalMembers}
+            </button>
+          </div>
+          {user_id == channel?.owner_id && (
+            <i
+              class="fa-solid fa-ellipsis-vertical"
+              id="EditChannelButton"
+              onClick={showEditChannelForm}
+            ></i>
+          )}
         </div>
       </div>
       <div className="MessagesBody">
@@ -74,9 +111,19 @@ const ChannelPage = () => {
               // onMouseEnter={() => setShowEditMessage(true)}
               // onMouseLeave={() => setShowEditMessage(false)}
             >
-              <div className="MessageProfile">
-                <i class="fa-solid fa-square-person-confined"></i>
-              </div>
+              {message.image_url ? (
+                <div className="MessageProfile">
+                  <img
+                    src={message.image_url}
+                    alt=""
+                    style={{ width: "45px", height: "43px", paddingTop: "7px" }}
+                  />
+                </div>
+              ) : (
+                <div className="MessageProfile">
+                  <i class="fa-solid fa-square-person-confined"></i>
+                </div>
+              )}
               <div className="MessageMain">
                 <div className="MessageInfo">
                   <div className="MessageName">{message.name}</div>
@@ -89,14 +136,12 @@ const ChannelPage = () => {
                 </div>
                 <div className="MessageContent">{message.content}</div>
               </div>
-              <div
-                className="EditMessageButton"
-                id={"MessageEdit" + message.id}
-              >
+              <div id={"MessageEdit" + message.id}>
                 {user_id === message.user_id && (
                   <>
                     <i
                       class="fa-solid fa-ellipsis-vertical"
+                      id="EditMessageButton"
                       onClick={() => {
                         dispatch(
                           setCurrentEditModal(
@@ -108,21 +153,6 @@ const ChannelPage = () => {
                         dispatch(showModal());
                       }}
                     ></i>
-                    {/* <div>
-                      <EditMessageForm
-                        channelId={channelId}
-                        messageToEdit={message}
-                      />
-                      <button
-                        onClick={async () => {
-                          await dispatch(
-                            deleteMessage(channel.id, message.id)
-                          ).then(() => dispatch(loadChannel(channel_id)));
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </div> */}
                   </>
                 )}
               </div>
