@@ -73,10 +73,11 @@ def get_users_results():
 
 @search_routes.route('/users-in-channel/', methods=["GET"])
 # @login_required
-def get_channel_users_results():
+def get_channel_users():
 
-    users = User.query.all()
+    search_input = request.args.get('searchInput')
     channel_id = request.args.get('channelId')
+
     channel = Channel.query.get(channel_id)
     channel_users = channel.users
 
@@ -86,17 +87,14 @@ def get_channel_users_results():
     print('\n\n RESULTS \n\n', results)
     print('\n\n NUM OF RESULTS \n\n', len(results))
 
-    # print('\n\n channel id \n\n', channel_id)
-    # print('\n\n CHANNEL \n\n', channel)
-    # print('\n\n CHANNEL USERS \n\n', channel_users)
-    # print('\n\n USERS \n\n', users)
-    # print('\n\n CHANNEL USERS nameee \n\n', channel_users[0].email)
+    print(f'\n\n search input:\n{search_input}\n\n')
 
-    # print(f'query is {query}')
+    found_users = []
 
-    # for user in users:
-    #     fullname = f'{user.first_name} {user.last_name}'.lower()
-    #     if fullname.find(query.lower()) >= 0:
-    #         found_users.append(user.to_dict())
+    for user in results:
+        fullname = f'{user.first_name} {user.last_name}'.lower()
+        if fullname.find(search_input.lower()) >= 0:
+            found_users.append(user.to_dict())
 
-    return {'users': [user.to_dict() for user in results]}
+    print('\n\n found users \n\n', found_users)
+    return {'users_results': found_users}

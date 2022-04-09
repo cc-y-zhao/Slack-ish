@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -15,7 +15,7 @@ function Search() {
 
   const results = useSelector((state) => state?.search.users_results);
 
-  const prevSearchInput = useSelector((state) => state?.search.search_input);
+  // const prevSearchInput = useSelector((state) => state?.search.search_input);
   const sessionUser = useSelector((state) => state.session.user);
 
   const [searchInput, setSearchInput] = useState("");
@@ -39,10 +39,7 @@ function Search() {
 
   const handleOnChange = async (inputValue, e) => {
     e.preventDefault();
-
-    dispatch(loadUsersResults(inputValue));
-    setSearchInput(prevSearchInput);
-    return;
+    setSearchInput(inputValue)
   };
 
   const handleClick = async (sessionUserId, resultId, e) => {
@@ -59,9 +56,13 @@ function Search() {
     }
   };
 
-  // useEffect(() => {
-  //   dispatch(loadUsersResults());
-  // }, [dispatch]);
+  useEffect(() => {
+    if (searchInput) {
+      dispatch(loadUsersResults(searchInput));
+    } else {
+      dispatch(resetSearchInput())
+    }
+  }, [dispatch, searchInput]);
 
   // From Dan:
   // useEffect allows you to run code between renders.. doesnt actually cause renders
