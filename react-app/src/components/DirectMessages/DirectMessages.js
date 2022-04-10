@@ -26,21 +26,19 @@ const DirectMessages = () => {
       <div className="channels">
         {channels?.map((channel) => {
           return (
-            channel.is_dm === true && (
-              // <div className="channel__list" key={channel.id}>
+           ( channel.is_dm === true) && (channel.title.includes(user_name)) ? (
               <NavLink
                 to={`/channels/${channel.id}`}
                 key={channel.id}
                 className="channel__list"
                 activeClassName="selected"
               >
-                {channel.title.includes(user_name) ?
                   <div className="ChannelListItem">
                     <i class="fa-regular fa-face-smile"></i> {channel.title}
-                  </div> : null
-                  }
+                  </div>
+
               </NavLink>
-            )
+            ) : null
           );
         })}
       </div>
