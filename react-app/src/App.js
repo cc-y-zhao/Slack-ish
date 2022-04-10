@@ -14,6 +14,7 @@ import ChannelPage from "./components/ChannelPage";
 import CreateChannelForm from "./components/CreateChannelForm";
 import Search from "./components/Search";
 import CreateDMForm from "./components/CreateDMForm";
+import DontBelongHerePage from "./components/DontBelongHerePage/DontBelongHerePage";
 
 import Modal from "./components/Modal/Modal";
 import SearchModal from "./components/Modal/SearchModal";
@@ -66,8 +67,7 @@ function App() {
           <ChannelPage />
         </ProtectedRoute>
         <Route path="*">
-          <h1>YOU DONT BELONG HERE!!</h1>
-          {/* Render a component that's just centered */}
+          <DontBelongHerePage />
         </Route>
       </Switch>
     </BrowserRouter>

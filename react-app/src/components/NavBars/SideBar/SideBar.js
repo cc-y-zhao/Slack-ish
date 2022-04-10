@@ -38,6 +38,7 @@ const Sidebar = () => {
               <i
                 class="fa-regular fa-pen-to-square"
                 onClick={showCreateDMSearch}
+                title="New Direct Message"
               ></i>
             </div>
             <div
@@ -52,6 +53,7 @@ const Sidebar = () => {
                   <i
                     className="fa-solid fa-plus"
                     onClick={showCreateChannelForm}
+                    title="Create Channel"
                   ></i>
                 )}
               </div>
