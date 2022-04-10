@@ -24,8 +24,8 @@ const deleteOneChannel = (channel) => ({
   deletedChannel: channel,
 });
 
-export const loadChannels = (user_id) => async (dispatch) => {
-  const response = await fetch(`/api/channels/user/${user_id}`);
+export const loadChannels = () => async (dispatch) => {
+  const response = await fetch(`/api/channels/all`);
   if (response.ok) {
     const channels = await response.json();
     dispatch(loadAllChannels(channels.channels));
