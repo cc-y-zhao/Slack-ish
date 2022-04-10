@@ -15,10 +15,11 @@ const Channels = () => {
   }
 
   const dispatch = useDispatch();
+  const channelsString = channels.toString();
 
   useEffect(() => {
     dispatch(loadChannels());
-  }, [channels.toString()]);
+  }, [dispatch, channelsString]);
 
   let showChannels = [];
   if (channels) {

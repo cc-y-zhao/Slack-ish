@@ -35,8 +35,6 @@ def get_users_results():
 
     found_users = []
 
-    print(f'query is {query}')
-
     for user in users:
         fullname = f'{user.first_name} {user.last_name}'.lower()
         if user != current_user and fullname.find(query.lower()) >= 0:
@@ -58,11 +56,6 @@ def get_channel_users():
     results = User.query.filter(User.email.not_in(
         [user.email for user in channel_users])).all()
 
-    print('\n\n RESULTS \n\n', results)
-    print('\n\n NUM OF RESULTS \n\n', len(results))
-
-    print(f'\n\n search input:\n{search_input}\n\n')
-
     found_users = []
 
     for user in results:
@@ -70,5 +63,4 @@ def get_channel_users():
         if user != current_user and fullname.find(search_input.lower()) >= 0:
             found_users.append(user.to_dict())
 
-    print('\n\n found users \n\n', found_users)
     return {'users_results': found_users}

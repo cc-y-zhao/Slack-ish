@@ -10,9 +10,11 @@ const DirectMessages = () => {
 
   const dispatch = useDispatch();
 
+  const channelsString = channels.toString();
+
   useEffect(() => {
     dispatch(loadChannels(user_id));
-  }, [channels.toString()]);
+  }, [dispatch, user_id, channelsString]);
 
   let showChannels = [];
   if (channels) {

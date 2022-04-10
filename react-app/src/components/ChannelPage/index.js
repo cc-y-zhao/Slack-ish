@@ -58,7 +58,7 @@ const ChannelPage = () => {
   }
   ////////////// ADD MEMBERS TO CHANNEL SECTION ///////////////////
   let addChannelMembersButton = false;
-  if (channel?.is_dm == false) {
+  if (channel?.is_dm === false) {
     addChannelMembersButton = true;
   }
 
@@ -115,7 +115,7 @@ const ChannelPage = () => {
                 </p>
               </div>
               <div>
-                {user_id == channel?.owner_id && (
+                {user_id === channel?.owner_id && (
                   <i
                     class="fa-solid fa-ellipsis-vertical"
                     id="EditChannelButton"

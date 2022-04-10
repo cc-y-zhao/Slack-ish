@@ -38,7 +38,6 @@ def post_message(channel_id):
 @message_routes.route('/<int:message_id>', methods=["PUT"])
 @login_required
 def edit_message(message_id):
-    print(f'\n\n im in edit message\n\n')
     form = MessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -46,7 +45,6 @@ def edit_message(message_id):
 
     if form.validate_on_submit():
         message = Message.query.get(message_id)
-        print('message to edit in message routes--------', message)
         message.content = data['content']
         message.time_updated = datetime.datetime.utcnow(),
 

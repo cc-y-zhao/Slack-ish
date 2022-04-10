@@ -27,7 +27,6 @@ def get_session_user_channels():
         for user in users_in_channel:
             users_ids.append(user['id'])
             channel_dicted['users_ids'] = users_ids
-            print('\n\n\n channel \n\n\n', channel)
         channels_dicted.append(channel_dicted)
 
     return {'channels': channels_dicted}
@@ -51,8 +50,6 @@ def get_one_channel(channel_id):
     users_ids = []
     users_in_channel_no_dict = channel.to_dict()
     users_in_channel = users_in_channel_no_dict['users_in_channel']
-
-    print('\n\n\n users in channel \n\n\n', users_in_channel)
 
     for user in users_in_channel:
         users_ids.append(user['id'])
@@ -172,9 +169,6 @@ def add_user_channel(channel_id, user_id):
 
     channel = Channel.query.get(channel_id)
     user = User.query.get(user_id)
-
-    print('\n\n channel in channel_routes \n\n', channel)
-    print('\n\n user in channel_routes \n\n', user)
 
     user.channels.append(channel)
 
