@@ -157,7 +157,16 @@ def add_direct_message(session_user_id, search_user_id):
     search_user.channels.append(new_channel)
 
     db.session.commit()
-    return new_channel.to_dict()
+
+    users_ids = []
+    users_ids.append(session_user.id)
+    users_ids.append(search_user.id)
+
+    direct_message_dicted = new_channel.to_dict()
+    direct_message_dicted['users_ids'] = users_ids
+
+
+    return direct_message_dicted
 
 # POST Route to add a user to a channel
 #####################################################
