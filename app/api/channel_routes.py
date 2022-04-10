@@ -192,7 +192,15 @@ def edit_channel(channel_id):
 
         db.session.commit()
 
-        return channel.to_dict()
+        users_ids = []
+        channel_dicted = channel.to_dict()
+        users_in_channel = channel_dicted['users_in_channel']
+
+        for user in users_in_channel:
+            users_ids.append(user['id'])
+        channel_dicted['users_ids'] = users_ids
+
+        return channel_dicted
 
     return {'errors': validation_errors_to_error_messages(form.errors)}
 

@@ -49,15 +49,13 @@ const EditChannelForm = () => {
 
     let editedChannelSuccess;
 
-    editedChannelSuccess = await dispatch(editChannel(editedChannel)).then(() =>
-      dispatch(loadChannel(editedChannel.id))
-    );
+    editedChannelSuccess = await dispatch(editChannel(editedChannel))
 
     if (editedChannelSuccess) {
       setErrors([]);
-      await dispatch(loadChannel(editedChannel.id));
       await dispatch(hideModal());
-      history.push(`/channels/${editedChannel.id}`);
+      await dispatch(loadChannel(id));
+      return history.push(`/channels/${id}`);
     }
   };
 

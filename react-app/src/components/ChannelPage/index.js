@@ -30,6 +30,12 @@ const ChannelPage = () => {
   const members = channel?.users_in_channel;
   const totalMembers = `(${members?.length})`;
 
+  const state = useSelector((state) => state);
+
+
+  console.log('STATE-------------------', state)
+  console.log('CHANNEL---------------------', channel);
+
   const showEditChannelForm = () => {
     dispatch(setCurrentEditModal(EditChannelForm, channel?.id));
     dispatch(showModal());
@@ -78,7 +84,8 @@ const ChannelPage = () => {
 
   let showChannel = false;
 
-  if (channel && channel["users_ids"]?.includes(user_id)) {
+  if (channel && channel['users_ids']) {
+     if (channel["users_ids"]?.includes(user_id))
     showChannel = true;
   } else {
     return <Redirect to="/channels/1" />;
