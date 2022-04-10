@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Redirect } from "react-router-dom";
 
@@ -8,6 +8,8 @@ import { createChannel } from "../../store/channels";
 
 import { loadUsersResults } from "../../store/search";
 import Search from "../Search";
+
+import "./ChannelMembers.css";
 
 const ChannelMembers = () => {
   // const ChannelMembers = ({ channelId }) => {
@@ -26,22 +28,40 @@ const ChannelMembers = () => {
   // const [searchInput, setSearchResult] = useState(prevSearchInput);
 
   return (
-    <div className="ShowListOfUsers">
-      <div className="search">
+    <div className="MembersWrapper">
+      <div className="MembersTitle">
         {/* <input placeholder='Find members'
           value={prevSearchInput}
           onChange={(e) => dispatch(loadUsersResults(e.target.value))}
         /> */}
-        <h2>Members</h2>
-        <div className="userlist__searchResult">
-          {members?.map((result) => (
-            <div key={result?.id}>
-              <div>
-                {result?.first_name} {result?.last_name}
-              </div>
+        <i class="fa-solid fa-hashtag"></i>
+        <h2>{channel.title}</h2>
+      </div>
+      <div className="MembersBody">
+        {members?.map((result) => (
+          <div key={result?.id}>
+            <div className="MemberNameBody">
+              {result.image_url ? (
+                <div className="MemberProfile">
+                  <img
+                    src={result.image_url}
+                    alt=""
+                    style={{
+                      width: "35px",
+                      height: "35px",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div>
+              ) : (
+                <div className="MemberProfile">
+                  <i class="fa-solid fa-square-person-confined"></i>
+                </div>
+              )}
+              {result.first_name} {result.last_name}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );

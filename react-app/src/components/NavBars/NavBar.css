@@ -59,6 +59,10 @@
     border-bottom: 1px solid rgb(81,83,82);
 }
 
+.ProfileNameArea > img {
+    padding-right: 8px;
+}
+
 .ProfileNameArea > i {
     color: rgb(245, 235, 92);
     font-size: 40px;

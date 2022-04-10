@@ -40,8 +40,23 @@
     padding-left: 60px;
 }
 
+.search__result {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    width: 100%;
+    max-height: 400px;
+    overflow: hidden;
+    scrollbar-width: thin;
+}
+
+.search__result:hover {
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
+    overflow-y: overlay;
+}
+
 .SearchResultDiv {
-    width: 598px;
+    width: 100%;
     min-height: 40px;
     display: flex;
     align-items: center;
@@ -63,4 +78,10 @@
 .SearchName {
     font-size: 19px;
     padding-left: 45px;
+    display: flex;
+    align-items: center;
+}
+
+.SearchProfile {
+    padding: 5px 10px 5px 8px;
 }

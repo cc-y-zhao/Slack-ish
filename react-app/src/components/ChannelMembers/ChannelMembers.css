@@ -1,0 +1,68 @@
+.MembersWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.MembersTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgb(81,83,82);
+    /* padding-left: 50px; */
+}
+
+.MembersTitle > h2 {
+    margin: 10px 0 10px 0;
+}
+
+.MembersTitle > i {
+    font-size: 20px;
+    padding-right: 7px;
+    padding-top: 4px;
+}
+
+.MembersBody {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    overflow: hidden;
+    scrollbar-width: thin;
+}
+
+.MembersBody:hover {
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
+    overflow-y: overlay;
+}
+
+.MemberNameBody {
+    display: flex;
+    font-size: 20px;
+    padding: 5px 0 5px 25px;
+    min-height: 40px;
+    /* width: 100%; */
+}
+
+.MemberNameBody:hover {
+    color: rgb(243, 246, 249);
+    background-color: rgb(32, 110, 159);
+    cursor: pointer;
+}
+
+.MemberNameBody {
+    padding-left: 45px;
+    display: flex;
+    align-items: center;
+}
+
+.MemberProfile {
+    padding-right: 18px;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(245, 235, 92);
+}

@@ -94,101 +94,110 @@ const ChannelPage = () => {
 
   return (
     <>
-      { showChannel ? (
+      {showChannel ? (
         <div className="ChannelPageBody">
-        <div className="ChannelPageTitle">
-          <div className="ChannelPageTitleLeft">
-            <i class="fa-solid fa-hashtag"></i>
-            <h2>{title}</h2>
-            <p>{description}</p>
-          </div>
-          <div className="ChannelPageTitleRight">
-            <div>
-              {addChannelMembersButton && (
-                <button onClick={showAddMembersSearchBar}>Add Members</button>
-              )}
+          <div className="ChannelPageTitle">
+            <div className="ChannelPageTitleLeft">
+              <i class="fa-solid fa-hashtag"></i>
+              <h2>{title}</h2>
+              <p>{description}</p>
             </div>
-            <div>
-              <button onClick={ShowChannelMembers}>
-                Channel Members {totalMembers}
-              </button>
-            </div>
-            {user_id == channel?.owner_id && (
-              <i
-                class="fa-solid fa-ellipsis-vertical"
-                id="EditChannelButton"
-                onClick={showEditChannelForm}
-              ></i>
-            )}
-          </div>
-        </div>
-        <div className="MessagesBody">
-          {messages
-            ?.slice(0)
-            .reverse()
-            .map((message) => (
-              <div
-                className="SingleMessageBody"
-                key={message.id}
-                // onMouseEnter={() => setShowEditMessage(true)}
-                // onMouseLeave={() => setShowEditMessage(false)}
-              >
-                {message.image_url ? (
-                  <div className="MessageProfile">
-                    <img
-                      src={message.image_url}
-                      alt=""
-                      style={{ width: "45px", height: "43px", paddingTop: "7px" }}
-                    />
-                  </div>
-                ) : (
-                  <div className="MessageProfile">
-                    <i class="fa-solid fa-square-person-confined"></i>
-                  </div>
+            <div className="ChannelPageTitleRight">
+              <div className="AddMembersButton">
+                {addChannelMembersButton && (
+                  <i
+                    class="fa-solid fa-user-plus"
+                    onClick={showAddMembersSearchBar}
+                  ></i>
                 )}
-                <div className="MessageMain">
-                  <div className="MessageInfo">
-                    <div className="MessageName">{message.name}</div>
-                    <div className="MessageTime">
-                      {formatTime(message.time_created)}{" "}
-                    </div>
-                    <div className="MessageTime">
-                      {formatDate(message.time_created)}
-                    </div>
-                  </div>
-                  <div className="MessageContent">{message.content}</div>
-                </div>
-                <div id={"MessageEdit" + message.id}>
-                  {user_id === message.user_id && (
-                    <>
-                      <i
-                        class="fa-solid fa-ellipsis-vertical"
-                        id="EditMessageButton"
-                        onClick={() => {
-                          dispatch(
-                            setCurrentEditModal(
-                              EditMessageForm,
-                              channel?.id,
-                              message?.id
-                            )
-                          );
-                          dispatch(showModal());
-                        }}
-                      ></i>
-                    </>
-                  )}
-                </div>
               </div>
-            ))}
+              <div className="ShowMembersButton">
+                <p onClick={ShowChannelMembers}>
+                  <i class="fa-solid fa-user"></i>
+                  {totalMembers}
+                </p>
+              </div>
+              <div>
+                {user_id == channel?.owner_id && (
+                  <i
+                    class="fa-solid fa-ellipsis-vertical"
+                    id="EditChannelButton"
+                    onClick={showEditChannelForm}
+                  ></i>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="MessagesBody">
+            {messages
+              ?.slice(0)
+              .reverse()
+              .map((message) => (
+                <div
+                  className="SingleMessageBody"
+                  key={message.id}
+                  // onMouseEnter={() => setShowEditMessage(true)}
+                  // onMouseLeave={() => setShowEditMessage(false)}
+                >
+                  {message.image_url ? (
+                    <div className="MessageProfile">
+                      <img
+                        src={message.image_url}
+                        alt=""
+                        style={{
+                          width: "45px",
+                          height: "45px",
+                          borderRadius: "5px",
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="MessageProfile">
+                      <i class="fa-solid fa-square-person-confined"></i>
+                    </div>
+                  )}
+                  <div className="MessageMain">
+                    <div className="MessageInfo">
+                      <div className="MessageName">{message.name}</div>
+                      <div className="MessageTime">
+                        {formatTime(message.time_created)}{" "}
+                      </div>
+                      <div className="MessageTime">
+                        {formatDate(message.time_created)}
+                      </div>
+                    </div>
+                    <div className="MessageContent">{message.content}</div>
+                  </div>
+                  <div id={"MessageEdit" + message.id}>
+                    {user_id === message.user_id && (
+                      <>
+                        <i
+                          class="fa-solid fa-ellipsis-vertical"
+                          id="EditMessageButton"
+                          onClick={() => {
+                            dispatch(
+                              setCurrentEditModal(
+                                EditMessageForm,
+                                channel?.id,
+                                message?.id
+                              )
+                            );
+                            dispatch(showModal());
+                          }}
+                        ></i>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
+          </div>
+          <CreateMessageForm channelId={channelId} />
         </div>
-        <CreateMessageForm channelId={channelId} />
-      </div>
       ) : (
         <>
           <h1>YOU DONT BELONG HERE</h1>
         </>
-      )
-      }
+      )}
     </>
   );
 };
