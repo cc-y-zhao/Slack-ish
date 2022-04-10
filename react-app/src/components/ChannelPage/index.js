@@ -29,6 +29,7 @@ const ChannelPage = () => {
   const { channel_id } = useParams();
   const channelId = parseInt(channel_id);
   const channel = useSelector((state) => state.channels[channel_id]);
+  const currentUser = useSelector((state) => state.session.user);
   const user_id = useSelector((state) => state.session.user?.id);
   const members = channel?.users_in_channel;
   const totalMembers = `(${members?.length})`;
@@ -81,21 +82,16 @@ const ChannelPage = () => {
 
   let showChannel = false;
 
-  if (channel) {
-    let ids = channel["users_ids"];
-    // console.log('ids-----------------------', ids);
-    // console.log('userId-----------------------', user_id);
-    // console.log('BOOLEAN-----------------------', ids?.includes(user_id));
-    if (ids?.includes(user_id)) {
-      showChannel = true;
-    } else {
-      return <Redirect to="/channels/1" />;
-    }
+
+  if (channel && channel['users_ids']?.includes(user_id)) {
+    showChannel = true;
+  } else {
+    return <Redirect to='/channels/1' />
   }
 
   return (
     <>
-      {showChannel ? (
+      {showChannel && (
         <div className="ChannelPageBody">
           <div className="ChannelPageTitle">
             <div className="ChannelPageTitleLeft">
@@ -204,8 +200,6 @@ const ChannelPage = () => {
           </div>
           <CreateMessageForm channelId={channelId} />
         </div>
-      ) : (
-        <DontBelongHerePage />
       )}
     </>
   );

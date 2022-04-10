@@ -5,11 +5,13 @@ const EDIT_ONE_CHANNEL = "channels/EDIT_ONE_CHANNEL";
 const DELETE_ONE_CHANNEL = "channels/DELETE_ONE_CHANNEL";
 const CREATE_ONE_DM = "channels/CREATE_ONE_DM";
 const ADD_ONE_USER_TO_CHANNEL = "channels/ADD_ONE_USER_TO_CHANNEL";
+const RESET_CHANNELS_STATE = "channels/RESET_CHANNELS_STATE";
 
 const createOneDm = (dm) => ({ type: CREATE_ONE_DM, dm });
 const loadAllChannels = (channels) => ({ type: GET_ALL_CHANNELS, channels });
 const loadOneChannel = (channel) => ({ type: GET_ONE_CHANNEL, channel });
 const addOneUserToChannel = (channel) => ({ type: ADD_ONE_USER_TO_CHANNEL, channel });
+const resetChannelsStateLogout = () => ({ type: RESET_CHANNELS_STATE });
 
 const createOneChannel = (channel) => ({
   type: CREATE_ONE_CHANNEL,
@@ -124,6 +126,10 @@ export const addUserToChannel = (channelId, userId) => async dispatch => {
   } else {
     return response.json('Could not handle request')
   }
+}
+
+export const resetChannelsState = () => async dispatch => {
+  dispatch(resetChannelsStateLogout());
 }
 // **********************************MESSAGES**********************************************
 // **********************************MESSAGES**********************************************
@@ -274,6 +280,10 @@ const channelsReducer = (state = initialState, action) => {
 
     case CREATE_ONE_DM: {
       return { [action.dm.id]: action.dm, ...state };
+    }
+
+    case RESET_CHANNELS_STATE :{
+      return {};
     }
 
     default:

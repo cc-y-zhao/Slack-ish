@@ -30,9 +30,22 @@ def get_session_user_channels():
     # channels = Channel.query.all()
     # return {'channels': [channel.to_dict() for channel in channels]}
 
-    # print('\n\n channels from backend \n\n', channels)
+    # print('\n\n channels from backend \n\n', channels)\
 
-    return {'channels': [channel.to_dict() for channel in channels]}
+    channels_dicted = []
+
+    for channel in channels:
+        users_ids = []
+        channel_dicted = channel.to_dict()
+        users_in_channel = channel_dicted['users_in_channel']
+        for user in users_in_channel:
+            users_ids.append(user['id'])
+            channel_dicted['users_ids'] = users_ids
+            print('\n\n\n channel \n\n\n', channel)
+        channels_dicted.append(channel_dicted)
+
+
+    return {'channels': channels_dicted}
 
 # GET logged in user's DM (search)
 # @channel_routes.route('/user/<int:user_id>/<int:search_user_id>')
@@ -132,7 +145,10 @@ def add_channel():
         current_user.channels.append(new_channel)
 
         db.session.commit()
-        return new_channel.to_dict()
+
+        channel_dicted = new_channel.to_dict()
+        channel_dicted['users_ids'] = [current_user.id]
+        return channel_dicted
 
     return {"errors": validation_errors_to_error_messages(form.errors)}
 
