@@ -138,7 +138,7 @@ const ChannelPage = () => {
                   // onMouseEnter={() => setShowEditMessage(true)}
                   // onMouseLeave={() => setShowEditMessage(false)}
                 >
-                  {message.image_url ? (
+                  {message?.image_url ? (
                     <div className="MessageProfile">
                       <img
                         src={message.image_url}
