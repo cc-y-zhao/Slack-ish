@@ -27,6 +27,7 @@ function AddMembersSearchBar() {
     let addedUserToChannel;
 
     addedUserToChannel = await dispatch(addUserToChannel(channelId, userId));
+
     dispatch(resetSearchInput());
     if (addedUserToChannel) {
       window.alert(`${firstName} ${lastName} was added to this channel!`);
