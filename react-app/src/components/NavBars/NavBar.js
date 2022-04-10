@@ -61,7 +61,7 @@ const NavBar = () => {
             />
           ) : (
             <i
-              class="fa-solid fa-square-person-confined"
+              className="fa-solid fa-square-person-confined"
               id="ProfileField"
               onClick={openMenu}
             ></i>
@@ -84,14 +84,14 @@ const NavBar = () => {
                       }}
                     />
                   ) : (
-                    <i class="fa-solid fa-square-person-confined"></i>
+                    <i className="fa-solid fa-square-person-confined"></i>
                   )}
                   <div className="ProfileName_Status">
                     <div className="ProfileName">
                       {sessionUser.first_name} {sessionUser.last_name}
                     </div>
                     <div className="ProfileStatus">
-                      <i class="fa-solid fa-circle"></i>
+                      <i className="fa-solid fa-circle"></i>
                       <p>Active</p>
                     </div>
                   </div>

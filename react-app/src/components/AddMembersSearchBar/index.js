@@ -45,7 +45,7 @@ function AddMembersSearchBar() {
     <div>
       <div className="search">
         <div className="SearchBarArea">
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i className="fa-solid fa-magnifying-glass"></i>
           <input
             placeholder="Type to search users"
             value={searchInput}
@@ -67,7 +67,7 @@ function AddMembersSearchBar() {
               }
               className="SearchResultDiv"
             >
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <i className="fa-solid fa-magnifying-glass"></i>
               <div className="SearchName">
                 {user.image_url ? (
                   <div className="SearchProfile">
@@ -86,7 +86,7 @@ function AddMembersSearchBar() {
                   </div>
                 ) : (
                   <div className="SearchProfile">
-                    <i class="fa-solid fa-square-person-confined"></i>
+                    <i className="fa-solid fa-square-person-confined"></i>
                   </div>
                 )}
                 {user.first_name} {user.last_name}

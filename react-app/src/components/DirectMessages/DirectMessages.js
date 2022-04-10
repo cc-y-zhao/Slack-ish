@@ -38,7 +38,7 @@ const DirectMessages = () => {
                 activeClassName="selected"
               >
                 <div className="ChannelListItem">
-                  <i class="fa-regular fa-face-smile"></i> {channel.title}
+                  <i className="fa-regular fa-face-smile"></i> {channel.title}
                 </div>
               </NavLink>
             )

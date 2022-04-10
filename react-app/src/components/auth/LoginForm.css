@@ -144,7 +144,7 @@
 }
 
 .LoginFormFooter {
-    padding: 32px 0;
+    padding-bottom: 32px;
     display: flex;
     align-items: center;
     position: absolute;
@@ -161,7 +161,22 @@
     cursor: pointer;
 }
 
+.LoginFormFooter p {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #696969;
+    letter-spacing: -.2px;
+    margin-right: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .LoginFormFooter > a:hover {
+    color: #1264a3;
+    text-decoration: underline;
+}
+
+.LoginFormFooter > p:hover {
     color: #1264a3;
     text-decoration: underline;
 }
@@ -171,7 +186,7 @@
     display: inline-block;
 }
 
-.contact-dropup > a:hover {
+.contact-dropup > p:hover {
     color: #1264a3;
     text-decoration: underline;
 }
@@ -179,7 +194,7 @@
 .contact-dropup-content {
     display: none;
     position: absolute;
-    bottom: 23px;
+    bottom: 40px;
     background-color: #f1f1f1;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -199,3 +214,33 @@
 .contact-dropup:hover .contact-dropup-content {
     display: block;
 }
+
+.languages-dropup {
+    position: relative;
+    display: inline-block;
+}
+
+.languages-dropup-content {
+    display: none;
+    position: absolute;
+    bottom: 40px;
+    background-color: #f1f1f1;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.languages-dropup > p:hover {
+    color: #1264a3;
+    text-decoration: underline;
+}
+
+.languages-dropup-content img {
+    height: 50px;
+}
+
+.languages-dropup:hover .languages-dropup-content {
+    display: block;
+}
+
+.languages-dropup-content img:hover {background-color: #ddd;}

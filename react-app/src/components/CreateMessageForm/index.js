@@ -64,7 +64,7 @@ const CreateMessageForm = ({ channelId }) => {
               onChange={updateContent}
             />
             <button type="submit" disabled={errors.length > 0}>
-              <i class="fa-solid fa-paper-plane"></i>
+              <i className="fa-solid fa-paper-plane"></i>
             </button>
           </div>
         </form>
