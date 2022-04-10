@@ -38,6 +38,7 @@ const Sidebar = () => {
               <i
                 class="fa-regular fa-pen-to-square"
                 onClick={showCreateDMSearch}
+                title="New Direct Message"
               ></i>
             </div>
             <div
@@ -47,13 +48,12 @@ const Sidebar = () => {
             >
               <i className="fa-solid fa-caret-down"></i>
               <h1>Channels</h1>
-              <div className="addchannelbutton">
-                {showAddChannel && (
-                  <i
-                    className="fa-solid fa-plus"
-                    onClick={showCreateChannelForm}
-                  ></i>
-                )}
+              <div
+                className="addchannelbutton"
+                onClick={showCreateChannelForm}
+                title="Create Channel"
+              >
+                {showAddChannel && <i className="fa-solid fa-plus"></i>}
               </div>
             </div>
             <div className="SidebarLinks">
@@ -71,13 +71,12 @@ const Sidebar = () => {
             >
               <i className="fa-solid fa-caret-down"></i>
               <h1>Direct Messages</h1>
-              <div className="adddmbutton">
-                {showAddDm && (
-                  <i
-                    className="fa-solid fa-plus"
-                    onClick={showCreateDMSearch}
-                  ></i>
-                )}
+              <div
+                className="adddmbutton"
+                onClick={showCreateDMSearch}
+                title="Open a direct message"
+              >
+                {showAddDm && <i className="fa-solid fa-plus"></i>}
               </div>
             </div>
             <div className="SidebarLinks">

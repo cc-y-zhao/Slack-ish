@@ -5,11 +5,16 @@ const EDIT_ONE_CHANNEL = "channels/EDIT_ONE_CHANNEL";
 const DELETE_ONE_CHANNEL = "channels/DELETE_ONE_CHANNEL";
 const CREATE_ONE_DM = "channels/CREATE_ONE_DM";
 const ADD_ONE_USER_TO_CHANNEL = "channels/ADD_ONE_USER_TO_CHANNEL";
+const RESET_CHANNELS_STATE = "channels/RESET_CHANNELS_STATE";
 
 const createOneDm = (dm) => ({ type: CREATE_ONE_DM, dm });
 const loadAllChannels = (channels) => ({ type: GET_ALL_CHANNELS, channels });
 const loadOneChannel = (channel) => ({ type: GET_ONE_CHANNEL, channel });
-const addOneUserToChannel = (channel) => ({ type: ADD_ONE_USER_TO_CHANNEL, channel });
+const addOneUserToChannel = (channel) => ({
+  type: ADD_ONE_USER_TO_CHANNEL,
+  channel,
+});
+const resetChannelsStateLogout = () => ({ type: RESET_CHANNELS_STATE });
 
 const createOneChannel = (channel) => ({
   type: CREATE_ONE_CHANNEL,
@@ -24,8 +29,8 @@ const deleteOneChannel = (channel) => ({
   deletedChannel: channel,
 });
 
-export const loadChannels = (user_id) => async (dispatch) => {
-  const response = await fetch(`/api/channels/user/${user_id}`);
+export const loadChannels = () => async (dispatch) => {
+  const response = await fetch(`/api/channels/all`);
   if (response.ok) {
     const channels = await response.json();
     dispatch(loadAllChannels(channels.channels));
@@ -66,7 +71,6 @@ export const createChannel = (channel) => async (dispatch) => {
 };
 
 export const editChannel = (editedChannel) => async (dispatch) => {
-
   const response = await fetch(`/api/channels/${editedChannel.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -96,35 +100,45 @@ export const deleteChannel = (channel_id) => async (dispatch) => {
   }
 };
 
-export const createDm = (session_user_id, search_user_id) => async dispatch => {
-  const response = await fetch(`/api/channels/${session_user_id}/${search_user_id}`, {
-    method: 'POST',
-    headers: { 'Content-Type' : 'application/json' },
-  })
-  if (response.ok) {
-    const createDm = await response.json();
-    dispatch(createOneDm(createDm))
-    return createDm
-  } else {
-    return response.json('Could not handle request')
-  }
-}
+export const createDm =
+  (session_user_id, search_user_id) => async (dispatch) => {
+    const response = await fetch(
+      `/api/channels/${session_user_id}/${search_user_id}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    if (response.ok) {
+      const createDm = await response.json();
+      dispatch(createOneDm(createDm));
+      return createDm;
+    } else {
+      return response.json("Could not handle request");
+    }
+  };
 
-export const addUserToChannel = (channelId, userId) => async dispatch => {
-
-  const response = await fetch(`/api/channels/add_user/${channelId}/${userId}`, {
-    method: 'POST',
-    headers: { 'Content-Type' : 'application/json' },
-  })
+export const addUserToChannel = (channelId, userId) => async (dispatch) => {
+  const response = await fetch(
+    `/api/channels/add_user/${channelId}/${userId}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
 
   if (response.ok) {
     const channelWithNewUser = await response.json();
-    dispatch(addOneUserToChannel(channelWithNewUser))
-    return channelWithNewUser
+    dispatch(addOneUserToChannel(channelWithNewUser));
+    return channelWithNewUser;
   } else {
-    return response.json('Could not handle request')
+    return response.json("Could not handle request");
   }
-}
+};
+
+export const resetChannelsState = () => async (dispatch) => {
+  dispatch(resetChannelsStateLogout());
+};
 // **********************************MESSAGES**********************************************
 // **********************************MESSAGES**********************************************
 // **********************************MESSAGES**********************************************
@@ -150,11 +164,8 @@ const deleteOneMessage = (channel_id, message) => ({
   deletedMessage: message,
   channel_id,
 });
-// const editOneMessage = (message) => ({ type: EDIT_ONE_MESSAGE, editedMessage: message });
 
 export const createMessage = (channel_id, message) => async (dispatch) => {
-  // console.log("REDUCER CHANNEL ID~~~:", typeof channel_id);
-
   const response = await fetch(`/api/messages/${channel_id}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -171,9 +182,6 @@ export const createMessage = (channel_id, message) => async (dispatch) => {
 };
 
 export const editMessage = (editedMessage) => async (dispatch) => {
-  console.log("editing Message", editedMessage);
-  console.log("editing Message id------", editedMessage.id);
-
   const response = await fetch(`/api/messages/${editedMessage.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -211,7 +219,12 @@ const channelsReducer = (state = initialState, action) => {
     case GET_ALL_CHANNELS: {
       newState = { ...state };
       action.channels.forEach((channel) => {
-        newState[channel.id] = channel;
+        // only write channel if the channel is not already loaded into the state
+        // otherwise we risk overriding a more richly populated channel, which contains
+        // messages with image url and author name
+        if (!newState[channel.id]) {
+          newState[channel.id] = channel;
+        }
       });
       return newState;
     }
@@ -269,6 +282,10 @@ const channelsReducer = (state = initialState, action) => {
 
     case CREATE_ONE_DM: {
       return { [action.dm.id]: action.dm, ...state };
+    }
+
+    case RESET_CHANNELS_STATE: {
+      return {};
     }
 
     default:

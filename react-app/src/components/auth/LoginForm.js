@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { login } from "../../store/session";
 
 import logo from "../../images/slack-ish.png";
@@ -35,10 +35,6 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
-  // if (user) {
-  //   return <Redirect to="/" />;
-  // }
-
   const demoLogin = async () => {
     await dispatch(login("demo@aa.io", "password"));
     history.push("/channels/1");
@@ -67,7 +63,6 @@ const LoginForm = () => {
             ))}
           </div>
           <div>
-            {/* <label htmlFor="email">Email</label> */}
             <input
               name="email"
               type="text"
@@ -77,7 +72,6 @@ const LoginForm = () => {
             />
           </div>
           <div>
-            {/* <label htmlFor="password">Password</label> */}
             <input
               name="password"
               type="password"
@@ -96,7 +90,6 @@ const LoginForm = () => {
           </p>
         </div>
       </div>
-      {/* <button onClick={demo}>demo</button> */}
       <div className="LoginFormFooter">
         <a href="https://github.com/cc-y-zhao/Slack-ish">Slack-ish Github</a>
         <div className="contact-dropup">

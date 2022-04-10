@@ -34,7 +34,6 @@
 }
 
 #ProfileField {
-    /* width: 300px; */
     font-size: 35px;
     position: absolute;
     right: 15px;
@@ -57,6 +56,10 @@
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid rgb(81,83,82);
+}
+
+.ProfileNameArea > img {
+    padding-right: 8px;
 }
 
 .ProfileNameArea > i {

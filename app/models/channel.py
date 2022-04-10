@@ -21,12 +21,7 @@ class Channel(db.Model):
         secondary=channel_users,
         back_populates="channels",
     )
-    # users = db.relationship(
-    #     "User",
-    #     secondary=channel_users,
-    #     back_populates="channels",
-    #     cascade="all, delete"
-    # )
+
     messages = db.relationship(
         "Message", back_populates="channel", cascade="all, delete"
     )

@@ -2,7 +2,6 @@
     position: absolute;
     top: 50px;
     left: 258px;
-    /* width: calc(100vw - 257px); */
     width: calc(100vw - 257px);
     height: calc(100vh - 50px);
     color: white;
@@ -32,8 +31,6 @@
 
 .ChannelPageTitleLeft > h2 {
     margin: 0;
-    /* padding-top: 11px;
-    padding-left: 6px; */
     padding: 11px 10px 0 0;
     font-size: 22px;
     z-index: 2;
@@ -47,22 +44,59 @@
 
 .ChannelPageTitleRight {
     display: flex;
+    padding: 12px 30px 0 0;
+}
+
+.ShowMembersButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 27px;
+    padding: 0 8px;
+    margin: 0 10px;
+}
+
+.ShowMembersButton > p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.ShowMembersButton:hover {
+    background-color: rgb(83, 82, 87);
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.AddMembersButton {
+    font-size: 16px;
+    width: 32px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(196, 202, 208);
+    margin-right: 15px;
+}
+
+.AddMembersButton:hover {
+    background-color: rgb(83, 82, 87);
+    border-radius: 2px;
+    cursor: pointer;
 }
 
 #EditChannelButton {
     color: rgb(196, 202, 208);
-    position: absolute;
-    top: 12px;
-    right: 50px;
-    width: 25px;
-    height: 25px;
+    width: 27px;
+    height: 27px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 10px;
+    margin-right: 25px;
 }
 
 #EditChannelButton:hover {
-    background-color: rgb(42,41,47);
+    background-color: rgb(83, 82, 87);
     border-radius: 4px;
     cursor: pointer;
 }
@@ -93,7 +127,7 @@
 
 .MessageProfile {
     color: rgb(245, 235, 92);
-    font-size: 45px;
+    font-size: 48px;
     padding-right: 10px;
 }
 
@@ -119,23 +153,6 @@
 .MessagesContent {
     color: rgb(196,198,199);
 }
-
-/* .EditMessageButton {
-    color: rgb(196, 202, 208);
-    position: absolute;
-    right: 50px;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.EditMessageButton:hover {
-    background-color: rgb(42,41,47);
-    border-radius: 4px;
-    cursor: pointer;
-} */
 
 #EditMessageButton {
     color: rgb(196, 202, 208);
@@ -163,7 +180,6 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    /* background-color: #d6dee1; */
     background-color: rgba(118, 121, 123, 0.5);
     border-radius: 20px;
     border: 6px solid transparent;

@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams, Redirect } from "react-router-dom";
-
-// import { ValidationError } from '../../utils/ValidationError';
-// import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { loadChannel } from "../../store/channels";
 import { createMessage } from "../../store/channels";
 

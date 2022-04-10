@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { hideModal } from "../../store/modal";
 
-import { createChannel } from "../../store/channels";
+import { createChannel, loadChannel } from "../../store/channels";
 
 import "./CreateChannelForm.css";
 
@@ -48,7 +48,8 @@ const CreateChannelForm = () => {
 
     if (newChannel) {
       setErrors([]);
-      dispatch(hideModal());
+      await dispatch(loadChannel(newChannel.id));
+      await dispatch(hideModal());
       history.push(`/channels/${newChannel.id}`);
     }
   };
