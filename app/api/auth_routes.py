@@ -64,7 +64,6 @@ def sign_up():
     if form.validate_on_submit():
         welcome = Channel.query.filter(Channel.id == 1).first()
         user = User(
-            # username=form.data['username'],
             first_name=form.data['first_name'],
             last_name=form.data['last_name'],
             email=form.data['email'],

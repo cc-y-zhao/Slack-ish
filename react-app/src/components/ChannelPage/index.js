@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory, Redirect } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import EditChannelForm from "../EditChannelForm";
 import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
 
 import ChannelMembers from "../ChannelMembers";
-import { loadChannel, deleteMessage } from "../../store/channels";
+import { loadChannel } from "../../store/channels";
 
 import {
   showModal,
@@ -19,17 +19,13 @@ import {
   setChannelUsersSearchModal,
 } from "../../store/modal";
 
-import DontBelongHerePage from "../DontBelongHerePage/DontBelongHerePage";
-
 import "./ChannelPage.css";
 
 const ChannelPage = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { channel_id } = useParams();
   const channelId = parseInt(channel_id);
   const channel = useSelector((state) => state.channels[channel_id]);
-  const currentUser = useSelector((state) => state.session.user);
   const user_id = useSelector((state) => state.session.user?.id);
   const members = channel?.users_in_channel;
   const totalMembers = `(${members?.length})`;
@@ -82,11 +78,10 @@ const ChannelPage = () => {
 
   let showChannel = false;
 
-
-  if (channel && channel['users_ids']?.includes(user_id)) {
+  if (channel && channel["users_ids"]?.includes(user_id)) {
     showChannel = true;
   } else {
-    return <Redirect to='/channels/1' />
+    return <Redirect to="/channels/1" />;
   }
 
   return (
@@ -168,9 +163,6 @@ const ChannelPage = () => {
                       >
                         {formatTime(message.time_created)}{" "}
                       </div>
-                      {/* <div className="MessageTime">
-                        {formatDate(message.time_created)}
-                      </div> */}
                     </div>
                     <div className="MessageContent">{message.content}</div>
                   </div>

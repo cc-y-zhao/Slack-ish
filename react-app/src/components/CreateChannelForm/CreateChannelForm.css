@@ -26,7 +26,6 @@
 }
 
 .CreatChannelFormBody input {
-/* .CreateChannelTitle > input { */
     resize: none;
     font-family: Lato;
     padding: 3px 12px 5px;
@@ -43,7 +42,6 @@
 }
 
 .CreatChannelFormBody textarea{
-/* .CreateChannelDescription > textarea { */
     resize: none;
     font-family: Lato;
     padding: 3px 12px 5px;

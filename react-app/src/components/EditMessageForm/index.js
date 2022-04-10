@@ -93,15 +93,6 @@ const EditMessageForm = () => {
               >
                 Delete
               </button>
-              {/* <button
-                onClick={async () => {
-                  await dispatch(deleteMessage(channel_id, id)).then(() =>
-                    dispatch(loadChannel(channel_id))
-                  );
-                }}
-              >
-                Delete
-              </button> */}
             </div>
           </div>
         </form>

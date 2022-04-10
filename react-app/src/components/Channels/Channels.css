@@ -3,7 +3,6 @@
     flex-direction: column;
 }
 
-/* If active: set to blue */
 .selected {
     color: rgb(243, 246, 249) !important;
     background-color: rgb(32, 110, 159) !important;
@@ -19,10 +18,6 @@
     text-decoration: none;
     color: rgb(134, 134, 136);
 }
-
-/* .channel__list:hover {
-    background-color: rgb(39, 36, 44);
-} */
 
 .ChannelListItem {
     padding-left: 45px;
@@ -41,7 +36,6 @@
     width: 100%;
     word-wrap: break-word;
     white-space: initial;
-    /* padding: 3px 2px 3px 2px; */
 }
 
 .channel__list i {

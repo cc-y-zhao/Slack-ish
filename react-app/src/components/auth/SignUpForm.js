@@ -24,10 +24,6 @@ const SignUpForm = () => {
       validationErrors.push("Please provide your first name");
     if (last_name.length === 0)
       validationErrors.push("Please provide your last name");
-    // if (username.length < 4)
-    //   validationErrors.push("Usernames must be at least 4 characters");
-    // if (username.length > 25)
-    //   validationErrors.push("Usernames must be less than 25 characters");
     if (!email.includes(".") || !email.includes("@") || email.length < 4)
       validationErrors.push("Please provide a valid email address");
     if (password.length < 5)
@@ -42,7 +38,7 @@ const SignUpForm = () => {
     e.preventDefault();
 
     if (password === repeatPassword) {
-      const data = await dispatch(
+      await dispatch(
         signUp(first_name, last_name, email.toLowerCase(), password, image_url)
       );
 
@@ -53,27 +49,8 @@ const SignUpForm = () => {
       setPassword("");
       setRepeatPassword("");
       setImageUrl("");
-
-      // if (data) {
-      //   setErrors(data);
-      // }
     }
   };
-
-  // const onSignUp = async (e) => {
-  //   e.preventDefault();
-
-  //   if (password === repeatPassword) {
-  //     const data = await dispatch(signUp(username, first_name, last_name, email, password));
-  //     if (data) {
-  //       setErrors(data)
-  //     }
-  //   }
-  // };
-
-  // const updateUsername = (e) => {
-  //   setUsername(e.target.value);
-  // };
 
   const updateFirstName = (e) => {
     setFirstName(e.target.value);
@@ -145,16 +122,6 @@ const SignUpForm = () => {
               required={true}
             ></input>
           </div>
-          {/* <div>
-        <label>User Name</label>
-        <input
-          type="text"
-          name="username"
-          onChange={updateUsername}
-          value={username}
-          required={true}
-        ></input>
-      </div> */}
           <div>
             <input
               type="text"
