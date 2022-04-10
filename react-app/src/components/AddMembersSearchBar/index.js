@@ -23,7 +23,7 @@ function AddMembersSearchBar() {
     e.preventDefault();
 
     try {
-      addUserToChannel = await dispatch(addUserToChannel(channelId, userId));
+      const addUserToChannel = await dispatch(addUserToChannel(channelId, userId));
     } catch (error) {}
     dispatch(resetSearchInput());
     if (addUserToChannel) {
