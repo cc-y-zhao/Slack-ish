@@ -82,9 +82,9 @@ const ChannelPage = () => {
 
   if (channel) {
     let ids = channel['users_ids'];
-    console.log('ids-----------------------', ids);
-    console.log('userId-----------------------', user_id);
-    console.log('BOOLEAN-----------------------', ids?.includes(user_id));
+    // console.log('ids-----------------------', ids);
+    // console.log('userId-----------------------', user_id);
+    // console.log('BOOLEAN-----------------------', ids?.includes(user_id));
     if (ids?.includes(user_id)) {
       showChannel = true;
     } else {
