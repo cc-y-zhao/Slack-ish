@@ -87,9 +87,10 @@ const ChannelPage = () => {
     // console.log('BOOLEAN-----------------------', ids?.includes(user_id));
     if (ids?.includes(user_id)) {
       showChannel = true;
-    } else {
-      return <Redirect to='/channels/1' />
     }
+    // else {
+    //   return <Redirect to='/channels/1' />
+    // }
   }
 
   return (
