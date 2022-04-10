@@ -13,10 +13,10 @@ class Message(db.Model):
         'channels.id'), nullable=False)
     content = db.Column(db.String(12000), nullable=False)
     # created_date = DateTime(default=datetime.datetime.utcnow)
-    time_created = db.Column(DateTime(timezone=True), server_default=func.now())
-    time_updated = db.Column(DateTime(timezone=True), onupdate=func.now())
-
-
+    time_created = db.Column(DateTime())
+    time_updated = db.Column(DateTime())
+    # time_created = db.Column(DateTime(timezone=True), server_default=func.now())
+    # time_updated = db.Column(DateTime(timezone=True), onupdate=func.now())
 
     # created_date = DateTime(default=datetime.datetime.utcnow)
 

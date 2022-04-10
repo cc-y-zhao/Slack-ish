@@ -6,6 +6,7 @@ import Search from "../Search";
 import { showSearchModal, setCurrentSearchModal } from "../../store/modal";
 
 import "./NavBar.css";
+import icon from "../../images/icon.png";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -46,6 +47,9 @@ const NavBar = () => {
           {sessionUser.image_url ? (
             <img
               src={sessionUser.image_url}
+              onError={(e) => {
+                e.target.setAttribute("src", icon);
+              }}
               alt=""
               style={{
                 width: "33px",
@@ -69,6 +73,9 @@ const NavBar = () => {
                   {sessionUser.image_url ? (
                     <img
                       src={sessionUser.image_url}
+                      onError={(e) => {
+                        e.target.setAttribute("src", icon);
+                      }}
                       alt=""
                       style={{
                         width: "35px",
