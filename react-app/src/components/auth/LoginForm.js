@@ -83,7 +83,7 @@ const LoginForm = () => {
           <button type="submit">Sign In with Email</button>
         </form>
         <div className="demo-login">
-          <i class="fa-regular fa-heart"></i>
+          <i className="fa-regular fa-heart"></i>
           <p className="Box">
             We won't email you a magic code for a password-free sign in. Or you
             can <a onClick={demoLogin}>sign in as a demo user instead</a>.
@@ -93,7 +93,7 @@ const LoginForm = () => {
       <div className="LoginFormFooter">
         <a href="https://github.com/cc-y-zhao/Slack-ish">Slack-ish Github</a>
         <div className="contact-dropup">
-          <a>Contact Us</a>
+          <p>Contact Us</p>
           <div className="contact-dropup-content">
             <a href="https://www.linkedin.com/in/ceciliazh/">Cecilia Zhao</a>
             <a href="https://www.linkedin.com/in/gabriel-sitorus/">
@@ -102,10 +102,50 @@ const LoginForm = () => {
             <a href="https://www.linkedin.com/in/sharonfang8/">Sharon Fang</a>
           </div>
         </div>
-        <a>
-          <i class="fa-solid fa-globe"></i> Languages used{" "}
-          <i class="fa-solid fa-angle-down"></i>
-        </a>
+        <div className="languages-dropup">
+          <p>
+            <i className="fa-solid fa-globe"></i> Languages used{" "}
+            <i className="fa-solid fa-angle-down"></i>
+          </p>
+          <div className="languages-dropup-content">
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original-wordmark.svg"
+              alt="python"
+            />
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlalchemy/sqlalchemy-original.svg"
+              alt="sqlalchemy"
+            />
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original-wordmark.svg"
+              alt="postgresql"
+            />
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+              alt="javascript"
+            />
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg"
+              alt="react"
+            />
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg"
+              alt="redux"
+            />
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original-wordmark.svg"
+              alt="html5"
+            />
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original-wordmark.svg"
+              alt="css3"
+            />
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+              alt="git"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

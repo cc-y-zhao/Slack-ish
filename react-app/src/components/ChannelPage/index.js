@@ -20,6 +20,7 @@ import {
 } from "../../store/modal";
 
 import "./ChannelPage.css";
+import icon from "../../images/icon.png";
 
 const ChannelPage = () => {
   const dispatch = useDispatch();
@@ -78,8 +79,8 @@ const ChannelPage = () => {
 
   let showChannel = false;
 
-  if (channel && channel["users_ids"]?.includes(user_id)) {
-    showChannel = true;
+  if (channel && channel["users_ids"]) {
+    if (channel["users_ids"]?.includes(user_id)) showChannel = true;
   } else {
     return <Redirect to="/channels/1" />;
   }
@@ -90,7 +91,7 @@ const ChannelPage = () => {
         <div className="ChannelPageBody">
           <div className="ChannelPageTitle">
             <div className="ChannelPageTitleLeft">
-              <i class="fa-solid fa-hashtag"></i>
+              <i className="fa-solid fa-hashtag"></i>
               <h2>{title}</h2>
               <p>{description}</p>
             </div>
@@ -98,7 +99,7 @@ const ChannelPage = () => {
               <div className="AddMembersButton">
                 {addChannelMembersButton && (
                   <i
-                    class="fa-solid fa-user-plus"
+                    className="fa-solid fa-user-plus"
                     onClick={showAddMembersSearchBar}
                     title="Add a member"
                   ></i>
@@ -110,14 +111,14 @@ const ChannelPage = () => {
                 title="View all members"
               >
                 <p>
-                  <i class="fa-solid fa-user"></i>
+                  <i className="fa-solid fa-user"></i>
                   {totalMembers}
                 </p>
               </div>
               <div>
                 {user_id === channel?.owner_id && (
                   <i
-                    class="fa-solid fa-ellipsis-vertical"
+                    className="fa-solid fa-ellipsis-vertical"
                     id="EditChannelButton"
                     onClick={showEditChannelForm}
                     title="Edit channel"
@@ -137,10 +138,13 @@ const ChannelPage = () => {
                   // onMouseEnter={() => setShowEditMessage(true)}
                   // onMouseLeave={() => setShowEditMessage(false)}
                 >
-                  {message.image_url ? (
+                  {message?.image_url ? (
                     <div className="MessageProfile">
                       <img
                         src={message.image_url}
+                        onError={(e) => {
+                          e.target.setAttribute("src", icon);
+                        }}
                         alt=""
                         style={{
                           width: "45px",
@@ -151,7 +155,7 @@ const ChannelPage = () => {
                     </div>
                   ) : (
                     <div className="MessageProfile">
-                      <i class="fa-solid fa-square-person-confined"></i>
+                      <i className="fa-solid fa-square-person-confined"></i>
                     </div>
                   )}
                   <div className="MessageMain">
@@ -170,7 +174,7 @@ const ChannelPage = () => {
                     {user_id === message.user_id && (
                       <>
                         <i
-                          class="fa-solid fa-ellipsis-vertical"
+                          className="fa-solid fa-ellipsis-vertical"
                           title="Edit message"
                           id="EditMessageButton"
                           onClick={() => {

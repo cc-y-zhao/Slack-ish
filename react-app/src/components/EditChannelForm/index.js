@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { editChannel, deleteChannel, loadChannel } from "../../store/channels";
 import { hideModal } from "../../store/modal";
 import "../CreateChannelForm/CreateChannelForm.css";
@@ -49,9 +49,7 @@ const EditChannelForm = () => {
 
     let editedChannelSuccess;
 
-    editedChannelSuccess = await dispatch(editChannel(editedChannel)).then(() =>
-      dispatch(loadChannel(editedChannel.id))
-    );
+    editedChannelSuccess = await dispatch(editChannel(editedChannel));
 
     if (editedChannelSuccess) {
       setErrors([]);
@@ -61,17 +59,20 @@ const EditChannelForm = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-
+  const handleDelete = async (e, id) => {
+    e.preventDefault();
     let deletedChannel;
-    if (window.confirm("Are you sure you want to delete this channel and all of its contents?")) {
-
-      deletedChannel = await dispatch(deleteChannel(id))
+    if (
+      window.confirm(
+        "Are you sure you want to delete this channel and all of its contents?"
+      )
+    ) {
+      deletedChannel = await dispatch(deleteChannel(id));
 
       if (deletedChannel) {
         await dispatch(hideModal());
         await dispatch(loadChannel(1));
-        history.push(`/channels/1`);
+        return <Redirect to="/channels/1" />;
       }
     }
   };
@@ -100,16 +101,14 @@ const EditChannelForm = () => {
               onChange={updateDescription}
             />
           </div>
-          <div className="UpdateMessageButtonContainer">
+          <div className="EditMessageButtonContainer">
             <div className="UpdateMessageButton">
               <button type="submit" disabled={errors.length > 0}>
                 Update
               </button>
             </div>
             <div className="DeleteMessageButton">
-              <button
-                onClick={(e) => handleDelete(channelToEdit?.id, e)}
-              >
+              <button onClick={(e) => handleDelete(e, channelToEdit?.id)}>
                 Delete
               </button>
             </div>

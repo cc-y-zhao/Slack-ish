@@ -43,7 +43,7 @@ const Channels = () => {
                 activeClassName="selected"
               >
                 <div className="ChannelListItem">
-                  <i class="fa-solid fa-hashtag"></i>
+                  <i className="fa-solid fa-hashtag"></i>
                   {channel.title}
                 </div>
               </NavLink>

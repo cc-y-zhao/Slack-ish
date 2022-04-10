@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import "./ChannelMembers.css";
+import icon from "../../images/icon.png";
 
 const ChannelMembers = () => {
   const channelId = useSelector((state) => state?.modals?.channelId);
@@ -11,7 +12,7 @@ const ChannelMembers = () => {
   return (
     <div className="MembersWrapper">
       <div className="MembersTitle">
-        <i class="fa-solid fa-hashtag"></i>
+        <i className="fa-solid fa-hashtag"></i>
         <h2>{channel.title}</h2>
       </div>
       <div className="MembersBody">
@@ -22,6 +23,9 @@ const ChannelMembers = () => {
                 <div className="MemberProfile">
                   <img
                     src={result.image_url}
+                    onError={(e) => {
+                      e.target.setAttribute("src", icon);
+                    }}
                     alt=""
                     style={{
                       width: "35px",
@@ -32,10 +36,19 @@ const ChannelMembers = () => {
                 </div>
               ) : (
                 <div className="MemberProfile">
-                  <i class="fa-solid fa-square-person-confined"></i>
+                  <i className="fa-solid fa-square-person-confined"></i>
                 </div>
               )}
-              {result.first_name} {result.last_name}
+              {/* {result.first_name} {result.last_name} */}
+              {channel.owner_id === result.id ? (
+                <p>
+                  {result.first_name} {result.last_name} (owner)
+                </p>
+              ) : (
+                <p>
+                  {result.first_name} {result.last_name}
+                </p>
+              )}
             </div>
           </div>
         ))}

@@ -6,6 +6,7 @@ import Search from "../Search";
 import { showSearchModal, setCurrentSearchModal } from "../../store/modal";
 
 import "./NavBar.css";
+import icon from "../../images/icon.png";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -46,6 +47,9 @@ const NavBar = () => {
           {sessionUser.image_url ? (
             <img
               src={sessionUser.image_url}
+              onError={(e) => {
+                e.target.setAttribute("src", icon);
+              }}
               alt=""
               style={{
                 width: "33px",
@@ -57,7 +61,7 @@ const NavBar = () => {
             />
           ) : (
             <i
-              class="fa-solid fa-square-person-confined"
+              className="fa-solid fa-square-person-confined"
               id="ProfileField"
               onClick={openMenu}
             ></i>
@@ -69,6 +73,9 @@ const NavBar = () => {
                   {sessionUser.image_url ? (
                     <img
                       src={sessionUser.image_url}
+                      onError={(e) => {
+                        e.target.setAttribute("src", icon);
+                      }}
                       alt=""
                       style={{
                         width: "35px",
@@ -77,14 +84,14 @@ const NavBar = () => {
                       }}
                     />
                   ) : (
-                    <i class="fa-solid fa-square-person-confined"></i>
+                    <i className="fa-solid fa-square-person-confined"></i>
                   )}
                   <div className="ProfileName_Status">
                     <div className="ProfileName">
                       {sessionUser.first_name} {sessionUser.last_name}
                     </div>
                     <div className="ProfileStatus">
-                      <i class="fa-solid fa-circle"></i>
+                      <i className="fa-solid fa-circle"></i>
                       <p>Active</p>
                     </div>
                   </div>

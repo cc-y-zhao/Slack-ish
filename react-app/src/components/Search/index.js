@@ -8,6 +8,7 @@ import { hideSearchModal } from "../../store/modal";
 import { createDm } from "../../store/channels";
 
 import "./Search.css";
+import icon from "../../images/icon.png";
 
 function Search() {
   const history = useHistory();
@@ -55,7 +56,7 @@ function Search() {
     <div>
       <div className="search">
         <div className="SearchBarArea">
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i className="fa-solid fa-magnifying-glass"></i>
           <input
             placeholder="Type to search users"
             value={searchInput}
@@ -71,12 +72,15 @@ function Search() {
                   onClick={(e) => handleClick(sessionUserId, result.id, e)}
                   className="SearchResultDiv"
                 >
-                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <i className="fa-solid fa-magnifying-glass"></i>
                   <div className="SearchName">
                     {result.image_url ? (
                       <div className="SearchProfile">
                         <img
                           src={result.image_url}
+                          onError={(e) => {
+                            e.target.setAttribute("src", icon);
+                          }}
                           alt=""
                           style={{
                             width: "30px",
@@ -87,7 +91,7 @@ function Search() {
                       </div>
                     ) : (
                       <div className="SearchProfile">
-                        <i class="fa-solid fa-square-person-confined"></i>
+                        <i className="fa-solid fa-square-person-confined"></i>
                       </div>
                     )}
                     {result.first_name} {result.last_name}

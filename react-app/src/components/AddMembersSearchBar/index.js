@@ -6,6 +6,8 @@ import { loadChannelUsersResults, resetSearchInput } from "../../store/search";
 import { loadChannel } from "../../store/channels";
 import { hideSearchModal } from "../../store/modal";
 
+import icon from "../../images/icon.png";
+
 function AddMembersSearchBar() {
   const dispatch = useDispatch();
 
@@ -22,11 +24,12 @@ function AddMembersSearchBar() {
   const handleClick = async (channelId, userId, firstName, lastName, e) => {
     e.preventDefault();
 
-    try {
-      const addUserToChannel = await dispatch(addUserToChannel(channelId, userId));
-    } catch (error) {}
+    let addedUserToChannel;
+
+    addedUserToChannel = await dispatch(addUserToChannel(channelId, userId));
+
     dispatch(resetSearchInput());
-    if (addUserToChannel) {
+    if (addedUserToChannel) {
       window.alert(`${firstName} ${lastName} was added to this channel!`);
       dispatch(loadChannel(channelId));
       return dispatch(hideSearchModal());
@@ -45,7 +48,7 @@ function AddMembersSearchBar() {
     <div>
       <div className="search">
         <div className="SearchBarArea">
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i className="fa-solid fa-magnifying-glass"></i>
           <input
             placeholder="Type to search users"
             value={searchInput}
@@ -67,12 +70,15 @@ function AddMembersSearchBar() {
               }
               className="SearchResultDiv"
             >
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <i className="fa-solid fa-magnifying-glass"></i>
               <div className="SearchName">
                 {user.image_url ? (
                   <div className="SearchProfile">
                     <img
                       src={user.image_url}
+                      onError={(e) => {
+                        e.target.setAttribute("src", icon);
+                      }}
                       alt=""
                       style={{
                         width: "30px",
@@ -83,7 +89,7 @@ function AddMembersSearchBar() {
                   </div>
                 ) : (
                   <div className="SearchProfile">
-                    <i class="fa-solid fa-square-person-confined"></i>
+                    <i className="fa-solid fa-square-person-confined"></i>
                   </div>
                 )}
                 {user.first_name} {user.last_name}
