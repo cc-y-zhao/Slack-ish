@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./Channels.css";
@@ -6,15 +7,19 @@ import "./Channels.css";
 import { loadChannels } from "../../store/channels";
 
 const Channels = () => {
+  const history = useHistory();
   const channels = useSelector((state) => Object.values(state.channels));
   const user_id = useSelector((state) => state.session.user.id);
+  if (!user_id) {
+    history.push('/login')
+  }
 
   const dispatch = useDispatch();
 
   // const [selected, setSelected] = useState(true);
 
   useEffect(() => {
-    dispatch(loadChannels(user_id));
+    dispatch(loadChannels());
   }, [channels.toString()]);
 
   // TO DO: add individual routes for each channel with below syntax:

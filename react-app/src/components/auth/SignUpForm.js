@@ -10,7 +10,6 @@ const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
-  // const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -50,7 +49,6 @@ const SignUpForm = () => {
       setErrors([]);
       setFirstName("");
       setLastName("");
-      // setUsername("");
       setEmail("");
       setPassword("");
       setRepeatPassword("");

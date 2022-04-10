@@ -69,6 +69,7 @@ def sign_up():
             last_name=form.data['last_name'],
             email=form.data['email'],
             password=form.data['password'],
+            image_url=form.data['image_url'],
             channels=[welcome]
         )
         # query channel to get channel1

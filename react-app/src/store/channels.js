@@ -24,8 +24,8 @@ const deleteOneChannel = (channel) => ({
   deletedChannel: channel,
 });
 
-export const loadChannels = (user_id) => async (dispatch) => {
-  const response = await fetch(`/api/channels/user/${user_id}`);
+export const loadChannels = () => async (dispatch) => {
+  const response = await fetch(`/api/channels/all`);
   if (response.ok) {
     const channels = await response.json();
     dispatch(loadAllChannels(channels.channels));
@@ -211,7 +211,12 @@ const channelsReducer = (state = initialState, action) => {
     case GET_ALL_CHANNELS: {
       newState = { ...state };
       action.channels.forEach((channel) => {
-        newState[channel.id] = channel;
+        // only write channel if the channel is not already loaded into the state
+        // otherwise we risk overriding a more richly populated channel, which contains
+        // messages with image url and author name
+        if (!newState[channel.id]){
+          newState[channel.id] = channel;
+        }
       });
       return newState;
     }

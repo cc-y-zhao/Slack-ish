@@ -69,7 +69,7 @@ export const logout = () => async (dispatch) => {
 };
 
 export const signUp =
-  (first_name, last_name, email, password) => async (dispatch) => {
+  (first_name, last_name, email, password, image_url) => async (dispatch) => {
     const response = await fetch("/api/auth/signup", {
       method: "POST",
       headers: {
@@ -80,6 +80,7 @@ export const signUp =
         last_name,
         email,
         password,
+        image_url,
       }),
     });
 

@@ -15,14 +15,14 @@ channel_routes = Blueprint('channels', __name__)
 # GET logged in user's channels
 
 
-@channel_routes.route('/user/<int:user_id>')
+@channel_routes.route('/all')
 # @login_required
-def get_session_user_channels(user_id):
-    # channels = Channel.query.all()
-    # user_id = 1
-    # print('channels backend', type(channels))
-    channel_users_query = Channel.query.join(channel_users).join(
-        User).filter((channel_users.c.user_id == user_id)).all()
+def get_session_user_channels():
+
+    channels = current_user.channels
+
+    # channel_users_query = Channel.query.join(channel_users).join(
+    #     User).filter((channel_users.c.user_id == user_id)).all()
 
     # Dan's demo:
     # return_value = {'channels': [channel.to_dict() for channel in channels]}
@@ -30,7 +30,9 @@ def get_session_user_channels(user_id):
     # channels = Channel.query.all()
     # return {'channels': [channel.to_dict() for channel in channels]}
 
-    return {'channels': [channel.to_dict() for channel in channel_users_query]}
+    # print('\n\n channels from backend \n\n', channels)
+
+    return {'channels': [channel.to_dict() for channel in channels]}
 
 # GET logged in user's DM (search)
 # @channel_routes.route('/user/<int:user_id>/<int:search_user_id>')
@@ -69,9 +71,14 @@ def get_one_channel(channel_id):
     for message in all_messages:
         messages[message['id']] = message
 
-    # print('MESSAGES IN HCANNEL_ROUTES-----', messages)
+    users_ids = []
+    users_in_channel_no_dict = channel.to_dict()
+    users_in_channel = users_in_channel_no_dict['users_in_channel']
 
-    # messages['first_name] =
+    print('\n\n\n users in channel \n\n\n', users_in_channel)
+
+    for user in users_in_channel:
+        users_ids.append(user['id'])
 
     user_list = []
     for message in all_messages:
@@ -92,6 +99,7 @@ def get_one_channel(channel_id):
     single_channel['messages'] = messages
     single_channel["all_messages"] = all_messages
     single_channel["users"] = user_list
+    single_channel['users_ids'] = users_ids
     # IMPORTANT##########: SINGLE_CHANNEL['USERS] IS A LIST OF USER NAMES FOR PEOPLE WHO SENT MESSAGES
     # IMPORTANT##########: SINGLE_CHANNEL['USERS_IN_CHANNEL] IS LIST OF USERS IN THE CHANNEL!!!
 
