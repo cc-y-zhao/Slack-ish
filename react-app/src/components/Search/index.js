@@ -5,7 +5,7 @@ import { useHistory, Redirect } from "react-router-dom";
 import { loadUsersResults, resetSearchInput } from "../../store/search";
 
 import { hideSearchModal } from "../../store/modal";
-import { createDm } from "../../store/channels";
+import { createDm, loadChannel } from "../../store/channels";
 
 import "./Search.css";
 import icon from "../../images/icon.png";
@@ -39,8 +39,8 @@ function Search() {
     newDirectMessage = await dispatch(createDm(sessionUserId, resultId));
 
     if (newDirectMessage) {
-      dispatch(hideSearchModal());
-      // <Redirect to={`/channels/${newDirectMessage.id}`} />;
+      await dispatch(loadChannel(newDirectMessage.id))
+      await dispatch(hideSearchModal());
       history.push(`/channels/${newDirectMessage.id}`);
     }
   };
