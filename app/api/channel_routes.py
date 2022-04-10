@@ -145,7 +145,10 @@ def add_channel():
         current_user.channels.append(new_channel)
 
         db.session.commit()
-        return new_channel.to_dict()
+
+        channel_dicted = new_channel.to_dict()
+        channel_dicted['users_ids'] = [current_user.id]
+        return channel_dicted
 
     return {"errors": validation_errors_to_error_messages(form.errors)}
 

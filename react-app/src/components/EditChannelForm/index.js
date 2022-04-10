@@ -55,8 +55,22 @@ const EditChannelForm = () => {
 
     if (editedChannelSuccess) {
       setErrors([]);
-      dispatch(hideModal());
+      await dispatch(loadChannel(editedChannel.id));
+      await dispatch(hideModal());
       history.push(`/channels/${editedChannel.id}`);
+    }
+  };
+
+  const handleDelete = async (id) => {
+
+    let deletedChannel;
+
+    deletedChannel = await dispatch(deleteChannel(id))
+
+    if (deletedChannel) {
+      await dispatch(hideModal());
+      await dispatch(loadChannel(1));
+      history.push(`/channels/${1}`);
     }
   };
 
@@ -87,12 +101,7 @@ const EditChannelForm = () => {
           <div className="UpdateMessageButtonContainer">
             <div className="DeleteMessageButton">
               <button
-                onClick={async () => {
-                  await dispatch(deleteChannel(channelToEdit?.id))
-                    .then(() => dispatch(loadChannel(1)))
-                    .then(() => dispatch(hideModal()))
-                    .then(() => history.push(`/channels/1`));
-                }}
+                onClick={(e) => handleDelete(channelToEdit?.id, e)}
               >
                 Delete
               </button>
