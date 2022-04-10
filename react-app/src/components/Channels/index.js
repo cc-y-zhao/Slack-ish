@@ -22,13 +22,22 @@ const Channels = () => {
     dispatch(loadChannels());
   }, [channels.toString()]);
 
+  let showChannels = [];
+  if (channels) {
+    channels.forEach((channel) => {
+      if (channel['users_ids']?.includes(user_id)) {
+        showChannels.push(channel);
+      }
+    })
+  }
+
   // TO DO: add individual routes for each channel with below syntax:
   // <NavLink key={channel.id} to={'/channels/' + channel.id}>
 
   return (
     <>
       <div className="channels">
-        {channels?.map((channel) => {
+        {showChannels?.map((channel) => {
           return (
             channel.is_dm === false && (
               // <div className="channel__list" key={channel.id}>

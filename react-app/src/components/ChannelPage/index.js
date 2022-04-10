@@ -82,7 +82,6 @@ const ChannelPage = () => {
 
   let showChannel = false;
 
-
   if (channel && channel['users_ids']?.includes(user_id)) {
     showChannel = true;
   } else {
