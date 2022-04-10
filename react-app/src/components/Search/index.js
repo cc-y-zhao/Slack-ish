@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 
 import { loadUsersResults, resetSearchInput } from "../../store/search";
 
@@ -40,6 +40,7 @@ function Search() {
 
     if (newDirectMessage) {
       dispatch(hideSearchModal());
+      // <Redirect to={`/channels/${newDirectMessage.id}`} />;
       history.push(`/channels/${newDirectMessage.id}`);
     }
   };
