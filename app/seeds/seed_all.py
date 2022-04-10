@@ -204,9 +204,9 @@ def seed_all():
     message1 = Message(
         user_id='1', channel_id='1', content='Hey everyone!')
     message2 = Message(
-        user_id='2', channel_id='1', content='What is UP!')
-    message3 = Message(
         user_id='3', channel_id='1', content='Hello...')
+    message3 = Message(
+        user_id='2', channel_id='1', content='What is UP!')
     message4 = Message(
         user_id='4', channel_id='1', content='I have two cats and they are adorable')
     message5 = Message(
@@ -221,14 +221,14 @@ def seed_all():
         user_id='2', channel_id='4', content='I love Riot Games')
     message10 = Message(
         user_id='4', channel_id='7', content='Welcome to my corner!')
+    message11 = Message(
+        user_id='5', channel_id='5', content='ayo blake and braxton lets get a 5 man val game going')
+    message12 = Message(
+        user_id='23', channel_id='5', content='anyone tft ?')
+    message13 = Message(
+        user_id='26', channel_id='5', content='aram pl0x')
     message_sharon = Message(
         user_id='2', channel_id='5', content='RITO PLS')
-    message11 = Message(
-        user_id='5', channel_id='5', content='val?')
-    message12 = Message(
-        user_id='23', channel_id='5', content='tft?')
-    message13 = Message(
-        user_id='26', channel_id='5', content='aram?')
     message14 = Message(
         user_id='11', channel_id='2', content='@channel Today might feel like an infinite loop, but good thing we have a break now!')
     message15 = Message(
@@ -241,6 +241,8 @@ def seed_all():
         user_id='37', channel_id='2', content='sing to me anthony')
     message19 = Message(
         user_id='18', channel_id='2', content='curly boys')
+    message_blake = Message(
+        user_id='9', channel_id='2', content='^')
     message20 = Message(
         user_id='45', channel_id='2', content='Not sure how and when brackets became "boys"')
     message21 = Message(
@@ -255,6 +257,20 @@ def seed_all():
         user_id='45', channel_id='1', content='kahoots')
     message25 = Message(
         user_id='17', channel_id='1', content='I used to be a wall street bro')
+    message26 = Message(
+        user_id='4', channel_id='2', content="Yeah I'll have some")
+    message27 = Message(
+        user_id='42', channel_id='2', content="🥜🥜🥜")
+    message28 = Message(
+        user_id='37', channel_id='2', content="hoot")
+    message29 = Message(
+        user_id='37', channel_id='2', content="blz")
+    message30 = Message(
+        user_id='51', channel_id='2', content="cant see breakout rooms")
+    message31 = Message(
+        user_id='16', channel_id='2', content="How about now? They should be open now..")
+    message32 = Message(
+        user_id='51', channel_id='2', content="no")
 
     db.session.add(message1)
     db.session.add(message2)
@@ -266,16 +282,17 @@ def seed_all():
     db.session.add(message8)
     db.session.add(message9)
     db.session.add(message10)
-    db.session.add(message_sharon)
     db.session.add(message11)
     db.session.add(message12)
     db.session.add(message13)
+    db.session.add(message_sharon)
     db.session.add(message14)
     db.session.add(message15)
     db.session.add(message16)
     db.session.add(message17)
     db.session.add(message18)
     db.session.add(message19)
+    db.session.add(message_blake)
     db.session.add(message20)
     db.session.add(message21)
     db.session.add(message22)
@@ -283,10 +300,13 @@ def seed_all():
     db.session.add(message23)
     db.session.add(message24)
     db.session.add(message25)
-
-
-
-
+    db.session.add(message26)
+    db.session.add(message27)
+    db.session.add(message28)
+    db.session.add(message29)
+    db.session.add(message30)
+    db.session.add(message31)
+    db.session.add(message32)
 
     # seed_channel_users():
     seed_channel_list = [channel2, channel3, channel4, channel5, channel6]

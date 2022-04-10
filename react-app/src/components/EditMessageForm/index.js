@@ -72,8 +72,28 @@ const EditMessageForm = () => {
             onChange={updateContent}
           />
           <div className="UpdateMessageButtonContainer">
+            <div className="UpdateMessageButton">
+              <button type="submit" disabled={errors.length > 0}>
+                Update
+              </button>
+            </div>
             <div className="DeleteMessageButton">
               <button
+                onClick={async () => {
+                  if (
+                    window.confirm(
+                      "Are you sure you want to delete this message?"
+                    )
+                  ) {
+                    await dispatch(deleteMessage(channel_id, id)).then(() =>
+                      dispatch(loadChannel(channel_id))
+                    );
+                  }
+                }}
+              >
+                Delete
+              </button>
+              {/* <button
                 onClick={async () => {
                   await dispatch(deleteMessage(channel_id, id)).then(() =>
                     dispatch(loadChannel(channel_id))
@@ -81,12 +101,7 @@ const EditMessageForm = () => {
                 }}
               >
                 Delete
-              </button>
-            </div>
-            <div className="UpdateMessageButton">
-              <button type="submit" disabled={errors.length > 0}>
-                Update
-              </button>
+              </button> */}
             </div>
           </div>
         </form>

@@ -19,6 +19,8 @@ import {
   setChannelUsersSearchModal,
 } from "../../store/modal";
 
+import DontBelongHerePage from "../DontBelongHerePage/DontBelongHerePage";
+
 import "./ChannelPage.css";
 
 const ChannelPage = () => {
@@ -31,7 +33,6 @@ const ChannelPage = () => {
   const user_id = useSelector((state) => state.session.user?.id);
   const members = channel?.users_in_channel;
   const totalMembers = `(${members?.length})`;
-
 
   const showEditChannelForm = () => {
     dispatch(setCurrentEditModal(EditChannelForm, channel?.id));
@@ -76,10 +77,11 @@ const ChannelPage = () => {
   };
 
   if (!user_id) {
-    return <Redirect to='/login' />
+    return <Redirect to="/login" />;
   }
 
   let showChannel = false;
+
 
   if (channel && channel['users_ids']?.includes(user_id)) {
     showChannel = true;
@@ -103,11 +105,16 @@ const ChannelPage = () => {
                   <i
                     class="fa-solid fa-user-plus"
                     onClick={showAddMembersSearchBar}
+                    title="Add a member"
                   ></i>
                 )}
               </div>
-              <div className="ShowMembersButton">
-                <p onClick={ShowChannelMembers}>
+              <div
+                className="ShowMembersButton"
+                onClick={ShowChannelMembers}
+                title="View all members"
+              >
+                <p>
                   <i class="fa-solid fa-user"></i>
                   {totalMembers}
                 </p>
@@ -118,6 +125,7 @@ const ChannelPage = () => {
                     class="fa-solid fa-ellipsis-vertical"
                     id="EditChannelButton"
                     onClick={showEditChannelForm}
+                    title="Edit channel"
                   ></i>
                 )}
               </div>
@@ -154,12 +162,15 @@ const ChannelPage = () => {
                   <div className="MessageMain">
                     <div className="MessageInfo">
                       <div className="MessageName">{message.name}</div>
-                      <div className="MessageTime">
+                      <div
+                        className="MessageTime"
+                        title={formatDate(message.time_created)}
+                      >
                         {formatTime(message.time_created)}{" "}
                       </div>
-                      <div className="MessageTime">
+                      {/* <div className="MessageTime">
                         {formatDate(message.time_created)}
-                      </div>
+                      </div> */}
                     </div>
                     <div className="MessageContent">{message.content}</div>
                   </div>
@@ -168,6 +179,7 @@ const ChannelPage = () => {
                       <>
                         <i
                           class="fa-solid fa-ellipsis-vertical"
+                          title="Edit message"
                           id="EditMessageButton"
                           onClick={() => {
                             dispatch(

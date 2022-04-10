@@ -71,7 +71,7 @@ const EditChannelForm = () => {
       if (deletedChannel) {
         await dispatch(hideModal());
         await dispatch(loadChannel(1));
-        history.push(`/channels/${1}`);
+        history.push(`/channels/1`);
       }
     }
   };
@@ -101,16 +101,16 @@ const EditChannelForm = () => {
             />
           </div>
           <div className="UpdateMessageButtonContainer">
+            <div className="UpdateMessageButton">
+              <button type="submit" disabled={errors.length > 0}>
+                Update
+              </button>
+            </div>
             <div className="DeleteMessageButton">
               <button
                 onClick={(e) => handleDelete(channelToEdit?.id, e)}
               >
                 Delete
-              </button>
-            </div>
-            <div className="UpdateMessageButton">
-              <button type="submit" disabled={errors.length > 0}>
-                Update
               </button>
             </div>
           </div>
