@@ -8,6 +8,7 @@ import { hideSearchModal } from "../../store/modal";
 import { createDm } from "../../store/channels";
 
 import "./Search.css";
+import icon from "../../images/icon.png";
 
 function Search() {
   const history = useHistory();
@@ -77,6 +78,9 @@ function Search() {
                       <div className="SearchProfile">
                         <img
                           src={result.image_url}
+                          onError={(e) => {
+                            e.target.setAttribute("src", icon);
+                          }}
                           alt=""
                           style={{
                             width: "30px",

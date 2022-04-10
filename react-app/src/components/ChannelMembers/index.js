@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import "./ChannelMembers.css";
+import icon from "../../images/icon.png";
 
 const ChannelMembers = () => {
   const channelId = useSelector((state) => state?.modals?.channelId);
@@ -22,6 +23,9 @@ const ChannelMembers = () => {
                 <div className="MemberProfile">
                   <img
                     src={result.image_url}
+                    onError={(e) => {
+                      e.target.setAttribute("src", icon);
+                    }}
                     alt=""
                     style={{
                       width: "35px",

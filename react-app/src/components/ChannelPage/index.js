@@ -20,6 +20,7 @@ import {
 } from "../../store/modal";
 
 import "./ChannelPage.css";
+import icon from "../../images/icon.png";
 
 const ChannelPage = () => {
   const dispatch = useDispatch();
@@ -141,6 +142,9 @@ const ChannelPage = () => {
                     <div className="MessageProfile">
                       <img
                         src={message.image_url}
+                        onError={(e) => {
+                          e.target.setAttribute("src", icon);
+                        }}
                         alt=""
                         style={{
                           width: "45px",

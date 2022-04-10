@@ -6,6 +6,8 @@ import { loadChannelUsersResults, resetSearchInput } from "../../store/search";
 import { loadChannel } from "../../store/channels";
 import { hideSearchModal } from "../../store/modal";
 
+import icon from "../../images/icon.png";
+
 function AddMembersSearchBar() {
   const dispatch = useDispatch();
 
@@ -71,6 +73,9 @@ function AddMembersSearchBar() {
                   <div className="SearchProfile">
                     <img
                       src={user.image_url}
+                      onError={(e) => {
+                        e.target.setAttribute("src", icon);
+                      }}
                       alt=""
                       style={{
                         width: "30px",
