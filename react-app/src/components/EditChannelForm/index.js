@@ -61,7 +61,8 @@ const EditChannelForm = () => {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (e, id) => {
+    e.preventDefault();
     let deletedChannel;
     if (
       window.confirm(
@@ -103,19 +104,19 @@ const EditChannelForm = () => {
               onChange={updateDescription}
             />
           </div>
-          <div className="UpdateMessageButtonContainer">
+          <div className="EditMessageButtonContainer">
             <div className="UpdateMessageButton">
               <button type="submit" disabled={errors.length > 0}>
                 Update
               </button>
             </div>
+            <div className="DeleteMessageButton">
+              <button onClick={(e) => handleDelete(e, channelToEdit?.id)}>
+                Delete
+              </button>
+            </div>
           </div>
         </form>
-        <div className="DeleteMessageButton">
-          <button onClick={(e) => handleDelete(channelToEdit?.id, e)}>
-            Delete
-          </button>
-        </div>
       </div>
     </div>
   );
