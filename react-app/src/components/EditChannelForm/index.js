@@ -64,13 +64,15 @@ const EditChannelForm = () => {
   const handleDelete = async (id) => {
 
     let deletedChannel;
+    if (window.confirm("Are you sure you want to delete this channel and all of its contents?")) {
 
-    deletedChannel = await dispatch(deleteChannel(id))
+      deletedChannel = await dispatch(deleteChannel(id))
 
-    if (deletedChannel) {
-      await dispatch(hideModal());
-      await dispatch(loadChannel(1));
-      history.push(`/channels/${1}`);
+      if (deletedChannel) {
+        await dispatch(hideModal());
+        await dispatch(loadChannel(1));
+        history.push(`/channels/${1}`);
+      }
     }
   };
 
