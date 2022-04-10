@@ -8,18 +8,8 @@ import { loadChannels, deleteChannel } from "../../store/channels";
 const DirectMessages = () => {
   const channels = useSelector((state) => Object.values(state.channels));
   const user_id = useSelector((state) => state.session.user.id);
-
-  // const currentChannelId = function (url) {
-  //   const parts = url.split("/");
-  //   const last_part = parts[parts.length - 1];
-  //   if (last_part === "") last_part = parts[parts.length - 2];
-
-  //   return last_part;
-  // };
-
-  // const channelId = currentChannelId(window.location.pathname);
-
-  // const [selected, setSelected] = useState(true);
+  const user_name = useSelector((state) => state.session.user.first_name)
+  console.log(user_name);
 
   const dispatch = useDispatch();
 
@@ -44,11 +34,12 @@ const DirectMessages = () => {
                 className="channel__list"
                 activeClassName="selected"
               >
-                <div className="ChannelListItem">
-                  <i class="fa-regular fa-face-smile"></i> {channel.title}
-                </div>
+                {channel.title.includes(user_name) ?
+                  <div className="ChannelListItem">
+                    <i class="fa-regular fa-face-smile"></i> {channel.title}
+                  </div> : null
+                  }
               </NavLink>
-              // </div>
             )
           );
         })}
