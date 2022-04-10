@@ -49,9 +49,7 @@ const EditChannelForm = () => {
 
     let editedChannelSuccess;
 
-    editedChannelSuccess = await dispatch(editChannel(editedChannel)).then(() =>
-      dispatch(loadChannel(editedChannel.id))
-    );
+    editedChannelSuccess = await dispatch(editChannel(editedChannel));
 
     if (editedChannelSuccess) {
       setErrors([]);
@@ -74,7 +72,6 @@ const EditChannelForm = () => {
       if (deletedChannel) {
         await dispatch(hideModal());
         await dispatch(loadChannel(1));
-        // history.push(`/channels/1`);
         return <Redirect to="/channels/1" />;
       }
     }
