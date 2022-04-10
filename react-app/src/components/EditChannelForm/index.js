@@ -85,8 +85,29 @@ const EditChannelForm = () => {
             />
           </div>
           <div className="UpdateMessageButtonContainer">
+            <div className="UpdateMessageButton">
+              <button type="submit" disabled={errors.length > 0}>
+                Update
+              </button>
+            </div>
             <div className="DeleteMessageButton">
               <button
+                onClick={async () => {
+                  if (
+                    window.confirm(
+                      "Are you sure you want to delete this channel and all of its contents?"
+                    )
+                  ) {
+                    await dispatch(deleteChannel(channelToEdit?.id))
+                      .then(() => dispatch(loadChannel(1)))
+                      .then(() => dispatch(hideModal()))
+                      .then(() => history.push(`/channels/1`));
+                  }
+                }}
+              >
+                Delete
+              </button>
+              {/* <button
                 onClick={async () => {
                   await dispatch(deleteChannel(channelToEdit?.id))
                     .then(() => dispatch(loadChannel(1)))
@@ -95,12 +116,7 @@ const EditChannelForm = () => {
                 }}
               >
                 Delete
-              </button>
-            </div>
-            <div className="UpdateMessageButton">
-              <button type="submit" disabled={errors.length > 0}>
-                Update
-              </button>
+              </button> */}
             </div>
           </div>
         </form>

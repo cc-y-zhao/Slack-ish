@@ -38,7 +38,7 @@ function AddMembersSearchBar() {
     setSearchInput(inputValue);
   };
 
-  const handleClick = async (channelId, userId, e) => {
+  const handleClick = async (channelId, userId, firstName, lastName, e) => {
     e.preventDefault();
 
     try {
@@ -46,6 +46,7 @@ function AddMembersSearchBar() {
     } catch (error) {}
     dispatch(resetSearchInput());
     if (addUserToChannel) {
+      window.alert(`${firstName} ${lastName} was added to this channel!`);
       dispatch(loadChannel(channelId));
       // setSearchResult('');
       return dispatch(hideSearchModal());
@@ -76,7 +77,15 @@ function AddMembersSearchBar() {
           {results?.map((user) => (
             <div
               key={user.id}
-              onClick={(e) => handleClick(channelId, user.id, e)}
+              onClick={(e) =>
+                handleClick(
+                  channelId,
+                  user.id,
+                  user.first_name,
+                  user.last_name,
+                  e
+                )
+              }
               className="SearchResultDiv"
             >
               <i class="fa-solid fa-magnifying-glass"></i>
