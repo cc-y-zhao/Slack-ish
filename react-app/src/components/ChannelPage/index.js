@@ -81,23 +81,29 @@ const ChannelPage = () => {
           <p>{description}</p>
         </div>
         <div className="ChannelPageTitleRight">
-          <div>
+          <div className="AddMembersButton">
             {addChannelMembersButton && (
-              <button onClick={showAddMembersSearchBar}>Add Members</button>
+              <i
+                class="fa-solid fa-user-plus"
+                onClick={showAddMembersSearchBar}
+              ></i>
             )}
           </div>
-          <div>
-            <button onClick={ShowChannelMembers}>
-              Channel Members {totalMembers}
-            </button>
+          <div className="ShowMembersButton">
+            <p onClick={ShowChannelMembers}>
+              <i class="fa-solid fa-user"></i>
+              {totalMembers}
+            </p>
           </div>
-          {user_id == channel?.owner_id && (
-            <i
-              class="fa-solid fa-ellipsis-vertical"
-              id="EditChannelButton"
-              onClick={showEditChannelForm}
-            ></i>
-          )}
+          <div>
+            {user_id == channel?.owner_id && (
+              <i
+                class="fa-solid fa-ellipsis-vertical"
+                id="EditChannelButton"
+                onClick={showEditChannelForm}
+              ></i>
+            )}
+          </div>
         </div>
       </div>
       <div className="MessagesBody">

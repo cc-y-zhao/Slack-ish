@@ -35,7 +35,7 @@ const ChannelMembers = () => {
           onChange={(e) => dispatch(loadUsersResults(e.target.value))}
         /> */}
         <i class="fa-solid fa-hashtag"></i>
-        <h2>{channel.title} members</h2>
+        <h2>{channel.title}</h2>
       </div>
       <div className="MembersBody">
         {members?.map((result) => (
