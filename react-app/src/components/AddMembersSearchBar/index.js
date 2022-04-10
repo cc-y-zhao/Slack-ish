@@ -22,9 +22,7 @@ function AddMembersSearchBar() {
   const handleClick = async (channelId, userId, firstName, lastName, e) => {
     e.preventDefault();
 
-    try {
-      addUserToChannel = await dispatch(addUserToChannel(channelId, userId));
-    } catch (error) {}
+    addUserToChannel = await dispatch(addUserToChannel(channelId, userId));
     dispatch(resetSearchInput());
     if (addUserToChannel) {
       window.alert(`${firstName} ${lastName} was added to this channel!`);

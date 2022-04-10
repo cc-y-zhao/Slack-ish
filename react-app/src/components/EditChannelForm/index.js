@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { editChannel, deleteChannel, loadChannel } from "../../store/channels";
 import { hideModal } from "../../store/modal";
 import "../CreateChannelForm/CreateChannelForm.css";
@@ -62,16 +62,19 @@ const EditChannelForm = () => {
   };
 
   const handleDelete = async (id) => {
-
     let deletedChannel;
-    if (window.confirm("Are you sure you want to delete this channel and all of its contents?")) {
-
-      deletedChannel = await dispatch(deleteChannel(id))
+    if (
+      window.confirm(
+        "Are you sure you want to delete this channel and all of its contents?"
+      )
+    ) {
+      deletedChannel = await dispatch(deleteChannel(id));
 
       if (deletedChannel) {
         await dispatch(hideModal());
         await dispatch(loadChannel(1));
-        history.push(`/channels/1`);
+        // history.push(`/channels/1`);
+        return <Redirect to="/channels/1" />;
       }
     }
   };
@@ -106,15 +109,13 @@ const EditChannelForm = () => {
                 Update
               </button>
             </div>
-            <div className="DeleteMessageButton">
-              <button
-                onClick={(e) => handleDelete(channelToEdit?.id, e)}
-              >
-                Delete
-              </button>
-            </div>
           </div>
         </form>
+        <div className="DeleteMessageButton">
+          <button onClick={(e) => handleDelete(channelToEdit?.id, e)}>
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );

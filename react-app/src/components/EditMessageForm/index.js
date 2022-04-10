@@ -77,25 +77,23 @@ const EditMessageForm = () => {
                 Update
               </button>
             </div>
-            <div className="DeleteMessageButton">
-              <button
-                onClick={async () => {
-                  if (
-                    window.confirm(
-                      "Are you sure you want to delete this message?"
-                    )
-                  ) {
-                    await dispatch(deleteMessage(channel_id, id)).then(() =>
-                      dispatch(loadChannel(channel_id))
-                    );
-                  }
-                }}
-              >
-                Delete
-              </button>
-            </div>
           </div>
         </form>
+        <div className="DeleteMessageButton">
+          <button
+            onClick={async () => {
+              if (
+                window.confirm("Are you sure you want to delete this message?")
+              ) {
+                await dispatch(deleteMessage(channel_id, id))
+                  .then(() => dispatch(hideModal()))
+                  .then(() => dispatch(loadChannel(channel_id)));
+              }
+            }}
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );
