@@ -33,6 +33,10 @@
     cursor: pointer;
 }
 
+.ProfileNameArea {
+    cursor: default;
+}
+
 #ProfileField {
     font-size: 35px;
     position: absolute;
