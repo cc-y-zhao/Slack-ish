@@ -4,7 +4,7 @@
 
 ## Meet the Team~
 
-This website is brought to you by [Cecilia Zhao](https://www.linkedin.com/in/ceciliazh/), [Sharon Fang](https://www.linkedin.com/in/sharonfang8/), and [Gabriel Sitorus](). Thank you for visiting our site! 😊❤
+This website is brought to you by [Cecilia Zhao](https://www.linkedin.com/in/ceciliazh/) and [Sharon Fang](https://www.linkedin.com/in/sharonfang8/). Thank you for visiting our site! 😊❤
 
 ---
 
