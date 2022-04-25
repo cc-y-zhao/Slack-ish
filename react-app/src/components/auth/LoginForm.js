@@ -96,9 +96,6 @@ const LoginForm = () => {
           <p>Contact Us</p>
           <div className="contact-dropup-content">
             <a href="https://www.linkedin.com/in/ceciliazh/">Cecilia Zhao</a>
-            <a href="https://www.linkedin.com/in/gabriel-sitorus/">
-              Gabriel Sitorus
-            </a>
             <a href="https://www.linkedin.com/in/sharonfang8/">Sharon Fang</a>
           </div>
         </div>
