@@ -116,7 +116,11 @@ This website is brought to you by [Cecilia Zhao](https://www.linkedin.com/in/cec
 <details>
 <summary>How do I log in as a Demo User?</summary>
 On the log in page, click "sign in as a demo user instead".
-
+   
+<br>
+   
+![demo](https://user-images.githubusercontent.com/89059894/162678832-57c159e5-9066-4062-9ece-53398ced3ef0.png)
+   
 </details>
 
 <br>

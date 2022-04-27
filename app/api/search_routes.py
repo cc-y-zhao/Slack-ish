@@ -12,7 +12,6 @@ from sqlalchemy import or_
 
 search_routes = Blueprint('search', __name__)
 
-#################################USERS######################################
 # GET Route (all users)
 
 
@@ -42,6 +41,7 @@ def get_users_results():
 
     return {'users_results': found_users}
 
+# GET search result for users in a specific channel
 
 @search_routes.route('/users-in-channel/', methods=["GET"])
 @login_required
