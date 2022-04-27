@@ -16,6 +16,7 @@ class Channel(db.Model):
                              server_default=func.now())
     time_updated = db.Column(DateTime(timezone=True), onupdate=func.now())
 
+    # think of 'channels' more as 'join_channel_users'
     users = db.relationship(
         "User",
         secondary=channel_users,
