@@ -76,3 +76,5 @@ flask run
 to reseed:
 flask seed undo
 flask seed all
+
+heroku push
