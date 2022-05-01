@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect } from "react-router-dom";
 import EditChannelForm from "../EditChannelForm";
@@ -23,13 +23,12 @@ import "./ChannelPage.css";
 import icon from "../../images/icon.png";
 
 // import the socket
-import { io } from 'socket.io-client';
+import { io } from "socket.io-client";
 
 // outside of your component, initialize the socket variable
 let socket;
 
 const ChannelPage = () => {
-
   const [socketMessages, setSocketMessages] = useState([]);
   const [chatInput, setChatInput] = useState("");
 
@@ -42,38 +41,35 @@ const ChannelPage = () => {
   const members = channel?.users_in_channel;
   const totalMembers = `(${members?.length})`;
 
-  let messages;
   if (channel?.messages) {
     setSocketMessages(Object.values(channel?.messages));
     // messages = Object.values(channel?.messages);
   }
 
   useEffect(() => {
-
     // create websocket
     socket = io();
 
     // listen for chat events
     socket.on("chat", (chat) => {
-        // when we recieve a chat, add it into our messages array in state
-      setSocketMessages(messages => [...messages, chat])
-    })
+      // when we recieve a chat, add it into our messages array in state
+      setSocketMessages((messages) => [...messages, chat]);
+    });
 
     // when component unmounts, disconnect
-    return (() => {
-      socket.disconnect()
-    })
-  }, [])
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   const sendChat = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // emit a message
     let name = user.first_name + " " + user.last_name;
-     socket.emit("chat", { user: name, msg: chatInput });
+    socket.emit("chat", { user: name, msg: chatInput });
     // clear the input field after the message is sent
-    setChatInput("")
-  }
-
+    setChatInput("");
+  };
 
   const showEditChannelForm = () => {
     dispatch(setCurrentEditModal(EditChannelForm, channel?.id));
@@ -233,7 +229,12 @@ const ChannelPage = () => {
                 </div>
               ))}
           </div>
-          <CreateMessageForm channelId={channelId} chatInput={chatInput} setChatInput={setChatInput}/>
+          <CreateMessageForm
+            channelId={channelId}
+            chatInput={chatInput}
+            setChatInput={setChatInput}
+            sendChat={sendChat}
+          />
         </div>
       )}
     </>

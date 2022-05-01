@@ -5,7 +5,12 @@ import { createMessage } from "../../store/channels";
 
 import "./CreateMessageForm.css";
 
-const CreateMessageForm = ({ channelId, chatInput, setChatInput}) => {
+const CreateMessageForm = ({
+  channelId,
+  chatInput,
+  setChatInput,
+  sendChat,
+}) => {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState([]);
@@ -16,7 +21,7 @@ const CreateMessageForm = ({ channelId, chatInput, setChatInput}) => {
   const updateContent = (e) => {
     // setContent(e.target.value);
     setChatInput(e.target.value);
-  }
+  };
 
   useEffect(() => {
     const validationErrors = [];
@@ -39,9 +44,9 @@ const CreateMessageForm = ({ channelId, chatInput, setChatInput}) => {
     };
 
     if (newMessage) {
-      await dispatch(createMessage(channel_id, newMessage)).then(() =>
-        dispatch(loadChannel(channel_id))
-      );
+      await dispatch(createMessage(channel_id, newMessage))
+        .then(() => sendChat(e))
+        .then(() => dispatch(loadChannel(channel_id)));
       setErrors([]);
       setChatInput("");
       // setContent("");
