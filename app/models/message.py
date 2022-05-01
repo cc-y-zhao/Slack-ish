@@ -31,4 +31,5 @@ class Message(db.Model):
             'content': self.content,
             'time_created': self.time_created,
             'time_updated': self.time_updated,
+            'user': self.user.info(),
         }

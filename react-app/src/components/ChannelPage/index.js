@@ -42,7 +42,7 @@ const ChannelPage = () => {
   const totalMembers = `(${members?.length})`;
 
   // if (channel?.messages) {
-  //   setSocketMessages(channel?.messages);
+  //   // setSocketMessages(channel?.messages);
   //   setSocketMessages(Object.values(channel?.messages));
   //   // messages = Object.values(channel?.messages);
   // }
@@ -63,14 +63,17 @@ const ChannelPage = () => {
     };
   }, []);
 
+  console.log("socketMessage", socketMessages);
   const sendChat = async (newMessage) => {
     // e.preventDefault();
     // emit a message
     let name = user.first_name + " " + user.last_name;
-    await dispatch(createMessage(channel_id, newMessage)).then((newMessage) =>
-      socket.emit("chat", { newMessage })
-    );
-    console.log(newMessage);
+    let createdMessage = await dispatch(createMessage(channel_id, newMessage));
+    // .then((newMessage) =>
+    //   socket.emit("chat", { newMessage })
+    // );
+    socket.emit("chat", { createdMessage });
+    console.log(createdMessage);
     // await dispatch(createMessage(channel_id, newMessage)).then(() =>
     //   socket.emit("chat", { user: name, msg: chatInput })
     // );
@@ -177,14 +180,14 @@ const ChannelPage = () => {
               .map((message) => (
                 <div
                   className="SingleMessageBody"
-                  key={message.id}
+                  key={"" + message?.createdMessage.id}
                   // onMouseEnter={() => setShowEditMessage(true)}
                   // onMouseLeave={() => setShowEditMessage(false)}
                 >
-                  {message?.image_url ? (
+                  {message?.createdMessage.user.image_url ? (
                     <div className="MessageProfile">
                       <img
-                        src={message.image_url}
+                        src={message?.createdMessage.user?.image_url}
                         onError={(e) => {
                           e.target.setAttribute("src", icon);
                         }}
@@ -203,18 +206,23 @@ const ChannelPage = () => {
                   )}
                   <div className="MessageMain">
                     <div className="MessageInfo">
-                      <div className="MessageName">{message.name}</div>
+                      <div className="MessageName">
+                        {message?.createdMessage.user?.first_name}{" "}
+                        {message?.createdMessage.user?.last_name}
+                      </div>
                       <div
                         className="MessageTime"
-                        title={formatDate(message.time_created)}
+                        title={formatDate(message?.createdMessage.time_created)}
                       >
-                        {formatTime(message.time_created)}{" "}
+                        {formatTime(message?.createdMessage.time_created)}{" "}
                       </div>
                     </div>
-                    <div className="MessageContent">{message.content}</div>
+                    <div className="MessageContent">
+                      {message?.createdMessage.content}
+                    </div>
                   </div>
-                  <div id={"MessageEdit" + message.id}>
-                    {user_id === message.user_id && (
+                  <div id={"MessageEdit" + message?.createdMessage.id}>
+                    {user_id === message?.createdMessage.user_id && (
                       <>
                         <i
                           className="fa-solid fa-ellipsis-vertical"
@@ -225,7 +233,7 @@ const ChannelPage = () => {
                               setCurrentEditModal(
                                 EditMessageForm,
                                 channel?.id,
-                                message?.id
+                                message?.createdMessage.id
                               )
                             );
                             dispatch(showModal());
