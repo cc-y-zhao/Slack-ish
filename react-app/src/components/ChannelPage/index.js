@@ -41,10 +41,10 @@ const ChannelPage = () => {
   const members = channel?.users_in_channel;
   const totalMembers = `(${members?.length})`;
 
-  if (channel?.messages) {
-    setSocketMessages(Object.values(channel?.messages));
-    // messages = Object.values(channel?.messages);
-  }
+  // if (channel?.messages) {
+  //   setSocketMessages(Object.values(channel?.messages));
+  //   // messages = Object.values(channel?.messages);
+  // }
 
   useEffect(() => {
     // create websocket

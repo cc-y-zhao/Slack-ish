@@ -44,9 +44,11 @@ const CreateMessageForm = ({
     };
 
     if (newMessage) {
+
+      console.log('new message -----------', newMessage)
       await dispatch(createMessage(channel_id, newMessage))
         .then(() => sendChat(e))
-        .then(() => dispatch(loadChannel(channel_id)));
+        // .then(() => dispatch(loadChannel(channel_id)));
       setErrors([]);
       setChatInput("");
       // setContent("");
