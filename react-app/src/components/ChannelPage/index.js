@@ -6,7 +6,7 @@ import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
 
 import ChannelMembers from "../ChannelMembers";
-import { loadChannel } from "../../store/channels";
+import { loadChannel, createMessage } from "../../store/channels";
 
 import {
   showModal,
@@ -41,10 +41,10 @@ const ChannelPage = () => {
   const members = channel?.users_in_channel;
   const totalMembers = `(${members?.length})`;
 
-  if (channel?.messages) {
-    setSocketMessages(Object.values(channel?.messages));
-    // messages = Object.values(channel?.messages);
-  }
+  // if (channel?.messages) {
+  //   setSocketMessages(channel?.messages);
+  //   // messages = Object.values(channel?.messages);
+  // }
 
   useEffect(() => {
     // create websocket
@@ -62,11 +62,18 @@ const ChannelPage = () => {
     };
   }, []);
 
-  const sendChat = (e) => {
-    e.preventDefault();
+  const sendChat = async (newMessage) => {
+    // e.preventDefault();
     // emit a message
     let name = user.first_name + " " + user.last_name;
-    socket.emit("chat", { user: name, msg: chatInput });
+    await dispatch(createMessage(channel_id, newMessage)).then((newMessage) =>
+      socket.emit("chat", { newMessage })
+    );
+    console.log(newMessage);
+    // await dispatch(createMessage(channel_id, newMessage)).then(() =>
+    //   socket.emit("chat", { user: name, msg: chatInput })
+    // );
+    // socket.emit("chat", { user: name, msg: chatInput });
     // clear the input field after the message is sent
     setChatInput("");
   };

@@ -40,13 +40,15 @@ const CreateMessageForm = ({
     let newMessage = {
       user_id,
       channel_id,
-      chatInput,
+      content: chatInput,
     };
 
     if (newMessage) {
-      await dispatch(createMessage(channel_id, newMessage))
-        .then(() => sendChat(e))
-        .then(() => dispatch(loadChannel(channel_id)));
+      // await dispatch(createMessage(channel_id, newMessage)).then(() =>
+      //   sendChat(e)
+      // );
+      await sendChat(newMessage);
+      // .then(() => dispatch(loadChannel(channel_id)));
       setErrors([]);
       setChatInput("");
       // setContent("");
