@@ -19,16 +19,16 @@ function App() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
 
-  useEffect(() => {
-    (async () => {
-      await dispatch(authenticate());
-      setLoaded(true);
-    })();
-  }, [dispatch]);
+  // useEffect(() => {
+  //   (async () => {
+  //     await dispatch(authenticate());
+  //     setLoaded(true);
+  //   })();
+  // }, [dispatch]);
 
-  if (!loaded) {
-    return null;
-  }
+  // if (!loaded) {
+  //   return null;
+  // }
 
   return (
     <BrowserRouter>

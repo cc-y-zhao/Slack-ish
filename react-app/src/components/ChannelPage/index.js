@@ -43,6 +43,7 @@ const ChannelPage = () => {
 
   // if (channel?.messages) {
   //   setSocketMessages(channel?.messages);
+  //   setSocketMessages(Object.values(channel?.messages));
   //   // messages = Object.values(channel?.messages);
   // }
 
