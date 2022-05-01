@@ -1,4 +1,6 @@
-from flask_socketio import SocketIO
+from flask import Flask, request
+from flask_socketio import SocketIO, emit, join_room, leave_room, send
+import os
 
 # create your SocketIO instance
 socketio = SocketIO()
@@ -19,7 +21,8 @@ else:
   origins = "*"
 
 # create your SocketIO instance
-socketio = SocketIO(cors_allowed_origins=origins)
+socketio = SocketIO(cors_allowed_origins=origins, logger=True, engineio_logger=True)
+# socketio = SocketIO(cors_allowed_origins=origins)
 
 
 # handle chat messages
