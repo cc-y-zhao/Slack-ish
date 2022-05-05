@@ -39,9 +39,12 @@ export const login = (email, password) => async (dispatch) => {
       password,
     }),
   });
+  console.log('response in session store----------', response)
 
   if (response.ok) {
     const data = await response.json();
+    console.log('data in session store----------', data)
+
     dispatch(setUser(data));
     return null;
   } else if (response.status < 500) {

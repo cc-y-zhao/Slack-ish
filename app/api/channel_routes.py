@@ -22,14 +22,32 @@ def get_session_user_channels():
 
     for channel in channels:
         users_ids = []
+        channel_info = {"id": channel.id, "title": channel.title, "is_dm": channel.is_dm}
         channel_dicted = channel.to_dict()
         users_in_channel = channel_dicted['users_in_channel']
         for user in users_in_channel:
             users_ids.append(user['id'])
-            channel_dicted['users_ids'] = users_ids
-        channels_dicted.append(channel_dicted)
+            channel_info['users_ids'] = users_ids
+        channels_dicted.append(channel_info)
 
     return {'channels': channels_dicted}
+
+# @channel_routes.route('/all')
+# @login_required
+# def get_session_user_channels():
+#     channels = current_user.channels
+#     channels_dicted = []
+
+#     for channel in channels:
+#         users_ids = []
+#         channel_dicted = channel.to_dict()
+#         users_in_channel = channel_dicted['users_in_channel']
+#         for user in users_in_channel:
+#             users_ids.append(user['id'])
+#             channel_dicted['users_ids'] = users_ids
+#         channels_dicted.append(channel_dicted)
+
+#     return {'channels': channels_dicted}
 
 # GET Route
 
