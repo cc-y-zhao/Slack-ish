@@ -29,6 +29,7 @@ export const authenticate = () => async (dispatch) => {
 };
 
 export const login = (email, password) => async (dispatch) => {
+  console.log("thunk", email, password);
   const response = await fetch("/api/auth/login", {
     method: "POST",
     headers: {
@@ -43,6 +44,7 @@ export const login = (email, password) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data));
+    console.log("thunk data", data);
     return null;
   } else if (response.status < 500) {
     const data = await response.json();

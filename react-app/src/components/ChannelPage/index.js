@@ -50,40 +50,40 @@ const ChannelPage = () => {
   //   });
   // }
 
-  useEffect(() => {
-    // create websocket
-    socket = io();
+  // useEffect(() => {
+  //   // create websocket
+  //   socket = io();
 
-    // listen for chat events
-    socket.on("chat", (chat) => {
-      // when we recieve a chat, add it into our messages array in state
-      setSocketMessages((messages) => [...messages, chat]);
-    });
+  //   // listen for chat events
+  //   socket.on("chat", (chat) => {
+  //     // when we recieve a chat, add it into our messages array in state
+  //     setSocketMessages((messages) => [...messages, chat]);
+  //   });
 
-    // when component unmounts, disconnect
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  //   // when component unmounts, disconnect
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
-  console.log("socketMessage", socketMessages);
-  const sendChat = async (newMessage) => {
-    // e.preventDefault();
-    // emit a message
-    let name = user.first_name + " " + user.last_name;
-    let createdMessage = await dispatch(createMessage(channel_id, newMessage));
-    // .then((newMessage) =>
-    //   socket.emit("chat", { newMessage })
-    // );
-    socket.emit("chat", { createdMessage });
-    console.log(createdMessage);
-    // await dispatch(createMessage(channel_id, newMessage)).then(() =>
-    //   socket.emit("chat", { user: name, msg: chatInput })
-    // );
-    // socket.emit("chat", { user: name, msg: chatInput });
-    // clear the input field after the message is sent
-    setChatInput("");
-  };
+  // console.log("socketMessage", socketMessages);
+  // const sendChat = async (newMessage) => {
+  //   // e.preventDefault();
+  //   // emit a message
+  //   let name = user.first_name + " " + user.last_name;
+  //   let createdMessage = await dispatch(createMessage(channel_id, newMessage));
+  //   // .then((newMessage) =>
+  //   //   socket.emit("chat", { newMessage })
+  //   // );
+  //   socket.emit("chat", { createdMessage });
+  //   console.log(createdMessage);
+  //   // await dispatch(createMessage(channel_id, newMessage)).then(() =>
+  //   //   socket.emit("chat", { user: name, msg: chatInput })
+  //   // );
+  //   // socket.emit("chat", { user: name, msg: chatInput });
+  //   // clear the input field after the message is sent
+  //   setChatInput("");
+  // };
 
   const showEditChannelForm = () => {
     dispatch(setCurrentEditModal(EditChannelForm, channel?.id));
@@ -318,7 +318,7 @@ const ChannelPage = () => {
             channelId={channelId}
             chatInput={chatInput}
             setChatInput={setChatInput}
-            sendChat={sendChat}
+            // sendChat={sendChat}
           />
         </div>
       )}
