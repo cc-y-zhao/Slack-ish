@@ -33,22 +33,16 @@ def login():
     """
     Logs a user in
     """
-    print("hello world")
     form = LoginForm()
-    print('\n\n\nform in backend: ', form, '\n\n\n')
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
-    print('\n\n\nrequest in backend: ', request.json, '\n\n\n')
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('\n\n\nrequest after csrf token in backend: ', request.json, '\n\n\n')
-    print('\n\n\nform.data: ', form.data, '\n\n\n')
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    return {"string": "test"}
 
 
 @auth_routes.route('/logout')
