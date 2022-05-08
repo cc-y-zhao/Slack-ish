@@ -34,9 +34,7 @@ const ChannelPage = () => {
   const [socketMessages, setSocketMessages] = useState([]);
   const [socketRoom, setSocketRoom] = useState();
   const [chatInput, setChatInput] = useState("");
-  const [prevRoom, setPrevRoom] = useState(
-    channelId && `channel${channelId}`
-  );
+  const [prevRoom, setPrevRoom] = useState(channelId && `channel${channelId}`);
   const dispatch = useDispatch();
   const channel = useSelector((state) => state.channels[channel_id]);
   const user_id = useSelector((state) => state.session.user?.id);
@@ -61,37 +59,39 @@ const ChannelPage = () => {
   }, [dispatch, channelId]);
 
   useEffect(() => {
-
     if (channel && channel.messages) {
       setSocketMessages(Object.values(channel?.messages));
     }
-
   }, [channel]);
 
   // console.log("socket messages ---------------", typeof socketMessages);
   // console.log("this is an array--------------", typeof []);
-  console.log("socket messages before socket use effect---------------", socketMessages);
+  console.log(
+    "socket messages before socket use effect---------------",
+    socketMessages
+  );
 
   useEffect(() => {
     // create websocket
     socket = io();
 
-    console.log("im in socket.on useeffect-----------------")
-    console.log("socket messages before socket.on!!!!!!--------------", socketMessages)
-
+    console.log("im in socket.on useeffect-----------------");
+    console.log(
+      "socket messages before socket.on!!!!!!--------------",
+      socketMessages
+    );
 
     // listen for chat events
     socket.on("message", (message) => {
-      console.log("im in socket.on-----------------")
+      console.log("im in socket.on-----------------");
       console.log("new message in socket.on-----------------", message);
-      console.log("socket messages before--------------", socketMessages)
+      console.log("socket messages before--------------", socketMessages);
       // when we recieve a message, add it into our messages array in state
       // let previousMessages = Object.values(socketMessages);
       // console.log("previous messages------------", previousMessages);
       setSocketMessages((socketMessages) => [...socketMessages, message]);
       // setSocketMessages(['this is empty'])
       console.log("socket messages after--------------", socketMessages);
-
     });
 
     // when component unmounts, disconnect
@@ -114,7 +114,6 @@ const ChannelPage = () => {
     socket.emit("join_room", { room: newRoom });
   };
 
-
   const sendChat = async (e) => {
     e.preventDefault();
     // emit a message
@@ -128,12 +127,12 @@ const ChannelPage = () => {
     // .then((newMessage) =>
     //   socket.emit("chat", { newMessage })
     // );
-    createdMessage['room'] = socketRoom;
+    createdMessage["room"] = socketRoom;
     // createdMessage['user'] = {"first_name": user.first_name, "last_name": user.last_name, "image_url": user.image_url}
-    createdMessage['name'] = createdMessage?.user?.first_name + " " + createdMessage?.user?.last_name;
-    createdMessage['image_url'] = createdMessage?.user?.image_url;
-    // createdMessage['time_created'] = createdMessage?.time_created;
-
+    createdMessage["name"] =
+      createdMessage?.user?.first_name + " " + createdMessage?.user?.last_name;
+    createdMessage["image_url"] = createdMessage?.user?.image_url;
+    createdMessage["time_created"] = createdMessage?.time_created;
 
     console.log("created message------------", createdMessage);
 
@@ -306,9 +305,9 @@ const ChannelPage = () => {
                     </div>
                   </div>
                 ))} */}
-{/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                 */}
-{/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                 */}
-{/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                 */}
+            {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                 */}
+            {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                 */}
+            {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                 */}
             {socketMessages
               ?.slice(0)
               .reverse()
@@ -342,8 +341,7 @@ const ChannelPage = () => {
                   <div className="MessageMain">
                     <div className="MessageInfo">
                       <div className="MessageName">
-                        {message?.user?.first_name}{" "}
-                        {message?.user?.last_name}
+                        {message?.user?.first_name} {message?.user?.last_name}
                       </div>
                       <div
                         className="MessageTime"
@@ -352,9 +350,7 @@ const ChannelPage = () => {
                         {formatTime(message?.time_created)}{" "}
                       </div>
                     </div>
-                    <div className="MessageContent">
-                      {message?.content}
-                    </div>
+                    <div className="MessageContent">{message?.content}</div>
                   </div>
                   <div id={"MessageEdit" + message?.id}>
                     {user_id === message?.user_id && (
