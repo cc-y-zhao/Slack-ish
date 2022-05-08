@@ -66,10 +66,6 @@ const ChannelPage = () => {
       setSocketMessages(Object.values(channel?.messages));
     }
 
-
-    // channel?.messages && setSocketMessages(Object.values(channel?.messages));
-    // console.log("socket messages in the use effect--------------", socketMessages)
-
   }, [channel]);
 
   // console.log("socket messages ---------------", typeof socketMessages);
@@ -136,7 +132,7 @@ const ChannelPage = () => {
     // createdMessage['user'] = {"first_name": user.first_name, "last_name": user.last_name, "image_url": user.image_url}
     createdMessage['name'] = createdMessage?.user?.first_name + " " + createdMessage?.user?.last_name;
     createdMessage['image_url'] = createdMessage?.user?.image_url;
-    createdMessage['time_created'] = createdMessage?.time_created;
+    // createdMessage['time_created'] = createdMessage?.time_created;
 
 
     console.log("created message------------", createdMessage);
