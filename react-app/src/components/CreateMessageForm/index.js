@@ -5,49 +5,60 @@ import { createMessage } from "../../store/channels";
 
 import "./CreateMessageForm.css";
 
-const CreateMessageForm = ({ channelId }) => {
+const CreateMessageForm = ({
+  channelId,
+  chatInput,
+  setChatInput,
+  sendChat,
+}) => {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState([]);
-  const [content, setContent] = useState("");
+  // const [content, setContent] = useState("");
   const channel_id = channelId;
   const user_id = useSelector((state) => state.session?.user).id;
 
-  const updateContent = (e) => setContent(e.target.value);
+  const updateContent = (e) => {
+    // setContent(e.target.value);
+    setChatInput(e.target.value);
+  };
 
   useEffect(() => {
     const validationErrors = [];
 
-    if (content.length === 0) validationErrors.push("");
+    if (chatInput.length === 0) validationErrors.push("");
 
-    if (content.length > 12000)
+    if (chatInput.length > 12000)
       validationErrors.push("Your message is too long.");
 
     setErrors(validationErrors);
-  }, [content]);
+  }, [chatInput]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    let newMessage = {
-      user_id,
-      channel_id,
-      content,
-    };
+  //   let newMessage = {
+  //     user_id,
+  //     channel_id,
+  //     content: chatInput,
+  //   };
 
-    if (newMessage) {
-      await dispatch(createMessage(channel_id, newMessage)).then(() =>
-        dispatch(loadChannel(channel_id))
-      );
-      setErrors([]);
-      setContent("");
-    }
-  };
+  //   if (newMessage) {
+  //     await dispatch(createMessage(channel_id, newMessage)).then(() =>
+  //       sendChat(newMessage)
+  //     );
+  //     // await sendChat(newMessage);
+  //     // .then(() => dispatch(loadChannel(channel_id)));
+  //     setErrors([]);
+  //     setChatInput("");
+  //     // setContent("");
+  //   }
+  // };
 
   return (
     <>
       <div className="CreateMessageFormDiv">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={sendChat}>
           <div className="CreateMessageErrors">
             <ul>
               {errors && errors.map((error) => <li key={error}>{error}</li>)}
@@ -60,7 +71,7 @@ const CreateMessageForm = ({ channelId }) => {
               type="text"
               required
               placeholder="Message"
-              value={content}
+              value={chatInput}
               onChange={updateContent}
             />
             <button type="submit" disabled={errors.length > 0}>
