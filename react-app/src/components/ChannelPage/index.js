@@ -61,8 +61,10 @@ const ChannelPage = () => {
   }, [dispatch, channelId]);
 
   useEffect(() => {
-    setSocketMessages(channel.messages);
+    channel?.messages && setSocketMessages(Object.values(channel?.messages));
   }, [channel]);
+
+  console.log("socket messages ---------------", socketMessages);
 
   useEffect(() => {
     // create websocket
@@ -71,7 +73,7 @@ const ChannelPage = () => {
     // listen for chat events
     socket.on("message", (message) => {
       // when we recieve a message, add it into our messages array in state
-      setSocketMessages((messages) => [...messages, message]);
+      setSocketMessages((socketMessages) => [...socketMessages, message]);
     });
 
     // when component unmounts, disconnect
@@ -94,17 +96,30 @@ const ChannelPage = () => {
     socket.emit("join_room", { room: newRoom });
   };
 
-  console.log("socketMessage", socketMessages);
-  const sendChat = async (newMessage) => {
-    // e.preventDefault();
+
+  const sendChat = async (e) => {
+    e.preventDefault();
     // emit a message
     let name = user.first_name + " " + user.last_name;
+    let newMessage = {
+      user_id,
+      channel_id,
+      content: chatInput,
+    };
     let createdMessage = await dispatch(createMessage(channel_id, newMessage));
     // .then((newMessage) =>
     //   socket.emit("chat", { newMessage })
     // );
-    socket.emit("chat", { createdMessage });
-    console.log(createdMessage);
+    createdMessage['room'] = socketRoom;
+    // createdMessage['user'] = {"first_name": user.first_name, "last_name": user.last_name, "image_url": user.image_url}
+    createdMessage['name'] = createdMessage?.user?.first_name + " " + createdMessage?.user?.last_name;
+    createdMessage['image_url'] = createdMessage?.user?.image_url;
+
+
+
+    // console.log("createdMessage in ChannelPAge--------------", createdMessage)
+    socket.send("chat", { createdMessage });
+    console.log("created message------------", createdMessage);
     // await dispatch(createMessage(channel_id, newMessage)).then(() =>
     //   socket.emit("chat", { user: name, msg: chatInput })
     // );
@@ -280,14 +295,14 @@ const ChannelPage = () => {
               .map((message) => (
                 <div
                   className="SingleMessageBody"
-                  key={"" + message?.createdMessage.id}
+                  key={"" + message?.id}
                   // onMouseEnter={() => setShowEditMessage(true)}
                   // onMouseLeave={() => setShowEditMessage(false)}
                 >
-                  {message?.createdMessage.user.image_url ? (
+                  {message?.user?.image_url ? (
                     <div className="MessageProfile">
                       <img
-                        src={message?.createdMessage.user?.image_url}
+                        src={message?.user?.image_url}
                         onError={(e) => {
                           e.target.setAttribute("src", icon);
                         }}
@@ -307,22 +322,22 @@ const ChannelPage = () => {
                   <div className="MessageMain">
                     <div className="MessageInfo">
                       <div className="MessageName">
-                        {message?.createdMessage.user?.first_name}{" "}
-                        {message?.createdMessage.user?.last_name}
+                        {message?.user?.first_name}{" "}
+                        {message?.user?.last_name}
                       </div>
                       <div
                         className="MessageTime"
-                        title={formatDate(message?.createdMessage.time_created)}
+                        title={formatDate(message?.time_created)}
                       >
-                        {formatTime(message?.createdMessage.time_created)}{" "}
+                        {formatTime(message?.time_created)}{" "}
                       </div>
                     </div>
                     <div className="MessageContent">
-                      {message?.createdMessage.content}
+                      {message?.content}
                     </div>
                   </div>
-                  <div id={"MessageEdit" + message?.createdMessage.id}>
-                    {user_id === message?.createdMessage.user_id && (
+                  <div id={"MessageEdit" + message?.id}>
+                    {user_id === message?.user_id && (
                       <>
                         <i
                           className="fa-solid fa-ellipsis-vertical"
@@ -333,7 +348,7 @@ const ChannelPage = () => {
                               setCurrentEditModal(
                                 EditMessageForm,
                                 channel?.id,
-                                message?.createdMessage.id
+                                message?.id
                               )
                             );
                             dispatch(showModal());

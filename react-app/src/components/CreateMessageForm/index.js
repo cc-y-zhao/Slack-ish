@@ -34,31 +34,31 @@ const CreateMessageForm = ({
     setErrors(validationErrors);
   }, [chatInput]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    let newMessage = {
-      user_id,
-      channel_id,
-      content: chatInput,
-    };
+  //   let newMessage = {
+  //     user_id,
+  //     channel_id,
+  //     content: chatInput,
+  //   };
 
-    if (newMessage) {
-      await dispatch(createMessage(channel_id, newMessage)).then(() =>
-        sendChat(newMessage)
-      );
-      // await sendChat(newMessage);
-      // .then(() => dispatch(loadChannel(channel_id)));
-      setErrors([]);
-      setChatInput("");
-      // setContent("");
-    }
-  };
+  //   if (newMessage) {
+  //     await dispatch(createMessage(channel_id, newMessage)).then(() =>
+  //       sendChat(newMessage)
+  //     );
+  //     // await sendChat(newMessage);
+  //     // .then(() => dispatch(loadChannel(channel_id)));
+  //     setErrors([]);
+  //     setChatInput("");
+  //     // setContent("");
+  //   }
+  // };
 
   return (
     <>
       <div className="CreateMessageFormDiv">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={sendChat}>
           <div className="CreateMessageErrors">
             <ul>
               {errors && errors.map((error) => <li key={error}>{error}</li>)}
