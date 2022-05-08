@@ -61,13 +61,20 @@ const ChannelPage = () => {
   }, [dispatch, channelId]);
 
   useEffect(() => {
-    channel?.messages && setSocketMessages(Object.values(channel?.messages));
-    console.log("socket messages in the use effect--------------", socketMessages)
+
+    if (channel && channel.messages) {
+      setSocketMessages(Object.values(channel?.messages));
+    }
+
+
+    // channel?.messages && setSocketMessages(Object.values(channel?.messages));
+    // console.log("socket messages in the use effect--------------", socketMessages)
 
   }, [channel]);
 
-  console.log("socket messages ---------------", typeof socketMessages);
-  console.log("this is an array--------------", typeof []);
+  // console.log("socket messages ---------------", typeof socketMessages);
+  // console.log("this is an array--------------", typeof []);
+  console.log("socket messages before socket use effect---------------", socketMessages);
 
   useEffect(() => {
     // create websocket
@@ -80,12 +87,13 @@ const ChannelPage = () => {
     // listen for chat events
     socket.on("message", (message) => {
       console.log("im in socket.on-----------------")
-      console.log("message in socket.on-----------------", message);
+      console.log("new message in socket.on-----------------", message);
       console.log("socket messages before--------------", socketMessages)
       // when we recieve a message, add it into our messages array in state
-      let previousMessages = Object.values(socketMessages);
-      console.log("previous messages------------", previousMessages);
-      setSocketMessages((socketMessages) => [...previousMessages, message]);
+      // let previousMessages = Object.values(socketMessages);
+      // console.log("previous messages------------", previousMessages);
+      setSocketMessages((socketMessages) => [...socketMessages, message]);
+      // setSocketMessages(['this is empty'])
       console.log("socket messages after--------------", socketMessages);
 
     });
@@ -128,6 +136,7 @@ const ChannelPage = () => {
     // createdMessage['user'] = {"first_name": user.first_name, "last_name": user.last_name, "image_url": user.image_url}
     createdMessage['name'] = createdMessage?.user?.first_name + " " + createdMessage?.user?.last_name;
     createdMessage['image_url'] = createdMessage?.user?.image_url;
+    createdMessage['time_created'] = createdMessage?.time_created;
 
 
     console.log("created message------------", createdMessage);
@@ -235,7 +244,7 @@ const ChannelPage = () => {
             </div>
           </div>
           <div className="MessagesBody">
-            {channel?.messages &&
+            {/* {channel?.messages &&
               Object.values(channel?.messages)
                 ?.slice(0)
                 .reverse()
@@ -300,7 +309,7 @@ const ChannelPage = () => {
                       )}
                     </div>
                   </div>
-                ))}
+                ))} */}
 {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                 */}
 {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                 */}
 {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                 */}

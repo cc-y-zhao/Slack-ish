@@ -71,5 +71,6 @@ def leave(data):
 def on_chat_sent(data):
     print('\n\n\n data issssss hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee \n\n\n', data)
     room = data['room']
-    send({'id': data['id'], 'channel_id': data['channel_id'], 'content': data['content'], 'created_at': data['time_created'],
+    # outgoing_message =
+    send({'id': data['id'], 'channel_id': data['channel_id'], 'content': data['content'], 'time_created': data['time_created'],
          'room': data['room'], 'user': data['user']}, room=data['room'],)
