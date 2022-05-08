@@ -62,18 +62,32 @@ const ChannelPage = () => {
 
   useEffect(() => {
     channel?.messages && setSocketMessages(Object.values(channel?.messages));
+    console.log("socket messages in the use effect--------------", socketMessages)
+
   }, [channel]);
 
-  console.log("socket messages ---------------", socketMessages);
+  console.log("socket messages ---------------", typeof socketMessages);
+  console.log("this is an array--------------", typeof []);
 
   useEffect(() => {
     // create websocket
     socket = io();
 
+    console.log("im in socket.on useeffect-----------------")
+    console.log("socket messages before socket.on!!!!!!--------------", socketMessages)
+
+
     // listen for chat events
     socket.on("message", (message) => {
+      console.log("im in socket.on-----------------")
+      console.log("message in socket.on-----------------", message);
+      console.log("socket messages before--------------", socketMessages)
       // when we recieve a message, add it into our messages array in state
-      setSocketMessages((socketMessages) => [...socketMessages, message]);
+      let previousMessages = Object.values(socketMessages);
+      console.log("previous messages------------", previousMessages);
+      setSocketMessages((socketMessages) => [...previousMessages, message]);
+      console.log("socket messages after--------------", socketMessages);
+
     });
 
     // when component unmounts, disconnect
@@ -116,14 +130,15 @@ const ChannelPage = () => {
     createdMessage['image_url'] = createdMessage?.user?.image_url;
 
 
+    console.log("created message------------", createdMessage);
 
     // console.log("createdMessage in ChannelPAge--------------", createdMessage)
-    socket.send("chat", { createdMessage });
-    console.log("created message------------", createdMessage);
+    socket.send(createdMessage);
+    // socket.send("chat", { createdMessage });
     // await dispatch(createMessage(channel_id, newMessage)).then(() =>
     //   socket.emit("chat", { user: name, msg: chatInput })
     // );
-    // socket.emit("chat", { user: name, msg: chatInput });
+    // socket.emit("message", { createdMessage });
     // clear the input field after the message is sent
     setChatInput("");
   };
