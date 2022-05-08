@@ -88,3 +88,6 @@ pipenv lock -r > requirements.txt
 
 FRONTEND:
 npm install socket.io-client
+
+
+deploying to heroku
