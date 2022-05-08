@@ -16,6 +16,8 @@ from .seeds import seed_commands
 
 from .config import Config
 
+from .socket import socketio
+
 app = Flask(__name__)
 
 # Setup login manager
@@ -40,6 +42,9 @@ app.register_blueprint(search_routes, url_prefix='/api/search')
 
 db.init_app(app)
 Migrate(app, db)
+
+# initialize the app with the socket instance
+socketio.init_app(app)
 
 # Application Security
 CORS(app)
@@ -77,3 +82,8 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('slackish.ico')
     return app.send_static_file('index.html')
+
+
+# at the bottom of the file, use this to run the app
+if __name__ == '__main__':
+    socketio.run(app)

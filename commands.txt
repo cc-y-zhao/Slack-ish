@@ -78,3 +78,13 @@ flask seed undo
 flask seed all
 
 heroku push
+
+
+*********** websocket commands *************
+BACKEND:
+pipenv install flask-socketio
+pipenv install eventlet==0.30.2
+pipenv lock -r > requirements.txt
+
+FRONTEND:
+npm install socket.io-client
