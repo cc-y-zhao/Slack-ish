@@ -29,12 +29,15 @@ import { io } from "socket.io-client";
 let socket;
 
 const ChannelPage = () => {
-  const [socketMessages, setSocketMessages] = useState([]);
-  const [chatInput, setChatInput] = useState("");
-
-  const dispatch = useDispatch();
   const { channel_id } = useParams();
   const channelId = parseInt(channel_id);
+  const [socketMessages, setSocketMessages] = useState([]);
+  const [socketRoom, setSocketRoom] = useState();
+  const [chatInput, setChatInput] = useState("");
+  const [prevRoom, setPrevRoom] = useState(
+    channelId && `channel${channelId}`
+  );
+  const dispatch = useDispatch();
   const channel = useSelector((state) => state.channels[channel_id]);
   const user_id = useSelector((state) => state.session.user?.id);
   const user = useSelector((state) => state.session.user);
@@ -51,13 +54,24 @@ const ChannelPage = () => {
   // }
 
   useEffect(() => {
+    if (channelId) {
+      dispatch(loadChannel(channelId));
+      setSocketRoom(`channel${channelId}`);
+    }
+  }, [dispatch, channelId]);
+
+  useEffect(() => {
+    setSocketMessages(channel.messages);
+  }, [channel]);
+
+  useEffect(() => {
     // create websocket
     socket = io();
 
     // listen for chat events
-    socket.on("chat", (chat) => {
-      // when we recieve a chat, add it into our messages array in state
-      setSocketMessages((messages) => [...messages, chat]);
+    socket.on("message", (message) => {
+      // when we recieve a message, add it into our messages array in state
+      setSocketMessages((messages) => [...messages, message]);
     });
 
     // when component unmounts, disconnect
@@ -65,6 +79,20 @@ const ChannelPage = () => {
       socket.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    leaveRoom(prevRoom);
+    joinRoom(socketRoom);
+    setPrevRoom(socketRoom);
+  }, [prevRoom, socketRoom]);
+
+  const leaveRoom = (oldRoom) => {
+    socket.emit("leave_room", { room: oldRoom });
+  };
+
+  const joinRoom = (newRoom) => {
+    socket.emit("join_room", { room: newRoom });
+  };
 
   console.log("socketMessage", socketMessages);
   const sendChat = async (newMessage) => {
