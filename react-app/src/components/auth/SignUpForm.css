@@ -4,8 +4,10 @@
     flex-grow: 1;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     font-size: 18px;
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .SignupFormArea {
