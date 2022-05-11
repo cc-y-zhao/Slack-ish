@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: center;
     font-size: 18px;
+    height: 100vh;
 }
 
 .LoginFormHeader {
@@ -146,9 +147,10 @@
 .LoginFormFooter {
     padding-bottom: 32px;
     display: flex;
-    align-items: center;
-    position: absolute;
+    align-items: flex-end;
+    position: relative;
     bottom: 0;
+    height: 100%;
 }
 
 .LoginFormFooter a {
@@ -159,6 +161,7 @@
     margin-right: 16px;
     text-decoration: none;
     cursor: pointer;
+    margin: 15px 15px 15px 0px;
 }
 
 .LoginFormFooter p {
