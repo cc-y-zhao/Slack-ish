@@ -19,9 +19,9 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
-    console.log('data in login form----------', data)
+    console.log("data in login form----------", data);
     if (data) {
-    console.log('data in login form----------', data)
+      console.log("data in login form----------", data);
 
       setErrors(data);
       return;
@@ -88,7 +88,7 @@ const LoginForm = () => {
         <div className="demo-login">
           <i className="fa-regular fa-heart"></i>
           <p className="Box">
-            We won't email you a magic code for a password-free sign in. Or you
+            We won't be emailing you anything, so use any email you want. Or you
             can <a onClick={demoLogin}>sign in as a demo user instead</a>.
           </p>
         </div>

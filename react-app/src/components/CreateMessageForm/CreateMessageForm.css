@@ -105,7 +105,7 @@
     --ck-font-size-base: 14px;
 
     /* Helper variables to avoid duplication in the colors. */
-    --ck-custom-background: rgb(37,40,43);
+    --ck-custom-background: rgb(100, 100, 100);
     --ck-custom-foreground: rgb(186, 186, 187);
     --ck-custom-border: rgb(43, 42, 43);
     --ck-custom-white: rgb(241, 241, 241);
