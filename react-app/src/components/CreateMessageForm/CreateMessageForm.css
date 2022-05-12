@@ -97,7 +97,36 @@
     color: rgb(190, 92, 92) !important;
 }
 
-:root {
+.cke_editable {
+    background-color: hsl(0, 0%, 20%) !important;
+    word-wrap:break-word;
+}
+
+.ck-content {
+    min-height: 134px;
+    width: 100% !important;
+    min-width: 380px;
+    background-color: rgb(37,40,43) !important;
+    /* border: 1px solid rgb(81,83,82); */
+    border-radius: 7px;
+    color: rgb(196,198,199);
+    font-family: Lato;
+    font-size: 15px;
+    resize: none;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow-wrap: break-word;
+    word-wrap:break-word;
+    /* border-color: rgb(136,138,140); */
+}
+
+.ck-toolbar {
+    background-color: rgb(37,40,43) !important;
+}
+
+
+.ck {
     /* Overrides the border radius setting in the theme. */
     --ck-border-radius: 4px;
 
@@ -105,7 +134,7 @@
     --ck-font-size-base: 14px;
 
     /* Helper variables to avoid duplication in the colors. */
-    --ck-custom-background: rgb(100, 100, 100);
+    --ck-custom-background: rgb(37,40,43);
     --ck-custom-foreground: rgb(186, 186, 187);
     --ck-custom-border: rgb(43, 42, 43);
     --ck-custom-white: rgb(241, 241, 241);
@@ -202,38 +231,4 @@
     /* -- Overrides the default colors used by the ckeditor5-link package. ---------------------- */
 
     --ck-color-link-default: hsl(190, 100%, 75%);
-}
-
-.ck-editor {
-    color: var(--color);
-    background-color: hsl(0, 0%, 20%);
-    word-wrap:break-word;
-}
-
-.cke_editable {
-    background-color: hsl(0, 0%, 20%) !important;
-    word-wrap:break-word;
-}
-
-.ck-content {
-    min-height: 134px;
-    width: 100% !important;
-    min-width: 380px;
-    background-color: rgb(37,40,43) !important;
-    /* border: 1px solid rgb(81,83,82); */
-    border-radius: 7px;
-    color: rgb(196,198,199);
-    font-family: Lato;
-    font-size: 15px;
-    resize: none;
-    box-sizing: border-box;
-    padding: 10px;
-    margin-bottom: 10px;
-    overflow-wrap: break-word;
-    word-wrap:break-word;
-    /* border-color: rgb(136,138,140); */
-}
-
-.ck-toolbar {
-    background-color: rgb(37,40,43) !important;
 }
