@@ -105,15 +105,15 @@
     --ck-font-size-base: 14px;
 
     /* Helper variables to avoid duplication in the colors. */
-    --ck-custom-background: rgb(37, 40, 43);
-    --ck-custom-foreground: rgb(44, 44, 46);
-    --ck-custom-border: rgb(58, 57, 58);
-    --ck-custom-white: rgb(255, 255, 255);
+    --ck-custom-background: rgb(37,40,43);
+    --ck-custom-foreground: rgb(186, 186, 187);
+    --ck-custom-border: rgb(43, 42, 43);
+    --ck-custom-white: rgb(241, 241, 241);
 
     /* -- Overrides generic colors. ------------------------------------------------------------- */
 
     --ck-color-base-foreground: var(--ck-custom-background);
-    --ck-color-focus-border: rgb(74, 164, 243);
+    --ck-color-focus-border: rgb(175, 175, 175);
     --ck-color-text: rgb(255, 255, 255);
     --ck-color-shadow-drop: rgba(0, 0, 0, 0.2);
     --ck-color-shadow-inner: rgba(0, 0, 0, 0.1);
@@ -121,15 +121,15 @@
     /* -- Overrides the default .ck-button class colors. ---------------------------------------- */
 
     --ck-color-button-default-background: var(--ck-custom-background);
-    --ck-color-button-default-hover-background: hsl(270, 1%, 22%);
-    --ck-color-button-default-active-background: hsl(270, 2%, 20%);
-    --ck-color-button-default-active-shadow: hsl(270, 2%, 23%);
+    --ck-color-button-default-hover-background: rgb(57, 57, 58);
+    --ck-color-button-default-active-background: rgb(52, 50, 53);
+    --ck-color-button-default-active-shadow: rgb(59, 57, 59);
     --ck-color-button-default-disabled-background: var(--ck-custom-background);
 
     --ck-color-button-on-background: var(--ck-custom-foreground);
-    --ck-color-button-on-hover-background: hsl(255, 4%, 16%);
-    --ck-color-button-on-active-background: hsl(255, 4%, 14%);
-    --ck-color-button-on-active-shadow: hsl(240, 3%, 19%);
+    --ck-color-button-on-hover-background: rgb(41, 39, 43);
+    --ck-color-button-on-active-background: rgb(35, 34, 37);
+    --ck-color-button-on-active-shadow: rgb(46, 46, 49);
     --ck-color-button-on-disabled-background: var(--ck-custom-foreground);
 
     --ck-color-button-action-background: hsl(168, 76%, 42%);
@@ -236,5 +236,4 @@
 
 .ck-toolbar {
     background-color: rgb(37,40,43) !important;
-    color: white !important;
 }
