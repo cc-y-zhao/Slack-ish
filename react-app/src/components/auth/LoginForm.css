@@ -161,7 +161,7 @@
     margin-right: 16px;
     text-decoration: none;
     cursor: pointer;
-    margin: 15px 15px 15px 0px;
+    /* margin: 15px 15px 15px 0px; */
 }
 
 .LoginFormFooter p {
