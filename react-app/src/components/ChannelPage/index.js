@@ -22,6 +22,7 @@ import {
 
 import "./ChannelPage.css";
 import icon from "../../images/icon.png";
+import audio from "./knock_brush.mp3";
 
 // import the socket
 import { io } from "socket.io-client";
@@ -146,6 +147,7 @@ const ChannelPage = () => {
     // socket.emit("message", { createdMessage });
     // clear the input field after the message is sent
     setChatInput("");
+    new Audio(audio).play();
   };
 
   const showEditChannelForm = () => {
