@@ -4,3 +4,8 @@ html {
     font-family: 'Lato', sans-serif;
     overflow: hidden;
 }
+
+p {
+    margin: 0;
+    padding: 0;
+}

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadChannel } from "../../store/channels";
-import { createMessage } from "../../store/channels";
+// import { loadChannel } from "../../store/channels";
+// import { createMessage } from "../../store/channels";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import "./CreateMessageForm.css";
 
@@ -18,9 +20,13 @@ const CreateMessageForm = ({
   const channel_id = channelId;
   const user_id = useSelector((state) => state.session?.user).id;
 
-  const updateContent = (e) => {
-    // setContent(e.target.value);
-    setChatInput(e.target.value);
+  // const updateContent = (e) => {
+  //   // setContent(e.target.value);
+  //   setChatInput(e.target.value);
+  // };
+  const updateContent = (e, editor) => {
+    const richText = editor.getData();
+    setChatInput(richText);
   };
 
   useEffect(() => {
@@ -67,12 +73,38 @@ const CreateMessageForm = ({
           <input type="hidden" value={user_id} />
           <input type="hidden" value={channel_id} />
           <div className="MessageTextBoxArea">
-            <textarea
+            {/* <textarea
               type="text"
               required
               placeholder="Message"
               value={chatInput}
               onChange={updateContent}
+            /> */}
+            <CKEditor
+              editor={ClassicEditor}
+              onChange={updateContent}
+              data={chatInput}
+              config={{
+                toolbar: [
+                  // "heading",
+                  // "|",
+                  "bold",
+                  "italic",
+                  "|",
+                  "link",
+                  "|",
+                  "bulletedList",
+                  "numberedList",
+                  "|",
+                  "indent",
+                  "outdent",
+                  // "|",
+                  // "blockQuote",
+                  // "insertTable",
+                  // "undo",
+                  // "redo",
+                ],
+              }}
             />
             <button type="submit" disabled={errors.length > 0}>
               <i className="fa-solid fa-paper-plane"></i>

@@ -91,3 +91,8 @@ npm install socket.io-client
 
 
 deploying to heroku
+
+
+*********** Text Editor *************
+npm install --save @ckeditor/ckeditor5-react @ckeditor/ckeditor5-build-classic
+npm install react-html-parser
