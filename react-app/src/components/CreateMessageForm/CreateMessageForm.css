@@ -105,18 +105,18 @@
     --ck-font-size-base: 14px;
 
     /* Helper variables to avoid duplication in the colors. */
-    --ck-custom-background: rgb(37,40,43);
-    --ck-custom-foreground: hsl(255, 3%, 18%);
-    --ck-custom-border: hsl(300, 1%, 22%);
-    --ck-custom-white: hsl(0, 0%, 100%);
+    --ck-custom-background: rgb(37, 40, 43);
+    --ck-custom-foreground: rgb(44, 44, 46);
+    --ck-custom-border: rgb(58, 57, 58);
+    --ck-custom-white: rgb(255, 255, 255);
 
     /* -- Overrides generic colors. ------------------------------------------------------------- */
 
     --ck-color-base-foreground: var(--ck-custom-background);
-    --ck-color-focus-border: hsl(208, 90%, 62%);
-    --ck-color-text: hsl(0, 0%, 98%);
-    --ck-color-shadow-drop: hsla(0, 0%, 0%, 0.2);
-    --ck-color-shadow-inner: hsla(0, 0%, 0%, 0.1);
+    --ck-color-focus-border: rgb(74, 164, 243);
+    --ck-color-text: rgb(255, 255, 255);
+    --ck-color-shadow-drop: rgba(0, 0, 0, 0.2);
+    --ck-color-shadow-inner: rgba(0, 0, 0, 0.1);
 
     /* -- Overrides the default .ck-button class colors. ---------------------------------------- */
 
@@ -155,11 +155,11 @@
     /* -- Overrides the default .ck-input class colors. ----------------------------------------- */
 
     --ck-color-input-background: var(--ck-custom-background);
-    --ck-color-input-border: hsl(257, 3%, 43%);
-    --ck-color-input-text: hsl(0, 0%, 98%);
-    --ck-color-input-disabled-background: hsl(255, 4%, 21%);
-    --ck-color-input-disabled-border: hsl(250, 3%, 38%);
-    --ck-color-input-disabled-text: hsl(0, 0%, 78%);
+    --ck-color-input-border: rgb(116, 116, 116);
+    --ck-color-input-text: rgb(255, 255, 255);
+    --ck-color-input-disabled-background: rgb(52, 51, 56);
+    --ck-color-input-disabled-border: rgb(97, 97, 97);
+    --ck-color-input-disabled-text: rgb(202, 201, 201);
 
     /* -- Overrides the default .ck-labeled-field-view class colors. ---------------------------- */
 
@@ -185,13 +185,13 @@
 
     /* -- Overrides the default .ck-tooltip class colors. --------------------------------------- */
 
-    --ck-color-tooltip-background: hsl(252, 7%, 14%);
-    --ck-color-tooltip-text: hsl(0, 0%, 93%);
+    --ck-color-tooltip-background: rgb(37,40,43) !important;
+    --ck-color-tooltip-text: white;
 
     /* -- Overrides the default colors used by the ckeditor5-image package. --------------------- */
 
-    --ck-color-image-caption-background: hsl(0, 0%, 97%);
-    --ck-color-image-caption-text: hsl(0, 0%, 20%);
+    --ck-color-image-caption-background: white;
+    --ck-color-image-caption-text: rgb(49, 49, 49);
 
     /* -- Overrides the default colors used by the ckeditor5-widget package. -------------------- */
 
@@ -232,4 +232,9 @@
     overflow-wrap: break-word;
     word-wrap:break-word;
     /* border-color: rgb(136,138,140); */
+}
+
+.ck-toolbar {
+    background-color: rgb(37,40,43) !important;
+    color: white !important;
 }
