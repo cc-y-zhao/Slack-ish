@@ -79,9 +79,9 @@
 
 .UpdateMessageButtonContainer {
     height: 75px;
-    width: 80%;
+    width: 70%;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
 }
 
@@ -207,15 +207,18 @@
 .ck-editor {
     color: var(--color);
     background-color: hsl(0, 0%, 20%);
+    word-wrap:break-word;
 }
 
 .cke_editable {
     background-color: hsl(0, 0%, 20%) !important;
+    word-wrap:break-word;
 }
 
 .ck-content {
     min-height: 134px;
-    width: 100%;
+    width: 100% !important;
+    min-width: 380px;
     background-color: rgb(37,40,43) !important;
     /* border: 1px solid rgb(81,83,82); */
     border-radius: 7px;
@@ -226,5 +229,7 @@
     box-sizing: border-box;
     padding: 10px;
     margin-bottom: 10px;
+    overflow-wrap: break-word;
+    word-wrap:break-word;
     /* border-color: rgb(136,138,140); */
 }

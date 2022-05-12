@@ -38,6 +38,7 @@
 
 .ChannelPageTitleLeft > p {
     padding: 5px 10px 0 0;
+    margin-top: 15px;
     font-size: 14px;
     color: rgb(134, 134, 136);
 }

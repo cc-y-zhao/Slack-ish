@@ -1,31 +1,33 @@
-.CreateChannelFormWrapper {
+.EditMessageFormWrapper {
     width: 100% !important;
     display: flex;
     flex-grow: 1;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    width: 400px;
     font-size: 18px;
 }
 
-.CreatChannelFormBody {
+.EditMessageFormBody {
     padding-top: 10px;
+    width: 400px;
 }
 
-.CreateChannelFormErrors > ul {
+.EditMessageFormErrors > ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.CreatChannelFormBody > form {
+.EditMessageFormBody > form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 400px;
 }
 
-.CreatChannelFormBody input {
+/* .EditMessageFormBody input {
     resize: none;
     font-family: Lato;
     padding: 3px 12px 5px;
@@ -37,11 +39,11 @@
     margin: 0 0 20px 0;
     height: 44px;
     font-size: 16px;
-    width: 300px;
+    width: 400px;
     box-sizing: border-box;
-}
+} */
 
-.CreatChannelFormBody textarea{
+/* .EditMessageFormBody textarea{
     resize: none;
     font-family: Lato;
     padding: 3px 12px 5px;
@@ -55,9 +57,9 @@
     font-size: 16px;
     width: 300px;
     box-sizing: border-box;
-}
+} */
 
-.CreateChannelButton {
+.EditMessageButton {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -71,7 +73,7 @@
     padding: 15px 0;
 }
 
-#EditMessage {
+/* .ck-content {
     resize: none;
     font-family: Lato;
     padding: 3px 12px 5px;
@@ -85,4 +87,4 @@
     font-size: 16px;
     max-width: 300px;
     box-sizing: border-box;
-}
+} */
