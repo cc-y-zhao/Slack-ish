@@ -4,7 +4,10 @@ import { hideModal } from "../../store/modal";
 
 import { loadChannel, editMessage, deleteMessage } from "../../store/channels";
 
-import "../CreateChannelForm/CreateChannelForm.css";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
+import "./EditMessageForm.css";
 
 const EditMessageForm = () => {
   const dispatch = useDispatch();
@@ -23,7 +26,11 @@ const EditMessageForm = () => {
   );
   const [content, setContent] = useState(messageToEdit?.content);
 
-  const updateContent = (e) => setContent(e.target.value);
+  // const updateContent = (e) => setContent(e.target.value);
+  const updateContent = (e, editor) => {
+    const richText = editor.getData();
+    setContent(richText);
+  };
 
   useEffect(() => {
     const validationErrors = [];
@@ -55,21 +62,48 @@ const EditMessageForm = () => {
   };
 
   return (
-    <div className="CreateChannelFormWrapper">
-      <div className="CreateChannelFormHeader">
+    <div className="EditMessageFormWrapper">
+      <div className="EditMessageFormHeader">
         <h1>Edit Message</h1>
       </div>
-      <div className="CreatChannelFormBody">
+      <div className="EditMessageFormBody">
         <form onSubmit={handleSubmit}>
-          <div className="CreateChannelFormErrors">{errors}</div>
+          <div className="EditMessageFormErrors">{errors}</div>
           <input type="hidden" value={user_id} />
           <input type="hidden" value={channel_id} />
-          <textarea
+          {/* <textarea
             type="text"
             required
             placeholder="Message"
             value={content}
             onChange={updateContent}
+          /> */}
+          <CKEditor
+            id="EditMessage"
+            editor={ClassicEditor}
+            onChange={updateContent}
+            data={content}
+            config={{
+              toolbar: [
+                // "heading",
+                // "|",
+                "bold",
+                "italic",
+                "|",
+                "link",
+                "|",
+                "bulletedList",
+                "numberedList",
+                "|",
+                "indent",
+                "outdent",
+                // "|",
+                // "blockQuote",
+                // "insertTable",
+                // "undo",
+                // "redo",
+              ],
+            }}
           />
           <div className="EditMessageButtonContainer">
             <div className="UpdateMessageButton">

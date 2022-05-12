@@ -4,6 +4,7 @@ import { useParams, Redirect } from "react-router-dom";
 import EditChannelForm from "../EditChannelForm";
 import CreateMessageForm from "../CreateMessageForm";
 import EditMessageForm from "../EditMessageForm";
+import ReactHtmlParser from "react-html-parser";
 
 import ChannelMembers from "../ChannelMembers";
 import { loadChannel, createMessage } from "../../store/channels";
@@ -350,7 +351,9 @@ const ChannelPage = () => {
                         {formatTime(message?.time_created)}{" "}
                       </div>
                     </div>
-                    <div className="MessageContent">{message?.content}</div>
+                    <div className="MessageContent">
+                      {ReactHtmlParser(message?.content)}
+                    </div>
                   </div>
                   <div id={"MessageEdit" + message?.id}>
                     {user_id === message?.user_id && (
