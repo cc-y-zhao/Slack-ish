@@ -1,6 +1,6 @@
 # Slack-ish
 
-[Slack-ish](https://slack-ish.herokuapp.com/) is a clone of [Slack](https://slack.com/), a popular messaging platform. Slack-ish offers channels, organized by topics of discussion, and direct messaging.
+[Slack-ish](https://slack-ish.herokuapp.com/) is a clone of [Slack](https://slack.com/), a popular messaging platform. Slack-ish offers channels, organized by topics of discussion, direct messaging, and live chat.
 
 ## Meet the Team~
 
@@ -29,14 +29,15 @@ This website is brought to you by [Cecilia Zhao](https://www.linkedin.com/in/cec
 
 # Technologies Used
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original-wordmark.svg" alt="python" width="60" /><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="javascript" width="60" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg" alt="react" width="60" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" alt="redux" width="60" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlalchemy/sqlalchemy-original.svg" alt="sqlalchemy" width="60" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="60" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original-wordmark.svg" alt="html5" width="60" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original-wordmark.svg" alt="css3" width="60" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="git" width="60" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original-wordmark.svg" alt="python" title="python" width="60" /><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="javascript" title="javascript" width="60" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg" alt="react" title="react" width="60" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" alt="redux" title="redux" width="60" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" alt="socketio" title="socketio" width="60" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlalchemy/sqlalchemy-original.svg" alt="sqlalchemy" title="sqlalchemy" width="60" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" title="postgresql" width="60" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original-wordmark.svg" alt="html5" title="html5" width="60" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original-wordmark.svg" alt="css3" title="css3" width="60" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="git" title="git" width="60" />
 
 <br>
 
@@ -153,10 +154,10 @@ In the future, we definitely want to revisit this project to refactor our code t
 - [ ] Abandon Modal state and utilize modals as props instead
 - [ ] Allow users to edit their names and profile pictures
 - [ ] Toggle close and open for Channels and Direct Messages on side bar
-- [ ] Utilize library for message text area
+- [x] Utilize library for message text area
 - [ ] Change editing messages to be inline instead of modal
 - [ ] Allow search for channels
-- [ ] Live chat
+- [x] Live chat
 - [ ] Notifications
 
 <br>
