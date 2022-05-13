@@ -173,6 +173,7 @@ export const createMessage = (channel_id, message) => async (dispatch) => {
   });
   if (response.ok) {
     const newMessage = await response.json();
+    console.log("new message in store-----------", newMessage);
     dispatch(createOneMessage(channel_id, newMessage));
     return newMessage;
   } else {
