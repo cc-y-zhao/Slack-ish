@@ -120,7 +120,8 @@ On the log in page, click "sign in as a demo user instead".
    
 <br>
    
-![demo](https://user-images.githubusercontent.com/89059894/162678832-57c159e5-9066-4062-9ece-53398ced3ef0.png)
+![demo](https://user-images.githubusercontent.com/89059894/168287829-81f75b71-b20e-4de3-8050-19190b0a3213.png)
+
    
 </details>
 
@@ -148,15 +149,15 @@ By leveraging the socket.io library, Slack-ish enables users to send live messag
    
 <br>
    
-<img src="https://github.com/cc-y-zhao/Slack-ish/blob/sockets_v3/react-app/public/GIFs/live_msg_demo.gif?raw=true" width="900" height="425" />
-   
+   ![livechat](https://user-images.githubusercontent.com/89059894/168287097-abe1acf7-7148-462e-a1b7-b54bb692506d.gif)
+
+
 ### Live Search
 Slack-ish offers live search functionality, allowing users to search for other users in the Slack-ish database. Upon selecting a name from the search results, the user will be directed to a direct message exchange with the selected individual (or an existing direct message exchange if the user has previously conversed with the selected individual). 
    
 <br>
    
-<img src="https://github.com/cc-y-zhao/Slack-ish/blob/sockets_v3/react-app/public/GIFs/search_demo.gif?raw=true" width="900" height="425" />
-
+![search](https://user-images.githubusercontent.com/89059894/168287110-7acf1b57-a642-45c7-84ce-de00e93b4432.gif)
 
 <br>
 
