@@ -140,6 +140,11 @@ Logged in users can perform the following actions.
 - Create a Direct Message with another user
 - Create/Edit/Delete messages in a Direct Message that the user is apart of
 - Search for other users to add to a Channel or create a Direct Message with
+   
+### Live Chat
+<img src="https://github.com/cc-y-zhao/Slack-ish/blob/sockets_v3/react-app/public/GIFs/live_msg_demo.gif?raw=true" width="900" height="425" />
+
+By leveraging the socket.io library, Slack-ish enables users to send live messages to one another. Incoming messages are rendered without the user having to refresh / reload the page. 
 
 <br>
 
