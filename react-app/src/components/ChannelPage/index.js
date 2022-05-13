@@ -77,23 +77,9 @@ const ChannelPage = () => {
     // create websocket
     socket = io();
 
-    console.log("im in socket.on useeffect-----------------");
-    console.log(
-      "socket messages before socket.on!!!!!!--------------",
-      socketMessages
-    );
-
     // listen for chat events
     socket.on("message", (message) => {
-      console.log("im in socket.on-----------------");
-      console.log("new message in socket.on-----------------", message);
-      console.log("socket messages before--------------", socketMessages);
-      // when we recieve a message, add it into our messages array in state
-      // let previousMessages = Object.values(socketMessages);
-      // console.log("previous messages------------", previousMessages);
       setSocketMessages((socketMessages) => [...socketMessages, message]);
-      // setSocketMessages(['this is empty'])
-      console.log("socket messages after--------------", socketMessages);
     });
 
     // when component unmounts, disconnect
@@ -126,25 +112,10 @@ const ChannelPage = () => {
       content: chatInput,
     };
     let createdMessage = await dispatch(createMessage(channel_id, newMessage));
-    // .then((newMessage) =>
-    //   socket.emit("chat", { newMessage })
-    // );
+
     createdMessage["room"] = socketRoom;
-    // createdMessage['user'] = {"first_name": user.first_name, "last_name": user.last_name, "image_url": user.image_url}
-    createdMessage["name"] =
-      createdMessage?.user?.first_name + " " + createdMessage?.user?.last_name;
-    createdMessage["image_url"] = createdMessage?.user?.image_url;
-    createdMessage["time_created"] = createdMessage?.time_created;
-
-    console.log("created message------------", createdMessage);
-
-    // console.log("createdMessage in ChannelPAge--------------", createdMessage)
+    createdMessage["name"] = name;
     socket.send(createdMessage);
-    // socket.send("chat", { createdMessage });
-    // await dispatch(createMessage(channel_id, newMessage)).then(() =>
-    //   socket.emit("chat", { user: name, msg: chatInput })
-    // );
-    // socket.emit("message", { createdMessage });
     // clear the input field after the message is sent
     setChatInput("");
     new Audio(audio).play();
@@ -358,7 +329,7 @@ const ChannelPage = () => {
                     </div>
                   </div>
                   <div id={"MessageEdit" + message?.id}>
-                    {user_id === message?.user_id && (
+                    {user_id === message?.user.id && (
                       <>
                         <i
                           className="fa-solid fa-ellipsis-vertical"
@@ -392,120 +363,6 @@ const ChannelPage = () => {
     </>
   );
 
-  // return (
-  //   <>
-  //     {showChannel && (
-  //       <div className="ChannelPageBody">
-  //         <div className="ChannelPageTitle">
-  //           <div className="ChannelPageTitleLeft">
-  //             <i className="fa-solid fa-hashtag"></i>
-  //             <h2>{title}</h2>
-  //             <p>{description}</p>
-  //           </div>
-  //           <div className="ChannelPageTitleRight">
-  //             <div className="AddMembersButton">
-  //               {addChannelMembersButton && (
-  //                 <i
-  //                   className="fa-solid fa-user-plus"
-  //                   onClick={showAddMembersSearchBar}
-  //                   title="Add a member"
-  //                 ></i>
-  //               )}
-  //             </div>
-  //             <div
-  //               className="ShowMembersButton"
-  //               onClick={ShowChannelMembers}
-  //               title="View all members"
-  //             >
-  //               <p>
-  //                 <i className="fa-solid fa-user"></i>
-  //                 {totalMembers}
-  //               </p>
-  //             </div>
-  //             <div>
-  //               {user_id === channel?.owner_id && (
-  //                 <i
-  //                   className="fa-solid fa-ellipsis-vertical"
-  //                   id="EditChannelButton"
-  //                   onClick={showEditChannelForm}
-  //                   title="Edit channel"
-  //                 ></i>
-  //               )}
-  //             </div>
-  //           </div>
-  //         </div>
-  //         <div className="MessagesBody">
-  //           {messages
-  //             ?.slice(0)
-  //             .reverse()
-  //             .map((message) => (
-  //               <div
-  //                 className="SingleMessageBody"
-  //                 key={message.id}
-  //                 // onMouseEnter={() => setShowEditMessage(true)}
-  //                 // onMouseLeave={() => setShowEditMessage(false)}
-  //               >
-  //                 {message?.image_url ? (
-  //                   <div className="MessageProfile">
-  //                     <img
-  //                       src={message.image_url}
-  //                       onError={(e) => {
-  //                         e.target.setAttribute("src", icon);
-  //                       }}
-  //                       alt=""
-  //                       style={{
-  //                         width: "45px",
-  //                         height: "45px",
-  //                         borderRadius: "5px",
-  //                       }}
-  //                     />
-  //                   </div>
-  //                 ) : (
-  //                   <div className="MessageProfile">
-  //                     <i className="fa-solid fa-square-person-confined"></i>
-  //                   </div>
-  //                 )}
-  //                 <div className="MessageMain">
-  //                   <div className="MessageInfo">
-  //                     <div className="MessageName">{message.name}</div>
-  //                     <div
-  //                       className="MessageTime"
-  //                       title={formatDate(message.time_created)}
-  //                     >
-  //                       {formatTime(message.time_created)}{" "}
-  //                     </div>
-  //                   </div>
-  //                   <div className="MessageContent">{message.content}</div>
-  //                 </div>
-  //                 <div id={"MessageEdit" + message.id}>
-  //                   {user_id === message.user_id && (
-  //                     <>
-  //                       <i
-  //                         className="fa-solid fa-ellipsis-vertical"
-  //                         title="Edit message"
-  //                         id="EditMessageButton"
-  //                         onClick={() => {
-  //                           dispatch(
-  //                             setCurrentEditModal(
-  //                               EditMessageForm,
-  //                               channel?.id,
-  //                               message?.id
-  //                             )
-  //                           );
-  //                           dispatch(showModal());
-  //                         }}
-  //                       ></i>
-  //                     </>
-  //                   )}
-  //                 </div>
-  //               </div>
-  //             ))}
-  //         </div>
-  //         <CreateMessageForm channelId={channelId} chatInput={chatInput} setChatInput={setChatInput}/>
-  //       </div>
-  //     )}
-  //   </>
-  // );
 };
 
 export default ChannelPage;
