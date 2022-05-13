@@ -141,6 +141,23 @@ Logged in users can perform the following actions.
 - Create/Edit/Delete messages in a Direct Message that the user is apart of
 - Search for other users to add to a Channel or create a Direct Message with
 
+# Highlighted Features
+
+### Live Chat
+By leveraging the socket.io library, Slack-ish enables users to send live messages to one another. Incoming messages are rendered without the user having to refresh / reload the page. 
+   
+<br>
+   
+<img src="https://github.com/cc-y-zhao/Slack-ish/blob/sockets_v3/react-app/public/GIFs/live_msg_demo.gif?raw=true" width="900" height="425" />
+   
+### Live Search
+Slack-ish offers live search functionality, allowing users to search for other users in the Slack-ish database. Upon selecting a name from the search results, the user will be directed to a direct message exchange with the selected individual (or an existing direct message exchange if the user has previously conversed with the selected individual). 
+   
+<br>
+   
+<img src="https://github.com/cc-y-zhao/Slack-ish/blob/sockets_v3/react-app/public/GIFs/search_demo.gif?raw=true" width="900" height="425" />
+
+
 <br>
 
 # To-do/Future Features
