@@ -19,7 +19,7 @@ DROP USER slackish_user;
 
 FLASK_APP=app
 FLASK_ENV=development
-SECRET_KEY=
+SECRET_KEY=<secret_key>
 DATABASE_URL=postgresql://slackish_user:password@localhost/slackish_db
 
 pipenv shell
