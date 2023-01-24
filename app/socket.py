@@ -15,7 +15,8 @@ socketio = SocketIO()
 if os.environ.get("FLASK_ENV") == "production":
     origins = [
         "http://slack-ish.herokuapp.com",
-        "https://slack-ish.herokuapp.com"
+        "https://slack-ish.herokuapp.com",
+        "https://slack-ish.onrender.com/"
     ]
 else:
     origins = "*"
