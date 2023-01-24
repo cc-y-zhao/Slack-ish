@@ -55,8 +55,8 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('channel_id', sa.Integer(), nullable=False),
     sa.Column('content', sa.String(length=12000), nullable=False),
-    sa.Column('time_created', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
-    sa.Column('time_updated', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('time_created', sa.DateTime()),
+    sa.Column('time_updated', sa.DateTime()),
     sa.ForeignKeyConstraint(['channel_id'], ['channels.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
