@@ -44,7 +44,7 @@ Migrate(app, db)
 
 # initialize the app with the socket instance
 # socketio.init_app(app)
-socketio.init_app(app, cors_allowed_origins='*')
+socketio.init_app(app, cors_allowed_origins=['http://slack-ish.onrender.com', 'https://slack-ish.onrender.com'])
 
 # Application Security
 CORS(app)
