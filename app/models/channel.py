@@ -1,4 +1,4 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .channel_user import channel_users
 from sqlalchemy import DateTime
 from sqlalchemy.sql import func
@@ -6,9 +6,11 @@ from sqlalchemy.sql import func
 
 class Channel(db.Model):
     __tablename__ = 'channels'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     title = db.Column(db.String(50), nullable=False)
     is_dm = db.Column(db.Boolean, nullable=False)
     description = db.Column(db.String(150))
