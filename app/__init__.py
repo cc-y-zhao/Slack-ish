@@ -43,7 +43,8 @@ db.init_app(app)
 Migrate(app, db)
 
 # initialize the app with the socket instance
-socketio.init_app(app)
+# socketio.init_app(app)
+socketio.init_app(app, cors_allowed_origins='*')
 
 # Application Security
 CORS(app)
