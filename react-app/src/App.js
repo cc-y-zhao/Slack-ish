@@ -31,8 +31,8 @@ function App() {
   }
 
   return (
-    // <BrowserRouter>
-    <HashRouter>
+    <BrowserRouter>
+    {/* <HashRouter> */}
       <NavBar />
       <SideBar />
       <Modal />
@@ -57,8 +57,8 @@ function App() {
           {sessionUser ? <DontBelongHerePage /> : <Redirect to="/login" />}
         </Route>
       </Switch>
-    </HashRouter>
-    // </BrowserRouter>
+    {/* </HashRouter> */}
+    </BrowserRouter>
   );
 }
 
