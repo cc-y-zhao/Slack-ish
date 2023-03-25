@@ -40,11 +40,11 @@ app.register_blueprint(message_routes, url_prefix='/api/messages')
 app.register_blueprint(search_routes, url_prefix='/api/search')
 
 db.init_app(app)
-Migrate(app, db)
+Migrate(app, db, compare_type=True)
 
 # initialize the app with the socket instance
-# socketio.init_app(app)
-socketio.init_app(app, cors_allowed_origins=['http://slack-ish.onrender.com', 'https://slack-ish.onrender.com'])
+socketio.init_app(app)
+# socketio.init_app(app, cors_allowed_origins=['http://slack-ish.onrender.com', 'https://slack-ish.onrender.com'])
 
 # Application Security
 CORS(app)
