@@ -18,7 +18,9 @@ from .config import Config
 
 from .socket import socketio
 
-app = Flask(__name__)
+# app = Flask(__name__)
+# RENDER
+app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
 # Setup login manager
 login = LoginManager(app)
@@ -41,7 +43,7 @@ app.register_blueprint(message_routes, url_prefix='/api/messages')
 app.register_blueprint(search_routes, url_prefix='/api/search')
 
 db.init_app(app)
-Migrate(app, db)
+Migrate(app, db, compare_type=True)
 
 # initialize the app with the socket instance
 socketio.init_app(app)
@@ -80,7 +82,9 @@ def inject_csrf_token(response):
 @app.route('/<path:path>')
 def react_root(path):
     if path == 'favicon.ico':
-        return app.send_static_file('favicon.ico')
+        # return app.send_static_file('favicon.ico')
+        # RENDER
+        return app.send_from_directory('public', 'favicon.ico')
     return app.send_static_file('index.html')
 
 
