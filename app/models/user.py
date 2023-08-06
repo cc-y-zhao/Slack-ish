@@ -1,4 +1,4 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .channel_user import channel_users
@@ -6,6 +6,8 @@ from .channel_user import channel_users
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(40), nullable=False)
@@ -13,9 +15,6 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     image_url = db.Column(db.String(2000))
-
-    messages = db.relationship(
-        'Message', back_populates='user')
 
     # think of 'channels' more as 'join_channel_users'
     channels = db.relationship(
