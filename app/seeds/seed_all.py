@@ -14,7 +14,7 @@ def seed_all():
     demo = User(
         first_name='App', last_name='Academy', email='demo@aa.io', password='password', channels=[channel1, channel_aa], image_url='https://assets-global.website-files.com/5dcc7f8c449e597ed83356b8/603820afd31232aab368ea6f_New%20Red-logo-emblem.png')
     sharon = User(
-        first_name='Sharon', last_name='Fang', email='sharon@aa.io', password='password', channels=[channel1, channel_aa], image_url='https://pbs.twimg.com/media/EbSfCHFU8AEimfk.jpg')
+        first_name='Sharon', last_name='Fang', email='sharon@aa.io', password='password', channels=[channel1, channel_aa], image_url='https://media.licdn.com/dms/image/C5603AQFbL2uEiU7GRA/profile-displayphoto-shrink_800_800/0/1651377972085?e=1697068800&v=beta&t=N_zVGlKUqvwNHGhnYKnDttEp4P9pm15ZfBlImY1rz-4')
     gabriel = User(
         first_name='Gabriel', last_name='Sitorus', email='gabriel@aa.io', password='password', channels=[channel1, channel_aa], image_url='https://media-exp1.licdn.com/dms/image/D5603AQHYi5RD9DFdKA/profile-displayphoto-shrink_200_200/0/1647206013202?e=1654732800&v=beta&t=kWWvntvsst9HwJikcrAKGe8fSr3-caSoOAVG2cW8MM8')
     cecilia = User(

@@ -10,7 +10,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-# render
+# RENDER: add new import and environment variable
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get('SCHEMA')
@@ -72,6 +72,30 @@ def run_migrations_online():
     # this callback is used to prevent an auto-migration from being generated
     # when there are no changes to the schema
     # reference: http://alembic.zzzcomputing.com/en/latest/cookbook.html
+
+    """
+    Old Heroku migrations
+    """
+    # def process_revision_directives(context, revision, directives):
+    #     if getattr(config.cmd_opts, 'autogenerate', False):
+    #         script = directives[0]
+    #         if script.upgrade_ops.is_empty():
+    #             directives[:] = []
+    #             logger.info('No changes in schema detected.')
+
+    # connectable = current_app.extensions['migrate'].db.get_engine()
+
+    # with connectable.connect() as connection:
+    #     context.configure(
+    #         connection=connection,
+    #         target_metadata=target_metadata,
+    #         process_revision_directives=process_revision_directives,
+    #         **current_app.extensions['migrate'].configure_args
+    #     )
+
+    #     with context.begin_transaction():
+    #         context.run_migrations()
+
     def process_revision_directives(context, revision, directives):
         if getattr(config.cmd_opts, 'autogenerate', False):
             script = directives[0]
@@ -102,6 +126,7 @@ def run_migrations_online():
             if environment == "production":
                 context.execute(f"SET search_path TO {SCHEMA}")
             context.run_migrations()
+
 
 
 if context.is_offline_mode():

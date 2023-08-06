@@ -16,6 +16,9 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     image_url = db.Column(db.String(2000))
 
+    messages = db.relationship(
+        'Message', back_populates='user')
+
     # think of 'channels' more as 'join_channel_users'
     channels = db.relationship(
         "Channel",
